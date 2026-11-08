@@ -1,0 +1,41 @@
+on early-init
+    write /sys/kernel/debug/tracing/instances/boottime/trace_marker "init:on early-init"
+
+on init
+    write /sys/kernel/debug/tracing/instances/boottime/trace_marker "init:on init"
+
+on late-init
+    write /sys/kernel/debug/tracing/instances/boottime/trace_marker "init:on late-init"
+
+on early-fs
+    write /sys/kernel/debug/tracing/instances/boottime/trace_marker "init:on early-fs"
+
+on fs
+    write /sys/kernel/debug/tracing/instances/boottime/trace_marker "init:on fs"
+
+on post-fs
+    write /sys/kernel/debug/tracing/instances/boottime/trace_marker "init:on post-fs"
+
+on post-fs-data
+    write /sys/kernel/debug/tracing/instances/boottime/trace_marker "init:on post-fs-data"
+
+on zygote-start
+    write /sys/kernel/debug/tracing/instances/boottime/trace_marker "init:on zygote-start"
+
+on property:init.svc.zygote=running
+    write /sys/kernel/debug/tracing/instances/boottime/trace_marker "init:on init.svc.zygote=running"
+
+on early-boot
+    write /sys/kernel/debug/tracing/instances/boottime/trace_marker "init:on early-boot"
+
+on boot
+    write /sys/kernel/debug/tracing/instances/boottime/trace_marker "init:on boot"
+
+on property:init.svc.bootanim=running
+    write /sys/kernel/debug/tracing/instances/boottime/trace_marker "init:on init.svc.bootanim=running"
+
+on property:init.svc.bootanim=stopped
+    write /sys/kernel/debug/tracing/instances/boottime/trace_marker "init:on init.svc.bootanim=stopped"
+
+on property:sys.boot_completed=1
+    write /sys/kernel/debug/tracing/instances/boottime/trace_marker "init:on sys.boot_completed=1"

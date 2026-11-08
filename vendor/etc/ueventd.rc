@@ -1,0 +1,97 @@
+# block devices
+# permission of block devices has to be 0 for other; CTS testAllBlockDevicesAreSecure.
+# MPOOL/MBOOT group should be drmrpc since mmap_init() uses it.(FIXME)
+# NOTE that the order matters!!
+/dev/block/mmcblk0boot1   0660   root       system
+/dev/block/mmcblk0p*      0660   root       system
+/dev/block/by-name/MBOOT  0660   root       drmrpc
+/dev/block/by-name/MPOOL  0660   root       drmrpc
+/dev/dri/card0            0660   root     graphics
+/dev/mmcblk0rpmb          0660   root       vendor_tee
+/dev/block/mmcblk0        0660   root       vendor_tee
+
+
+/dev/mik!*                0666   system     system
+/dev/miomap               0666   media      system
+/dev/malloc               0666   media      system
+/dev/rtc0                 0660   system     system
+/dev/ump                  0666   system     system
+/dev/mali                 0666   system     system
+/dev/video*               0660   root       camera
+/dev/snd                  0666   system     audio
+/dev/semutex              0666   media      system
+/dev/btusb0               0666   bluetooth  bluetooth
+/dev/bt_usb0              0666   bluetooth  bluetooth
+/dev/upcm                 0666   bluetooth  bluetooth
+/dev/mali0                0666   system     graphics
+/dev/ion                  0666   system     graphics
+/dev/sw_sync              0666   media      system
+/dev/cmapool              0666   media      system
+/dev/rtk_btusb            0666   bluetooth  net_bt_stack
+/dev/stpbt                0666   bluetooth  bluetooth
+/dev/hidraw*              0666   system     audio
+/dev/tuner                0666   media      system
+/dev/apm_bios             0666   system     system
+/dev/scaler               0666   media      system
+/dev/opteearmtz00         0666   media      system
+/dev/tee*                 0666   media      system
+/dev/teepriv*             0660   vendor_tee system
+/dev/mstar_share_resource 0666   media      system
+/dev/gflip                0666   system     graphics
+/dev/system               0666   system     graphics
+/dev/smart                0666   system     system
+/dev/ir                   0666   system     system
+/dev/msmailbox            0666   system     graphics
+/dev/vbi_mmap             0660   system     system
+
+# add the rules to ueventd.rc
+/dev/mediator*            0440   system     system
+/dev/eeprom_0             0660   root       root
+/dev/eeprom_3             0660   root       root
+/dev/eeprom_4             0660   root       root
+/dev/localdimming         0660   system     system
+/dev/mtal                 0660   root       root
+/dev/mtal_system          0660   system     system
+/dev/mtal_media           0660   media      drmrpc
+/dev/cb                   0660   root       root
+/dev/cb_system            0660   system     system
+/dev/cb_media             0660   media      drmrpc
+/dev/cb2                  0666   root       root
+/dev/cli                  0660   root       shell
+/dev/log2usb              0660   root       root
+/dev/feeder               0660   root       root
+/dev/mtphoto              0660   system     system
+/dev/fbm_vbi              0660   root       root
+/dev/fbm_mpeg             0660   media      system
+/dev/fbm_feeder           0640   root       root
+/dev/fbm_feeder_mmp       0660   root       root
+/dev/fbm_venc             0660   mediacodec camera
+/dev/fbm_feeder2          0640   root       root
+/dev/fbm_mpeg2            0660   media      system
+/dev/fbm_pvr              0640   root       root
+/dev/fbm_shm_vbif         0640   root       root
+/dev/fbm_shm_thumbnail    0640   root       root
+/dev/fbm_shm_ssma         0640   root       root
+/dev/ttyMT3               0640   root       root
+/dev/mma                  0666   system     system
+/dev/iommu_mtkd           0660   system     system
+/dev/dma_heap/mtk_*       0444   system     system
+/dev/dvb*                 0660   media      system
+/dev/mtkdmx-*             0660   media      system
+/dev/media*               0660   media      system
+/dev/cec*                 0660   media      system
+/dev/rpmsg*               0660   system     system
+/dev/mdlactl              0660   system     system
+/dev/apusys               0660   system     system
+/dev/mtk-es-buf-mgr       0660   system     system
+/dev/ttyS*                0660   root       system
+/dev/gpiochip*            0660   root       system
+/dev/i2c-*                0660   root       system
+/dev/watchdog*            0660   root       system
+/sys/bus/platform/drivers/mtk-dramc/dramc_ssc		0660	root	system
+/sys/bus/iio/devices/iio:device1/in_illuminance0_input     0660   root       system
+/dev/demura_mmap          0660   system     system
+/dev/ws_tsf               0640   system     system
+/sys/devices/platform/1c080400.cec mtk_dbg/cec_wakeup_command              0660    system     system
+/sys/devices/platform/1c080400.cec mtk_dbg/cec_wakeup_enable               0660    system     system
+/sys/devices/platform/1c080400.cec mtk_dbg/cec_wakeup_command_enable       0660    system     system

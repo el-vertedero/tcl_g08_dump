@@ -1,0 +1,4 @@
+service capture-hal-1-0 /vendor/bin/hw/vendor.mediatek.hardware.capture-V1-service
+    class hal
+    user system
+    group system camera graphics

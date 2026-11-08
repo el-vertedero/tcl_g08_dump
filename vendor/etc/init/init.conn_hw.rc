@@ -1,0 +1,19 @@
+service conn_hw /vendor/bin/conn_hw insmod
+    oneshot
+    class core 
+    capabilities NET_ADMIN NET_RAW SYS_MODULE
+    user wifi
+    group wifi gps
+
+service conn_hw_unload /vendor/bin/conn_hw rmmod
+    oneshot
+    disabled
+    class core
+    capabilities NET_ADMIN NET_RAW SYS_MODULE
+    user wifi
+    group wifi gps
+
+on property:sys.boot_completed=1
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+

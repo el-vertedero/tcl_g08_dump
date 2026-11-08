@@ -1,0 +1,4 @@
+service vendor.keymint-tee /vendor/bin/hw/android.hardware.security.keymint-service.tee
+    class early_hal
+    user nobody
+    group drmrpc system vendor_tee

@@ -1,0 +1,36 @@
+# device specific syscalls
+sendto: 1
+recvfrom: 1
+
+# For MI3.0 MI_SYS_Init
+epoll_create: 1
+epoll_create1: 1
+epoll_ctl: 1
+epoll_pwait: 1
+dup3: 1
+
+# For EGL
+eventfd2: 1
+clock_gettime: 1
+connect: 1
+fcntl64: 1
+socket: 1
+writev: 1
+clock_nanosleep: 1
+
+# For MI VIDEO
+vfork: 1
+execve: 1
+wait4: 1
+
+# For realtime
+flock: 1
+fchmodat : 1
+faccessat : 1
+mkdirat : 1
+sched_setattr : 1
+sched_getattr : 1
+getpgid : 1
+
+# For AiVision
+msync: 1

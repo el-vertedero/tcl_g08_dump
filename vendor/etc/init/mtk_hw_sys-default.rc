@@ -1,0 +1,4 @@
+service vendor.mediatek.hardware.mtk_hw_sys-default /vendor/bin/hw/vendor.mediatek.hardware.mtk_hw_sys-service
+    class hal
+    user system
+    group system

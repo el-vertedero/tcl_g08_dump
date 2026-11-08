@@ -1,0 +1,28 @@
+{
+    "$HearderComment": [
+        "PresetDB for colortuner(HSY) min/max remapping, VTS",
+        "Struct Version 0.100 : 1st version "
+    ],
+
+    "COLORTUNER_H_R":   {"Min":0, "Max":100},
+    "COLORTUNER_H_G":   {"Min":20, "Max":80},
+    "COLORTUNER_H_B":   {"Min":0, "Max":100},
+    "COLORTUNER_H_C":   {"Min":0, "Max":100},
+    "COLORTUNER_H_M":   {"Min":0, "Max":100},
+    "COLORTUNER_H_Y":   {"Min":0, "Max":100},
+    "COLORTUNER_H_F":   {"Min":0, "Max":100},
+    "COLORTUNER_S_R":   {"Min":0, "Max":100},
+    "COLORTUNER_S_G":   {"Min":0, "Max":100},
+    "COLORTUNER_S_B":   {"Min":0, "Max":100},
+    "COLORTUNER_S_C":   {"Min":0, "Max":100},
+    "COLORTUNER_S_M":   {"Min":0, "Max":100},
+    "COLORTUNER_S_Y":   {"Min":0, "Max":100},
+    "COLORTUNER_S_F":   {"Min":0, "Max":100},
+    "COLORTUNER_Y_R":   {"Min":0, "Max":100},
+    "COLORTUNER_Y_G":   {"Min":0, "Max":100},
+    "COLORTUNER_Y_B":   {"Min":0, "Max":100},
+    "COLORTUNER_Y_C":   {"Min":0, "Max":100},
+    "COLORTUNER_Y_M":   {"Min":0, "Max":100},
+    "COLORTUNER_Y_Y":   {"Min":0, "Max":100},
+    "COLORTUNER_Y_F":   {"Min":0, "Max":100}
+}

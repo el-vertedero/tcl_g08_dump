@@ -1,0 +1,20 @@
+{
+    "version": "1.0",
+    "StoredFrames": {
+        "size": 1,
+    },
+    "SetDelayTime": {
+        "NonTunneled": {
+            "EnableRenderDelay": 1,
+            "NotifyCodec2ToIncreaseBufferCount": 1,
+        }
+    },
+    "CustomerGameMode": {
+        "DropBuffer": 0,
+        "FreeRun": 0,
+        "DTV_DropBuffer": 0,
+        "DTV_FreeRun": 0,
+        "InputSrc_DropBuffer": 1,
+        "InputSrc_FreeRun": 1,
+    },
+}

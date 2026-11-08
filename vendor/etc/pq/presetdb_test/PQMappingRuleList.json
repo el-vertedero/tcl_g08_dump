@@ -1,0 +1,265 @@
+{
+    "$HearderComment": [
+        "PresetDB for Capability and Range",
+        "Struct Version 0.100 : 1st version ",
+        "Struct Version 0.200 : Separated Keys from the setting for Global and only for Per-Stream."
+    ],
+
+    "Map_HWRange" : {
+        "Brightness": {
+            "Min" : 0,
+            "Max" : 2047
+        },
+        "Contrast": {
+            "Min" : 0,
+            "Max" : 2047
+        },
+        "Saturation": {
+            "Min" : 0,
+            "Max" : 255
+        },
+        "Backlight": {
+            "Min" : 0,
+            "Max" : 100
+        },
+        "Hue": {
+            "Min" : 0,
+            "Max" : 100
+        },
+        "SR_Strength": {
+            "Min" : 0,
+            "Max" : 63
+        },
+        "COLORTUNER_R_GAIN": {
+            "Min" : 0,
+            "Max" : 255
+        },
+        "COLORTUNER_R_OFFSET": {
+            "Min" : 0,
+            "Max" : 255
+        },
+        "COLORTUNER_G_GAIN": {
+            "Min" : 0,
+            "Max" : 255
+        },
+        "COLORTUNER_G_OFFSET": {
+            "Min" : 0,
+            "Max" : 255
+        },
+        "COLORTUNER_B_GAIN": {
+            "Min" : 0,
+            "Max" : 255
+        },
+        "COLORTUNER_B_OFFSET": {
+            "Min" : 0,
+            "Max" : 255
+        },
+        "Color_Temperature_Red_Gain": {
+            "Min" : 624,
+            "Max" : 1424
+        },
+        "Color_Temperature_Green_Gain": {
+            "Min" : 624,
+            "Max" : 1424
+        },
+        "Color_Temperature_Blue_Gain": {
+            "Min" : 624,
+            "Max" : 1424
+        },
+        "Color_Temperature_Red_Offset": {
+            "Min" : 0,
+            "Max" : 2047
+        },
+        "Color_Temperature_Green_Offset": {
+            "Min" : 0,
+            "Max" : 2047
+        },
+        "Color_Temperature_Blue_Offset": {
+            "Min" : 0,
+            "Max" : 2047
+        }
+    },
+    "Map_LevelToInteger" : {
+        "DLC_STRENGTH": {
+            "Off": 0,
+            "Low": 1,
+            "Middle": 1,
+            "High": 1,
+            "AIPQ": 1
+        },
+        "SWDR_STRENGTH": {
+            "Off": 0,
+            "Low": 1,
+            "Middle": 1,
+            "High": 1,
+            "AIPQ": 1
+        },
+        "TMO_Range": {
+        	"Off": 0,
+        	"Low": 1,
+        	"Mid": 2,
+        	"High": 3
+        },
+        "HDR_Mode": {
+        	"Auto": 0,
+        	"SDR": 1,
+        	"HDR10": 2,
+        	"HLG": 3
+        },
+        "Level_Range": {
+        	"Auto": 0,
+        	"Limited": 1,
+        	"Full": 2
+        },
+        "Gamut_Mapping": {
+        	"Disable": 0,
+        	"Enable": 1
+        },
+        "COLORTUNER_SWITCH": {
+            "Off": 0,
+            "On": 1
+        },
+        "AI_PQ": {
+            "Off": 0,
+            "On": 1
+        },
+        "AISR": {
+            "Off": 0,
+            "Low": 1,
+            "Middle": 2,
+            "High": 3
+        },
+        "Dynamic_Color_Booster": {
+            "Off": 0,
+            "Low": 1,
+            "Middle": 2,
+            "High": 3
+        },
+        "Color space": {
+        	"Auto": 0,
+        	"sRGB/BT.709": 1,
+        	"DCI": 2,
+        	"Adobe RGB": 3,
+        	"BT.2020": 4
+        },
+        "Tmo_Mode": {
+        	"Auto": 0,
+        	"12P": 1,
+        	"256P": 2
+        },
+        "Tmo_Manual_Mode": {
+        	"Off": 0,
+        	"On": 1
+        },
+        "Xvycc_Manual_Mode": {
+        	"Off": 0,
+        	"On": 1
+        },
+        "Gamut_Manual_Mode": {
+        	"Off": 0,
+        	"On": 1
+        },
+        "LD_MODE": {
+            "Off": 0,
+            "Low": 1,
+            "Middle": 2,
+            "High": 3
+        },
+        "Hdr_in_csc_Manual_Mode": {
+            "Off": 0,
+            "On": 1
+        },
+        "Ip2csc_Manual_Mode": {
+            "Off": 0,
+            "On": 1
+        },
+        "Vopcsc_Manual_Mode": {
+            "Off": 0,
+            "On": 1
+        },
+        "InputCSC_Input_Range": {
+            "Auto": 0,
+            "Limited": 1,
+            "Full": 2
+        },
+        "InputCSC_Input_DataFormat": {
+            "Auto": 0,
+            "YUV": 1,
+            "RGB": 2
+        },
+        "InputCSC_Output_Range": {
+            "Auto": 0,
+            "Limited": 1,
+            "Full": 2
+        },
+        "InputCSC_Output_DataFormat": {
+            "Auto": 0,
+            "YUV": 1,
+            "RGB": 2
+        },
+        "FrameInCSC_Output_DataFormat": {
+            "Auto": 0,
+            "YUV": 1,
+            "RGB": 2
+        },
+        "FrameOutCSC_Input_Range": {
+            "Auto": 0,
+            "Limited": 1,
+            "Full": 2
+        },
+        "FrameOutCSC_Input_DataFormat": {
+            "Auto": 0,
+            "YUV": 1,
+            "RGB": 2
+        },
+        "FrameOutCSC_Input_ColorSpace": {
+            "Auto": 0,
+            "BT.601": 1,
+            "BT.709": 2,
+            "BT.2020":3
+        },
+        "FrameOutCSC_Output_Range": {
+            "Auto": 0,
+            "Limited": 1,
+            "Full": 2
+        },
+        "FrameOutCSC_Output_DataFormat": {
+            "Auto": 0,
+            "YUV": 1,
+            "RGB": 2
+        }
+    },
+    "Map_LevelToParameters":
+    {
+        "tsRuleList": {
+            "Picture_Mode": {
+                "DolbyVisionVivid": "Vivid",
+                "DolbyVisionGame": "Game",
+                "DolbyVisionIQ": "Bright",
+                "DolbyVisionBright": "Bright",
+                "DolbyVisionDark": "Dark"
+            }
+        },
+        "frameRuleList": {
+            "MJC_Effect": {
+                "Off" :
+                {
+                    "MEMC_ONOFF" : "Off",
+                    "MEMC_Level" : [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+                },
+                "Low" : {
+                    "MEMC_ONOFF" : "On",
+                    "MEMC_Level" : [7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7,7]
+                },
+                "Middle" : {
+                    "MEMC_ONOFF" : "On",
+                    "MEMC_Level" : [14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14,14]
+                },
+                "High" : {
+                    "MEMC_ONOFF" : "On",
+                    "MEMC_Level" : [21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21]
+                }
+            }
+        }
+    }
+}

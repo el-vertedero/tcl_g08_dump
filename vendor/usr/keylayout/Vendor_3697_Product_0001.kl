@@ -1,0 +1,224 @@
+# Copyright (C) 2010 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#
+# MStar Smart TV IR Receiver.
+#
+
+key 116     POWER
+key 11      0
+key 2       1
+key 3       2
+key 4       3
+key 5       4
+key 6       5
+key 7       6
+key 8       7
+key 9       8
+key 10      9
+key 16      BUTTON_12 # send BUTTON_12 to wake up system in all platform
+key 398     PROG_RED
+key 399     PROG_GREEN
+key 400     PROG_YELLOW
+key 401     PROG_BLUE
+key 103     DPAD_UP
+key 108     DPAD_DOWN
+key 105     DPAD_LEFT
+key 106     DPAD_RIGHT
+key 28      DPAD_CENTER
+key 363     LAST_CHANNEL
+key 402     CHANNEL_UP
+key 403     CHANNEL_DOWN
+key 115     VOLUME_UP
+key 114     VOLUME_DOWN
+key 104     STEM_1
+key 59      SLASH
+key 109     PAGE_DOWN
+key 102     HOME    WAKE
+key 139     MENU
+key 158     BACK
+key 365     TCL_EPG
+key 113     VOLUME_MUTE
+key 167     MEDIA_RECORD
+key 138     GUIDE   WAKE   #STEM_3
+key 358     INFO
+#key 395     BOOKMARK
+#key 82      WINDOW
+key 356     TV_POWER
+key 142     STEM_PRIMARY
+key 370     CAPTIONS
+key 79      TV_INPUT
+key 372     TCL_ZOOM
+key 468     TV_TELETEXT
+key 466     MUHENKAN
+key 64      STEM_3   #for FVP hotkey
+key 168     MEDIA_REWIND
+key 159     MEDIA_FAST_FORWARD
+key 165     MEDIA_PREVIOUS
+key 163     MEDIA_NEXT
+key 207     MEDIA_PLAY
+key 119     MEDIA_PAUSE
+key 164     MEDIA_PLAY_PAUSE
+key 128     MEDIA_STOP
+key 392     TCL_AUDIO
+key 469     CAPTIONS
+key 60      TV_DATA_SERVICE
+#key 471     SYSRQ
+key 583     PAIRING
+key 622     SETTINGS
+key 190     BUTTON_3   WAKE  #define KEY_F20   190      KEY_F20                 =       0x64 #IR_YOUTUBE
+key 187     BUTTON_4   WAKE  #define KEY_F17   187      KEY_F17                 =       0x63 #IR_NETFLIX
+key 193     BUTTON_6     #define KEY_F23   193      KEY_F23                 =       0x67 #IR_DISNEY
+key 194     BUTTON_7     #define KEY_F24   194      KEY_F24                 =       0x68 #IR_HBOMAX
+
+#ifndef VENDOR_EDIT
+#yetao.zhou@tcl.com, 2023/9/13,add TCL_MTS in 9618
+key 253     TCL_MTS
+#endif /* VENDOR_EDIT */
+
+#ifndef VENDOR_EDIT
+#qizhi2.liu@tcl.com, 2023/1/4,add tcl keys in 9618
+key 174   TCL_EXIT
+key 195   INFO
+key 199   TCL_LANG
+key 201   MEDIA_PAUSE
+key 204   TCL_DASHBOARD
+key 266   NUMPAD_DOT
+key 338   TCL_PICTURE_SWITCH
+key 339   TCL_BRIGHTNESS_UP
+key 340   TCL_BRIGHTNESS_DOWN
+
+key 388   TCL_TEXT
+key 436   TCL_BUG_REPORT
+key 456   TCL_QUICK_MENU
+key 471   TV_INPUT
+key 485   TCL_USB_MEDIA
+key 654   TCL_STAN
+key 555   ASSIST
+key 559   TCL_RF_LINK_S
+key 561   NOTIFICATION
+key 563   TCL_NUMBER
+key 566   TCL_NETFLIX
+key 575   MEDIA_PLAY
+key 577   MEDIA_FAST_FORWARD
+key 578   MEDIA_STOP
+key 579   MEDIA_REWIND
+key 586   TCL_GLOBO_PLAY
+key 648   TCL_XPLORETV
+key 650   TCL_TVPLUS
+key 651   TCL_BROWSEHERE
+key 652   TCL_APPLETV
+key 653   PROFILE_SWITCH
+key 743   TCL_VIDIO
+#key 745   TCL_MEGOGO
+#key 746   TCL_IVI
+#key 747   TCL_WETV
+key 748   TCL_GUARD
+key 749   TCL_HOVRING
+key 751   TCL_OKKO
+key 752   TCL_PRIMEVIDEO
+key 759   TCL_IQIYI
+key 753   TCL_TOT
+key 755   TCL_FPTPLAYER
+key 762   TCL_DISNEY
+key 767   TCL_HD
+
+key 427   TCL_11
+key 428   TCL_12
+key 570   TCL_HULU
+key 440   TCL_U_NEXT
+key 441   TCL_ABEMA
+key 430   TCL_BML
+key 431   TCL_TERMINAL
+key 438   TCL_SATELLITE_BS_CS
+key 439   TCL_BS_CS_4K
+key 434   TCL_RECORD_LIST
+key 574   MEDIA_PREVIOUS
+key 576   MEDIA_NEXT
+key 452   TCL_3_LINE_INPUT
+key 703   TCL_FOD
+
+#endif /* VENDOR_EDIT */
+
+# ifndef VENDOR_EDIT
+# wei60.liu@tcl.com, 2023/06/26, add tcl keys
+key 591      TCL_AV1
+key 594      TCL_HDMI3
+key 595      TCL_TV_ON
+key 596      TCL_TV_OFF
+key 597      TCL_HDMI4
+key 598      TCL_HDMI1
+key 599      TCL_HDMI2
+#endif /* VENDOR_EDIT */
+
+#ifndef VENDOR_EDIT
+#wei60.liu@tcl.com, 2023/04/22, add TCL keys
+key 351      TCL_TVER
+key 588      TCL_ALL_APP
+key 649      TCL_PLUTOTV
+key 646      TCL_WINK
+#endif /* VENDOR_EDIT */
+
+#ifndef VENDOR_EDIT
+#wei60.liu@tcl.com, 2023/08/25, add TCL keys for Control 4
+key 656      TCL_PICTURE_MODE
+key 657      TCL_SOUND_MODE
+key 658      TCL_OPEN_DOLBY
+key 659      TCL_RESERVE_C4_1
+key 660      TCL_RESERVE_C4_2
+key 661      TCL_RESERVE_C4_3
+key 662      TCL_RESERVE_C4_4
+key 663      TCL_RESERVE_C4_5
+key 664      TCL_RESERVE_C4_6
+key 665      TCL_RESERVE_C4_7
+#endif /* VENDOR_EDIT */
+
+#ifndef VENDOR_EDIT
+#tengyi.an@tcl.com, 2023/10/30, add VIX,SonyLIV and VTVGO keys.
+key 640     TCL_VIX
+key 641     TCL_SONYLIV
+key 642     TCL_VTVGO
+#endif /* VENDOR_EDIT */
+
+#ifndef VENDOR_EDIT
+#tengyi.an@tcl.com, 2024/02/29, add for [BUURDB2022-671].
+key 508     TCL_COUPANG
+#endif /* VENDOR_EDIT */
+
+#ifndef VENDOR_EDIT
+#tengyi.an@tcl.com, 2024/11/08, add for [BUURDB2022-1068].
+#key 345     TCL_CHANNELPLUS
+#endif /* VENDOR_EDIT */
+
+#ifndef VENDOR_EDIT
+#tengyi.an@tcl.com, 2024/11/25, add for [BUURDB2022-1062].
+#key 343     TCL_PREMIER
+#key 344     TCL_VKVIDEO
+#endif /* VENDOR_EDIT */
+
+#ifndef VENDOR_EDIT
+#tengyi.an@tcl.com, 2024/06/04, add for free satellite.
+#key 341     TCL_FREE_SATELLITE
+#endif /* VENDOR_EDIT */
+
+#####Watson position 1,11
+key 364     BOOKMARK     #define KEY_FAVORITES 0x16c
+key 249     SETTINGS
+
+#####google TV position 1,11
+key 473     NOTIFICATION     #define KEY_FN_F8 0x1d9 =473
+key 474     PROFILE_SWITCH   #define KEY_FN_F9             0x1da =474
+key 352     BUTTON_16
+
+key 512  MACRO_1  WAKE

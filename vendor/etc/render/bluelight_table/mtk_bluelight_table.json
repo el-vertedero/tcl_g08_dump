@@ -1,0 +1,22 @@
+﻿{
+  "Off":{
+  "R_Gain": 0,
+  "G_Gain": 0,
+  "B_Gain": 0
+  },
+  "Low":{
+  "R_Gain": 5,
+  "G_Gain": 0,
+  "B_Gain": -15
+  },
+  "Middle":{
+  "R_Gain": 10,
+  "G_Gain": 0,
+  "B_Gain": -30
+  },
+  "High":{
+  "R_Gain": 15,
+  "G_Gain": 0,
+  "B_Gain": -50
+  }
+}

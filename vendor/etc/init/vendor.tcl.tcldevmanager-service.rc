@@ -1,0 +1,6 @@
+service tcldevmanager_hal_service /vendor/bin/hw/vendor.tcl.tcldevmanager-service
+    class hal
+    user root
+    group system root media
+    capabilities SYS_MODULE
+    oneshot

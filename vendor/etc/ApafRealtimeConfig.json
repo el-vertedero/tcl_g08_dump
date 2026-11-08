@@ -1,0 +1,298 @@
+{
+    "Template": {
+        "Default": "RR",
+        "MM": "DL",
+        "DTV": "Other",
+    },
+
+    "SpeakerOutput": {
+        "Default": "RR",
+    },
+
+    "HeadphoneOutput": {
+        "Default": "RR",
+    },
+
+    "LineOutput": {
+        "Default": "RR",
+    },
+
+    "SpdifOutput": {
+        "Default": "RR",
+    },
+
+    "ArcOutput": {
+        "Default": "RR",
+    },
+
+    "EarcOutput": {
+        "Default": "RR",
+    },
+
+    "Hdmi": {
+        "Default": "RR",
+    },
+
+    "Adc": {
+        "Default": "RR",
+    },
+
+    "Atv": {
+        "Default": "RR",
+    },
+
+    "Src": {
+        "Default": "RR",
+    },
+
+    "Synth": {
+        "Default": "RR",
+    },
+
+    "Aloop": {
+        "Default": "RR",
+    },
+
+    "Loopback": {
+        "Default": "RR",
+    },
+
+    "I2SCapture": {
+        "Default": "RR",
+    },
+
+    "Lpcm": {
+        "Default": "RR",
+    },
+
+    "ImaAdpcm": {
+        "Default": "RR",
+    },
+
+    "MsAdpcm": {
+        "Default": "RR",
+    },
+
+    "Mpeg": {
+        "Default": "RR",
+    },
+
+    "Gaac": {
+        "Default": "RR",
+    },
+
+    "Dra": {
+        "Default": "RR",
+    },
+
+    "Aac": {
+        "Default": "RR",
+    },
+
+    "Ac3": {
+        "Default": "RR",
+    },
+
+    "Ac4": {
+        "Default": "RR",
+    },
+
+    "MpegH": {
+        "Default": "RR",
+    },
+
+    "Dts": {
+        "Default": "RR",
+    },
+
+    "Mat": {
+        "Default": "RR",
+    },
+
+    "WmaPro": {
+        "Default": "RR",
+    },
+
+    "Alac": {
+        "Default": "RR",
+    },
+
+    "Cook": {
+        "Default": "RR",
+    },
+
+    "Flac": {
+        "Default": "RR",
+    },
+
+    "Opus": {
+        "Default": "RR",
+    },
+
+    "Vorbis": {
+        "Default": "RR",
+    },
+
+    "AmrNb": {
+        "Default": "RR",
+    },
+
+    "AmrWb": {
+        "Default": "RR",
+    },
+
+    "PcmR": {
+        "Default": "RR",
+    },
+
+    "Aac_Enc": {
+        "Default": "RR",
+    },
+
+    "Ac3_Enc": {
+        "Default": "RR",
+    },
+
+    "Ac3p_Enc": {
+        "Default": "RR",
+    },
+
+    "Dts_Core2": {
+        "Default": "RR",
+    },
+
+    "Mat_Enc": {
+        "Default": "RR",
+    },
+
+    "Mp3_Enc": {
+        "Default": "RR",
+    },
+
+    "MseInputgain": {
+        "Default": "RR",
+    },
+
+    "MseOutputgain": {
+        "Default": "RR",
+    },
+
+    "MseBalance": {
+        "Default": "RR",
+    },
+
+    "MseDcr": {
+        "Default": "RR",
+    },
+
+    "MseDrc": {
+        "Default": "RR",
+    },
+
+    "MseAvc": {
+        "Default": "RR",
+    },
+
+    "MseGeq": {
+        "Default": "RR",
+    },
+
+    "MsePeq": {
+        "Default": "RR",
+    },
+
+    "MseTone": {
+        "Default": "RR",
+    },
+
+    "MseHpf": {
+        "Default": "RR",
+    },
+
+    "MseNr": {
+        "Default": "RR",
+    },
+
+    "MseEasing": {
+        "Default": "RR",
+    },
+
+    "MseLeveldet": {
+        "Default": "RR",
+    },
+
+    "MseMvs": {
+        "Default": "RR",
+    },
+
+    "MseSinegen": {
+        "Default": "RR",
+    },
+
+    "MseSpectrum": {
+        "Default": "RR",
+    },
+
+    "MsePrescale": {
+        "Default": "RR",
+    },
+
+    "MseFir": {
+        "Default": "RR",
+    },
+
+    "MseChannel": {
+        "Default": "RR",
+    },
+
+    "Format": {
+        "Default": "RR",
+    },
+
+    "Delay": {
+        "Default": "RR",
+    },
+
+    "Mixer": {
+        "Default": "RR",
+    },
+
+    "Sync": {
+        "Default": "RR",
+    },
+
+    "Volume": {
+        "Default": "RR",
+    },
+
+    "FileInput": {
+        "Default": "RR",
+    },
+
+    "FileOutput": {
+        "Default": "RR",
+    },
+
+    "RawFileOutput": {
+        "Default": "RR",
+    },
+
+    "TwoPcmFileOutput": {
+        "Default": "RR",
+    },
+
+    "BluetoothOutput": {
+        "Default": "RR",
+    },
+
+    "IpcDecoder": {
+        "Default": "RR",
+    },
+
+    "DtsVX4": {
+        "Default": "RR",
+    },
+    "AiAq": {
+        "Default": "RR",
+    },
+}

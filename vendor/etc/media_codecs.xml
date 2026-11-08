@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- For One Image Solution.
+android.media.cts.MediaCodecListTest#testMediaCodecXmlFileExist
+fail
+junit.framework.AssertionFailedError: media_codecs.xml does not exist in /odm/etc, /vendor/etc or /etc.
+-->
+
+<MediaCodecs>
+</MediaCodecs>

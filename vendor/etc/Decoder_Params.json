@@ -1,0 +1,13 @@
+{
+    "Dts": {
+        "Default": {
+            "DtsLoudnessEnable" : 1,
+            "DtsLoudnessLevel" : -31,
+        },
+    },
+    "Aac": {
+        "Default": {
+            "DmxMode" : 1,
+        },
+    },
+}

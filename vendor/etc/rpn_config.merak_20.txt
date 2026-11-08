@@ -1,0 +1,18 @@
+rpn_set_num: 2
+block_size: 2
+anchor_stride: 16
+
+shape_num: 4
+regression_name: person1_Regression
+logit_name: person1_Logit
+anchor_template: 12 20
+anchor_template: 33 52
+anchor_template: 90 63
+anchor_template: 70 114
+
+shape_num: 3
+regression_name: person2_Regression
+logit_name: person2_Logit
+anchor_template: 260 160
+anchor_template: 166 225
+anchor_template: 290 290

@@ -1,0 +1,96 @@
+{
+    "Config_PQToPQ":
+    {
+        "Local_Contrast": "UCD_MODE"
+    },
+    "Config_FleshTone":
+    {
+        "Off": 0,
+        "Low": 1,
+        "Middle": 2,
+        "High": 3
+    },
+    "Config_HSYIndex":
+    {
+        "COLORTUNER_H_R":0,
+        "COLORTUNER_H_G":1,
+        "COLORTUNER_H_B":2,
+        "COLORTUNER_H_C":3,
+        "COLORTUNER_H_M":4,
+        "COLORTUNER_H_Y":5,
+        "COLORTUNER_H_F":6,
+        "COLORTUNER_S_R":7,
+        "COLORTUNER_S_G":8,
+        "COLORTUNER_S_B":9,
+        "COLORTUNER_S_C":10,
+        "COLORTUNER_S_M":11,
+        "COLORTUNER_S_Y":12,
+        "COLORTUNER_S_F":13,
+        "COLORTUNER_Y_R":14,
+        "COLORTUNER_Y_G":15,
+        "COLORTUNER_Y_B":16,
+        "COLORTUNER_Y_C":17,
+        "COLORTUNER_Y_M":18,
+        "COLORTUNER_Y_Y":19,
+        "COLORTUNER_Y_F":20
+    },
+    "Config_CFD":{
+        "Color space":
+        {
+            "color_primaries":{
+                "Auto": 0,
+                "sRGB/BT.709": 1,
+                "DCI": 12,
+                "Adobe RGB": 128,
+                "BT.2020": 9
+            },
+            "transfer_characteristics":{
+                "Auto": 0,
+                "sRGB/BT.709": 1,
+                "DCI": 13,
+                "Adobe RGB": 18,
+                "BT.2020": 14
+            },
+            "matrix_coefficients":{
+                "Auto": 0,
+                "sRGB/BT.709": 1,
+                "DCI": 10,
+                "Adobe RGB": 5,
+                "BT.2020": 9
+            }
+        },
+        "HDR_Mode":{
+            "Auto": 0,
+            "SDR": 1,
+            "HDR10": 0,
+            "HLG": 2
+        },
+        "Xvycc_Manual_Mode":{
+            "Off": 1,
+            "On": 0
+        },
+        "Gamut_Manual_Mode":{
+            "Off": 1,
+            "On": 0
+        },
+        "TMO_Range":{
+            "Off": 0,
+            "Low": 1,
+            "Mid": 2,
+            "High": 3
+        },
+        "Tmo_Mode":{
+            "Auto": 0,
+            "12P": 1,
+            "256P": 2
+        },
+        "Tmo_Manual_Mode":{
+            "Off": 1,
+            "On": 0
+        }
+    },
+    "Config_NonAwareApp":{
+        "com.netflix.ninja": "Netflix",
+        "com.google.android.youtube.tv": "Youtube"
+    }
+}

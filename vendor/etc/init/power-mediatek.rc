@@ -1,0 +1,6 @@
+service vendor.power-mediatek /vendor/bin/hw/android.hardware.power-service.mediatek
+    class hal
+    user system
+    group system
+    capabilities SYS_TIME
+    file /dev/kmsg w

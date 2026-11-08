@@ -1,0 +1,7 @@
+<manifest version="1.0" type="device">
+    <hal format="aidl" override="true">
+        <name>android.hardware.tv.input</name>
+        <version>1</version>
+        <fqname>ITvInput/default</fqname>
+    </hal>
+</manifest>

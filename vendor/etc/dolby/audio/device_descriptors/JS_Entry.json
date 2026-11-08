@@ -1,0 +1,164 @@
+{
+    "type": "device render descriptor v1",
+    "identifier": "JSEntry",
+    "mapping": {
+        "latencies": {
+            "playback_latency": 0.004028889534320845
+        }
+    },
+    "sensitivity": 58.2,
+    "device_processing_mode": "internal",
+    "render_outputs": [
+        {
+            "offset_x": 0.05,
+            "offset_y": 0.0,
+            "direction_x": 1.0,
+            "direction_y": 0.0,
+            "direction_z": 0.0,
+            "min_hz": 120.0,
+            "max_hz": 20000.0,
+            "used_in_solo": true,
+            "render_output_processing_params": {
+                "num_dests": 1,
+                "operations_response_approximate": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "operations": [
+                    {
+                        "type": "1x1 gain",
+                        "store": true,
+                        "source": -1,
+                        "gain_q14": 16384,
+                        "dest": 0
+                    }
+                ],
+                "regulator": {
+                    "timbre_preservation_amount": 1.0,
+                    "relaxation_amount": 9.0,
+                    "overdrive": 0.0,
+                    "tuning": [
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": true
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": true
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": true
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": true
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": true
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": true
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": false
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": false
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": false
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": false
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": false
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": false
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": false
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": false
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": false
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": false
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": false
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": false
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": false
+                        },
+                        {
+                            "low_threshold": 0.0,
+                            "high_threshold": 12.0,
+                            "isolated": false
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}

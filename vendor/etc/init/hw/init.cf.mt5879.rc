@@ -1,0 +1,11 @@
+on init
+    setprop ro.sf.lcd_density 320
+    setprop vendor.mtk.sf.lcd.density 320
+    setprop vendor.mtk.osd_size 1080p
+    setprop vendor.display-size 3840x2160
+    setprop vendor.video-decoder-capability 3840x2160x60
+    setprop vendor.mtktv.sourceCapDD.freerun 1
+    # for osd size
+    setprop ro.vendor.max_ui_width 1920
+    setprop ro.surface_flinger.max_graphics_width 1920
+    setprop ro.surface_flinger.max_graphics_height 1080

@@ -1,0 +1,7 @@
+<manifest version="1.0" type="device">
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.mtk_netflix</name>
+        <fqname>INetflixControl/default</fqname>
+        <fqname>INetflixdrmControl/default</fqname>
+    </hal>
+</manifest>

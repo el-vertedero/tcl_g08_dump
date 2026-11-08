@@ -1,0 +1,7 @@
+service voicesdk_service /vendor/bin/voicesdk_server
+    class core
+    user audioserver
+    console
+    group system audio drmrpc
+    seclabel u:r:voicesdk_service:s0
+

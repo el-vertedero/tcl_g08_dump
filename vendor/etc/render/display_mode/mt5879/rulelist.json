@@ -1,0 +1,186 @@
+{
+    "PqRuleLists": {
+        "#version": {
+            "JsonVersionFormat": "0001.0000",
+            "Note": "1348cb7",
+            "Revision": "1348cb7"
+        },
+        "DMA_Setting": {
+            "content": [
+                "FRC",
+                "MDGW",
+                "NA"
+            ]
+        },
+        "DUMMY2": {
+            "content": [
+                "Legacy",
+                "Timesharing",
+                "default"
+            ]
+        },
+        "Focus_Win": {
+            "content": [
+                "Y",
+                "N"
+            ]
+        },
+        "Fps": {
+            "content": [
+                "<=61",
+                ">61"
+            ],
+            "define": {
+                "<=61": {
+                    "Fps_Hz": "[0, 61]"
+                },
+                ">61": {
+                    "Fps_Hz": "[62, 300]"
+                }
+            }
+        },
+        "Fps_Hz": {
+            "content": null
+        },
+        "Interlace": {
+            "content": [
+                "interlace",
+                "progressive"
+            ]
+        },
+        "MJC_UI": {
+            "content": [
+                "Y",
+                "N"
+            ]
+        },
+        "Mode": {
+            "content": [
+                "Legacy",
+                "Timesharing",
+                "default"
+            ]
+        },
+        "Panel": {
+            "content": [
+                "8K4K60",
+                "8K4K120",
+                "8K4K144",
+                "4K1K240",
+                "4K2K120",
+                "4K1K120",
+                "4K2K60",
+                "4K2K144",
+                "4K1K144",
+                "2K1K288",
+                "2K1K240",
+                "2K1K120",
+                "2K1K60"
+            ],
+            "define": {
+                "2K1K120": {
+                    "Panel_Fps": "[90, 130]",
+                    "Panel_H": "[1900, 1950]",
+                    "Panel_V": "[1050, 1100]"
+                },
+                "2K1K240": {
+                    "Panel_Fps": "[230, 250]",
+                    "Panel_H": "[1900, 1950]",
+                    "Panel_V": "[1050, 1100]"
+                },
+                "2K1K288": {
+                    "Panel_Fps": "[275, 295]",
+                    "Panel_H": "[1900, 1950]",
+                    "Panel_V": "[1050, 1100]"
+                },
+                "2K1K60": {
+                    "Panel_Fps": "[45, 65]",
+                    "Panel_H": "[1900, 1950]",
+                    "Panel_V": "[1050, 1100]"
+                },
+                "4K1K120": {
+                    "Panel_Fps": "[90, 130]",
+                    "Panel_H": "[3830, 3850]",
+                    "Panel_V": "[1050, 1100]"
+                },
+                "4K1K144": {
+                    "Panel_Fps": "[140, 150]",
+                    "Panel_H": "[3830, 3850]",
+                    "Panel_V": "[1050, 1100]"
+                },
+                "4K1K240": {
+                    "Panel_Fps": "[230, 250]",
+                    "Panel_H": "[3830, 3850]",
+                    "Panel_V": "[2100, 2200]"
+                },
+                "4K2K120": {
+                    "Panel_Fps": "[90, 130]",
+                    "Panel_H": "[3830, 3850]",
+                    "Panel_V": "[2100, 2200]"
+                },
+                "4K2K144": {
+                    "Panel_Fps": "[140, 150]",
+                    "Panel_H": "[3830, 3850]",
+                    "Panel_V": "[2100, 2200]"
+                },
+                "4K2K60": {
+                    "Panel_Fps": "[45, 65]",
+                    "Panel_H": "[3830, 3850]",
+                    "Panel_V": "[2100, 2200]"
+                },
+                "8K4K120": {
+                    "Panel_Fps": "[90, 130]",
+                    "Panel_H": "[7600, 7700]",
+                    "Panel_V": "[4200, 4300]"
+                },
+                "8K4K144": {
+                    "Panel_Fps": "[140, 150]",
+                    "Panel_H": "[7600, 7700]",
+                    "Panel_V": "[4200, 4300]"
+                },
+                "8K4K60": {
+                    "Panel_Fps": "[45, 65]",
+                    "Panel_H": "[7600, 7700]",
+                    "Panel_V": "[4200, 4300]"
+                }
+            }
+        },
+        "Panel_Fps": {
+            "content": null
+        },
+        "Panel_H": {
+            "content": null
+        },
+        "Panel_V": {
+            "content": null
+        },
+        "Scene": {
+            "content": [
+                "Normal",
+                "Game",
+                "Game+Crop",
+                "SliceGame",
+                "GameMEMC",
+                "PC",
+                "Photo",
+                "PI",
+                "HFR",
+                "3D"
+            ]
+        },
+        "Source": {
+            "content": [
+                "EXTIN",
+                "MM_VIDEO"
+            ]
+        },
+        "VRR": {
+            "content": [
+                "Gaming-VRR",
+                "QMS-VRR",
+                "Force-VRR",
+                "off"
+            ]
+        }
+    }
+}

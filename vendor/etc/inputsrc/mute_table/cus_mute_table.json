@@ -1,0 +1,7 @@
+{
+    "Svp_encryption_change": "freeze",
+    "Dolby_crc_ok": "no_action",
+    "Dolby_crc_fail_transition": "freeze",
+    "Dolby_crc_fail_stable": "mute",
+    "Dolby_hdr_type_change": "freeze"
+}

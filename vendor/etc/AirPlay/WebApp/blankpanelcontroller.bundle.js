@@ -1,0 +1,1 @@
+"use strict";exports.id=711,exports.ids=[711],exports.modules={4265:(t,e,n)=>{n.r(e),n.d(e,{default:()=>a});var s=n(1285);const a=class{constructor(){this.blankPanel=new s.B0}getPanel(){return this.blankPanel}onHandleDisplayChanged(t){this.blankPanel&&this.blankPanel.constructUI(t.width,t.height)}}}};

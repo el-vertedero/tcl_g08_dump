@@ -1,0 +1,4 @@
+service vendor.mediatek.hardware.mtk_netflix /vendor/bin/hw/vendor.mediatek.hardware.mtk_netflix-service
+    class hal
+    user vendor_netflix
+    group vendor_netflix system

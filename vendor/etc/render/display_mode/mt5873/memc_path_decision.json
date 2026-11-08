@@ -1,0 +1,86 @@
+{
+    "version": 1,
+    "syntax description": {
+        "memc-path-decision-table": {
+            "input-src": "SRCCAP | B2R | ignore",
+            "panel-group": "group-<num>[, group-<num>]",
+            "display-mode": "legacy | time sharing | ignore",
+            "scene": "[NORMAL | GAME | GAME_CROP | PC | PHOTO | FORCE_P | HFR | GAME_WITH_MEMC | 3D | SLICED_GAME | GAME_PC], each delimits by ,",
+            "vrr": "true | false | ignore",
+            "src-fps": "<op> <POSITIVE-INT-NUM> | ignore",
+            "interlace": "true | false | ignore",
+            "memc-path": "true | false"
+        },
+        "panel-group": [
+            {
+                "group-id": "<NONNEGATIVE-INT-NUMBER>",
+                "panels":"[2K1K60 | 2K1K120 | 4K1K120 | 4K2K60 | 4K1K144 | 4K1K240 | 4K2K120], each delimits by ,"
+            }
+        ]
+    },
+    "panel-group": [
+        {
+            "group-id": 0,
+            "panels": "2K1K60, 2K1K120, 4K1K120, 4K2K60"
+        },
+        {
+            "group-id": 1,
+            "panels": "4K1K144"
+        }
+    ],
+    "memc-path-decision-table": [
+        {
+            "input-src": "SRCCAP",
+            "panel-group": "0",
+            "display-mode": "legacy",
+            "scene": "NORMAL, GAME_WITH_MEMC",
+            "memc-path": "true"
+        },
+        {
+            "input-src": "SRCCAP",
+            "panel-group": "0, 1",
+            "display-mode": "legacy",
+            "scene": "GAME",
+            "memc-path": "false"
+        },
+        {
+            "input-src": "SRCCAP",
+            "panel-group": "0, 1",
+            "display-mode": "legacy",
+            "scene": "GAME_CROP",
+            "vrr": "false",
+            "src-fps": "<= 61",
+            "memc-path": "false"
+        },
+        {
+            "input-src": "SRCCAP",
+            "panel-group": "0",
+            "display-mode": "legacy",
+            "scene": "HFR, PC, 3D, GAME_PC",
+            "dma-path": "none"
+        },
+        {
+            "input-src": "B2R",
+            "panel-group": "0",
+            "display-mode": "legacy",
+            "scene": "NORMAL,FORCE_P",
+            "vrr": "false",
+            "memc-path": "true"
+        },
+        {
+            "input-src": "B2R",
+            "panel-group": "0",
+            "display-mode": "legacy",
+            "scene": "GAME, SLICED_GAME, HFR, PHOTO",
+            "vrr": "false",
+            "memc-path": "false"
+        },
+        {
+            "last-resort": "true",
+            "panel-group": "0, 1",
+            "display-mode": "legacy",
+            "scene": "NORMAL, GAME, GAME_CROP, PC, PHOTO, FORCE_P, HFR, GAME_WITH_MEMC, 3D",
+            "memc-path": "true"
+        }
+    ]
+}

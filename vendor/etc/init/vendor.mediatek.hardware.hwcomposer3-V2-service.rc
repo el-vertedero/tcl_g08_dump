@@ -1,0 +1,7 @@
+service vendor.hwcomposer-3 /vendor/bin/hw/hwcomposer.merak
+    class hal animation
+    user system
+    group graphics drmrpc vendor_realtime system camera media_rw external_storage
+    capabilities SYS_NICE SYS_ADMIN
+    onrestart restart surfaceflinger
+    writepid /dev/cpuset/system-background/tasks

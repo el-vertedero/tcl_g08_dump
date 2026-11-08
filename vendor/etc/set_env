@@ -1,0 +1,32 @@
+# <- this is for comment / total file size must be less than 4KB
+# Kernel protect is automatically done by mboot
+
+# Boot from RamDisk.
+setenv bootargs console=ttyS0,115200 init=/init CORE_DUMP_PATH=/data/core_dump.%%p.gz KDebug=1 delaylogo=true security=selinux SD_CONFIG=2 loop.max_part=7
+setenv verify n
+setenv devicestate lock
+setenv usb_auto_upgrade disable
+setenv force_boot_recovery false
+setenv autoload 0
+setenv android_product tcl9618
+setenv board tcl9618
+# ifdef VENDOR_EDIT
+# ruiqi.zhao@tcl.com, 2023/03/09, [MT9618CHIP-237] Example Change the attribute value Tcl to TCL
+setenv android_manufacturer TCL
+# endif /* VENDOR_EDIT */
+setenv dtbo_cfg_part default
+setenv dtbo_cfg_sel default
+setenv bootconfig 0
+setenv ENTER_STANDBY 0
+setenv QHB_FLAG 0
+setenv loglevel 3
+saveenv
+addbootargs vmpressure_level_critical 80
+addbootargs cgroup.memory nokmem
+addbootargs utpa_str_fr 1
+addbootargs 8250.nr_uarts 4
+addbootargs vmalloc 550M
+addbootargs kasan_multi_shot 1
+addbootargs firmware_class.path /tclconfig/,/vendor/firmware/
+
+% <- this is end of file symbol
