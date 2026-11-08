@@ -1,0 +1,10 @@
+on boot
+    mkdir /userdata  0770 system system
+    chmod 660 /userdata/satellite.db
+    chmod 660 /userdata/DtvData.db
+    chmod 660 /userdata/AtvData.db
+    chmod 660 /userdata/AtscData.db
+    chown system system /userdata/satellite.db
+    chown system system /userdata/DtvData.db
+    chown system system /userdata/AtvData.db
+    chown system system /userdata/AtscData.db
