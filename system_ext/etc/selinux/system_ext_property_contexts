@@ -1,0 +1,234 @@
+#line 1 "vendor/tcl/sepolicy/system_ext/private/property_contexts"
+#ifdef VENDOR_EDIT
+# chenle@SystemDepartment2,2021/02/08,modify RT51M-2902 begin for gmsversion
+#ro.com.google.gmsversion        u:object_r:ro_com_google_gmsversion_prop:s0
+# chenle@SystemDepartment2,2021/02/08,modify RT51M-2902 end for tcl gmsversion
+#endif /* VENDOR_EDIT  */
+# ifdef VENDOR_EDIT
+# yi11.tang@tcl.com, 2020/11/09, add tmmgr selinux
+#persist.tm.enable_app_exception u:object_r:log_prop:s0
+#persist.sys.logd.level u:object_r:log_prop:s0
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# ke.shi@tcl.com, 2020/11/30, add for RMS
+persist.device_config.runtime_native.usap_pool_enabled u:object_r:log_prop:s0
+persist.device_config.runtime_native.usap_pool_size_max u:object_r:log_prop:s0
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# yongcheng.luo@tcl.com, 2020/12/30, add for ion cache
+#persist.vendor.gralloc.ioncache.    u:object_r:log_prop:s0
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# chao18.xu@tcl.com, 2020/12/28, add for pmkaroakge
+#tcl.micmanager.  u:object_r:log_prop:s0
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# ming9.yao@tcl.com, 2020/03/13, add selinux for assert
+persist.sys.disable.asserttip                                   u:object_r:system_prop:s0
+persist.odm.tcl_log_boot                                        u:object_r:system_prop:s0
+persist.odm.tcl_alllog_user                                     u:object_r:system_prop:s0
+persist.odm.tcl_log_user                                        u:object_r:system_prop:s0
+debug.assert.crash.process                                      u:object_r:system_prop:s0
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# xingjie.wen@tcl.com, 2024/10/21, add selinux for com.tcl.tvsmartalbu
+persist.tvsmartalbum.clear                                      u:object_r:system_prop:s0
+# endif /* VENDOR_EDIT */
+
+
+#ifdef VENDOR_EDIT
+#kaidong.gao@tcl.com  2021/1/23  add for GOOGLEISSUE-21
+persist.tv.client_sku u:object_r:log_prop:s0
+# endif /* VENDOR_EDIT */
+#ro.setupwizard.mode            u:object_r:ro_setupwizard_mode_prop:s0
+
+# qiliang.zhao@tcl, 2021/03/23, add for cloud profile
+persist.vendor.tcl.cloud.profile.log.level  u:object_r:log_prop:s0
+
+#ifdef VENDOR_EDIT
+#yongkang.xun@tcl.com 2022/08/30  add for product pid prop
+ro.product.pid                  u:object_r:ro_product_pid_prop:s0
+# endif /* VENDOR_EDIT *
+
+# ifndef VENDOR_EDIT
+# yulong8.zhang@tcl.com, 2022/9/6, add for platform name
+ro.product.platform_name  u:object_r:log_prop:s0
+#endif /* VENDOR_EDIT */
+
+ro.feature.res_themeskin                                u:object_r:feature_build_prop:s0
+
+# ifndef VENDOR_EDIT
+# pengzhao.chen@tcl.con,2023/2/9,add for persist.odm.tcl.wiredheadsafe.status
+persist.odm.tcl.wiredheadsafe.status  u:object_r:log_prop:s0
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# chen20.zhang@bt 2023/02/15  add for bt/wifi prop
+sys.tcl.bt.driver                                        u:object_r:log_prop:s0
+com.tcl.bluetooth.protocolstack                          u:object_r:log_prop:s0
+sys.tcl.bt.listen.alone.version                          u:object_r:log_prop:s0
+sys.tcl.bt.listen.alone.current.version                  u:object_r:log_prop:s0
+wlan.driver.status                                       u:object_r:log_prop:s0
+# endif /* VENDOR_EDIT */
+
+# ifndef VENDOR_EDIT
+# zijie5.zhang@tcl.com, 2023/2/13, add for persist.tcl. and persist.odm.tcl
+persist.tcl.       u:object_r:log_prop:s0
+persist.odm.tcl.   u:object_r:log_prop:s0
+# endif /* VENDOR_EDIT */
+
+# ifndef VENDOR_EDIT
+# yinghong.mo@tcl.com, 2023/02/22, add for TGuard
+odm.tcl.tms.                                                u:object_r:system_prop:s0
+persist.tm.                                                 u:object_r:system_prop:s0
+# endif /* VENDOR_EDIT */
+
+# ifndef VENDOR_EDIT^M
+# fan17.wang@tcl.com, 2023/03/23, add for InitSetup
+persist.odm.tcl.fcm.country                                 u:object_r:init_setup_prop:s0
+# endif /* VENDOR_EDIT */
+
+# ex_gang.zheng@tcl.com 2023/3/15 add for shop
+persist.odm.tcl.fty.locale.stat                             u:object_r:system_prop:s0
+persist.odm.tcl.fty.version_id                            u:object_r:exported_system_prop:s0
+
+# ifndef VENDOR_EDIT
+# ming1.hou@tcl.com, 2022/08/23, add for audio dump.
+sys.tcl.audio.dump.enable                                 u:object_r:system_prop:s0
+# endif /* VENDOR_EDIT */
+
+# add for hardware version prop
+ro.hardware.version_id                                      u:object_r:log_prop:s0
+
+#ifdef VENDOR_EDIT
+#xin88.zhang@tcl.com, add for perfdata
+sys.bootanim.anim_1  u:object_r:system_prop:s0 exact string
+sys.bootanim.anim_2  u:object_r:system_prop:s0 exact string
+# endif /* VENDOR_EDIT */
+
+#ifdef VENDOR_EDIT
+# xingjie.wen@tcl.com 2024/09/09,Transplant the configuration of 9653
+sys.tcl.                                                u:object_r:log_prop:s0
+persist.P_MODE                                          u:object_r:log_prop:s0
+persist.hotel.                                          u:object_r:log_prop:s0
+hotel.test.anim.status                                  u:object_r:log_prop:s0
+persist.silentinstallapk                                u:object_r:log_prop:s0
+service.offanim.finish                                  u:object_r:log_prop:s0
+service.offanim.offon                                   u:object_r:log_prop:s0
+#vendor.mtk.running.application u:object_r:exported_system_prop:s0 exact string
+vendor.tcl.running.application u:object_r:exported_system_prop:s0 exact string
+rtk.longpress.shutdown u:object_r:log_prop:s0
+persist.xfar.platform                        u:object_r:log_prop:s0
+persist.cyberui.intellect.sort                        u:object_r:log_prop:s0
+com.tcl.logd.switch                             u:object_r:log_prop:s0
+ctl.start$console                               u:object_r:log_prop:s0
+ctl.stop$console                                u:object_r:log_prop:s0
+persist.sys.ffv.switch                          u:object_r:log_prop:s0
+persist.sys.ffv.w.switch                        u:object_r:log_prop:s0
+persist.sys.power_suspend_mode                  u:object_r:log_prop:s0
+media.libplayer.height                          u:object_r:log_prop:s0
+media.libplayer.width                           u:object_r:log_prop:s0
+persist.sys.is.image.player                     u:object_r:log_prop:s0
+sys.is.or.not.http.mediaplayer                  u:object_r:log_prop:s0
+com.tcl.art.show_picture                        u:object_r:log_prop:s0
+media.player.pid                                u:object_r:log_prop:s0
+vendor.media.gpu.readable                       u:object_r:log_prop:s0
+persist.audio.debug.search                      u:object_r:log_prop:s0
+persist.audio.debug.read                        u:object_r:log_prop:s0
+com.tcl.voicemanager.enable                     u:object_r:log_prop:s0
+com.tcl.ai.full.scene.mode                      u:object_r:log_prop:s0
+com.tcl.AI.music.support                        u:object_r:log_prop:s0
+com.tcl.walleve.update                          u:object_r:log_prop:s0
+ISGOINGTOAI                                                      u:object_r:log_prop:s0
+com.tcl.AI.soundbox.state                                        u:object_r:log_prop:s0
+persist.walleve.handfree                                         u:object_r:log_prop:s0
+com.tcl.walleve.far-field.enable                                 u:object_r:log_prop:s0
+com.tcl.walleve.running                                          u:object_r:log_prop:s0
+persist.walleve.web.asr                                          u:object_r:log_prop:s0
+persist.koo.connectSource                                       u:object_r:log_prop:s0
+tcl.ai.audiohal.startRecord                                     u:object_r:log_prop:s0
+persist.nscreen.deviceid                                        u:object_r:log_prop:s0
+nScreen_status                                                  u:object_r:log_prop:s0
+ro.crypto.fuse_sdcard                                           u:object_r:log_prop:s0
+connectName                                                     u:object_r:log_prop:s0
+persist.vendor.ffv_switch                                       u:object_r:log_prop:s0
+persist.vendor.vadwake                                          u:object_r:log_prop:s0
+vendor.ffv_switch                                               u:object_r:log_prop:s0
+vendor.vadwake                                                  u:object_r:log_prop:s0
+init.svc.bootanim                                               u:object_r:log_prop:s0
+third.pmkara.mic.card                                            u:object_r:log_prop:s0
+third.pmkara.mic.name                                            u:object_r:log_prop:s0
+persist.nvr.                                    u:object_r:log_prop:s0
+persist.sys.nvr.                                u:object_r:log_prop:s0
+persist.sys.tlog.                               u:object_r:log_prop:s0 exact string
+persist.sys.tlog.debug                          u:object_r:log_prop:s0 exact string
+persist.sys.tlog.enable                         u:object_r:log_prop:s0 exact string
+persist.sys.tlog.level                          u:object_r:log_prop:s0 exact string
+persist.sys.tlog.tags                           u:object_r:log_prop:s0 exact string
+persist.sys.tlog.threold                        u:object_r:log_prop:s0 exact string
+persist.sys.tlog.procs                          u:object_r:log_prop:s0 exact string
+vendor.tcl.audio.dump.enable                                      u:object_r:system_prop:s0
+vendor.media.audiohal.outdump                                     u:object_r:system_prop:s0
+vendor.media.audiohal.a2dpdump                                    u:object_r:system_prop:s0
+mstar.ursa.type                                u:object_r:log_prop:s0
+#vendor.mtk.is.storage.source                   u:object_r:log_prop:s0
+com.tcl.AI.start.count                                u:object_r:walleve_ai_prop:s0
+process.start.count.walleve                           u:object_r:walleve_ai_prop:s0
+persist.walleve.soundbox.screen                       u:object_r:walleve_ai_prop:s0
+com.tcl.ai.scene.key.support                          u:object_r:walleve_ai_prop:s0
+#mtk.exoplayer.debug.level                                  u:object_r:system_prop:s0
+#endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# haoyang5.zhang@tcl.com, 2024/09/14, add for tlkg global mic
+ro.config.global_mic                                            u:object_r:log_prop:s0
+com.tcl.micmanager_enable                                       u:object_r:log_prop:s0
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+persist.url.bi                                  u:object_r:log_prop:s0
+persist.config.bi.laboratory                    u:object_r:log_prop:s0
+persist.system.update.test.flag                 u:object_r:log_prop:s0
+# endif /* VENDOR_EDIT */
+
+ro.support.changesubtitle                                   u:object_r:log_prop:s0
+
+# ifndef VENDOR_EDIT
+# mingyou.yu@tcl.com, 2024/08/01, add for loadmonitor
+persist.tcl.psi.                                                u:object_r:system_prop:s0
+sys.loadmonitor.                                                u:object_r:system_prop:s0
+# endif /* VENDOR_EDIT */
+
+ro.virtual_ab.allow_non_ab          u:object_r:virtual_ab_prop:s0
+bluetooth.device.class_of_device    u:object_r:exported_bluetooth_prop:s0
+
+ro.feature.perf_ipel                u:object_r:vendor_ipel_enable_prop:s0
+persist.dft.newlogd                 u:object_r:log_prop:s0
+
+# ifdef VENDOR_EDIT
+# han39.zhang@tcl.com, 2025/10/09, add for power info report
+persist.software.version_id         u:object_r:system_prop:s0
+persist.sys.last.exception          u:object_r:system_prop:s0
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# yuchao4.zhang@tcl.com,2025/09/18,zero space boot
+sys.tcl.data_full                   u:object_r:system_prop:s0
+sys.tcl.zero_data_available         u:object_r:system_prop:s0
+# endif /* VENDOR_EDIT */
+
+
+#line 1 "out/soong/.intermediates/system/sepolicy/contexts/system_ext_property_contexts/android_common/gen/newline"
+
+#line 1 "vendor/google_gtvs/sepolicy/tv/property_contexts"
+# used by mediashell
+ro.odm.cast.ssid_suffix u:object_r:odm_cast_prop:s0
+# TODO(359400735): Remove after root cause the av sync problem.
+odm.cast.audio_latency_adjust_ms u:object_r:odm_cast_prop:s0
+#line 1 "out/soong/.intermediates/system/sepolicy/contexts/system_ext_property_contexts/android_common/gen/newline"
+

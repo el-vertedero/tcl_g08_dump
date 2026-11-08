@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<client_cert_config>
+	<element>
+		<host>widevine.eurofins-digitaltesting.com</host>
+		<port>443</port>
+		<type>PEM</type>
+		<certificate>eurofins_c</certificate>
+		<key>eurofins_k</key>
+	</element>
+	<element>
+		<host>drm-license.a3sa-test.yottacloud.tv</host>
+		<port>443</port>
+		<type>PEM</type>
+		<certificate>eonti_c</certificate>
+		<key>eonti_k</key>
+	</element>
+</client_cert_config>

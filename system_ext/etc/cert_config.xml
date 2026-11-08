@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client_path_config>
+<element>
+	<ca_root>/system_ext/etc/hbbtv/crt/ca-certificates.crt</ca_root>
+</element>
+<element>
+	<ca_client_config>/system_ext/etc/hbbtv/crt/client/client_cert_config.xml</ca_client_config>
+</element>
+<element>
+	<mds_test>/system_ext/etc/hbbtv/crt/client/mds_test.xml</mds_test>
+</element>
+<element>
+	<hbbtv_UA>/system_ext/etc/hbbtv/ua/hbbtv_UA.xml</hbbtv_UA>
+</element>
+</client_path_config>

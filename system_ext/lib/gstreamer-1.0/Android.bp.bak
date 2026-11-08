@@ -1,0 +1,331 @@
+cc_prebuilt_library_shared {
+    name: "libfppasink",
+    system_ext_specific: true,
+    srcs: ["libfppasink.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libfpptsink",
+    system_ext_specific: true,
+    srcs: ["libfpptsink.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libfppvsink",
+    system_ext_specific: true,
+    srcs: ["libfppvsink.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstadpcmdec",
+    system_ext_specific: true,
+    srcs: ["libgstadpcmdec.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstaiff",
+    system_ext_specific: true,
+    srcs: ["libgstaiff.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstapetag",
+    system_ext_specific: true,
+    srcs: ["libgstapetag.so"],
+    check_elf_files: false,
+}
+cc_prebuilt_library_shared {
+    name: "libgstapp",
+    system_ext_specific: true,
+    srcs: ["libgstapp.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstasf",
+    system_ext_specific: true,
+    srcs: ["libgstasf.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstaudioconvert",
+    system_ext_specific: true,
+    srcs: ["libgstaudioconvert.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstaudioparsers",
+    system_ext_specific: true,
+    srcs: ["libgstaudioparsers.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstauparse",
+    system_ext_specific: true,
+    srcs: ["libgstauparse.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstautodetect",
+    system_ext_specific: true,
+    srcs: ["libgstautodetect.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstavi",
+    system_ext_specific: true,
+    srcs: ["libgstavi.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstcoreelements",
+    system_ext_specific: true,
+    srcs: ["libgstcoreelements.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstcoretracers",
+    system_ext_specific: true,
+    srcs: ["libgstcoretracers.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstcurlhttpsrc",
+    system_ext_specific: true,
+    srcs: ["libgstcurlhttpsrc.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstdashdemux",
+    system_ext_specific: true,
+    srcs: ["libgstdashdemux.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstdashqtdemux",
+    system_ext_specific: true,
+    srcs: ["libgstdashqtdemux.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstdvbsuboverlay",
+    system_ext_specific: true,
+    srcs: ["libgstdvbsuboverlay.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstdvdlpcmdec",
+    system_ext_specific: true,
+    srcs: ["libgstdvdlpcmdec.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstdvdsuboverlay",
+    system_ext_specific: true,
+    srcs: ["libgstdvdsuboverlay.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstflv",
+    system_ext_specific: true,
+    srcs: ["libgstflv.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgsthlsdemux",
+    system_ext_specific: true,
+    srcs: ["libgsthlsdemux.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgsticydemux",
+    system_ext_specific: true,
+    srcs: ["libgsticydemux.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstid3demux",
+    system_ext_specific: true,
+    srcs: ["libgstid3demux.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstisomp4",
+    system_ext_specific: true,
+    srcs: ["libgstisomp4.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstlibav",
+    system_ext_specific: true,
+    srcs: ["libgstlibav.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstmatroska",
+    system_ext_specific: true,
+    srcs: ["libgstmatroska.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstmpegpsdemux",
+    system_ext_specific: true,
+    srcs: ["libgstmpegpsdemux.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstmpegtsdemux",
+    system_ext_specific: true,
+    srcs: ["libgstmpegtsdemux.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstmssdemux",
+    system_ext_specific: true,
+    srcs: ["libgstmssdemux.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstmultiinjectdemux",
+    system_ext_specific: true,
+    srcs: ["libgstmultiinjectdemux.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstpgssuboverlay",
+    system_ext_specific: true,
+    srcs: ["libgstpgssuboverlay.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstplayback",
+    system_ext_specific: true,
+    srcs: ["libgstplayback.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstrawparse",
+    system_ext_specific: true,
+    srcs: ["libgstrawparse.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstsubparse",
+    system_ext_specific: true,
+    srcs: ["libgstsubparse.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgsttinyalsa",
+    system_ext_specific: true,
+    srcs: ["libgsttinyalsa.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstttmlsuboverlay",
+    system_ext_specific: true,
+    srcs: ["libgstttmlsuboverlay.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstttxsuboverlay",
+    system_ext_specific: true,
+    srcs: ["libgstttxsuboverlay.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgsttxtsuboverlay",
+    system_ext_specific: true,
+    srcs: ["libgsttxtsuboverlay.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgsttypefindfunctions",
+    system_ext_specific: true,
+    srcs: ["libgsttypefindfunctions.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstvideofiltersbad",
+    system_ext_specific: true,
+    srcs: ["libgstvideofiltersbad.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstvideoparsersbad",
+    system_ext_specific: true,
+    srcs: ["libgstvideoparsersbad.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstwavparse",
+    system_ext_specific: true,
+    srcs: ["libgstwavparse.so"],
+    check_elf_files: false,
+}
+
+cc_prebuilt_library_shared {
+    name: "libgstwvttsuboverlay",
+    system_ext_specific: true,
+    srcs: ["libgstwvttsuboverlay.so"],
+    allow_undefined_symbols: true,
+    check_elf_files: false,
+}
+

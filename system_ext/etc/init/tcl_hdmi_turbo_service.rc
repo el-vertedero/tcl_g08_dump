@@ -1,0 +1,6 @@
+service hdmi_turbo_service /system_ext/bin/tcl_hdmi_turbo_service
+    class main
+    user root
+    group root system media media_rw external_storage everybody
+    seclabel u:r:hdmi_turbo_service:s0
+    updatable

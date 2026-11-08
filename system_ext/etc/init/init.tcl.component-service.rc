@@ -1,0 +1,15 @@
+on boot
+    setprop sys.tcl.start_component_service ${persist.tcl.componentinfo.enable}
+
+on property:sys.tcl.start_component_service=true
+    start tcl_component_service
+
+on property:persist.tcl.componentinfo.enable=true
+    start tcl_component_service
+
+service tcl_component_service /system_ext/bin/tcl_component_service
+    class main
+    user root
+    group root system
+    critical
+    seclabel u:r:tcl_component_service:s0

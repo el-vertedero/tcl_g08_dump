@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hierarchy>
+    <system_property>
+        <path base="/tvcust/aio_resources/resource/common" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/brand/common" args="tcl_brand" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, series" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/project/common" args="device_name" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/product/common" args="product" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/common" args="product, device_name" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/region/common" args="region" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, region" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, device_name" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, product" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, product, device_name" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/ecid/common" args="ecid" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, ecid" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product, device_name" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/certify/common" args="certify" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="extension" file="build.prop"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="product_name" file="build.prop"/>
+        <path base="/data/system/fcm" file="build.prop"/>
+    </system_property>
+    <system_feature>
+        <path base="/tvcust/aio_resources/resource/common"/>
+        <path base="/tvcust/aio_resources/resource/brand/common" args="tcl_brand"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, series"/>
+        <path base="/tvcust/aio_resources/resource/project/common" args="device_name"/>
+        <path base="/tvcust/aio_resources/resource/product/common" args="product"/>
+        <path base="/tvcust/aio_resources/resource/common" args="product, device_name"/>
+        <path base="/tvcust/aio_resources/resource/region/common" args="region"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, region"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, device_name"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, product"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, product, device_name"/>
+        <path base="/tvcust/aio_resources/resource/ecid/common" args="ecid"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, ecid"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product, device_name"/>
+        <path base="/tvcust/aio_resources/resource/certify/common" args="certify"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="extension"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="product_name"/>
+        <path base="/data/system/fcm"/>
+    </system_feature>
+    <bootanim>
+        <path base="/tvcust/aio_resources/resource/common" sub="bootanim"/>
+        <path base="/tvcust/aio_resources/resource/brand/common" args="tcl_brand" sub="bootanim"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, series" sub="bootanim"/>
+        <path base="/tvcust/aio_resources/resource/project/common" args="device_name" sub="bootanim"/>
+        <path base="/tvcust/aio_resources/resource/product/common" args="product" sub="bootanim"/>
+        <path base="/tvcust/aio_resources/resource/region/common" args="region" sub="bootanim"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, region" sub="bootanim"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, device_name" sub="bootanim"/>
+        <path base="/tvcust/aio_resources/resource/ecid/common" args="ecid" sub="bootanim"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, ecid" sub="bootanim"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product" sub="bootanim"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product, device_name" sub="bootanim"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="extension" sub="bootanim"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="product_name" sub="bootanim"/>
+    </bootanim>
+    <boot_logo>
+        <path base="/tvcust/aio_resources/resource/common" sub="logo"/>
+        <path base="/tvcust/aio_resources/resource/brand/common" args="tcl_brand" sub="logo"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, series" sub="logo"/>
+        <path base="/tvcust/aio_resources/resource/project/common" args="device_name" sub="logo"/>
+        <path base="/tvcust/aio_resources/resource/product/common" args="product" sub="logo"/>
+        <path base="/tvcust/aio_resources/resource/region/common" args="region" sub="logo"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, region" sub="logo"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, device_name" sub="logo"/>
+        <path base="/tvcust/aio_resources/resource/ecid/common" args="ecid" sub="logo"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, ecid" sub="logo"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product" sub="logo"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product, device_name" sub="logo"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="extension" sub="logo"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="product_name" sub="logo"/>
+    </boot_logo>
+    <system_config>
+        <path base="/tvcust/aio_resources/resource/common" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/brand/common" args="tcl_brand" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, series" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/project/common" args="device_name" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/product/common" args="product" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/common" args="product, device_name" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/region/common" args="region" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, region" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, device_name" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, product" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, product, device_name" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/ecid/common" args="ecid" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, ecid" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product, device_name" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/certify/common" args="certify" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="extension" file="system_config.xml"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="product_name" file="system_config.xml"/>
+        <path base="/data/system/fcm" file="system_config.xml"/>
+    </system_config>
+    <dynamic_feature>
+        <path base="/tvcust/aio_resources/resource/common" sub="params" file="dynamic_feature_config.json"/>
+        <path base="/tvcust/aio_resources/resource/project/common" args="device_name" sub="params" file="dynamic_feature_config.json"/>
+    </dynamic_feature>
+    <params_config>
+        <path base="/tvcust/aio_resources/resource/common" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/brand/common" args="tcl_brand" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, series" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/project/common" args="device_name" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/product/common" args="product" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="product, device_name" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/region/common" args="region" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, region" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, device_name" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, product" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, product, device_name" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/ecid/common" args="ecid" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, ecid" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product, device_name" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/certify/common" args="certify" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="extension" sub="params" file="feature_config.pb"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="product_name" sub="params" file="feature_config.pb"/>
+        <path base="/data/system/fcm" file="feature_config.pb"/>
+    </params_config>
+    <shortcut_key>
+        <path base="/tvcust/aio_resources/resource/common" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="area" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/brand/common" args="tcl_brand" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, series" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/project/common" args="device_name" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/product/common" args="product" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="product, device_name" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/region/common" args="region" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, region" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, device_name" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, product" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, product, device_name" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/ecid/common" args="ecid" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, ecid" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product, device_name" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/certify/common" args="certify" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="extension" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="product_name" sub="input_key" file="shortcutkey.pb"/>
+        <path base="/data/system/fcm" file="shortcutkey.pb"/>
+    </shortcut_key>
+    <key_layout>
+        <path base="/tvcust/aio_resources/resource/common" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/common" args="area" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/brand/common" args="tcl_brand" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, series" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/project/common" args="device_name" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/product/common" args="product" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/common" args="product, device_name" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/region/common" args="region" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, region" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, device_name" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, product" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/common" args="region, product, device_name" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/ecid/common" args="ecid" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/common" args="tcl_brand, ecid" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/common" args="ecid, product, device_name" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/certify/common" args="certify" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="extension" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/tvcust/aio_resources/resource/extension/common" args="product_name" sub="input_key" file="shortcutkey.tkl"/>
+        <path base="/data/system/fcm" file="shortcutkey.tkl"/>
+    </key_layout>
+</hierarchy>
+

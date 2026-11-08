@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+    <privapp-permissions package="com.mediatek.network">
+        <permission name="android.permission.TURN_SCREEN_ON"/>
+    </privapp-permissions>
+</permissions>

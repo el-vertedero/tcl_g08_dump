@@ -1,0 +1,5 @@
+service tcl_display_service /system_ext/bin/tcl_tv_display_service
+    class main
+    user root
+    group root system media media_rw external_storage everybody
+    seclabel u:r:tcl_display_service:s0

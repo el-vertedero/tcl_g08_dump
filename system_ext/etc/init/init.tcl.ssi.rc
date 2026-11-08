@@ -1,0 +1,111 @@
+import /vendor/etc/init/hw/init.tcl.rc
+
+# ifdef VENDOR_EDIT
+# haotian3.liu@tcl.com, 2023/11/15, add for tstreamingservice
+import /system_ext/etc/init/hw/init.tcl.tstreamingservice.rc
+# endif /* VENDOR_EDIT */
+
+#ifdef VENDOR_EDIT
+#ziqian1.liu@tcl.com, 2023/11/15, [RZXT2-158] add for assert red screen
+import /system_ext/etc/init/hw/tclinitassert.rc
+#endif /* VENDOR_EDIT */
+
+#ifdef VENDOR_EDIT
+#ziqian1.liu@tcl.com, 2024/09/23, add for userlogkit
+import /system_ext/etc/init/hw/userlogkit.rc
+#endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# yinghong.mo@tcl.com, 2024/05/08, [TROM4JXKFFZP-1735] add logkit
+import /system_ext/etc/init/hw/logkit.rc
+# endif /* VENDOR_EDIT */
+
+# yinghong.mo@tcl.com, 2024/10/24, [LINTHYU-1461] add for TGuard kmsg log
+import /system_ext/etc/init/hw/tguard.rc
+# endif /* VENDOR_EDIT */
+
+#ifdef VENDOR_EDIT
+#yulong8.zhang@tcl.com, 2022/5/9, add config provider service
+on post-fs-data
+    mkdir /data/local/feature 0777 system system
+#endif /* VENDOR_EDIT */
+#ifdef VENDOR_EDIT
+#ruiqi.zhao@tcl.com, 2023/11/16, [MT9603-14] VAB compatible with NON-AB
+    mkdir /data/fota 0770 system system encryption=Require
+#endif VENDOR_EDIT
+    #ifdef VENDOR_EDIT
+    # xing28.wang@tcl.com, 2024/09/11, add for heraeye
+    mkdir /data/system/nvrhung
+    chown root system /data/system/nvrhung
+    chmod 777 /data/system/nvrhung
+    restorecon -r -v /data/system/nvrhung
+    # endif /* VENDOR_EDIT */
+
+    # ke5.hu@tcl.com, add for abnormal_wakeup
+    mkdir /data/system/abnormal_wakeup
+    chown root system /data/system/abnormal_wakeup
+    chmod 777 /data/system/abnormal_wakeup
+    restorecon -r -v /data/system/abnormal_wakeup
+
+    # ke5.hu@tcl.com, add for HeLog
+    mkdir /data/system/HeLog
+    chown root system /data/system/HeLog
+    chmod 777 /data/system/HeLog
+    restorecon -r -v /data/system/HeLog
+
+    #ifdef VENDOR_EDIT
+    #yixuan8.zhang@tcl.com, 2025/05/27, add for upgrade
+    mkdir /data/vendor/upgrade 0770 root system
+    #endif  VENDOR_EDIT
+
+# ifdef VENDOR_EDIT
+# han39.zhang@tcl.com, 2024/03/25, [TROM4JXKFFZP-1666] add hotel data backup
+    mkdir /data/system/hotel 0777 system system
+    mkdir /data/system/hotel/bootanim 0777 system system
+    mkdir /data/system/hotel/bootvideo 0777 system system
+    mkdir /data/system/hotel/aq 0777 system system
+    restorecon -r -v /data/system/hotel
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# han39.zhang@tcl.com, 2025/10/28, add for power info report
+    mkdir /data/system/power_record 0777 system system
+    restorecon -r -v /data/system/power_record
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# pengbo.zeng@tcl.com, 2024/09/27, add deviceinfo.db
+    mkdir /data/system/deviceinfo 0770 system system
+    restorecon -r -v /data/system/deviceinfo
+# endif /* VENDOR_EDIT */
+
+# ifndef VENDOR_EDIT
+# sheng2.lei@tcl.com, 2024/08/27, [TROM5-1507] add ads for BootAnimation.
+    mkdir /data/system/ad 0777 system root
+    restorecon -r -v /data/system/ad
+    write /data/system/ad/procstats ""
+    chown graphics graphics /data/system/ad/procstats
+    chmod 664 /data/system/ad/procstats
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# ming1.hou@tcl.com, 2023/06/16, add for audio dump
+    mkdir /data/audio_dump 0777 audioserver system
+# endif /* VENDOR_EDIT */
+
+service vold_hdparm /system/bin/sh /system_ext/bin/hdparm_device_sleep.sh
+    class core
+    user root
+    group root
+    seclabel u:r:uncrypt:s0
+    disabled
+    oneshot
+
+on property:vold.tcl.device.sleep=*
+    start vold_hdparm
+
+#ifdef VENDOR_EDIT
+#guangjian.guo@tcl.com, 2023/08/08, add /data/factory_log
+on property:odm.tcl.factory.pmode=1
+    mkdir /data/factory_log 0770 root system
+#endif /* VENDOR_EDIT */

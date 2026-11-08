@@ -1,0 +1,8 @@
+on init
+    start pqalg_service
+
+service pqalg_service /system_ext/bin/pqalg_service
+    class main
+    user system
+    group root system
+    seclabel u:r:pqalg_service:s0

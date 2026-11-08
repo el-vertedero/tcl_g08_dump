@@ -1,0 +1,15 @@
+# check_data_space
+
+service data_check /system_ext/bin/data_check
+    class main
+    user root
+    disabled
+    group root system
+    oneshot
+    seclabel u:r:data_check:s0
+
+
+on zygote-start && property:persist.sys.tcl.storage_extreme_low=true && property:ro.feature.power_zero_space_boot=true
+    start data_check
+
+

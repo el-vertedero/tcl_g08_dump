@@ -1,0 +1,30 @@
+#ifdef VENDOR_EDIT
+# haotian3.liu@tcl.com, 2022/08/01, add for tvcamera and tstreaming
+# tstreamingservice service
+on property:sys.boot_completed=1
+    start tstreamingservice
+
+service tstreamingservice /system_ext/bin/tstreamingservice
+    class main
+    user root
+    group root camera
+    disabled
+#endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# haotian3.liu@tcl.com, 2023/06/28, add for updateperipheral
+on post-fs-data
+    mkdir /data/system/update
+    chown system system /data/system/update
+    chmod 0770 /data/system/update
+    restorecon -r -v /data/system/update
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# shengfeng2.chen@tcl.com, 2024/04/08, add for tcl dev ota update
+on post-fs-data
+    mkdir /tmp/ota
+    chown system system /tmp/ota
+    chmod 0774 /tmp/ota
+    restorecon -r -v /tmp/ota
+# endif /* VENDOR_EDIT */

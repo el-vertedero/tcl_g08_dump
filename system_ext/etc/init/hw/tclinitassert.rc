@@ -1,0 +1,19 @@
+#copyright (C),2014-2020,Tcl Comm Corp., Ltd
+# VENDOR_EDIT,All rights reserved.
+#
+# FILE:-
+# Description:tclinitassert.rc
+#    Define the tcl init service by init
+
+# ifdef VENDOR_EDIT
+# qian23.li@tcl.com, 2020/09/08, add for define service assert
+on property:persist.sys.disable.asserttip=0
+    start asserttip
+
+service asserttip /system/bin/asserttip
+    user root
+    group root
+    oneshot
+    seclabel u:r:asserttip:s0
+    writepid /dev/cpuset/system-background/tasks
+

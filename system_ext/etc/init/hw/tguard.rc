@@ -1,0 +1,16 @@
+#copyright (C),2023-2030,Tcl Comm Corp., Ltd
+# VENDOR_EDIT,All rights reserved.
+#
+# FILE:-tguard.rc
+# Description:
+#    Define new service by init
+on post-fs-data
+    mkdir /data/tmp 0770 root system
+    mkdir /data/tmp/tguard_tms 0770 root system
+service GeorgedebugTMSLogcatKernel /system/bin/sh /system_ext/bin/tguard.sh "LogcatKernel"
+    class core
+    user root
+    group root system
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot

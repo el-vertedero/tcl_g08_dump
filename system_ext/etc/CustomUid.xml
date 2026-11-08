@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <feature name="CustomUid">
+        <string-array name="custom_uid_pkg_list">
+            <item>com.android.providers.media.module</item>
+        </string-array>
+    </feature>
+</resources>

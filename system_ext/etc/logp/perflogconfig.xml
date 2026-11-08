@@ -1,0 +1,331 @@
+<alltag version="0.1">
+        <maintag tag = "01" name = "kernel">
+                <subtag tag = "01" name = "perf">
+                        <param name = "io_basic_info" arg1 = "life_time_typeA" arg2 = "life_time_typeB" arg3 = "pgpgin" arg4 = "pgpgout" arg5 = "inflight" />
+                        <param name = "emcdrv_iowait" arg1 = "TC_high_threshold" arg2 = "TC_low_threshold" arg3 = "IO_time_consume" arg4 = "IO_threshold_cnt" arg5 = "FIO_thresh_cnt" arg6 = "FIO_thresh_cnt_add" arg7 = "TC_front" arg8 = "front_IO_cnt" arg9 = "enable" />
+                        <param name = "monitor_scheduling" arg1 = "threshold" arg2 = "over_thresh_cnt" arg3 = "total_time" arg4 = "total_cnt" arg5 = "F_over_thresh_cnt" arg6 = "max_time" arg7 = "enable" />
+                        <param name = "cpu_rt_info" arg1 = "total_cpu_count" arg2 = "high_threshold" arg3 = "low_threshold" arg4 = "total_rt_us" arg5 = "curr_rt_us" arg6 = "comm" arg7 = "max_exec_ns" arg8 = "HI_thresh_cnt" arg9 = "over_Hthresh_cnt" />
+                        <param name = "mem_health_info" arg1 = "mem_size" arg2 = "mem_size_add" arg3 = "ion_zram_free" arg4 = "slab_mem_info" arg5 = "page_number" arg6 = "zram" arg7 = "order_page_info" arg8 = "page_alloc_fail" arg9 = "page_alloc_failAdd" />
+                        <param name = "memory_process_info" arg1 = "reclaim_page" arg2 = "scan_page" arg3 = "threshold" arg4 = "H_thresh_cnt" arg5 = "L_thresh_cnt" arg6 = "time" />
+                        <param name = "hung_task_info" arg1 = "comm" arg2 = "pid" arg3 = "timeout" arg4 = "back_trace" arg5 = "time_stamp" arg6 = "version"/>
+                        <param name = "oom_info" arg1 = "current_comm" arg2 = "current_tid" arg3 = "kill_comm" arg4 = "kill_tid" arg5 = "max_pss" arg6 = "max_pid" arg7 = "max_comm" arg8 = "mem_available" arg9 = "mem_available" arg10 = "timestamp"  arg11 = "version"/>
+                </subtag>
+        </maintag>
+        <maintag tag = "02" name = "init">
+                <subtag tag = "01" name = "boot">
+                        <param name = "boot" arg1 = "time" />
+                </subtag>
+                <subtag tag = "02" name = "selinux">
+                        <param name = "init" arg1 = "time" />
+                        <param name = "restore" arg1 = "time" />
+                </subtag>
+                <subtag tag = "03" name = "hidl">
+                    <param name = "root_check" arg1 = "pid" arg2 = "pid_cmd" arg3 = "ppid" arg4 = "ppid_cmd" arg5 = "detected" />
+                </subtag>
+        </maintag>
+        <maintag tag = "03" name = "bootanim">
+                <subtag tag = "01" name = "bootanim">
+                        <param name = "bootanim" arg1 = "time" arg2 = "file_path" />
+                </subtag>
+        </maintag>
+        <maintag tag = "04" name = "zygote">
+                <subtag tag = "01" name = "boot">
+                        <param name = "boot" arg1 = "time" />
+                </subtag>
+                <subtag tag = "02" name = "preload">
+                        <param name = "class" arg1 = "num" arg2 = "time" />
+                        <param name = "resource" arg1 = "num" arg2 = "time" />
+                </subtag>
+        </maintag>
+        <maintag tag = "05" name = "system_server">
+                <subtag tag = "01" name = "boot">
+                        <param name = "allservice" arg1 = "time" />
+                        <param name = "dexopt" arg1 = "time" />
+                        <param name = "fstrim" arg1 = "time" />
+                        <param name = "launcher" arg1 = "start_time" />
+                        <param name = "pms_ready" arg1 = "time" />
+                        <param name = "pms_scan" arg1 = "time" arg2 = "num" />
+                        <param name = "pms_scan_system" arg1 = "time" arg2 = "num" />
+                        <param name = "pms_scan_data" arg1 = "time" arg2 = "num" />
+                        <!--type 0: boot normal 1: boot from OTA 2: boot from factory or first boot-->
+                        <param name = "boot_type" arg1 = "type" />
+                </subtag>
+                <subtag tag = "02" name = "watchdog">
+                </subtag>
+        </maintag>
+        <maintag tag = "05" name = "sytem_server">
+                <subtag tag = "03" name = "ims">
+                        <param name = "inputInfos" arg1 = "keyType" arg2 = "keyName" arg3 = "keyCode" />
+                </subtag>
+        </maintag>
+        <maintag tag = "06" name = "app">
+                <subtag tag = "01" name = "codeboot">
+                        <param name = "total" arg1 = "packagename" arg2 = "uid" arg3 = "pid" arg4 = "time" />
+                        <param name = "fork" arg1 = "uid"  arg2 = "pid" arg3 = "time" />
+                        <param name = "attach" arg1 = "packagename" arg2 = "uid"  arg3 = "pid" arg4 = "time" />
+                        <param name = "bind" arg1 = "packagename" arg2 = "uid"  arg3 = "pid" arg4 = "time" />
+                        <param name = "launch" arg1 = "packagename" arg2 = "uid"  arg3 = "pid" arg4 = "time" />
+                </subtag>
+		<subtag tag = "02" name = "hotboot">
+                        <param name = "total" arg1 = "packagename" arg2 = "uid" arg3 = "pid" arg4 = "time" />
+                </subtag>
+                <subtag tag = "03" name = "frame">
+                        <param name = "block" arg1 = "packagename" arg2 = "viewname" arg3 = "janktype" arg4 = "janklevel" />
+                </subtag>
+                <subtag tag = "04" name = "anr">
+                        <param name = "anr" arg1 = "packagename" arg2 = "uid" arg3 = "pid" arg4 = "reason" trace = "path" />
+                </subtag>
+                <subtag tag = "04" name = "crash">
+                        <param name = "crash" arg1 = "packagename" arg2 = "uid" arg3 = "pid" arg4 = "reason" trace = "path" />
+                </subtag>
+        </maintag>
+        <maintag tag = "07" name = "art">
+                <subtag tag = "01" name = "oom">
+                        <param name = "oom" arg1 = "packagename" arg2 = "heapsize" arg3 = "uid" arg4 = "pid" />
+                </subtag>
+                <subtag tag = "02" name = "block_gc">
+                        <param name = "block_gc" arg1 = "packagename" arg2 = "pid" arg3 = "free_bytes" arg4 = "cost_time" />
+                </subtag>
+        </maintag>
+        <maintag tag = "08" name = "media">
+                <subtag tag = "01" name = "eeplayer">
+                        <!--LOGPT("event_type 2 key1|value key2|value);-->
+                        <param name = "abnormal_pts" arg1 = "event_type" arg2 = "count" arg3 = "key|value" />
+                        <param name = "unsupported_stream" arg1 = "event_type" arg2 = "count" arg3 = "key|value" />
+                        <param name = "decoder_abnormal" arg1 = "event_type" arg2 = "count" arg3 = "key|value" />
+                        <param name = "first_frame_info" arg1 = "event_type" arg2 = "count" arg3 = "key|value" />
+                        <param name = "resource_abnormal" arg1 = "event_type" arg2 = "count" arg3 = "key|value" />
+                        <param name = "audio_video_async" arg1 = "event_type" arg2 = "count" arg3 = "key|value" />
+                        <param name = "network_inaccessible" arg1 = "event_type" arg2 = "count" arg3 = "key|value" />
+                        <param name = "start_buffering" arg1 = "event_type" arg2 = "count" arg3 = "key|value" />
+                </subtag>
+        </maintag>
+        <maintag tag = "09" name = "tboost">
+                <subtag tag = "01" name = "input">
+                        <param name = "info" arg1 = "timestamp" arg2 = "input_info" arg3 = "target" arg4 = "get_events_time"
+                        arg5 = "reader_notify_time" arg6 = "dispatcher_intercept_time" arg7 = "dispatcher_dispatch_time"
+                        arg8 = "app_dispatch_start_time" arg9 = "app_dispatch_finish_time" arg10 = "dispatcher_finish_time"/>
+                </subtag>
+                <subtag tag = "02" name = "app">
+                        <param name = "info" arg1 = "timestamp" arg2 = "app_info" arg3 = "ams_start_time" arg4 = "process_start_time"
+                        arg5 = "ams_attach_time" arg6 = "at_handle_launch_time" arg7 = "activity_create_time"
+                        arg8 = "activity_resume_time" arg9 = "activity_launch_time" arg10 = "activity_idle_time"/>
+                </subtag>
+                <subtag tag = "03" name = "block">
+                        <param name = "info" arg1 = "timestamp" arg2 = "appInfo" arg3 = "blockType" arg4 = "currentMsgInfo"
+                        arg5 = "msgInfoForLatency" arg6 = "blockDuration" arg7 = "traceInfo"
+                        arg8 = "kernelInfo" arg9 = "choreoJankInfo" arg10 = "activityLifeStyleInfo"/>
+                </subtag>
+                <subtag tag = "05" name = "boot">
+                        <param name = "info" arg1 = "boot_type" arg2 = "init"
+                        arg3 = "boot_animation" arg4 = "zygote" arg5 = "system_server" arg6 = "pms"
+                        arg7 = "extra_data"/>
+                </subtag>
+                 <subtag tag = "08" name = "appStartStats">
+                        <param name = "info" arg1 = "start_time" arg2 = "component_name"
+                        arg3 = "start_type" arg4 = "start_duration" arg5 = "version"/>
+                </subtag>
+                <subtag tag = "04" name = "appBootInfo">
+                        <param name = "appBootInfo" arg1 = "timestamp" arg2 = "callerPkgName" arg3 = "calleePkgName"
+                        arg4 = "calleeComponent" arg5 = "bootType" arg6 = "isAutoStart" arg7 = "isAllow"
+                        arg8 = "reason" arg9 = "count"/>
+                </subtag>
+                <subtag tag = "07" name = "cloudProfile">
+                        <param name = "cloudProfile" arg1 = "packageName" arg2 = "longVersionCode"
+                        arg3 = "eventId" arg4 = "result" arg5 = "description" />
+                </subtag>
+        </maintag>
+        <maintag tag="10" name="herasys">
+                <subtag tag="01" name="nvrhung">
+                        <param name="cpu" arg1="pkg" arg2="version" arg3="name" arg4="total_percent"
+                            arg5="percent" arg6="timestamp" arg7="event_id"/>
+                        <param name="mem" arg1="pkg" arg2="version" arg3="name" arg4="total"
+                            arg5="free" arg6="available" arg7="pss" arg8="rss"
+                            arg9 = "uss" arg10="timestamp" arg11="event_id"/>
+                        <param name="oom" arg1="event_id" arg2="timestamp" />
+                        <param name="ui_probe" arg1="pkg" arg2="version" arg3="name"
+                            arg4="timestamp" arg5="event_id"/>
+                        <param name="anr" arg1="pkg" arg2="isSilentANR" arg3="reason"
+                            arg4="componentName" arg5="version" arg6="timestamp" arg7="event_id"/>
+                        <param name="app_clear" arg1="processName" arg2="reason" arg3="version"
+                            arg4="timestamp" />
+                        <param name="black_window" arg1="winName" arg2="blackTime"
+                            arg3="timestamp" />
+                        <param name="app_boot_fail" arg1="packageName" arg2="version"
+                            arg3="timestamp" />
+                        <param name="crash" arg1="packageName" arg2="isBackground"
+                            arg3="isRepeating" arg4="reason" arg5="version" arg6="timestamp" />
+                        <param name="focus_window" arg1="winName" arg2="timestamp" arg3="event_id" />
+                        <param name="fwk_block" arg1="monitor" arg2="threads"
+                            arg3="timestamp" />
+                        <param name="win_transit_timeout" arg1="winName" arg3="timestamp" />
+                        <param name="wtg" arg1="event_id" arg2="timestamp" />
+                        <param name="kernel_task" arg1="timestamp" arg2="event_id" />
+                        <param name="kernel_oom" arg1="timestamp" arg2="event_id" />
+                        <param name="kernel_boot_fail" arg1="timestamp" arg2="event_id" />
+                        <param name="kernel_panic" arg1="timestamp" arg2="event_id" />
+                        <param name="tlogs" arg1="timestamp" arg2="event_id" />
+                        <param name = "bt_rc_connect_error" arg1 = "btEventType" arg2 = "errorCode" arg3 = "deviceName"
+                            arg4 = "eventId" arg5 = "battery" arg6 = "usbDevice" arg7 = "driverVersion"
+                            arg8 = "fwVersion" arg9 = "RSSI" arg10 = "rcFwVersion" arg11 = "timestamp"/>
+                        <param name = "bt_a2dp_connect_error" arg1 = "btEventType" arg2 = "errorCode" arg3 = "deviceName"
+                            arg4 = "btDeviceType" arg5 = "eventId" arg6 = "usbDevice" arg7 = "driverVersion"
+                            arg8 = "fwVersion" arg9 = "RSSI" arg10 = "timestamp"/>
+                        <param name = "bt_common_error" arg1 = "btEventType" arg2 = "errorCode" arg3 = "usbDevice"
+                            arg4 = "driverVersion" arg5 = "fwVersion" arg6 = "timestamp" arg7 = "state"/>
+                        <param name="wifi_open_success" arg1="callerPkg" arg2="spendTimeMs" arg3="driverVer" arg4="fwVer"
+                            arg5="usbDevice" arg6="feature" arg7="channelType" arg8="timestamp" arg9="eventInfo" />
+                        <param name="wifi_open_fail" arg1="callerPkg" arg2="driverVer" arg3="fwVer" arg4="usbDevice"
+                            arg5="insmodResult" arg6="feature" arg7="enableFailCount" arg8="timestamp"
+                            arg9="eventId" arg10="reasonCode" arg11="reasonCodeSet" arg12="eventInfo" />
+                        <param name="wifi_scan_fail" arg1="driverVer" arg2="fwVer" arg3="usbDevice"
+                            arg4="channelType" arg5="btState" arg6="p2pState" arg7="feature" arg8="scanCount"
+                            arg9="timestamp" arg10="eventId" arg11="reasonCode" arg12="reasonCodeSet" arg13="eventInfo" arg14="curTEMP" arg15="maxTEMP" />
+                        <param name="wifi_connect_success" arg1="driverVer" arg2="fwVer" arg3="usbDevice"
+                            arg4="ssid" arg5="bssid" arg6="rssi" arg7="freq" arg8="bandwith" arg9="linkSpeed"
+                            arg10="keyMgmt" arg11="wifiStandard" arg12="feature" arg13="bssChannelUtilizationRate" arg14="apStaCnt"
+                            arg15="authMs" arg16="assocMs" arg17="handshakeMs" arg18="dhcpMs" arg19="spendTimeMs" arg20="vendorInfo"
+                            arg21="freqApNum" arg22="scanNum" arg23="saveNum" arg24="timestamp" arg25="eventInfo" arg26="curTEMP" arg27="maxTEMP" />
+                        <param name="wifi_connect_fail" arg1="driverVer" arg2="fwVer" arg3="usbDevice"
+                            arg4="ssid" arg5="bssid" arg6="freq" arg7="bandwith" arg8="linkSpeed" arg9="rssi"
+                            arg10="keyMgmt" arg11="wifiStandard" arg12="feature" arg13="bssChannelUtilizationRate" arg14="apStaCnt"
+                            arg15="vendorInfo" arg16="freqApNum" arg17="timestamp" arg18="reasonCode" arg19="eventId" arg20="reasonCodeSet" arg21="eventInfo" arg22="curTEMP" arg23="maxTEMP"/>
+                        <param name="wifi_disconnect" arg1="driverVer" arg2="fwVer" arg3="usbDevice"
+                            arg4="ssid" arg5="bssid" arg6="keyMgmt" arg7="connRssi" arg8="disconnRssi" arg9="freq"
+                            arg10="bandwith" arg11="vendorInfo" arg12="apNum" arg13="bssChannelUtilizationRate" arg14="apStaCnt"
+                            arg15="feature" arg16="connTimeS" arg17="timestamp" arg18="reasonCode" arg19="eventId" arg20="reasonCodeSet"
+                            arg21="eventInfo" arg22="wpaReasonCode" arg23="wifiStandard" arg24="curTEMP" arg25="maxTEMP" />
+                        <param name="wifi_reset" arg1="driverVer" arg2="fwVer" arg3="usbDevice"
+                            arg4="feature" arg5="timestamp" arg6="reasonCode" arg7="eventInfo" />
+                        <param name="wifi_hung" arg1="driverVer" arg2="fwVer" arg3="usbDevice"
+                            arg4="feature" arg5="timestamp" arg6="reasonCode" arg7="eventInfo" arg8="eventId" arg9="reasonCodeSet" arg10="curTEMP" arg11="maxTEMP" />
+                        <param name="eth_connect_success" arg1="dhcpLease" arg2="ipAssignment" arg3="linkInfo" arg4="linkSpeed" arg5="ifaceName"
+                            arg6="timestamp" arg7="feature" arg8="eventInfo" arg9="connectScene" arg10="spendTimeMs" arg11="abnormalTimeS"
+                            arg12="apModel" arg13="macOui" />
+                        <param name="eth_connect_fail" arg1="dhcpLease" arg2="ipAssignment" arg3="linkInfo" arg4="linkSpeed" arg5="ifaceName"
+                            arg6="timestamp" arg7="feature" arg8="eventInfo" arg9="connectScene" arg10="reasonCode" arg11="reasonCodeSet" arg12="eventid" />
+                        <param name="eth_disconnect" arg1="dhcpLease" arg2="ipAssignment" arg3="linkInfo" arg4="linkSpeed" arg5="ifaceName" arg6="timestamp"
+                            arg7="feature" arg8="eventInfo" arg9="reasonCode" arg10="reasonCodeSet" arg11="apModel" arg12="eventid"
+                            arg13="abnormalDuration" arg14="normalTimeS" />
+                        <param name="eth_net_changed" arg1="dhcpLease" arg2="ipAssignment" arg3="linkInfo" arg4="linkSpeed" arg5="ifaceName"
+                            arg6="timestamp" arg7="feature" arg8="eventInfo" arg9="reasonCode" arg10="reasonCodeSet" arg11="apModel" arg12="netQuality"
+                            arg13="probeResult" arg14="upCount" arg15="abnormalDuration" arg16="normalTimeS" />
+                        <param name="net_self_cure" arg1="driverVer" arg2="fwVer" arg3="usbDevice"
+                            arg4="feature" arg5="baseInfo" arg6="apStaCnt" arg7="apModel" arg8="vendorInfo" arg9="freqApNum" arg10="Is1x1IOTAp"
+                            arg11="isMeshAp" arg12="isMeteredAp" arg13="ipAssignment" arg14="ipState" arg15="dhcpCount" arg16="gateway"
+                            arg17="gatewayState" arg18="isDualStack" arg19="vpnState" arg20="dnsaddr" arg21="privateDns" arg22="netType"
+                            arg23="TxlinkSpeed" arg24="RxlinkSpeed" arg25="rssi" arg26="bandwith" arg27="coexistInfo" arg28="wifi_sce_happend_time"
+                            arg29="wifi_sce_basic_info" arg30="wifi_sce_final_result" arg31="wifi_sce_selfcure_reason" arg32="wifi_sce_abnormal_scenes"
+                            arg33="wifi_sce_level_type"/>
+                        <param name="net_health" arg1="driverVer" arg2="fwVer" arg3="usbDevice"
+                            arg4="feature" arg5="baseInfo" arg6="apStaCnt" arg7="apModel" arg8="vendorInfo" arg9="freqApNum" arg10="Is1x1IOTAp"
+                            arg11="isMeshAp" arg12="isMeteredAp" arg13="ipAssignment" arg14="ipState" arg15="dhcpCount" arg16="gateway"
+                            arg17="gatewayState" arg18="isDualStack" arg19="vpnState" arg20="dnsaddr" arg21="privateDns" arg22="netType"
+                            arg23="TxlinkSpeed" arg24="RxlinkSpeed" arg25="rssi" arg26="bandwith" arg27="trafficInfo" arg28="netConnTimeSec"
+                            arg29="netInvalidTimeSec" arg30="netPoorTimeSec" arg31="netHealth" arg32="timestamp"
+                            arg33="coexistInfo"/>
+                        <param name="net_bad" arg1="driverVer" arg2="fwVer" arg3="usbDevice"
+                            arg4="feature" arg5="baseInfo" arg6="apStaCnt" arg7="apModel" arg8="vendorInfo" arg9="freqApNum" arg10="Is1x1IOTAp"
+                            arg11="isMeshAp" arg12="isMeteredAp" arg13="ipAssignment" arg14="ipState" arg15="dhcpCount" arg16="gateway"
+                            arg17="gatewayState" arg18="isDualStack" arg19="vpnState" arg20="dnsaddr" arg21="privateDns" arg22="netType"
+                            arg23="TxlinkSpeed" arg24="RxlinkSpeed" arg25="rssi" arg26="bandwith" arg27="trafficInfo" arg28="packetInfo"
+                            arg29="channelStats" arg30="l2Stat" arg31="coexistInfo" arg32="appStat" arg33="dnsStat" arg34="httpStat"
+                            arg35="tcpStat" arg36="topPkg" arg37="happenTime" arg38="durationTime" arg39="reason" arg40="doSelfCure"/>
+                        <param name="abnormal_resource_usage" arg1="processName" arg2="type" arg3="pkg" arg4="version" arg5="reason" arg6="timestamp"
+                            arg7="count" arg8="key01" arg9="key02" arg10="event_id" />
+                        <param name="audio_track_status" arg1="callerName" arg2="funcStatus" arg3="trackState" arg4="samplerate" arg5="frameCount"
+                            arg6= "channelMask" arg7="encoding" arg8="timestamp" />
+                        <param name="audio_record_status" arg1="callerName" arg2="funcStatus" arg3="sourceType" arg4="samplerate"
+                            arg5="frameCount" arg6="encoding" arg7="timestamp" />
+                        <param name="audio_flinger_status" arg1="exception_name" arg2="hal_alg_result" arg3="underrun_cnt" arg4="repair_action"
+                            arg5="repair_success" arg6="track_pkg_name" arg7="event_id" arg8="timestamp" />
+                        <param name="unsupported_stream" arg1="codecType" arg2="errorType" arg3="parameterValue" arg4="unsupportedType" />
+                        <param name="resource_abnormal" arg1="componentName" arg2="errorType" arg3="failType" />
+                        <param name="decoder_abnormal" arg1="codecType" arg2="componentName" arg3="errorNo" arg4="errorType"
+                            arg5="failType" />
+                        <param name="audio_video_async" arg1="audioCount" arg2="duration" arg3="errorType" arg4="filterNum"
+                            arg5="timestamp" arg6="videoCount" />
+                        <param name="network_inaccessible" arg1="errorType" arg2="filterNum" arg3="returnCode" arg4="timestamp" />
+                        <param name="start_buffering" arg1="appProcessId" arg2="errorType" arg3="filterNum" arg4="netEval"
+                            arg5="netEvalNum" arg6="timestamp" />
+                        <param name="abnormal_pts" arg1="audioPtsHaltCount" arg2="errorType" arg3="maxDuration" arg4="minDuration"
+                            arg5="timestamp" arg6="videoPtsHaltCount" />
+                        <param name="input_fps" arg1="errorType" arg2="filterNum" arg3="netEval" arg4="netEvalNum"
+                            arg5="queueInputFrameRate" arg6="timestamp" />
+                        <param name="drop_frame" arg1="errorType" arg2="filterNum" arg3="renderFrameRate" arg4="timestamp" />
+                        <param name="play_blackScreen" arg1="errorType" arg2="failType" arg3="repair_action" arg4="fixSuccess"
+                            arg5="percent" arg6="pkgName" arg7="timestamp" />
+                        <param name="startPlay_slow" arg1="errorType" arg2="mediaInfo" arg3="pkgName" arg4="timeInfo"
+                            arg5="totalTime" />
+                        <param name="buffering" arg1="errorType" arg2="filterNum" arg3="info_Bw" arg4="mBitrate"
+                            arg5="percent" arg6="pkgName" arg7="timestamp" />
+                        <param name="p2p_con_success" arg1="spendTime" arg2="foundChannel" arg3="p2pChannel" arg4="firstConnect"
+                            arg5="isGO" arg6="peerChannel" arg7="staInfo" arg8="peerName" arg9="driverVer" arg10="usbDevice" />
+                        <param name="p2p_con_error" arg1="foundChannel" arg2="p2pChannel" arg3="firstConnect" arg4="isGO"
+                            arg5="peerChannel" arg6="staInfo" arg7="reasonCode" arg8="peerName" arg9="driverVer" arg10="usbDevice"
+                            arg11="eventId" />
+                        <param name="hardware" arg1="icType" arg2="idInfo" arg3="statusRegister_1"
+                            arg4="statusRegister_2" arg5="statusRegister_3" arg6="statusRegister_4" arg7="statusRegister_5"/>
+                        <param name="dnsprefetch" arg1="version" arg2="hostname" arg3="package" arg4="queryCount"
+                            arg5="minTime" arg6="maxTime" arg7="avgTime" />
+                </subtag>
+        </maintag>
+        <maintag tag = "11" name = "systemui">
+                <subtag tag = "01" name = "virtualkey">
+                        <param name = "quit_panel" arg1 = "usage_scenarios" arg2 = "keycode_keyname_keyfunction"/>
+                </subtag>
+                <subtag tag = "02" name = "dashboard">
+                        <param name = "open" arg1 = "dashboard_open_date" arg2 = "dashboard_current_input" arg3 = "dashboard_current_mode" arg4 = "dashboard_current_launcher" arg5 = "dashboard_tvstartup_first" arg6 = "dashboard_tvstartup_time" arg7 = "dashboard_open_showtime" arg8 = "dashboard_open_pathway" />
+                        <param name = "click" arg1 = "dashboard_open_date" arg2 = "dashboard_current_input" arg3 = "dashboard_current_mode" arg4 = "dashboard_current_launcher" arg5 = "dashboard_click_type" arg6 = "dashboard_click_id" arg7 = "dashboard_click_name" arg8 = "dashboard_click_order" />
+                        <param name = "qs_show" arg1 = "dashboard_open_date" arg2 = "dashboard_current_input" arg3 = "dashboard_current_mode" arg4 = "dashboard_current_launcher" arg5 = "dashboard_qs_show_id" arg6 = "dashboard_qs_show_name" arg7 = "dashboard_qs_show_order" arg8 = "dashboard_qs_show_type" arg9 = "dashboard_qs_show_visible" />
+                        <param name = "qs_click" arg1 = "dashboard_open_date" arg2 = "dashboard_current_input" arg3 = "dashboard_current_mode" arg4 = "dashboard_current_launcher" arg5 = "dashboard_qs_click_id" arg6 = "dashboard_qs_click_name" arg7 = "dashboard_qs_click_itemOrder" />
+                        <param name = "qs_set" arg1 = "dashboard_open_date" arg2 = "dashboard_current_input" arg3 = "dashboard_current_mode" arg4 = "dashboard_current_launcher" arg5 = "dashboard_qs_set_id" arg6 = "dashboard_qs_set_name" arg7 = "dashboard_qs_set_type" arg8 = "dashboard_qs_set_visible" arg9 = "dashboard_qs_set_itemOrder" arg10 = "dashboard_qs_set_value" />
+                        <param name = "qs_edit" arg1 = "dashboard_open_date" arg2 = "dashboard_current_input" arg3 = "dashboard_current_mode" arg4 = "dashboard_current_launcher" arg5 = "dashboard_qs_edit_time" arg6 = "dashboard_qs_edit_type" />
+                        <param name = "qe_click" arg1 = "dashboard_open_date" arg2 = "dashboard_current_input" arg3 = "dashboard_current_mode" arg4 = "dashboard_current_launcher" arg5 = "dashboard_qe_id" arg6 = "dashboard_qe_name" arg7 = "dashboard_qe_order" />
+                        <param name = "error" arg1 = "dashboard_open_date" arg2 = "dashboard_current_input" arg3 = "dashboard_current_mode" arg4 = "dashboard_current_launcher" arg5 = "dashboard_error_type" />
+                </subtag>
+                <subtag tag = "03" name = "controlpanel">
+                        <param name = "click" arg1 = "ControlPanel_Click_Func_Date" arg2 = "ControlPanel_Click_ID" arg3 = "ControlPanel_Click_Name" />
+                </subtag>
+                <subtag tag = "04" name = "sourcePanel">
+                        <param name = "open_panel" arg1 = "date" arg2 = "input" arg3 = "mode" arg4 = "launcher" arg5 = "pathway" />
+                        <param name = "click_settings" arg1 = "date" />
+                        <param name = "click_source" arg1 = "date" arg2 = "sourceName" arg3 = "deviceName" arg4 = "rename" />
+                        <param name = "open_rename" arg1 = "date" arg2 = "sourceName" arg3 = "deviceName" />
+                        <param name = "rename_hdmi" arg1 = "date" arg2 = "renameType" arg3 = "sourceName" arg4 = "rename" />
+                </subtag>
+        </maintag>
+        <maintag tag = "12" name = "hdmi">
+                <subtag tag = "01" name = "inspection">
+                        <param name = "information" arg1 = "cecDeviceType" arg2 = "cecOsdName" arg3 = "cecVendorId" arg4 = "cecVersion" arg5 = "spdDeviceType" arg6 = "spdVendorName" arg7 = "spdProductDescription" arg8 = "extInfomation" />
+                        <param name = "interaction" arg1 = "deviceInteractiveType" arg2 = "deviceInteractiveCode" arg3 = "deviceInteractiveParameter" arg4 = "deviceInteractiveResult" arg5 = "deviceInteractiveExtInformation" />
+                        <param name = "errorevent" arg1 = "errorEventType" arg2 = "errorEventCode" arg3 = "errorReasonType" arg4 = "errorReasonCode" arg5 = "errorEventExtInformation" />
+                        <param name = "actionevent" arg1 = "errorActionType" arg2 = "errorActionCode" arg3 = "actionResultType" arg4 = "actionResultCode" arg5 = "errorActionExtInformation" />
+                </subtag>
+        </maintag>
+	<maintag tag = "13" name = "dtv">
+                <subtag tag = "01" name = "info">
+                        <param name = "weaksignal" arg1 = "freqkHz" arg2 = "delivery" arg3 = "quality" arg4 = "strength"/>
+                </subtag>
+                <subtag tag = "02" name = "info">
+                        <param name = "updatechannel" arg1 = "reason" arg2 = "delivery" arg3 = "count" arg4 = "content"/>
+                </subtag>
+                <subtag tag = "03" name = "info">
+                        <param name = "fullscan" arg1 = "delivery" arg2 = "freqcount" arg3 = "servicecount" arg4 = "content"/>
+                </subtag>
+                <subtag tag = "04" name = "info">
+                        <param name = "cam" arg1 = "reason" arg2 = "manufacturer" arg3 = "code" arg4 = "content"/>
+                </subtag>
+                <subtag tag = "05" name = "info">
+                        <param name = "dvb_update" arg1 = "reason" arg2 = "delivery" arg3 = "freqkHz" arg4 = "content"/>
+                </subtag>
+                <subtag tag = "06" name = "info">
+                        <param name = "unsmooth" arg1 = "reason" arg2 = "delivery" arg3 = "freqkHz" arg4 = "content"/>
+                </subtag>
+        </maintag>
+        <maintag tag = "14" name = "sensor">
+                <subtag tag = "01" name = "LightSensor">
+                        <param name = "information" arg1 = "name" arg2 = "result" />
+                </subtag>
+        </maintag>
+</alltag>

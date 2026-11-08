@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TCL_UA>
+<brower>Mozilla/5.0 (QtEmbedded; Linux) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0 Safari/537.36</brower>
+<hbbtvVersion>HbbTV/1.6.1</hbbtvVersion>
+<capabilities>+DRM</capabilities>
+<vendorName>TCL</vendorName>
+<modelName>MT9653</modelName>
+<softwareVersion>V8-T653T01-LF1XXX</softwareVersion>
+<hardwareVersion>MT9653</hardwareVersion>
+<familyName>com.tcl.MT9653.UHD</familyName>
+<reserved></reserved>
+<extension>(TCL; com.tcl.MT9653;) A-PAB/1.0 (4K;0x3C591E;TCL4K;1;0;0;) TCL/1.0 (Google TV; TCL; TV-2024; MT9653)</extension>
+</TCL_UA>
