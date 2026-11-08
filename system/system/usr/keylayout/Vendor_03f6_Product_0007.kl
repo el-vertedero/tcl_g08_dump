@@ -1,0 +1,20 @@
+#
+# SoundBar key layout file for "Sbar Demo Prop Keyboard"
+#
+# Add by yanfeng2.liu@tcl.com for [BUURDB2022-1383] at 2025/11/17
+#
+
+key usage 0x000c0042 DPAD_UP
+key usage 0x000c0043 DPAD_DOWN
+key usage 0x000c0044 DPAD_LEFT
+key usage 0x000c0045 DPAD_RIGHT
+key usage 0x000c0041 DPAD_CENTER
+
+key usage 0x000c00ea VOLUME_DOWN
+key usage 0x000c00e9 VOLUME_UP
+
+key usage 0x000c0224 BACK
+
+key usage 0x000c0176 TCL_SOUNDBAR_DEMO
+key usage 0x000c0177 TCL_TV_DEMO
+key usage 0x000c0178 TCL_AUDIO_SWITCH

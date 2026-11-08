@@ -1,0 +1,62 @@
+service logd /system/bin/logd
+    socket logd stream 0666 logd logd
+    socket logdr seqpacket 0666 logd logd
+    socket logdw dgram+passcred 0222 logd logd
+    file /proc/kmsg r
+    file /dev/kmsg w
+    user logd
+    group logd system package_info readproc
+    capabilities SYSLOG AUDIT_CONTROL
+    priority 10
+    task_profiles ServiceCapacityLow
+    onrestart setprop logd.ready false
+
+service logd-reinit /system/bin/logd --reinit
+    oneshot
+    disabled
+    user logd
+    group logd
+    task_profiles ServiceCapacityLow
+
+# Limit SELinux denial generation to 5/second
+service logd-auditctl /system/bin/auditctl -r 5
+    oneshot
+    disabled
+    user logd
+    group logd
+    capabilities AUDIT_CONTROL
+
+on fs
+    write /dev/event-log-tags "# content owned by logd
+"
+    chown logd logd /dev/event-log-tags
+    chmod 0644 /dev/event-log-tags
+
+# #ifdef VENDOR_EDIT
+# quanwei5.li@tcl.com, 2025/08/25, add for tcl logd_persis
+on post-fs-data
+    mkdir /data/misc/newlogd 0750 logd log
+    write /data/misc/newlogd/anrmain.txt ""
+    chown logd log /data/misc/newlogd/anrmain.txt
+    chmod 777 /data/misc/newlogd/anrmain.txt
+    restorecon /data/misc/newlogd/anrmain.txt
+
+    write /data/misc/newlogd/anrevents.txt ""
+    chown logd log /data/misc/newlogd/anrevents.txt
+    chmod 777 /data/misc/newlogd/anrevents.txt
+    restorecon /data/misc/newlogd/anrevents.txt
+
+    write /data/misc/newlogd/crashmain.txt ""
+    chown logd log /data/misc/newlogd/crashmain.txt
+    chmod 777 /data/misc/newlogd/crashmain.txt
+    restorecon /data/misc/newlogd/crashmain.txt
+
+    write /data/misc/newlogd/crashevents.txt ""
+    chown logd log /data/misc/newlogd/crashevents.txt
+    chmod 777 /data/misc/newlogd/crashevents.txt
+    restorecon /data/misc/newlogd/crashevents.txt
+
+# #endif /* VENDOR_EDIT */
+
+on property:sys.boot_completed=1
+    start logd-auditctl

@@ -1,0 +1,20 @@
+#Thu Jun 27 19:10:47 CST 2024
+system_prop_version=0076.0009
+
+pathlist_common_version=0009.0001
+
+component_version=V8-T653T01-CFG-RS000075
+
+component_build_date=2610240113
+
+pathlist_removable_app_version=0001.0002
+
+file_config_version=0001.0093
+
+fcm_features_version=0072.0007
+
+system_config_version=0011.0003
+
+params_config_version=0009.0002
+
+shortcut_key_version=0014.0009
