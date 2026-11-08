@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+
+    <privapp-permissions package="com.mediatek.android.tv.mdns.offload">
+        <permission name="android.permission.SET_LOW_POWER_STANDBY_PORTS"/>
+        <permission name="android.permission.MANAGE_LOW_POWER_STANDBY"/>
+    </privapp-permissions>
+
+</permissions>

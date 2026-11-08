@@ -1,0 +1,563 @@
+#copyright (C),2021-2030,Tcl Comm Corp., Ltd
+# VENDOR_EDIT,All rights reserved.
+#
+# FILE:-logkit.rc
+# Description:
+#    Define new service by init
+# xing28.wang@tcl.com, 2021/09/23, add for log tool
+on post-fs-data
+    mkdir /data/tcl_log 0770 root system
+    mkdir /data/tcl_log/tmp 0770 root system
+    restorecon --recursive /data/tcl_log
+    setprop persist.sys.logkitversion 300239994163729
+service GeorgedebugStartCollectBootMainLog /system/bin/sh /system_ext/bin/logkit.sh "CollectBootMainLog"
+  class core
+  user root
+  group root system
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+
+service GeorgedebugStartCollectBootEventLog /system/bin/sh /system_ext/bin/logkit.sh "CollectBootEventLog"
+  class core
+  user root
+  group root system
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+
+service GeorgedebugStartCollectBootKernelLog /system/bin/sh /system_ext/bin/logkit.sh "CollectBootKernelLog"
+  class core
+  user root
+  group root system
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+
+service GeorgedebugInitBootLog /system/bin/sh /system_ext/bin/logkit.sh "InitBootLog"
+  class core
+  user root
+  group root system
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+
+service GeorgedebugInitLog  /system/bin/sh /system_ext/bin/logkit.sh "InitLog"
+  class core
+  user root
+  group root system sdcard_rw everybody
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+
+service GeorgedebugLogcatMain /system/bin/sh /system_ext/bin/logkit.sh "LogcatMain"
+  class core
+  user root
+  group root system
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+
+service GeorgedebugLogcatEvent /system/bin/sh /system_ext/bin/logkit.sh "LogcatEvent"
+  class core
+  user root
+  group root system
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+service GeorgedebugLogcatKernel /system/bin/sh /system_ext/bin/logkit.sh "LogcatKernel"
+    class core
+    user root
+    group root system
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service GeorgedebugMvLogtoSDcard /system/bin/sh /system_ext/bin/logkit.sh "MvLogtoSDcard"
+  class core
+  user root
+  group root system sdcard_rw everybody
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+service GeorgedebugMvtoUdisk /system/bin/sh /system_ext/bin/logkit.sh "MvtoUdisk"
+    class core
+    user root
+    group sdcard_rw everybody root
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+service GeorgedebugMakeTarFile /system/bin/sh /system_ext/bin/logkit.sh "MakeTarFile"
+    class core
+    user root
+    group sdcard_rw everybody root
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+service GeorgedebugCopyAnr /system/bin/sh /system_ext/bin/logkit.sh "CopyAnr"
+  class core
+  user system
+  group root system
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+
+service GeorgedebugCopyAee /system/bin/sh /system_ext/bin/logkit.sh "CopyAee"
+  class core
+  user root
+  group root system everybody shell
+  seclabel u:r:shell:s0
+  disabled
+  oneshot
+
+service GeorgedebugmvPerformance  /system/bin/sh /system_ext/bin/logkit.sh "mvPerformance"
+  class core
+  user root
+  group shell root everybody system sdcard_rw ext_data_rw
+  seclabel u:r:shell:s0
+  disabled
+  oneshot
+
+service GeorgedebugPerfettoStart /system/bin/sh /system_ext/bin/logkit.sh "PerfettoStart"
+  class core
+  user  root
+  group misc shell root everybody
+  seclabel u:r:shell:s0
+  disabled
+  oneshot
+
+service mvPerfetto /system/bin/sh /system_ext/bin/logkit.sh "mvPerfetto"
+  class core
+  user root
+  group shell misc system root everybody
+  seclabel u:r:shell:s0
+  disabled
+  oneshot
+
+service dumpSystem /system/bin/sh /system_ext/bin/logkit.sh "dumpSystem"
+  class core
+  user root
+  group root system everybody shell
+  seclabel u:r:dumpstate:s0
+  disabled
+  oneshot
+service GeorgedebugCopyPstore  /system/bin/sh /system_ext/bin/logkit.sh "copyPstore"
+    class core
+    user root
+    group system shell misc log
+    seclabel u:r:dumpstate:s0
+    disabled
+    oneshot
+service GeorgedebugCopyKfault  /system/bin/sh /system_ext/bin/logkit.sh "copyKfault"
+    class core
+    user root
+    group root system everybody shell
+    seclabel u:r:dumpstate:s0
+    disabled
+    oneshot
+# #ifdef VENDOR_EDIT
+# yuzhe.deng@tcl.com, 2025/12/06, [LINTHY-88529] logkit add bluetooth chip log
+service GeorgedebugStartDebugBluetooth /system/bin/sh /system_ext/bin/logkit_bluetooth.sh "StartDebugBluetooth"
+          class core
+          user root
+          group misc bluetooth system log net_bt_admin
+          seclabel u:r:dumpstate:s0
+          disabled
+          oneshot
+service GeorgedebugStopDebugBluetooth /system/bin/sh /system_ext/bin/logkit_bluetooth.sh "StopDebugBluetooth"
+         class core
+         user root
+         group misc bluetooth system log net_bt_admin
+         seclabel u:r:dumpstate:s0
+         disabled
+         oneshot
+#endif /* VENDOR_EDIT */
+service GeorgedebugCopyBluetoothLog  /system/bin/sh /system_ext/bin/logkit.sh "CopyBlueToothLog"
+       class core
+       user system
+       group misc bluetooth system log net_bt_admin
+       seclabel u:r:dumpstate:s0
+       disabled
+       oneshot
+service GeorgedebugKillBluetooth  /system/bin/sh /system_ext/bin/logkit.sh "KillBluetooth"
+       class core
+       user root
+       group root
+       seclabel u:r:dumpstate:s0
+       disabled
+       oneshot
+service GeorgedebugCleanLog /system/bin/sh /system_ext/bin/logkit.sh "CleanLog"
+       class core
+       user root
+       group root
+       disabled
+       oneshot
+service GeorgedebugDumpHprof /system/bin/sh /system_ext/bin/logkit.sh "DumpHprof"
+       class core
+       user root
+       group shell
+       seclabel u:r:dumpstate:s0
+       disabled
+       oneshot
+service GeorgedebugStartDebugWifi /system/bin/sh /system_ext/bin/logkit_wifi.sh "StartDebugWifi"
+          class core
+          user root
+          group root
+          seclabel u:r:dumpstate:s0
+          disabled
+          oneshot
+service GeorgedebugStartWifiNormalLog /system/bin/sh /system_ext/bin/logkit_wifi.sh "StartWifiNormalLog"
+          class core
+          user root
+          group root
+          seclabel u:r:dumpstate:s0
+          disabled
+          oneshot
+service GeorgedebugStartIwpriv /system/bin/sh /system_ext/bin/logkit_wifi.sh "StartIwpriv"
+        class core
+        user root
+        group root
+        seclabel u:r:shell:s0
+        disabled
+        oneshot
+service GeorgedebugStopDebugWifi /system/bin/sh /system_ext/bin/logkit_wifi.sh "StopDebugWifi"
+         class core
+         user root
+         group root
+         seclabel u:r:dumpstate:s0
+         disabled
+         oneshot
+service GeorgedebugStopWifiNormalLog /system/bin/sh /system_ext/bin/logkit_wifi.sh "StopWifiNormalLog"
+          class core
+          user root
+          group root
+          seclabel u:r:dumpstate:s0
+          disabled
+          oneshot
+service GeorgedebugStartKfence /system/bin/sh /system_ext/bin/logkit.sh "StartKfence"
+          class core
+          user root
+          group root
+          seclabel u:r:dumpstate:s0
+          disabled
+          oneshot
+service GeorgedebugEnablePrintk /system/bin/sh /system_ext/bin/logkit.sh "EnablePrintk"
+        class core
+        user root
+        group root
+        seclabel u:r:dumpstate:s0
+        disabled
+        oneshot
+service GeorgedebugCatKfence /system/bin/sh /system_ext/bin/logkit.sh "CatKfence"
+        class core
+        user root
+        group sdcard_rw everybody root
+        seclabel u:r:logkit_service:s0
+        disabled
+        oneshot
+service GeorgedebugDumpMiddleWare /system/bin/sh /system_ext/bin/logkit.sh "DumpMiddleWare"
+        class core
+        user system
+        group system root shell
+        seclabel u:r:shell:s0
+        disabled
+        oneshot
+service GeorgedebugDetectStorage  /system/bin/sh /system_ext/bin/logkit.sh "DetectStorage"
+  class core
+  user root
+  group root system sdcard_rw everybody
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+service GeorgedebugClearAllLog  /system/bin/sh /system_ext/bin/logkit.sh "ClearAllLog"
+    class core
+    user root
+    group root everybody media_rw system  shell
+    seclabel u:r:dumpstate:s0
+    disabled
+    oneshot
+service GeorgedebugWriteSettings  /system/bin/sh /system_ext/bin/logkit.sh "WriteSettings"
+      class core
+      user root
+      group root system sdcard_rw everybody
+      seclabel u:r:dumpstate:s0
+      disabled
+      oneshot
+service GeorgedebugMvPcmToData  /system/bin/sh /system_ext/bin/logkit.sh "MvPcmToUdisk"
+    class core
+    user root
+    group system  audioserver shell audio sdcard_rw
+    seclabel u:r:dumpstate:s0
+    disabled
+    oneshot
+service GeorgedebugDumpAudio /system/bin/sh /system_ext/bin/logkit.sh "DumpAudio"
+    class core
+    user root
+    group system root shell everybody media_rw
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+
+service GeorgedebugLogkitInputEvent  /system/bin/sh /system_ext/bin/logkit.sh "WatchLogkitInputEvent"
+   class main
+   user root
+   group root system
+   seclabel u:r:logkit_service:s0
+   oneshot
+service GeorgedebugFastMvLogtoUdisk /system/bin/sh /system_ext/bin/logkit.sh "FastMvLogtoUdisk"
+      class core
+      user root
+      group root system sdcard_rw everybody
+      seclabel u:r:logkit_service:s0
+      disabled
+      oneshot
+service GeorgedebugUsbLogcatMain /system/bin/sh /system_ext/bin/logkit.sh "UsbLogcatMain"
+  class core
+  user root
+  group root system
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+
+service GeorgedebugUsbLogcatEvent /system/bin/sh /system_ext/bin/logkit.sh "UsbLogcatEvent"
+  class core
+  user root
+  group root system
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+service GeorgedebugUsbLogcatKernel /system/bin/sh /system_ext/bin/logkit.sh "UsbLogcatKernel"
+    class core
+    user root
+    group root system
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+service GeorgedebugUsbWatchLogcat /system/bin/sh /system_ext/bin/logkit.sh "WatchLogcat"
+    class core
+    user root
+    group root system
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+service GeorgedebugUsbInitLog  /system/bin/sh /system_ext/bin/logkit.sh "UsbInitLog"
+  class core
+  user root
+  group root system sdcard_rw everybody
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+service GeorgedebugGetTcliInfo  /system/bin/sh /system_ext/bin/logkit.sh "GetTcliInfo"
+    class core
+    user root
+    group system root shell everybody media_rw
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+service GeorgedebugScreenRecordAndDump /system/bin/sh /system_ext/bin/logkit.sh "ScreenRecordAndDump"
+    class core
+    user root
+    group shell log readproc
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+
+service GeorgedebugScreenRecordAndEnableWmStart /system/bin/sh /system_ext/bin/logkit.sh "ScreenRecordAndEnableWmStart"
+    class core
+    user root
+    group shell log readproc
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+
+service GeorgedebugScreenRecordAndDisableWmStop /system/bin/sh /system_ext/bin/logkit.sh "ScreenRecordAndDisableWmStop"
+    class core
+    user root
+    group shell log readproc
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+service  GeorgedebugTcpDumpLog /system/bin/sh /system_ext/bin/logkit_wifi.sh "TcpDumpLog"
+      class core
+      user root
+      group root system
+      seclabel u:r:logkit_service:s0
+      disabled
+      oneshot
+service GeorgedebugStopLog  /system/bin/sh /system_ext/bin/logkit.sh "StopLog"
+    class core
+    user root
+    group system root
+    seclabel u:r:dumpstate:s0
+    disabled
+    oneshot
+
+service GeorgedebugPerfettoAsyncStart /system/bin/sh /system_ext/bin/logkit.sh "PerfettoAsyncStart"
+  class core
+  user  root
+  group misc shell root everybody
+  seclabel u:r:shell:s0
+  disabled
+  oneshot
+service GeorgedebugPerfettoAsyncStop /system/bin/sh /system_ext/bin/logkit.sh "PerfettoAsyncStop"
+  class core
+  user  root
+  group shell misc system root everybody
+  seclabel u:r:shell:s0
+  disabled
+  oneshot
+service GeorgedebugInitPerfettoAsyncLog  /system/bin/sh /system_ext/bin/logkit.sh "InitPerfettoAsyncLog"
+  class core
+  user root
+  group root
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+
+service AnrPerfettoAsyncStartService /system/bin/sh /system_ext/bin/logkit.sh "AnrPerfettoAsyncStart"
+    class core
+    user  system
+    group misc shell root everybody
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+service AnrPerfettoAsyncStopService /system/bin/sh /system_ext/bin/logkit.sh "AnrPerfettoAsyncStop"
+    class core
+    user  system
+    group misc shell root everybody
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+service MvAnrPerfettoLogService /system/bin/sh /system_ext/bin/logkit.sh "MvAnrPerfettoLog"
+    class core
+    user system
+    group misc root everybody system sdcard_rw
+    seclabel u:r:adbd:s0
+    disabled
+    oneshot
+service InitAnrPerfettoAsyncLogService  /system/bin/sh /system_ext/bin/logkit.sh "InitAnrPerfettoAsyncLog"
+    class core
+    user root
+    group system root sdcard_rw everybody
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+service StopAnrPerfettoLogService  /system/bin/sh /system_ext/bin/logkit.sh "StopAnrPerfettoLog"
+    class core
+    user root
+    group system root sdcard_rw everybody
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+service GeorgedebugResetEnvironment  /system/bin/sh /system_ext/bin/logkit.sh "resetEnvironment"
+  class core
+  user shell
+  group shell log readproc
+  seclabel u:r:shell:s0
+  disabled
+  oneshot
+service GeorgedebugSetEnvironment  /system/bin/sh /system_ext/bin/logkit.sh "SetEnvironment"
+  class core
+  user shell
+  group shell log readproc
+  seclabel u:r:shell:s0
+  disabled
+  oneshot
+service GeorgedebugLogcatBugreport /system/bin/sh /system_ext/bin/logkit.sh "LogcatBugreport"
+  class core
+  user root
+  group root
+  seclabel u:r:dumpstate:s0
+  disabled
+  oneshot
+service GeorgedebugMvBugreportToSDcard /system/bin/sh /system_ext/bin/logkit.sh "MvBugreportToSDcard"
+  class core
+  user root
+  group root
+  seclabel u:r:dumpstate:s0
+  disabled
+  oneshot
+service GeorgedebugLogcatBugreportForNvr /system/bin/sh /system_ext/bin/logkit.sh "LogcatBugreportForNvr"
+  class core
+  user root
+  group root
+  seclabel u:r:dumpstate:s0
+  disabled
+  oneshot
+service GeorgedebugMvBugreportToData /system/bin/sh /system_ext/bin/logkit.sh "LogcatBugreportToData"
+  class core
+  user root
+  group shell root
+  seclabel u:r:dumpstate:s0
+  disabled
+  oneshot
+service GeorgedebugMvBugreportToNvr /system/bin/sh /system_ext/bin/logkit.sh "LogcatBugreportToNvr"
+  class core
+  user root
+  group system root shell
+  seclabel u:r:dumpstate:s0
+  disabled
+  oneshot
+on property:persist.sys.perfettolog=true
+    start GeorgedebugInitPerfettoAsyncLog
+on property:persist.sys.perfettolog=false
+    start GeorgedebugPerfettoAsyncStop
+    setprop persist.sys.perfettolog "-1"
+
+on property:persist.sys.anrtrace=true
+    start InitAnrPerfettoAsyncLogService
+on property:persist.sys.anrtrace=false
+    start StopAnrPerfettoLogService
+on property:persist.sys.anrtrace.state="copy"
+    start MvAnrPerfettoLogService
+
+on property:persist.sys.stoplog=true
+    start GeorgedebugStopLog
+    setprop persist.sys.stoplog "-1"
+on property:sys.dumpscreenrecord.start=true
+      start GeorgedebugScreenRecordAndDump
+on property:sys.dumpaudio.start=true
+      start GeorgedebugDumpAudio
+
+# Deprecated: usblog trigger moved to userlogkit.rc
+#on property:persist.sys.usblog=true
+#start GeorgedebugUsbInitLog
+
+on property:sys.bugreport.start=true
+start GeorgedebugLogcatBugreportForNvr
+
+# Deprecated: usblog trigger moved to userlogkit.rc
+#on property:sys.boot_completed="1" && property:persist.sys.usblog=false
+# stop GeorgedebugUsbLogcatMain
+# stop GeorgedebugUsbLogcatEvent
+# stop GeorgedebugUsbLogcatKernel
+# stop GeorgedebugUsbWatchLogcat
+
+on property:sys.dumpSystem.start=true
+  start dumpSystem
+
+on property:persist.sys.normallog=true
+  start GeorgedebugInitBootLog
+  start GeorgedebugInitLog
+
+on property:persist.sys.normallog=false
+  stop GeorgedebugInitBootLog
+  stop GeorgedebugInitLog
+
+on property:sys.collectbootlog.start=true
+  start GeorgedebugStartCollectBootMainLog
+  start GeorgedebugStartCollectBootEventLog
+  start GeorgedebugStartCollectBootKernelLog
+
+on property:sys.collectbootlog.start=false
+  stop GeorgedebugStartCollectBootMainLog
+  stop GeorgedebugStartCollectBootEventLog
+  stop GeorgedebugStartCollectBootKernelLog
+
+on property:sys.perfettostart.start=true
+  start GeorgedebugPerfettoStart
+
+on property:sys.mvperfettostart.start=true
+  start mvPerfetto
+
+

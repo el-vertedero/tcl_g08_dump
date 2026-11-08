@@ -1,0 +1,15 @@
+on post-fs-data
+    mkdir /data/system/diagnosis-log 0777 system system
+
+service diagnosis_service /system_ext/bin/diagnosis
+    class main
+    user system
+    group system system
+    disabled
+    oneshot
+
+on property:sys.boot_completed=1
+    start diagnosis_service
+
+on property:debug.diagnosis.pmode=1
+    stop diagnosis_service

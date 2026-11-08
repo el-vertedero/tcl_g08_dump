@@ -1,0 +1,8 @@
+# The libraries should be named as `lib<name>.<companyname>.so` as in `libFoo.tcl.so`.
+
+libcom_tcl_hbbtv_jni.tcl.so
+libcom_tcl_tbrowser_jni.tcl.so
+libhbbtv_plugin.tcl.so
+libhbbtv_plugin_arib.tcl.so
+#libcom_tcl_tbrowser_player_jni.tcl.so
+#libjsext_isdb.tcl.so

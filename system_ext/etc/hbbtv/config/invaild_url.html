@@ -1,0 +1,110 @@
+<html>
+<body>
+  <p id="p1">This service is invalid, please press "Back" key</p>
+
+	<head>
+	<style type="text/css">
+	body{
+		margin:0px;
+		width: 100%;
+		height: 100%;
+		background: #585858;
+	}
+	
+	p{
+		font-family:arial;
+		color:red;
+		font-size:40px;
+		padding: 0;
+		margin: 0;
+		text-align: center;
+		position: relative;
+		top: 50%;
+		transform: translateY( -50%);
+	}
+	</style>
+	<script type="text/javascript" language=JavaScript charset="UTF-8">
+      document.onkeydown=function(event){
+            var e = event || window.event || arguments.callee.caller.arguments[0];
+            if(e && e.keyCode == VK_BACK){ // 按 back(461) 
+                window.close();
+            }
+        };
+		var url = window.location.href;
+		console.log("invalid: url=" + url);
+		var params = url.indexOf("?module=");
+		if(params != -1){		
+			console.log("invalid: params=" + params);
+			var searchParams = url.substring(params+8);
+			//console.log("invalid searchParams="+searchParams);
+			var name = 'This service is invalid, please press "Back" key';
+			//console.log(name);
+			console.log("invalid: name=" + name);
+			if(searchParams != ""
+				&& searchParams != null 
+				&& searchParams != "undefined"){
+				console.log("searchParams is "+searchParams);
+				var errorStart=searchParams.indexOf('&error_code=')
+				console.log("errorStart  is "+errorStart);
+				var module = "";
+				var error_code = "";
+				if(errorStart != -1){
+					module = searchParams.substring(searchParams, errorStart); 
+					console.log("module is " + module);
+					error_code = searchParams.substring(errorStart+12);
+				}else{
+					module = searchParams;
+					console.log("module is " + module);
+				}			
+				console.log("invalid: module=" + module);
+				console.log("module:"+module);
+				console.log("error_code:"+error_code);				
+				switch(parseInt(module))
+				{
+				case 1:
+				{
+				  name = "Please press \"Back\" key, check your network and try again, ERROR_CODE:100";
+				  //console.log(name);
+				}
+				break;
+				case 2:
+				{			
+					var errorInt = parseInt(error_code);
+					console.log("invalid: errorInt=" + errorInt);
+					switch(errorInt)
+					{
+					case 1:
+					case 2:
+					errorInt+=200;
+					name = "Please press \"Back\" key, this service is not ready now, try again after,ERROR_CODE"+errorInt;
+					break;
+					case 3:
+					case 10:
+					case 20:
+					case 30:
+					case 40:
+					errorInt+=200;
+					name = "Please press \"Back\" key, If you want to view this service, please reboot your TV, ERROR_CODE:"+errorInt;
+					break;					
+					default:
+					name = "Please press \"Back\" key, If you want to view this service, please reboot your TV, ERROR_CODE:2"+error_code;					
+					break;
+					}
+				}
+				break;			
+				case 3:{
+					name = "Please press \"Back\" key, this service is not ready now, try again after, ERROR_CODE:3"+error_code;
+				}
+				break;
+				default:
+				break;
+				}
+				 
+			}
+			
+			document.getElementById("p1").innerHTML =  name;
+		}
+	</script>
+</head>
+</body>
+</html>
