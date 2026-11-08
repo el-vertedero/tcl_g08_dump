@@ -1,0 +1,15 @@
+on post-fs-data
+    chown system system /dev/tcl_dybridge
+    chmod 0666 /dev/tcl_dybridge
+
+    mkdir /data/dybridge  0775 system system
+    chown system system /data/dybridge/dybridge.db
+    chown system system /data/dybridge/dybridge.db-journal
+    chmod 0664 /data/dybridge/dybridge.db
+    chmod 0664 /data/dybridge/dybridge.db-journal
+	
+service dybridge_ini /system/bin/dybridge_ini
+    class main
+    user system
+    group system
+    oneshot

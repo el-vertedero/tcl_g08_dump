@@ -1,0 +1,2 @@
+
+com.android.tetheringêπï¢:/libcom.android.tethering.connectivity_native.so:libnetd_updatable.soBlibandroid.soBlibbinder_ndk.soBlibc.soBlibdl.soB	liblog.soBlibm.soBlibmediandk.soBlibnativehelper.soBlibz.soJBlibandroid_net_connectivity_tcl_com_android_net_module_util_jni.soJlibcronet.114.0.5735.84.soJlibcrypto.soJ libframework-connectivity-jni.soJ)libframework-connectivity-tiramisu-jni.soJlibservice-connectivity.soJ	libssl.so

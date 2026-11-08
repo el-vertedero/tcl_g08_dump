@@ -1,0 +1,24 @@
+service bootanim /system/bin/bootanimation
+    class core animation
+    user graphics
+# ifdef VENDOR_EDIT
+# sheng2.lei@tcl.com, 2024/03/22, add hotel_file group,clearBootLogo
+    # group graphics audio
+    group graphics audio system input drmrpc
+# endif /* VENDOR_EDIT */
+    disabled
+    oneshot
+    ioprio rt 0
+    task_profiles MaxPerformance
+
+##ifdef VENDOR_EDIT
+##yanfeng2.liu@SystemDepartment2, 2021/08/13, [TROMPLATE-19] Unified bootanimation
+service strbootvideo /system/bin/bootanimation -s screenOn
+    class core animation
+    user graphics
+    group graphics audio root system input
+    disabled
+    oneshot
+    ioprio rt 0
+    task_profiles MaxPerformance
+##endif VENDOR_EDIT
