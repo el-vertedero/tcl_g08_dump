@@ -1,0 +1,43 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@2 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disalbed";
+		};
+	};
+
+	fragment@3 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	__fixups__ {
+		pmu_rproc = "/fragment@0:target:0";
+		pmu_rpmsg = "/fragment@1:target:0";
+		pmu_mcs51_rproc = "/fragment@2:target:0";
+		pmu_ini = "/fragment@3:target:0";
+	};
+};

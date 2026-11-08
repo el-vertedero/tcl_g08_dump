@@ -1,0 +1,16 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			voc_force_default_stub = <0x00>;
+		};
+	};
+
+	__fixups__ {
+		voc_platform = "/fragment@0:target:0";
+	};
+};

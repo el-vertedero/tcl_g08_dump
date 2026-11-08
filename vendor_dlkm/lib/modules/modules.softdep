@@ -1,0 +1,4 @@
+# Soft dependencies extracted from modules themselves.
+softdep mediatek_drm_tv pre: mtk_srccap
+softdep mali_kbase_mt5879 pre: memory_group_manager
+softdep cpu_freq_adapter pre: mtktv_cpufreq

@@ -1,0 +1,35 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+
+			android {
+
+				vbmeta {
+					compatible = "android,vbmeta";
+					parts = "vbmeta,boot,system,vendor,oem,bootdata,tvconfig";
+					by_name_prefix = "/dev/block/platform/mstar_mci.0/by-name/vbmeta";
+				};
+			};
+		};
+	};
+
+	fragment@9999999 {
+		target-path = "/";
+
+		__overlay__ {
+
+			multi_dto_dummy_node {
+				status = "disabled";
+			};
+		};
+	};
+
+	__fixups__ {
+		firmware = "/fragment@0:target:0";
+	};
+};

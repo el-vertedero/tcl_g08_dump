@@ -1,0 +1,24 @@
+####################################
+# from generate-common-build-props
+# These properties identify this partition image.
+####################################
+ro.product.vendor_dlkm.brand=TCL
+ro.product.vendor_dlkm.device=G08
+ro.product.vendor_dlkm.manufacturer=TCL
+ro.product.vendor_dlkm.model=Smart TV Pro
+ro.product.vendor_dlkm.name=G08_4K_US
+ro.product.model_for_attestation=Smart TV Pro
+ro.product.brand_for_attestation=TCL
+ro.product.name_for_attestation=G08_4K_US
+ro.product.device_for_attestation=G08
+ro.product.manufacturer_for_attestation=TCL
+ro.vendor_dlkm.build.date=Tue Dec 30 01:01:43 CST 2025
+ro.vendor_dlkm.build.date.utc=1767027703
+ro.vendor_dlkm.build.id=UTT2.250416.001
+ro.vendor_dlkm.build.tags=release-keys
+ro.vendor_dlkm.build.type=user
+ro.vendor_dlkm.build.version.incremental=AU14
+ro.vendor_dlkm.build.version.release=14
+ro.vendor_dlkm.build.version.release_or_codename=14
+ro.vendor_dlkm.build.version.sdk=34
+# end of file

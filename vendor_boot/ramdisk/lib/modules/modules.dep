@@ -1,0 +1,59 @@
+/lib/modules/tcl_common_data.ko:
+/lib/modules/gpio-mt5896.ko:
+/lib/modules/pwmscan-mt5896.ko:
+/lib/modules/mtk_gmac_mt5896.ko: /lib/modules/mii.ko /lib/modules/mtk-pm.ko
+/lib/modules/mtk_iommu.ko: /lib/modules/tee.ko
+/lib/modules/rtl8150.ko:
+/lib/modules/mtk_pmu_rproc.ko:
+/lib/modules/leds-breath.ko:
+/lib/modules/r8152.ko: /lib/modules/mii.ko
+/lib/modules/mtk-tv-atrace.ko:
+/lib/modules/pinctrl-mt5896.ko:
+/lib/modules/mtk-memory.ko: /lib/modules/mtk-kmiup.ko /lib/modules/mtk-miup.ko
+/lib/modules/keypad-mt5896.ko: /lib/modules/mtk-pm.ko
+/lib/modules/irq-mt58xx.ko:
+/lib/modules/tkperf.ko:
+/lib/modules/clk_mt5896.ko: /lib/modules/clk_dtv_util.ko /lib/modules/clk_common.ko
+/lib/modules/virtio_rpmsg_bus.ko: /lib/modules/rpmsg_ns.ko
+/lib/modules/mtk-mmc-fcie.ko:
+/lib/modules/mtk-ir.ko: /lib/modules/mtk-pm.ko
+/lib/modules/mtk-efuse.ko: /lib/modules/cfi_nonGPL_patch.ko
+/lib/modules/mtk_tee.ko: /lib/modules/tee.ko
+/lib/modules/mtk_cus.ko: /lib/modules/cfi_nonGPL_patch.ko /lib/modules/mtktv-public-if.ko
+/lib/modules/mtk-pixelmnt.ko: /lib/modules/mtk-tvscriptmgt.ko /lib/modules/mtk-memory.ko /lib/modules/mtk-kmiup.ko /lib/modules/mtk-miup.ko /lib/modules/mtk-boottime.ko /lib/modules/mtk-tv-atrace.ko /lib/modules/mtktv-public-if.ko
+/lib/modules/mtk-pqmaputil.ko: /lib/modules/cfi_nonGPL_patch.ko /lib/modules/mtktv-public-if.ko
+/lib/modules/cdc_eem.ko: /lib/modules/usbnet.ko /lib/modules/mii.ko
+/lib/modules/tee.ko:
+/lib/modules/mtk-pmu-ir.ko:
+/lib/modules/cdc_ether.ko: /lib/modules/usbnet.ko /lib/modules/mii.ko
+/lib/modules/optee.ko: /lib/modules/tee.ko
+/lib/modules/usbnet.ko: /lib/modules/mii.ko
+/lib/modules/mtk-metautil.ko:
+/lib/modules/clk_dtv_util.ko:
+/lib/modules/aqc111.ko: /lib/modules/usbnet.ko /lib/modules/mii.ko
+/lib/modules/pwm-mt5896.ko:
+/lib/modules/spi-mt5896.ko: /lib/modules/mtk-bdma.ko
+/lib/modules/cfi_nonGPL_patch.ko:
+/lib/modules/clk_common.ko:
+/lib/modules/mtk_hwreg.ko: /lib/modules/mtk-efuse.ko /lib/modules/mtk-boottime.ko /lib/modules/cfi_nonGPL_patch.ko /lib/modules/mtktv-public-if.ko
+/lib/modules/mtk_xcalg.ko: /lib/modules/mtk_hwreg.ko /lib/modules/mtk-efuse.ko /lib/modules/mtk-boottime.ko /lib/modules/cfi_nonGPL_patch.ko /lib/modules/mtktv-public-if.ko
+/lib/modules/mtk-smi-tv.ko:
+/lib/modules/mtk-ab-boot.ko: /lib/modules/tee.ko
+/lib/modules/at24.ko:
+/lib/modules/system_heap.ko:
+/lib/modules/mtk-bdma.ko:
+/lib/modules/pnl_cust.ko:
+/lib/modules/rpmsg_ns.ko:
+/lib/modules/mtk-pmu-keypad.ko:
+/lib/modules/8250_mtk_tv.ko:
+/lib/modules/tcl_kto_monitor.ko:
+/lib/modules/mtk-pm.ko:
+/lib/modules/mtk-kmiup.ko: /lib/modules/mtk-miup.ko
+/lib/modules/ax88179_178a.ko: /lib/modules/usbnet.ko /lib/modules/mii.ko
+/lib/modules/ntfs.ko:
+/lib/modules/mt5896_hwspinlock.ko:
+/lib/modules/mtk-boottime.ko:
+/lib/modules/mtk-miup.ko:
+/lib/modules/mii.ko:
+/lib/modules/mtk-tvscriptmgt.ko: /lib/modules/mtk-memory.ko /lib/modules/mtk-kmiup.ko /lib/modules/mtk-miup.ko /lib/modules/mtk-boottime.ko /lib/modules/mtk-tv-atrace.ko /lib/modules/mtktv-public-if.ko
+/lib/modules/mtktv-public-if.ko:

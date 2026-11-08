@@ -1,0 +1,16 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			earc_port_sel = <0x00>;
+		};
+	};
+
+	__fixups__ {
+		mtk_earc_label = "/fragment@0:target:0";
+	};
+};

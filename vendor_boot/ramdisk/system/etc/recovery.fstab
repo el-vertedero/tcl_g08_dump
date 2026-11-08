@@ -1,0 +1,37 @@
+# Android fstab file.
+#<src>                                                  <mnt_point>         <type>    <mnt_flags>             <fs_mgr_flags>
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+
+system                            /system               ext4      ro,barrier=1           wait,logical,first_stage_mount,slotselect
+vendor                            /vendor               ext4      ro,barrier=1           wait,logical,first_stage_mount,slotselect
+vendor_dlkm                       /vendor_dlkm          ext4      noatime,ro,errors=panic wait,logical,first_stage_mount,slotselect
+product                           /product              ext4      ro,nodev,barrier=1     wait,logical,first_stage_mount,slotselect
+/dev/block/sda1                   /sdcard               vfat      defaults               defaults
+/dev/block/by-name/userdata       /data                 ext4      noatime,nosuid,nodev   wait,formattable,block_validity,nodiscard,data=ordered,journal_checksum
+/dev/block/by-name/metadata       /metadata             ext4      noatime,nosuid,nodev,discard,sync  wait,formattable,first_stage_mount
+/dev/block/by-name/cache          /cache                ext4      noatime,nosuid,nodev   wait,block_validity,nodiscard,data=ordered,journal_checksum
+/dev/block/by-name/tvconfig       /vendor/tvconfig      ext4      ro                     wait,slotselect
+/dev/block/by-name/tvcertificate  /vendor/tvcertificate ext4      noatime,nosuid,nodev   wait,block_validity,nodiscard,data=ordered,journal_checksum
+/dev/block/by-name/misc           /misc                 emmc      defaults               defaults
+/dev/block/by-name/vbmeta         /vbmeta               emmc      defaults               defaults,slotselect
+/dev/block/by-name/boot           /boot                 emmc      defaults               defaults,slotselect
+/dev/block/by-name/dtbo           /dtbo                 emmc      defaults               defaults,slotselect
+/dev/block/by-name/optee          /optee                emmc      defaults               defaults
+/dev/block/by-name/armfw          /armfw                emmc      defaults               defaults
+/dev/block/by-name/bootdata       /mnt/vendor/bootdata     ext4   noatime,nosuid,nodev   wait
+/dev/block/by-name/config         /mnt/vendor/config       ext4   noatime,nosuid,nodev   wait
+/dev/block/by-name/mtk_persist    /mnt/vendor/persist      ext4   noatime,nosuid,nodev   wait
+/dev/block/by-name/certificate    /mnt/vendor/certificate  ext4   noatime,nosuid,nodev   wait
+
+# add by jun8.hou@tcl.com tclconfig/persist/tcluserdata/impdata
+/dev/block/by-name/tclconfig            /tclconfig                          ext4    ro                                                     wait,slotselect,first_stage_mount,nofail
+/dev/block/by-name/persist              /persist                            ext4    noatime,nosuid,nodev                                   wait,block_validity,nodiscard,data=ordered,journal_checksum
+/dev/block/by-name/tcluserdata          /userdata                           ext4    noatime,nosuid,nodev                                   wait,block_validity,nodiscard,data=ordered,journal_checksum
+/dev/block/by-name/impdata              /impdata                            ext4    ro                                                     wait
+/dev/block/by-name/video                /mnt/video                          ext4    ro                                                     wait
+
+# ifdef VENDOR_EDIT
+# ruiqi.zhao@tcl.com, 2023/03/31, [MT9618CHIP-237] 9653NA adaptive incremental upgrade
+system_ext                              /system_ext                         ext4    ro,nodev,barrier=1                                     wait,logical,first_stage_mount,slotselect
+# endif /* VENDOR_EDIT*/

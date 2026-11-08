@@ -1,0 +1,587 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+
+			android {
+
+				vbmeta {
+					compatible = "android,vbmeta";
+					parts = "vbmeta,boot,system,vendor,oem,bootdata,tvconfig";
+					by_name_prefix = "/dev/block/platform/mstar_mci.0/by-name/vbmeta";
+				};
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			ini_path = "audio/";
+			pre_init_table = "audio_pre_init_mt5897.ini";
+			init_table = "audio_init_mt5897.ini";
+			depop_table = "depop_mt5897.ini";
+			earc_table = "earc_mt5897.ini";
+		};
+	};
+
+	fragment@2 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			rx-desc-num = <0x200>;
+			ethpll-ictrl = <0x01>;
+			mac-type = <0x00>;
+			phy-process = <0x00>;
+			threaded-irq = <0x00>;
+			irq-affinity = <0x03>;
+		};
+	};
+
+	fragment@3 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			phys = <0xffffffff 0x03 0xffffffff 0x03 0xffffffff 0x03 0xffffffff 0x04>;
+		};
+	};
+
+	fragment@4 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			phys = <0xffffffff 0x03 0xffffffff 0x03 0xffffffff 0x03 0xffffffff 0x04>;
+		};
+	};
+
+	fragment@5 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			mediatek,src_hw_capable;
+
+			usb-phy@1C780000 {
+				reg = <0x00 0x1c780000 0x00 0x700>;
+				#phy-cells = <0x01>;
+				status = "okay";
+			};
+
+			usb-phy@1C781000 {
+				reg = <0x00 0x1c781000 0x00 0x700>;
+				#phy-cells = <0x01>;
+				status = "okay";
+			};
+
+			usb-phy@1C782000 {
+				reg = <0x00 0x1c782000 0x00 0x700>;
+				#phy-cells = <0x01>;
+				status = "okay";
+			};
+
+			usb-phy@1C780700 {
+				reg = <0x00 0x1c780700 0x00 0x900>;
+				#phy-cells = <0x01>;
+				degradation-mode = <0x01>;
+				status = "okay";
+			};
+		};
+	};
+
+	fragment@6 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			phys = <0xffffffff 0x03 0xffffffff 0x04>;
+		};
+	};
+
+	fragment@7 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			mediatek,src_hw_capable;
+
+			usb-phy@1C1A0000 {
+				reg = <0x00 0x1c1a0000 0x00 0x700>;
+				#phy-cells = <0x01>;
+				status = "okay";
+			};
+
+			usb-phy@1C1A0700 {
+				reg = <0x00 0x1c1a0700 0x00 0x900>;
+				#phy-cells = <0x01>;
+				degradation-mode = <0x01>;
+				status = "okay";
+			};
+		};
+	};
+
+	fragment@8 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			usb2-lpm-disable;
+			irq-affinity = <0x03>;
+		};
+	};
+
+	fragment@9 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			usb2-lpm-disable;
+			irq-affinity = <0x03>;
+		};
+	};
+
+	fragment@10 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			ip-version = <0x100>;
+		};
+	};
+
+	fragment@11 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			ngpios = <0x8b>;
+			base = <0x00>;
+			max-ngpios = <0xc8>;
+			irq-both-edge = <0x00>;
+		};
+	};
+
+	fragment@12 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			ngpios = <0x64>;
+			base = <0xc8>;
+			max-ngpios = <0xc8>;
+			irq-both-edge = <0x00>;
+			status = "okay";
+		};
+	};
+
+	fragment@13 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			ngpios = <0x64>;
+			base = <0xc8>;
+			max-ngpios = <0xc8>;
+			irq-both-edge = <0x00>;
+			status = "disabled";
+		};
+	};
+
+	fragment@14 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			GOP_TOTAL_GWIN_NUMBER = <0x05>;
+			GOP_AFBC_WIDTH_CAPS = <0xf00 0xf00 0x780 0x780 0x00>;
+			GOP_INPUT_MAX_WIDTH_CAP = <0xf00 0xf00 0xf00 0xf00 0x100>;
+			GOP_DUAL_FOR_ONE_LAYER = <0x01>;
+			GOP_USE_ML = <0x01>;
+			GOP_AUTO_DETECT_CAP = <0x00>;
+			GOP_BLENDING_TO_OSDB0_CAP = <0x00>;
+			GOP_SELECT_OSDB_LOCATION_CAP = <0x01>;
+			GOP_BLEND_VIDEO_IRQ_CAP = <0x01>;
+			GOP_MULTI_ALPHA_CAPS = <0x00>;
+			GOP_STEP2_HVSP_CAPS = <0x00>;
+		};
+	};
+
+	fragment@15 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			ip-version = <0x101>;
+			capability = <0x26aa1f7d>;
+			reg = <0x00 0x1d49b200 0x00 0x2e00 0x00 0x1d49a600 0x00 0x600 0x00 0x1d487800 0x00 0x200>;
+		};
+	};
+
+	fragment@16 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			ip-version = <0x101>;
+			capability = <0x9aa04d>;
+			reg = <0x00 0x1d49b200 0x00 0x2e00 0x00 0x1d49a600 0x00 0x600 0x00 0x1d487800 0x00 0x200>;
+		};
+	};
+
+	fragment@17 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			ip-version = <0x101>;
+			capability = <0x9aa04d>;
+			reg = <0x00 0x1d49b200 0x00 0x2e00 0x00 0x1d49a600 0x00 0x600 0x00 0x1d487800 0x00 0x200>;
+		};
+	};
+
+	fragment@18 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			ip-version = <0x101>;
+			capability = <0x9aa04d>;
+			reg = <0x00 0x1d49b200 0x00 0x2e00 0x00 0x1d49a600 0x00 0x600 0x00 0x1d487800 0x00 0x200>;
+		};
+	};
+
+	fragment@19 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			ip-version = <0x101>;
+			capability = <0x0c>;
+			reg = <0x00 0x1d49b200 0x00 0x2e00 0x00 0x1d49a600 0x00 0x600 0x00 0x1d487800 0x00 0x200>;
+		};
+	};
+
+	fragment@20 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			blend_hw_version = <0x01>;
+			pnlgamma_version = <0x01>;
+			pqgamma_version = <0x01>;
+			framesync_version = <0x01>;
+			IRQ_Version = <0x01>;
+			MGW_VERSION = <0x01>;
+			Clk_Version = <0x01>;
+			GRAPHIC_ENGINE_PMODE = <0x02>;
+			GRAPHIC_PLANE_NUM = <0x05>;
+			GRAPHIC_LAYER_ZORDER = <0x01 0x02 0x00 0x03 0x04>;
+			GRAPHIC_BOOTLOGO_GOPIDX = <0x03>;
+			disp_x_align = <0x01>;
+			disp_y_align = <0x01>;
+			disp_w_align = <0x01>;
+			disp_h_align = <0x01>;
+			crop_x_align_420_422 = <0x02>;
+			crop_x_align_444 = <0x01>;
+			crop_y_align_420 = <0x02>;
+			crop_y_align_444_422 = <0x01>;
+			crop_w_align = <0x01>;
+			crop_h_align = <0x01>;
+			render_p_engine = <0x02>;
+			PATTERN_HW_VER = <0x02>;
+			hwmode_support_planetype = <0x0f>;
+			swmode_support_planetype = <0x0f>;
+			bypassmode_support_planetype = <0x10>;
+			support_h_scl_down = <0x01>;
+			algo_capability = <0x10000 0x02>;
+			algo_header_size = <0x40>;
+			support_render_scaling = <0x01>;
+			video_mute_version = <0x00>;
+			disp_win_version = <0x00>;
+			VIDEO_MGW_NUM = <0x01>;
+			VIDEO_DMA_SCL_NUM = <0x02>;
+			VIDEO_WINDOW_NUM = <0x10>;
+			ambient_version = <0x01>;
+			enable_expect_pqout_size = <0x01>;
+			enable_pqu_ds_size_ctl = <0x00>;
+			video_irq_affinity = <0x02>;
+			video_freeze_version = <0x00>;
+			chip_series = <0x01>;
+		};
+	};
+
+	fragment@21 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			mediatek,max_cid_group = <0x02>;
+			mediatek,cpu_client_cnt = <0x01>;
+			mediatek,cpu_client = <0xc0000000 0x00>;
+			mediatek,client_cnt = <0x0c>;
+			mediatek,client = <0xc0000000 0x00 0xff80c500 0x00 0xe000e000 0x00 0xff80c580 0x00 0xffffcd0d 0x00 0xff80cb00 0x00 0xffc0c740 0x00 0xffffcc00 0x00 0xfff9c809 0x00 0xfff8c800 0x00 0xffe0c780 0x00 0xffc0c640 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00>;
+			mediatek,end_addr_ver = <0x01>;
+			overbound_black_client_cnt = <0x00>;
+			overbound_black_client = <0x00 0x00 0x00 0x00 0x00 0x00>;
+			mediatek,chipid = <0x02>;
+		};
+	};
+
+	fragment@22 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			ip-version = [02 00];
+			compatible = "mtk,mali-mt5897";
+			interrupt-parent = <0xffffffff>;
+			interrupts = <0x00 0x1a 0x04 0x00 0x1a 0x04 0x00 0x1a 0x04>;
+			interrupt-names = "JOB\0MMU\0GPU";
+			reg = <0x00 0x1c5e0000 0x00 0x4000>;
+		};
+	};
+
+	fragment@23 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			vd_init = <0x00>;
+			vd_hsen_normal_detect_win_before_lock = <0x08>;
+			vd_hsen_noamrl_detect_win_after_lock = <0x08>;
+			vd_hsen_normal_cntr_fail_before_lock = <0x0f>;
+			vd_hsen_normal_cntr_sync_before_lock = <0x10>;
+			vd_hsen_normal_cntr_sync_after_lock = <0x1c>;
+			vd_hsen_chan_scan_detect_win_before_lock = <0x05>;
+			vd_hsen_chan_scan_detect_win_after_lock = <0x05>;
+			vd_hsen_chan_scan_cntr_fail_before_lock = <0x0f>;
+			vd_hsen_chan_scan_cntr_sync_before_lock = <0x18>;
+			vd_hsen_chan_scan_cntr_sync_after_lock = <0x0e>;
+			vd_hsen_chan_scan_hsync_check_count = <0x14>;
+		};
+	};
+
+	fragment@24 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			vd_init = <0x00>;
+			vd_init_patch_flag = <0x10>;
+		};
+	};
+
+	fragment@25 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			vd_init = <0x00>;
+			vd_fix_gain = <0x14>;
+			vd_fine_gain = <0x90>;
+			vd_color_kill_high_bound = <0x30>;
+			vd_color_kill_low_bound = <0x0d>;
+		};
+	};
+
+	fragment@26 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			memory_type = <0x00>;
+		};
+	};
+
+	fragment@27 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			compatible = "mediatek,pm";
+			reg = <0x00 0x1c020200 0x00 0x200 0x00 0x1c020000 0x00 0x200>;
+
+			wakeup-source {
+
+				usb {
+					id = <0x10>;
+					enable = <0x00>;
+				};
+
+				ir0 {
+					id = <0x01>;
+					enable = <0x01>;
+				};
+
+				dvi0 {
+					id = <0x02>;
+					enable = <0x00>;
+				};
+
+				dvi1 {
+					id = <0x12>;
+					enable = <0x00>;
+				};
+
+				dvi2 {
+					id = <0x03>;
+					enable = <0x00>;
+				};
+
+				dvi3 {
+					id = <0x13>;
+					enable = <0x00>;
+				};
+
+				cec0 {
+					id = <0x04>;
+					enable = <0x01>;
+				};
+
+				keypad0 {
+					id = <0x05>;
+					enable = <0x01>;
+				};
+
+				sync {
+					id = <0x07>;
+					enable = <0x00>;
+				};
+
+				rtc0 {
+					id = <0x08>;
+					enable = <0x01>;
+				};
+
+				voice {
+					id = <0x1a>;
+					enable = <0x01>;
+				};
+
+				uart {
+					id = <0x0b>;
+					enable = <0x00>;
+				};
+
+				wifi-gpio {
+					id = <0x1c>;
+					enable = <0x01>;
+				};
+
+				bt-gpio {
+					id = <0x2c>;
+					enable = <0x01>;
+				};
+
+				emer-gpio {
+					id = <0x4c>;
+					enable = <0x00>;
+				};
+
+				mute-gpio {
+					id = <0x5c>;
+					enable = <0x00>;
+				};
+
+				lan {
+					id = <0x0e>;
+					enable = <0x00>;
+				};
+
+				cast {
+					id = <0x0f>;
+					enable = <0x00>;
+				};
+
+				mmwave {
+					id = <0x6c>;
+					enable = <0x01>;
+				};
+			};
+		};
+	};
+
+	fragment@28 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			memory-region = <0xffffffff>;
+			vrr_qms_support = <0x00>;
+			vrr_qms_project = <0x00>;
+			vrr_qms_project_sw_mode = <0x00>;
+			vrr_qms_project_hw_support = <0x00>;
+			vrr_qms_hw_support_error_handling = <0x00>;
+		};
+	};
+
+	fragment@9999999 {
+		target-path = "/";
+
+		__overlay__ {
+
+			dummy_node {
+				status = "disabled";
+			};
+		};
+	};
+
+	fragment@29 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			compatible = "arm,cortex-a73\0arm,armv8";
+			reg = <0x00 0x00>;
+		};
+	};
+
+	fragment@30 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			compatible = "arm,cortex-a73\0arm,armv8";
+			reg = <0x00 0x01>;
+		};
+	};
+
+	fragment@31 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			compatible = "arm,cortex-a73\0arm,armv8";
+			reg = <0x00 0x02>;
+		};
+	};
+
+	fragment@32 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			compatible = "arm,cortex-a73\0arm,armv8";
+			reg = <0x00 0x03>;
+		};
+	};
+
+	__fixups__ {
+		firmware = "/fragment@0:target:0";
+		mtk_sound_soc = "/fragment@1:target:0\0/fragment@10:target:0";
+		gmac = "/fragment@2:target:0";
+		ssusb = "/fragment@3:target:0";
+		u2port0 = "/fragment@3/__overlay__:phys:0\0/fragment@4/__overlay__:phys:0";
+		u2port1 = "/fragment@3/__overlay__:phys:8\0/fragment@4/__overlay__:phys:8";
+		u2port2 = "/fragment@3/__overlay__:phys:16\0/fragment@4/__overlay__:phys:16";
+		u3port1 = "/fragment@3/__overlay__:phys:24\0/fragment@4/__overlay__:phys:24";
+		udc = "/fragment@4:target:0";
+		u3phy0 = "/fragment@5:target:0";
+		ssusb1 = "/fragment@6:target:0";
+		u2port3 = "/fragment@6/__overlay__:phys:0";
+		u3port3 = "/fragment@6/__overlay__:phys:8";
+		u3phy1 = "/fragment@7:target:0";
+		usb_host0 = "/fragment@8:target:0";
+		usb_host1 = "/fragment@9:target:0";
+		gpio0 = "/fragment@11:target:0";
+		pm_gpio0 = "/fragment@12:target:0";
+		pm_gpio1 = "/fragment@13:target:0";
+		mediatek_drm_gop_drvconfig = "/fragment@14:target:0";
+		mtk_gop0 = "/fragment@15:target:0";
+		mtk_gop1 = "/fragment@16:target:0";
+		mtk_gop2 = "/fragment@17:target:0";
+		mtk_gop3 = "/fragment@18:target:0";
+		mtk_gop4 = "/fragment@19:target:0";
+		mediatek_drm_tv_kms = "/fragment@20:target:0";
+		mtk_miup = "/fragment@21:target:0";
+		gpu = "/fragment@22:target:0";
+		mtk_intc1_irq_high = "/fragment@22/__overlay__:interrupt-parent:0";
+		mtk_vd_sensibility = "/fragment@23:target:0";
+		mtk_vd_patchflag = "/fragment@24:target:0";
+		mtk_vd_factory = "/fragment@25:target:0";
+		mtk_vd_memory_type = "/fragment@26:target:0";
+		mtk_pm = "/fragment@27:target:0";
+		mtk_vrr = "/fragment@28:target:0";
+		MI_VRR_SHM = "/fragment@28/__overlay__:memory-region:0";
+		cpu0 = "/fragment@29:target:0";
+		cpu1 = "/fragment@30:target:0";
+		cpu2 = "/fragment@31:target:0";
+		cpu3 = "/fragment@32:target:0";
+	};
+};

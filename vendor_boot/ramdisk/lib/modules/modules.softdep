@@ -1,0 +1,3 @@
+# Soft dependencies extracted from modules themselves.
+softdep mtk_hwreg pre: mtktv-public-if
+softdep mtk_tvscriptmgt pre: mtk_hwreg

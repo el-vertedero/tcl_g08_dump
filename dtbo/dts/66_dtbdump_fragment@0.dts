@@ -1,0 +1,15 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+		};
+	};
+
+	__fixups__ {
+		wdt0 = "/fragment@0:target:0";
+	};
+};

@@ -1,0 +1,14 @@
+# tcl9618-user 14 UTT2.250416.001 AU14 release-keys
+- manufacturer: tcl
+- platform: merak
+- codename: G08
+- flavor: tcl9618-user
+- release: 14
+- id: UTT2.250416.001
+- incremental: AU14
+- tags: release-keys
+- fingerprint: TCL/G08_4K_US/G08:14/UTT2.250416.001/AU14:user/release-keys
+- is_ab: true
+- brand: TCL
+- branch: tcl9618-user-14-UTT2.250416.001-AU14-release-keys
+- repo: tcl_g08_dump

@@ -1,0 +1,80 @@
+on init
+    mkdir /data/property
+    # sdcard/usb mount points
+    mkdir /mnt
+    mkdir /mnt/sdcard
+    mkdir /mnt/usb
+    mkdir /mnt/usb/sda1
+    mkdir /mnt/usb/mmcblka1
+    mkdir /storage
+# ifdef VENDOR_EDIT
+# jiehua2.li@tcl.com, 2025/04/16, add for kfault kernel init timeout
+    write /proc/kfaultfs_uboot stopwdg
+# endif /* VENDOR_EDIT */
+
+on early-fs
+    write /proc/sys/kernel/printk 0
+    setprop sys.usb.configfs 1
+    setprop sys.usb.controller 1c7a3e00.usb
+    # insert usb driver and enable device mode
+    # Recovery mode got through this
+    insmod /lib/modules/phy-mtk-tphy-tv.ko
+    insmod /lib/modules/mtu3.ko mtu3_dev_en=1
+    insmod /lib/modules/xhci-mtk-hcd-tv.ko
+    insmod /lib/modules/mtk_realtime_producer.ko rt_disable=1
+    insmod /lib/modules/mtk-tvcpuif.ko
+    insmod /lib/modules/mtk-tvpqu.ko
+    # ifndef VENDOR_EDIT
+    # lei6.yao@tcl.com, 2024.08.22.add for standby qhb mode
+    insmod /lib/modules/tcl_qhb_reset.ko gl_qhb_status=0
+    # endif  /* VENDOR_EDIT End*/
+    insmod /lib/modules/mediatek-drm-tv.ko
+
+# ifdef VENDOR_EDIT
+# ruiqi.zhao@tcl.com, 2024/04/15, [MT9618CHIP-237] The USB upgrade can be performed on the USB2.0 port in recovery
+service load_usb2 /system/bin/load_usb2.sh
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
+on property:sys.tcl.recovery_usb2_enable=true
+    start load_usb2
+# endif /* VENDOR_EDIT */
+
+on fs
+    # restore security contexts here to label those device nodes created by utopia
+    restorecon /dev/gflip
+    restorecon /dev/msmailbox
+    restorecon /dev/system
+
+# Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
+#service watchdogd /sbin/watchdogd 10 20
+#    class core
+# enable ir input for reboot recovery case
+    write /sys/module/mdrv_ir/parameters/input_event_en 1
+    write /sys/module/mdrv_ir/parameters/input_dev_event_enable 1
+    symlink /dev/block/mmcblk0boot0 /dev/block/by-name/rom_emmc_boot_a
+    symlink /dev/block/mmcblk0boot1 /dev/block/by-name/rom_emmc_boot_b
+
+    # ifdef VENDOR_EDIT
+    # ruiqi.zhao@tcl.com, 2023/11/16, [[MT9618CHIP-237] rom_emmc_boot cannot be upgraded
+    write /sys/block/mmcblk0boot0/force_ro 0
+    write /sys/block/mmcblk0boot1/force_ro 0
+    # endif /* VENDOR_EDIT */
+
+    # ifdef VENDOR_EDIT
+    # ruiqi.zhao@tcl.com, 2025/06/09, [[LINTHYOS-113882] Clear the retry count when enter recovery
+    write /proc/mtk_boot/ab_boot 1
+    # endif /* VENDOR_EDIT */
+
+on property:ro.debuggable=1
+    start console
+
+service console /system/bin/sh
+    class core
+    console
+    disabled
+    user root
+    group shell log readproc
+    seclabel u:r:shell:s0
+    setenv HOSTNAME console

@@ -1,0 +1,22 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			compatible = "mediatek,mt5896-bdma";
+			interrupt-parent = <0xffffffff>;
+			interrupts = <0x00 0x1f 0x04>;
+			reg = <0x00 0x1d004c00 0x00 0x200 0x00 0x1c207b64 0x00 0x10>;
+			mediatek,channel = "bdma_ch2";
+			status = "ok";
+		};
+	};
+
+	__fixups__ {
+		frc_bdma = "/fragment@0:target:0";
+		mtk_intc1_irq_high = "/fragment@0/__overlay__:interrupt-parent:0";
+	};
+};

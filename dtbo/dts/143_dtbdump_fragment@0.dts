@@ -1,0 +1,77 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+
+			hw_reserved_1 {
+				reg = <0x00 0x20000000 0x00 0x6000000>;
+				no-map;
+			};
+
+			hw_reserved_2 {
+				reg = <0x00 0x4bc00000 0x00 0x300000>;
+				no-map;
+			};
+
+			hw_reserved_3 {
+				reg = <0x00 0x4bf15000 0x00 0x50eb000>;
+				no-map;
+			};
+
+			default_cma {
+				compatible = "shared-dma-pool";
+				reg = <0x01 0x1fc00000 0x00 0x400000>;
+				reusable;
+				linux,cma-default;
+			};
+
+			nullmem_1 {
+				device_type = "mtk-nullmem";
+				reg = <0x00 0x3000000 0x00 0x10000000>;
+			};
+
+			reserved_local_dimming {
+				reg = <0x00 0x51800000 0x00 0x634000>;
+				reusable;
+				mediatek,mpu-nomap;
+			};
+
+			reserved_dummy_2 {
+				reg = <0x00 0x51e34000 0x00 0x1cc000>;
+				mediatek,mpu-nomap;
+			};
+
+			frc_dma_pool@frc0 {
+				compatible = "shared-dma-pool";
+				reg = <0x00 0x4bf00000 0x00 0x15000>;
+				no-map;
+			};
+
+			cma_23 {
+				compatible = "shared-dma-pool";
+				heap_name = "OTHERS_RETURN";
+				reg = <0x00 0x51000000 0x00 0x800000>;
+				reusable;
+			};
+
+			iommu_cma0@cma0 {
+				compatible = "shared-dma-pool";
+				reg = <0x00 0xb2c00000 0x00 0xa000000>;
+				reusable;
+			};
+
+			iommu_carveout@cv0 {
+				reg = <0x00 0x79400000 0x00 0x16000000>;
+				mediatek,mpu-map;
+			};
+		};
+	};
+
+	__fixups__ {
+		reserved_memory = "/fragment@0:target:0";
+	};
+};
