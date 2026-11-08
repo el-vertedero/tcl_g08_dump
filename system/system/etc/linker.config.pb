@@ -1,0 +1,13 @@
+
+/apex/com.android.i18n/lib
+/apex/com.android.i18n/lib64libaptX_encoder.solibaptXHD_encoder.solibpqtidl.so"libstagefright_bufferpool@2.0.1.solibMtkPhoto.solibandroid_runtime.solibmediandk.so
+libhwui.solibtcllinkerconfig.solibtvcamera.tcl.solibthal_hdmi.solibthal_tvinput.solibthal_display.solibthal_audio.solibhdmi2hera.tcl.solibhdmi2hera.tcl.solibmediawrapper.solibnativewindowwrap.solibc++_shared.0.1.so	liblog.solibuniplayer_android.solibsmbclient.solibgssapi_krb5.so
+libkrb5.solibk5crypto.solibcom_err.solibgnutls.solibc.so	libcap.solibz.solibdl.so	libpng.solibdng_sdk.so
+libjpeg.so
+libpiex.solibexpat.so	libft2.so
+libbase.solibcutils.solibutils.so	libgui.solibui.so	libEGL.solibGLESv2.solibvulkan.solibnativewindow.so
+libheif.so	libc++.solibm.solibstagefright.solibaudioclient.solibstagefright_foundation.solibaudioutils.solibbinder.solibmedia.solibmedia_codeclist.sovendor.tcl.ipel@1.0.solibhidlbase.solibcodecinspection.sofeature_engine_cc_lib.soheapprofd_client_api.solibGLESv1_CM.solibGLESv3.solibOpenMAXAL.solibOpenSLES.solibRS.solibaaudio.solibadbd_auth.solibadbd_fs.solibamidi.solibandroid.solibandroid_net.solibartpalette-system.solibbinder_ndk.solibbinder_rpc_unstable.solibcamera2ndk.solibcgrouprc.solibclang_rt.asan-arm-android.solibdl_android.solibincident.solibjnigraphics.solibmediametrics.so libneuralnetworks_packageinfo.solibselinux.solibstdc++.so
+libsync.solibvndksupport.so"libandroidicu.so"libdexfile.so"libdexfiled.so"	libicu.so"
+libjdwp.so"libnativebridge.so"libnativehelper.so"libnativeloader.so"libsigchain.so"	libpac.so"libbinder_rpc_unstable.so"libicui18n.so"libicuuc.so"libnetd_resolv.so"libnetd_updatable.so"libstatspull.so"libstatssocket.so"libadb_pairing_auth.so"libadb_pairing_connection.so"libadb_pairing_server.so"libtclaudioutils.so"libtclaudioflinger.so"&libtclaudiopolicyengineconfigurable.so"!libtclaudiopolicyenginedefault.so""libtclaudiopolicymanagerdefault.so"libtclaudiopolicyservice.so"libtclinputflingerimpl.so"libtclbootanimimpl.so"libgstreamer-1.0.so"libuniplayer.so"libgstvideo-1.0.so"libgstbase-1.0.so"libgio-2.0.so"libgobject-2.0.so"libgioopenssl.so"libdecoder.so"libdrm_agent.so"libsubtitleinterface.so"
+libintl.so"libglib-2.0.so"libmmdownload.so"libgmodule-2.0.so"
+libxml2.so"libgthread-2.0.so"libpango-1.0.so"libpangocairo-1.0.so"libdrm-decoder.so"libavfilter.so"libavutil.so"/libcom.android.tethering.connectivity_native.so"libneuralnetworks.so
