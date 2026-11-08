@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+<privapp-permissions package="com.mediatek.tis">
+        <permission name="android.permission.TV_INPUT_HARDWARE"/>
+        <permission name="android.permission.ACCESS_TV_TUNER"/>
+        <permission name="android.permission.ACCESS_TV_DESCRAMBLER"/>
+        <permission name="android.permission.TUNER_RESOURCE_ACCESS"/>
+        <permission name="android.permission.READ_CONTENT_RATING_SYSTEMS"/>
+        <permission name="android.permission.MODIFY_PARENTAL_CONTROLS"/>
+        <permission name="android.permission.INTERACT_ACROSS_USERS"/>
+        <permission name="android.permission.MANAGE_USERS"/>
+        <permission name="android.permission.HDMI_CEC"/>
+        <permission name="android.permission.SET_TIME"/>
+        <permission name="android.permission.SET_TIME_ZONE"/>
+    </privapp-permissions>
+</permissions>

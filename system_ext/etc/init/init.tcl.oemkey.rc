@@ -1,0 +1,10 @@
+service setoemkey1 /system_ext/bin/oemkey1
+    class main
+    user root
+    group root system
+    oneshot
+    seclabel u:r:oemkey:s0
+
+on property:ro.odm.tcl.oemkey1=*
+    setprop ro.oem.key1 ${ro.odm.tcl.oemkey1}
+

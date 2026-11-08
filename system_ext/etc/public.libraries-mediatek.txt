@@ -1,0 +1,2 @@
+# this is the public platform libraries available to the system_ext partition
+libMtkPhoto.mediatek.so

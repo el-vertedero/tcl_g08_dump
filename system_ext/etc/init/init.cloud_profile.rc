@@ -1,0 +1,8 @@
+# qiliang.zhao@tcl, 2021/03/23, add for cloud profile
+on post-fs-data
+    mkdir /data/tcl 0777 system system
+    mkdir /data/tcl/profiles 0777 system system
+    mkdir /data/tcl/profiles/sp_tmp 0777 system system
+    mkdir /data/tcl/profiles/up_tmp 0770 system system
+    mkdir /data/tcl/profiles/baseline_tmp 0777 system system
+    mkdir /data/tcl/profman 0777 system system

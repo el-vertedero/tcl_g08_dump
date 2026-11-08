@@ -1,0 +1,25 @@
+on boot
+    setprop sys.tcl.start_component_service ${persist.tcl.componentinfo.enable}
+
+on property:sys.tcl.start_component_service=true
+    start copy_component_version
+
+on property:persist.tcl.componentinfo.enable=true
+    start copy_component_version
+
+service tcl_component_service /system_ext/bin/tcl_component_service
+    interface aidl com.tcl.component.ITclComponentService/default
+    oneshot
+    disabled
+    class main
+    user root
+    group root system
+    seclabel u:r:tcl_component_service:s0
+
+service copy_component_version /system/bin/sh /system_ext/bin/copy_component_version.sh
+    class main
+    disabled
+    oneshot
+    user root
+    group root system
+    seclabel u:r:uncrypt:s0

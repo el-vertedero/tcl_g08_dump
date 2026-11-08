@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mds_test>
+    <element>
+		<available>0</available>
+		<host>auth-ctv.uat.digitaluk.co.uk</host>
+		<cert_url>https://auth-ctv.uat.digitaluk.co.uk</cert_url>
+		<port>443</port>
+		<type>PEM</type>
+		<certificate>fvp_c</certificate>
+		<key>fvp_k</key>
+	</element>	
+</mds_test>

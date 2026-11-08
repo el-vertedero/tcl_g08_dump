@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--motify by xinning.wei@tcl.com for boot jar system_ext motify system-->
+<permissions>
+    <library name="com.mediatek.mtkPhoto"
+            file="/system/framework/com.mediatek.mtkPhoto.jar"/>
+</permissions>

@@ -1,0 +1,14 @@
+
+service aiod /system_ext/bin/aiod
+    class early_hal
+    user root
+    group root
+    critical
+    seclabel u:r:aiod:s0
+
+on post-fs-data
+    mkdir /data/system/fcm 0777 system system
+    restorecon -r -v /data/system/fcm
+    #add for set feature status by adb
+    mkdir /data/system/feature 0777 system system
+    restorecon -r -v /data/system/feature

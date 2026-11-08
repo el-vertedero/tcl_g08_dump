@@ -1,0 +1,304 @@
+#copyright (C),2021-2030,Tcl Comm Corp., Ltd
+# VENDOR_EDIT,All rights reserved.
+#
+# FILE:-userlogkit.rc
+# Description:
+#    Define new service by init
+# ziqian1.liu@tcl.com, 2023/04/21, add for log tool
+on post-fs-data
+    mkdir /data/user_log 0755 root system
+    restorecon --recursive /data/user_log
+
+service UserLogService  /system/bin/sh /system_ext/bin/userlogkit.sh "UserLog"
+    class core
+    user root
+    group system root sdcard_rw everybody
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service UserDetectStorageService  /system/bin/sh /system_ext/bin/userlogkit.sh "UserDetectStorage"
+    class core
+    user root
+    group system root sdcard_rw everybody
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service UserDeleteAllLogService  /system/bin/sh /system_ext/bin/userlogkit.sh "UserDeleteAllLog"
+    class core
+    user root
+    group system root sdcard_rw everybody
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service UserNormalLogService /system/bin/sh /system_ext/bin/userlogkit.sh "UserNormalLog"
+    class core
+    user root
+    group system root
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service UserKmsgLogService /system/bin/sh /system_ext/bin/userlogkit.sh "UserKmsgLog"
+    class core
+    user root
+    group system root
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service UserKillUserklogcatService  /system/bin/sh /system_ext/bin/userlogkit.sh "UserKillUserklogcat"
+    class core
+    user root
+    group root
+    seclabel u:r:dumpstate:s0
+    disabled
+    oneshot
+
+service UserDumpSystemService /system/bin/sh /system_ext/bin/userlogkit.sh "UserDumpSystem"
+    class core
+    user root
+    group root system everybody shell
+    seclabel u:r:dumpstate:s0
+    disabled
+    oneshot
+
+service UserWifiLogService /system/bin/sh /system_ext/bin/userlogkit.sh "UserWifiLog"
+    class core
+    user root
+    group system root
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service UserStartDebugWifiService /system/bin/sh /system_ext/bin/userlogkit.sh "UserStartDebugWifi"
+    class core
+    user root
+    group root
+    seclabel u:r:dumpstate:s0
+    disabled
+    oneshot
+
+service UserStopDebugWifiService /system/bin/sh /system_ext/bin/userlogkit.sh "UserStopDebugWifi"
+    class core
+    user root
+    group root
+    seclabel u:r:dumpstate:s0
+    disabled
+    oneshot
+
+service UserStartIwprivWifiService /system/bin/sh /system_ext/bin/userlogkit.sh "UserStartIwprivWifi"
+    class core
+    user root
+    group root
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+
+service UserStopIwprivWifiService /system/bin/sh /system_ext/bin/userlogkit.sh "UserStopIwprivWifi"
+    class core
+    user root
+    group root
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+
+service StartUserPerformanceLogService /system/bin/sh /system_ext/bin/userlogkit.sh "StartUserPerformanceLog"
+    class core
+    user  system
+    group misc shell root everybody
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+
+service StopUserPerformanceLogService /system/bin/sh /system_ext/bin/userlogkit.sh "StopUserPerformanceLog"
+    class core
+    user  system
+    group misc shell root everybody
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+
+service UserMvPerformanceLogService /system/bin/sh /system_ext/bin/userlogkit.sh "UserMvPerformanceLog"
+    class core
+    user system
+    group misc root everybody system sdcard_rw
+    seclabel u:r:adbd:s0
+    disabled
+    oneshot
+
+service UserDisplayLogService /system/bin/sh /system_ext/bin/userlogkit.sh "UserDisplayLog"
+    class core
+    user shell
+    group shell log readproc
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+
+service UserMvDisplayLogService /system/bin/sh /system_ext/bin/userlogkit.sh "UserMvDisplayLog"
+    class core
+    user root
+    group root system everybody shell
+    seclabel u:r:dumpstate:s0
+    disabled
+    oneshot
+
+service UserHDMIInfoOnFinishService  /system/bin/sh /system_ext/bin/userlogkit.sh "UserHDMIInfoOnFinish"
+    class core
+    user root
+    group root system everybody shell
+    seclabel u:r:dumpstate:s0
+    disabled
+    oneshot
+
+service UserTcliInfoOnFinishService  /system/bin/sh /system_ext/bin/userlogkit.sh "UserTcliInfoOnFinish"
+    class core
+    user root
+    group system root shell everybody media_rw
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+
+service UserMvTcliInfoService /system/bin/sh /system_ext/bin/userlogkit.sh "UserMvTcliInfo"
+    class core
+    user root
+    group root system everybody shell
+    seclabel u:r:dumpstate:s0
+    disabled
+    oneshot
+
+service UserMvAudioLogService /system/bin/sh /system_ext/bin/userlogkit.sh "UserMvAudioLog"
+    class core
+    user root
+    group system  audioserver shell audio sdcard_rw
+    seclabel u:r:dumpstate:s0
+    disabled
+    oneshot
+
+service UserMvBluetoothLogService /system/bin/sh /system_ext/bin/userlogkit.sh "UserMvBluetoothLog"
+    class core
+    user system
+    group misc bluetooth system log net_bt_admin
+    seclabel u:r:dumpstate:s0
+    disabled
+    oneshot
+
+service  UserMvDTVLogService /system/bin/sh /system_ext/bin/userlogkit.sh "UserMvDTVLog"
+    class core
+    user system
+    group system root
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service UserInputPerformanceLogService  /system/bin/sh /system_ext/bin/userlogkit.sh "UserInputPerformanceLog"
+    class core
+    user root
+    group system root sdcard_rw everybody
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service StartUserInputPerformanceLogService /system/bin/sh /system_ext/bin/userlogkit.sh "StartUserInputPerformanceLog"
+    class core
+    user  system
+    group misc shell root everybody
+    seclabel u:r:shell:s0
+    disabled
+    oneshot
+
+service UserMvInputPerformanceLogService /system/bin/sh /system_ext/bin/userlogkit.sh "UserMvInputPerformanceLog"
+    class core
+    user system
+    group misc root everybody system sdcard_rw
+    seclabel u:r:adbd:s0
+    disabled
+    oneshot
+
+service StopAndTarLogService  /system/bin/sh /system_ext/bin/userlogkit.sh "StopAndTarLog"
+    class core
+    user root
+    group system root sdcard_rw everybody
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service PmodeUsbLogcatMain /system/bin/sh /system_ext/bin/userlogkit.sh "PmodeUsbLogcatMain"
+    class core
+    user root
+    group root system
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service PmodeUsbLogcatEvent /system/bin/sh /system_ext/bin/userlogkit.sh "PmodeUsbLogcatEvent"
+    class core
+    user root
+    group root system
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service PmodeUsbLogcatKernel /system/bin/sh /system_ext/bin/userlogkit.sh "PmodeUsbLogcatKernel"
+    class core
+    user root
+    group root system
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service PmodeWatchLogcat /system/bin/sh /system_ext/bin/userlogkit.sh "PmodeWatchLogcat"
+    class core
+    user root
+    group root system
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service PmodeUsbInitLog /system/bin/sh /system_ext/bin/userlogkit.sh "PmodeUsbInitLog"
+    class core
+    user root
+    group root system
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+service PmodeSetEnvironment /system/bin/sh /system_ext/bin/userlogkit.sh "PmodeSetEnvironment"
+    class core
+    user root
+    group root system
+    seclabel u:r:logkit_service:s0
+    disabled
+    oneshot
+
+on property:persist.sys.userlog_inputperformance_service=true
+    start UserInputPerformanceLogService
+
+on property:persist.sys.userlog_delete_all=true
+    start UserDeleteAllLogService
+
+on property:persist.sys.userlog=true
+    start UserLogService
+
+on property:persist.sys.userlog=false && property:persist.sys.userlogstatus="running"
+    start StopAndTarLogService
+
+on property:persist.sys.userlog=false && property:persist.sys.userlogstatus="err_2"
+    start StopAndTarLogService
+
+on property:persist.sys.userlog=false && property:persist.sys.userlogstatus="prepackaging"
+    start StopAndTarLogService
+
+on property:persist.sys.userlog=false && property:persist.sys.userlogstatus="packaging"
+    start StopAndTarLogService
+
+on property:persist.sys.usblog=true
+    start PmodeUsbInitLog
+
+on property:sys.boot_completed="1" && property:persist.sys.usblog=false
+    stop PmodeUsbLogcatMain
+    stop PmodeUsbLogcatEvent
+    stop PmodeUsbLogcatKernel
+    stop PmodeWatchLogcat

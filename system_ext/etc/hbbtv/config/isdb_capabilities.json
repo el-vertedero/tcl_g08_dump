@@ -1,0 +1,15 @@
+{
+"CASystem":"0005",
+"CASsystemAPI":"0005/1.0",
+"KeyGroup":"VCR",
+"BrowserResolution":"8K|4K|2K",
+"VideoElement":"MSE|201610|EME|201709",
+"Media":"1|2|3|4|6|7",
+"TLS":"1.2",
+"AudioElement":"SupportSimultaneousPlaying|video/x-arib2-broadcast|1|audio/X-arib-mp3|1|audio/X-arib-aiff|2|audio/X-arib-mpeg4-aac|1|audio/X-arib-aiff|1|audio/X-arib-romsound|1",
+"SimultaneousPlay":"arib2|video/x-arib2-broadcast|4K|60P|http|video/X-arib-avc|4K|60p|http|video/X-arib-avc|2K|30P",
+"Schedule":"SupportsScheduleToTuneWithUI|SupportsScheduleToRecordWithUI",
+"EventMessage":"NPT",
+"APIGroup":"sourceIs|dataEventIDUpdate",
+"InputDevice":"SupportEvent|keyboard|support|keyboard|available|mouse|support|mouse|available"
+}

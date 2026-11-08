@@ -1,0 +1,22 @@
+on property:service.bootanim.exit=1 && property:sys.tcl.bootanim.listenEnabled=true
+    start BootAnimStatusChangeService
+
+service BootAnimStatusChangeService  /system/bin/sh /system_ext/bin/sandmanhelper.sh "BootAnimStatusChange"
+  class core
+  user root
+  group root system everybody shell
+  seclabel u:r:shell:s0
+  disabled
+  oneshot
+
+service ServiceCopyDataAnr /system/bin/sh /system_ext/bin/sandmanhelper.sh "CopyDataAnr"
+  class core
+  user system
+  group root system sdcard_rw everybody
+  seclabel u:r:logkit_service:s0
+  disabled
+  oneshot
+
+on post-fs-data
+   setprop sys.tcl.bootanim.listenEnabled false
+   setprop sys.tcl.bootexit.statuschange false
