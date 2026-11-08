@@ -1,0 +1,4 @@
+service vendor-mediatek-hardware-tpc-1.0 /vendor/bin/hw/vendor.mediatek.hardware.tpc@1.0-service
+    class hal
+    user system
+    group system

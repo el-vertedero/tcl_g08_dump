@@ -1,0 +1,995 @@
+#!/vendor/bin/sh
+
+# ============================================================================
+# 原有日志功能代码（已注释，保留作为参考）
+# ============================================================================
+
+# #日志级别 debug-1, info-2, warn-3, error-4
+# LOG_LEVEL=2
+#
+# #如果日志大小超过上限，则保存旧日志，重新生成日志文件
+# FSIZE=50000000   
+#
+# #日志文件
+# LOG_PATH=/data/vendor/nova/NovaLog
+# LOG_FILE=$LOG_PATH/upgrade.log
+#
+# #判断备份目录是否存在
+# if [ ! -d $LOG_PATH ]; then
+#   mkdir -p $LOG_PATH
+#   touch $LOG_FILE
+# fi
+#
+# #判断文件是否存在
+# if [ ! -f $LOG_FILE ]; then
+#   touch $LOG_FILE
+# fi
+#
+# #判断文件大小
+# CURSIZE=$(cat $LOG_FILE | wc -c)
+#
+# if [ $FSIZE -lt $CURSIZE ]; then
+#   rm $LOG_FILE
+#   touch $LOG_FILE
+# fi 
+#
+# #调试日志
+# log_debug(){
+#   content="[DEBUG] $(date '+%Y-%m-%d %H:%M:%S') $@"
+#   [ $LOG_LEVEL -le 1  ] && echo -e "$content" >> $LOG_FILE && echo -e "$content" 
+# }
+# #信息日志
+# log_info(){
+#   content="[INFO] $(date '+%Y-%m-%d %H:%M:%S') $@"
+#   [ $LOG_LEVEL -le 2  ] && echo -e $content >> $LOG_FILE && echo -e "$content" 
+# }
+# #警告日志
+# log_warn(){
+#   content="[WARN] $(date '+%Y-%m-%d %H:%M:%S') $@"
+#   [ $LOG_LEVEL -le 3  ] && echo -e "$content" >> $LOG_FILE && echo -e "$content"
+# }
+# #错误日志
+# log_err(){
+#   content="[ERROR] $(date '+%Y-%m-%d %H:%M:%S') $@"
+#   [ $LOG_LEVEL -le 4  ] && echo -e "$content" >> $LOG_FILE && echo -e "$content" 
+# }
+
+# ============================================================================
+# U盘拷贝功能 - 升级日志保存到U盘方案
+# ============================================================================
+# 
+# 功能概述：
+#   1. 日志路径初始化确定：上电时扫描U盘，有U盘则使用U盘，无U盘则使用/tmp
+#   2. 路径固定不切换：一旦确定路径，即使中途插入U盘也不改变，日志继续写入原路径
+#   3. U盘拷贝功能：定期或手动将日志从当前路径拷贝到U盘（作为备份）
+#
+# 工作原理：
+#   - 脚本加载时初始化日志路径（仅执行一次）
+#   - 每次调用log_info/log_warn/log_err时，使用初始化时确定的路径写入
+#   - 如果上电时有U盘，日志写入U盘；如果上电时无U盘，日志写入/tmp（即使中途插入U盘也不切换）
+# ============================================================================
+
+# ============================================================================
+# 配置参数区域
+# ============================================================================
+
+# 日志文件路径变量（动态确定，由get_log_file_path()函数初始化）
+# 优先级：U盘 > 持久化路径(/data/vendor/nova/NovaLog) > /tmp
+LOG_FILE=""
+
+# 备用日志路径（无U盘时使用）
+# ⚠️ 注意：/tmp 是内存文件系统（tmpfs），断电后数据会丢失！
+# 建议：如需持久化，请设置 LOG_USE_PERSISTENT_FALLBACK=1
+FALLBACK_LOG_DIR="/tmp"
+FALLBACK_LOG_FILE="$FALLBACK_LOG_DIR/upgrade.log"
+
+# 持久化备用路径（可选，避免断电丢失日志）
+# 此路径存储在data分区，断电不会丢失数据
+PERSISTENT_LOG_DIR="/data/vendor/nova/NovaLog"
+PERSISTENT_LOG_FILE="$PERSISTENT_LOG_DIR/upgrade.log"
+
+# 日志路径配置
+LOG_USE_PERSISTENT_FALLBACK=0  # 无U盘时是否使用持久化路径（/data/vendor/nova/NovaLog）
+                               # 1=使用持久化路径（断电不丢失），0=使用/tmp（断电丢失）
+                               # 建议：如需断电保护，设置为1
+                               # 注意：日志路径在初始化时确定，中途插入U盘不会切换路径
+
+# U盘拷贝配置（用于备份功能，与日志实时写入是分开的）
+USB_COPY_ENABLED=1          # 是否启用U盘拷贝功能（守护进程模式）
+                             # 1=启用，0=禁用
+                             # 此功能用于定期将日志从备用路径拷贝到U盘作为备份
+USB_COPY_INTERVAL=60        # U盘拷贝检查间隔（秒）
+                             # 0=仅手动触发，不启动守护进程
+                             # >0=每N秒执行一次拷贝操作
+                             # 注意：这是拷贝备份功能，不是日志实时写入路径
+USB_COPY_WITH_TIMESTAMP=1   # 拷贝到U盘时，文件名是否添加时间戳
+                             # 1=是（格式：upgrade_YYYYMMDD_HHMMSS.log）
+                             # 0=否（固定文件名：upgrade.log）
+USB_COPY_RETRY_COUNT=2      # 每个U盘挂载点的拷贝重试次数
+                             # 如果拷贝失败，会重试指定次数后再尝试下一个U盘
+
+# ============================================================================
+# 核心功能函数实现
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# 函数名：is_mount_point_writable
+# 功能：检查挂载点是否可写（通过创建临时文件测试）
+# 参数：
+#   $1 - mount_point: 挂载点路径
+# 返回值：
+#   0 - 可写
+#   1 - 不可写（路径无效、不存在、或只读）
+# 说明：
+#   使用临时文件测试写权限，使用进程PID（$$）确保文件名唯一性
+#   这是判断U盘是否可用的关键函数
+# ----------------------------------------------------------------------------
+is_mount_point_writable() {
+    local mount_point="$1"
+    
+    # 参数验证：检查挂载点路径是否为空或不是目录
+    [ -z "$mount_point" ] && { echo false; return; }
+    [ ! -d "$mount_point" ] && { echo false; return; }
+    # 必须是真正的挂载点（避免把预置目录当作U盘）
+    if ! mount | awk '{print $3}' | grep -qx "$mount_point"; then
+        echo false
+        return
+    fi
+    
+    # 尝试创建临时文件来测试写权限
+    # $$ 是Shell内置变量，表示当前进程的PID（进程ID），用于确保文件名唯一性
+    # 例如：如果PID是12345，临时文件名为：.nova_usb_write_test_12345
+    local test_file="$mount_point/.nova_usb_write_test_$$"
+    
+    # 尝试创建临时文件（2>/dev/null 屏蔽错误输出）
+    if touch "$test_file" 2>/dev/null; then
+        # 创建成功，同步到磁盘确保文件真正写入
+        sync 2>/dev/null
+        # 删除临时测试文件
+        rm -f "$test_file" 2>/dev/null
+        echo true  # 可写
+        return
+    fi
+    
+    # 创建失败，说明挂载点不可写（可能是只读文件系统或权限不足）
+    echo false
+    return
+}
+
+# ----------------------------------------------------------------------------
+# 函数名：is_factory_mode
+# 功能：判断当前是否为工厂模式
+# 返回值：
+#   0 - 工厂模式（odm.tcl.factory.pmode == "1"）
+#   1 - 用户模式（属性不存在或值不为 "1"）
+# 说明：
+#   - 工厂模式：属性存在且值为 "1"
+#   - 用户模式：属性不存在或值不为 "1"
+# ----------------------------------------------------------------------------
+is_factory_mode() {
+    local pmode=$(getprop odm.tcl.factory.pmode 2>/dev/null)
+    if [ "$pmode" = "1" ]; then
+        return 0  # 工厂模式
+    else
+        return 1  # 用户模式
+    fi
+}
+
+# ----------------------------------------------------------------------------
+# 函数名：usb_has_nova_flag
+# 功能：检查U盘根目录是否存在 nova.txt 文件
+# 参数：
+#   $1 - mount_point: U盘挂载点路径
+# 返回值：
+#   0 - 存在 nova.txt
+#   1 - 不存在 nova.txt 或参数无效
+# 说明：
+#   - 仅在用户模式下使用此函数
+#   - 工厂模式下不检查 nova.txt
+# ----------------------------------------------------------------------------
+usb_has_nova_flag() {
+    local mount_point="$1"
+    [ -z "$mount_point" ] && return 1
+    [ -f "$mount_point/nova.txt" ] && return 0 || return 1
+}
+
+# ----------------------------------------------------------------------------
+# 函数名：should_enable_tmp_log_user_mode
+# 功能：检查用户模式下是否允许写 /tmp 日志
+# 返回值：
+#   0 - 允许写 /tmp（persist.sys.normallog == "true"）
+#   1 - 不允许写 /tmp（属性非 "true" 或未设置）
+# 说明：
+#   - 此函数仅在用户模式下使用
+#   - 工厂模式下不检查此属性
+# ----------------------------------------------------------------------------
+should_enable_tmp_log_user_mode() {
+    local normallog=$(getprop persist.sys.normallog 2>/dev/null)
+    if [ "$normallog" = "true" ]; then
+        return 0  # 允许写 /tmp
+    else
+        return 1  # 不允许写 /tmp
+    fi
+}
+
+# ----------------------------------------------------------------------------
+# 函数名：find_writable_usb_mount
+# 功能：查找可写U盘挂载点（封装 quick_scan_usb_mount_point）
+# 返回值：
+#   成功：返回U盘挂载点路径
+#   失败：返回空字符串
+# ----------------------------------------------------------------------------
+find_writable_usb_mount() {
+    quick_scan_usb_mount_point
+}
+
+# ----------------------------------------------------------------------------
+# 函数名：quick_scan_usb_mount_point
+# 功能：快速扫描USB挂载点，找到第一个可写的U盘（用于确定日志路径）
+# 特点：
+#   - 轻量级扫描，不输出日志（避免循环依赖）
+#   - 按优先级顺序扫描：优先常用路径，提高效率
+#   - 找到第一个可写U盘即返回，不继续扫描
+# 返回值：
+#   成功：返回U盘挂载点路径（如：/mnt/media_rw/ABCD-EFGH）
+#   失败：返回空字符串
+# 扫描优先级顺序：
+#   1. /mnt/media_rw/* (系统级挂载点，最常用)
+#   2. /mnt/vendor/public (MTK平台特定路径)
+#   3. /storage/usbotg* (MTK USB OTG路径)
+#   4. /storage/* (标准Android路径，排除emulated/self)
+#   5. /mnt/usb* (通用USB挂载点)
+# ----------------------------------------------------------------------------
+quick_scan_usb_mount_point() {
+    local mount_point=""
+    
+    # 方法2: 优先检查 /mnt/media_rw (系统级挂载点)
+    # 这是Android系统中最常用的USB存储挂载位置，优先检查可提高效率
+    if [ -d /mnt/media_rw ]; then
+        for dir in /mnt/media_rw/*; do
+            [ ! -d "$dir" ] && continue
+            if [ "$(is_mount_point_writable "$dir")" = "true" ]; then
+                mount_point="$dir"
+                break
+            fi
+        done
+    fi
+    
+    # 方法4: MTK平台特定路径 - /mnt/vendor/public
+    # 联发科MTK 9655平台特定的USB存储挂载点
+    if [ -z "$mount_point" ] && [ -d /mnt/vendor/public ]; then
+        if [ "$(is_mount_point_writable "/mnt/vendor/public")" = "true" ]; then
+            mount_point="/mnt/vendor/public"
+        fi
+    fi
+    
+    # 方法5: USB OTG路径
+    # MTK平台和某些设备的USB OTG设备挂载路径
+    if [ -z "$mount_point" ] && [ -d /storage ]; then
+        # 通配符匹配：usbotg0, usbotg1, USBOTG0等
+        for dir in /storage/usbotg* /storage/USBOTG*; do
+            [ ! -d "$dir" ] && continue
+            if [ "$(is_mount_point_writable "$dir")" = "true" ]; then
+                mount_point="$dir"
+                break  # 找到即退出循环
+            fi
+        done
+    fi
+    
+    # 方法1: 扫描 /storage 目录（标准Android路径）
+    # Android 11的Storage Access Framework路径，格式：/storage/XXXX-XXXX
+    if [ -z "$mount_point" ] && [ -d /storage ]; then
+        for dir in /storage/*; do
+            [ ! -d "$dir" ] && continue
+            
+            # 排除内部存储和系统目录（这些不是USB设备）
+            case "$dir" in
+                */emulated|*/self|*/USB*)
+                    continue  # 跳过这些目录
+                    ;;
+            esac
+            
+            # 检查该目录是否是一个挂载点
+            if mount | grep -q "$dir "; then
+                # 从mount输出中提取设备路径（例如：/dev/block/sda1）
+                local device=$(mount | grep -E "$dir " | awk '{print $1}')
+                if [ -n "$device" ]; then
+                    # 检查设备路径是否包含USB相关关键词
+                    # usb: USB设备标识
+                    # sd[a-z]: SCSI/SD卡设备标识（sda, sdb等）
+                    # vold: Android Volume Daemon管理的设备（MTK平台常用）
+                    if echo "$device" | grep -qi "usb\|sd[a-z]\|vold"; then
+                        # 确认是USB设备后，检查是否可写
+                        if [ "$(is_mount_point_writable "$dir")" = "true" ]; then
+                            mount_point="$dir"
+                            break  # 找到可写U盘即退出
+                        fi
+                    fi
+                fi
+            fi
+        done
+    fi
+    
+    # 方法3: 扫描 /mnt/usb*（某些设备的直接挂载点）
+    # 通用USB挂载点，部分设备可能使用此路径
+    if [ -z "$mount_point" ] && [ -d /mnt ]; then
+        for dir in /mnt/usb* /mnt/USB*; do
+            [ ! -d "$dir" ] && continue
+            if [ "$(is_mount_point_writable "$dir")" = "true" ]; then
+                mount_point="$dir"
+                break
+            fi
+        done
+    fi
+    
+    # 方法6: 检查 UDISK 分区（mmcblk0p28）- StartManage 特定路径
+    if [ -z "$mount_point" ]; then
+        local udisk_mount=$(mount | grep "mmcblk0p28" | awk '{print $3}')
+        if [ -n "$udisk_mount" ] && [ -d "$udisk_mount" ]; then
+            if [ "$(is_mount_point_writable "$udisk_mount")" = "true" ]; then
+                mount_point="$udisk_mount"
+            fi
+        fi
+    fi
+    
+    # 方法7: 检查 /sdcard/UDISK（特定平台路径）
+    if [ -z "$mount_point" ] && [ -d /sdcard/UDISK ]; then
+        if mount | grep -q "/sdcard/UDISK"; then
+            if [ "$(is_mount_point_writable "/sdcard/UDISK")" = "true" ]; then
+                mount_point="/sdcard/UDISK"
+            fi
+        fi
+    fi
+    
+    # 返回找到的第一个可写U盘挂载点（如果找到），否则返回空字符串
+    echo "$mount_point"
+}
+
+# ----------------------------------------------------------------------------
+# 函数名：get_log_file_path
+# 功能：初始化日志文件路径（仅在脚本加载时执行一次，不动态切换）
+# 返回值：
+#   返回日志文件的完整路径（如：/mnt/media_rw/ABCD/upgrade.log 或 /tmp/upgrade.log）
+#   或空字符串（用户模式禁止日志时）
+# 工作流程：
+#   1. 判断工厂模式/用户模式
+#   2. 工厂模式：有U盘用U盘，无U盘用/tmp
+#   3. 用户模式：U盘+nova.txt用U盘，否则检查persist.sys.normallog
+#   4. 一旦确定路径，不再改变（即使中途插入U盘也不切换）
+# 说明：
+#   - 此函数只在脚本初始化时调用一次
+#   - 后续所有日志写入都使用初始化时确定的路径
+#   - 中途插入U盘不会改变日志路径
+# ----------------------------------------------------------------------------
+get_log_file_path() {
+    local result_path=""
+    
+    # 判断工厂模式/用户模式
+    if is_factory_mode; then
+        # ========== 工厂模式分支 ==========
+        # 扫描可写U盘
+        local usb_mount=$(find_writable_usb_mount)
+        if [ -n "$usb_mount" ]; then
+            # 有U盘：使用U盘路径
+            result_path="$usb_mount/upgrade.log"
+        else
+            # 无U盘：使用 /tmp 路径
+            [ ! -d "$FALLBACK_LOG_DIR" ] && mkdir -p "$FALLBACK_LOG_DIR" 2>/dev/null || true
+            result_path="$FALLBACK_LOG_FILE"
+        fi
+    else
+        # ========== 用户模式分支 ==========
+        # 扫描可写U盘
+        local usb_mount=$(find_writable_usb_mount)
+        if [ -n "$usb_mount" ] && usb_has_nova_flag "$usb_mount"; then
+            # 有U盘 + nova.txt：使用U盘路径
+            result_path="$usb_mount/upgrade.log"
+        else
+            # 无U盘或无nova.txt：检查 persist.sys.normallog
+            if should_enable_tmp_log_user_mode; then
+                # persist.sys.normallog == true：允许写 /tmp
+                [ ! -d "$FALLBACK_LOG_DIR" ] && mkdir -p "$FALLBACK_LOG_DIR" 2>/dev/null || true
+                result_path="$FALLBACK_LOG_FILE"
+            else
+                # persist.sys.normallog != true：不写日志（返回空字符串）
+                result_path=""
+            fi
+        fi
+    fi
+
+    echo "$result_path"
+}
+
+# ----------------------------------------------------------------------------
+# 函数名：get_current_log_file
+# 功能：获取当前日志文件路径（固定路径，不动态切换）
+# 说明：
+#   - 如果LOG_FILE变量未初始化，调用get_log_file_path()初始化一次
+#   - 后续调用直接返回已确定的路径，不再重新扫描U盘
+#   - 即使中途插入U盘，路径也不会改变
+# 返回值：日志文件的完整路径
+# ----------------------------------------------------------------------------
+get_current_log_file() {
+    # 如果LOG_FILE未初始化，初始化一次（仅在脚本加载时）
+    if [ -z "$LOG_FILE" ]; then
+        LOG_FILE=$(get_log_file_path)
+    fi
+    # 直接返回已确定的路径，不再动态切换
+    echo "$LOG_FILE"
+}
+
+# ----------------------------------------------------------------------------
+# 函数名：refresh_log_file_path
+# 功能：刷新日志文件路径（已废弃，不再动态切换）
+# 说明：
+#   - 此函数保留以兼容旧代码，但不再执行任何操作
+#   - 日志路径在初始化时确定后不再改变
+# ----------------------------------------------------------------------------
+refresh_log_file_path() {
+    LOG_FILE=$(get_log_file_path)
+    echo "$LOG_FILE"
+}
+
+# ============================================================================
+# 日志输出函数（使用动态日志路径）
+# ============================================================================
+# 说明：
+#   - 所有日志函数都会自动获取当前日志路径（优先U盘）
+#   - 日志实时写入，每次调用立即写入文件
+#   - 格式：[级别] 时间戳 消息内容
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# 函数名：log_info
+# 功能：输出信息级别日志
+# 参数：$@ - 日志消息内容
+# 行为：
+#   1. 获取当前日志路径（可能指向U盘或备用路径）
+#   2. 格式化日志：添加[INFO]前缀和时间戳
+#   3. 写入日志文件并同时输出到标准输出
+# ----------------------------------------------------------------------------
+log_info() {
+    local log_path=$(get_current_log_file)
+    content="[INFO] $(date '+%Y-%m-%d %H:%M:%S') $@"
+    # 如果路径为空（用户模式禁止日志），只输出到控制台
+    if [ -n "$log_path" ]; then
+        echo -e "$content" >> "$log_path" && echo -e "$content"
+    else
+        echo -e "$content"
+    fi
+}
+
+# ----------------------------------------------------------------------------
+# 函数名：log_warn
+# 功能：输出警告级别日志
+# 参数：$@ - 日志消息内容
+# ----------------------------------------------------------------------------
+log_warn() {
+    local log_path=$(get_current_log_file)
+    content="[WARN] $(date '+%Y-%m-%d %H:%M:%S') $@"
+    # 如果路径为空（用户模式禁止日志），只输出到控制台
+    if [ -n "$log_path" ]; then
+        echo -e "$content" >> "$log_path" && echo -e "$content"
+    else
+        echo -e "$content"
+    fi
+}
+
+# ----------------------------------------------------------------------------
+# 函数名：log_err
+# 功能：输出错误级别日志
+# 参数：$@ - 日志消息内容
+# ----------------------------------------------------------------------------
+log_err() {
+    local log_path=$(get_current_log_file)
+    content="[ERROR] $(date '+%Y-%m-%d %H:%M:%S') $@"
+    # 如果路径为空（用户模式禁止日志），只输出到控制台
+    if [ -n "$log_path" ]; then
+        echo -e "$content" >> "$log_path" && echo -e "$content"
+    else
+        echo -e "$content"
+    fi
+}
+
+# ============================================================================
+# U盘拷贝核心功能实现
+# ============================================================================
+# 说明：
+#   这是日志备份功能，与日志实时写入是分开的
+#   用途：将日志从备用路径（/tmp或/data）定期拷贝到U盘作为备份
+#   注意：如果日志已经在U盘中，此功能会跳过拷贝
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# 函数名：scan_usb_mount_points
+# 功能：扫描所有可能的USB存储挂载点（完整扫描，用于拷贝功能）
+# 与quick_scan_usb_mount_point的区别：
+#   - 本函数扫描所有挂载点（不返回即退出）
+#   - 输出详细日志，便于调试
+#   - 使用6种方法全面扫描，确保不遗漏
+# 返回值：
+#   返回所有找到的USB挂载点列表（空格分隔，已去重）
+# Android 11中U盘可能挂载在以下位置：
+#   1. /storage/XXXX-XXXX (Storage Access Framework标准路径)
+#   2. /mnt/media_rw/XXXX-XXXX (系统级直接挂载点)
+#   3. /mnt/usb* (某些设备的直接挂载点)
+#   4. /mnt/vendor/public (MTK平台特定路径)
+#   5. /storage/usbotg* (MTK USB OTG路径)
+#   6. 从/proc/mounts解析的USB设备
+# ----------------------------------------------------------------------------
+scan_usb_mount_points() {
+    local mount_points=""
+    
+    # 注意：这里可能会触发日志写入，需要先初始化日志路径
+    if [ -z "$LOG_FILE" ]; then
+        LOG_FILE=$(get_log_file_path)
+    fi
+    
+    log_info "Starting USB mount point scan..."
+    
+    # 方法1: 扫描 /storage 目录，排除emulated和self
+    if [ -d /storage ]; then
+        for dir in /storage/*; do
+            [ ! -d "$dir" ] && continue
+            # 排除内部存储和系统目录
+            case "$dir" in
+                */emulated|*/self|*/USB*)
+                    continue
+                    ;;
+            esac
+            # 检查是否是USB存储设备（通过挂载信息判断）
+            if mount | grep -q "$dir "; then
+                local device=$(mount | grep -E "$dir " | awk '{print $1}')
+                if [ -n "$device" ]; then
+                    # 检查设备路径是否包含usb或sd
+                    if echo "$device" | grep -qi "usb\|sd[a-z]\|vold"; then
+                        mount_points="$mount_points $dir"
+                        log_info "Found mount point (Method 1): $dir (Device: $device)"
+                    fi
+                fi
+            fi
+        done
+    fi
+    
+    # 方法2: 扫描 /mnt/media_rw (系统级挂载点，需要系统权限)
+    if [ -d /mnt/media_rw ]; then
+        for dir in /mnt/media_rw/*; do
+            [ ! -d "$dir" ] && continue
+            mount_points="$mount_points $dir"
+            log_info "Found mount point (Method 2): $dir"
+        done
+    fi
+    
+    # 方法3: 扫描 /mnt/usb* (某些设备的直接挂载点)
+    if [ -d /mnt ]; then
+        for dir in /mnt/usb* /mnt/USB*; do
+            [ ! -d "$dir" ] && continue
+            mount_points="$mount_points $dir"
+            log_info "Found mount point (Method 3): $dir"
+        done
+    fi
+    
+    # 方法4: MTK平台特定路径 - /mnt/vendor/public
+    if [ -d /mnt/vendor/public ]; then
+        mount_points="$mount_points /mnt/vendor/public"
+        log_info "Found mount point (Method 4 - MTK): /mnt/vendor/public"
+    fi
+    
+    # 方法5: 扫描 /storage/usbotg* (MTK/某些平台的USB OTG路径)
+    if [ -d /storage ]; then
+        for dir in /storage/usbotg* /storage/USBOTG*; do
+            [ ! -d "$dir" ] && continue
+            mount_points="$mount_points $dir"
+            log_info "Found mount point (Method 5 - USB OTG): $dir"
+        done
+    fi
+    
+    # 方法6: 从 /proc/mounts 解析查找USB设备
+    if [ -r /proc/mounts ]; then
+        local usb_mounts=$(cat /proc/mounts 2>/dev/null | grep -E "/storage/|/mnt/media_rw/|/mnt/usb|/mnt/vendor/public|/storage/usbotg" | \
+            grep -vE "emulated|self" | awk '{print $2}')
+        if [ -n "$usb_mounts" ]; then
+            for mount in $usb_mounts; do
+                if [ -d "$mount" ]; then
+                    mount_points="$mount_points $mount"
+                fi
+            done
+        fi
+    fi
+    
+    # 去重并返回
+    local unique_points=$(echo "$mount_points" | tr ' ' '\n' | sort -u | grep -v "^$")
+    
+    if [ -z "$unique_points" ]; then
+        log_warn "No USB mount points found"
+    else
+        local point_count=$(echo "$unique_points" | wc -l)
+        log_info "Found $point_count mount point(s)"
+    fi
+    
+    echo "$unique_points"
+}
+
+# ----------------------------------------------------------------------------
+# 函数名：check_available_space
+# 功能：检查挂载点可用空间是否足够拷贝文件
+# 参数：
+#   $1 - mount_point: 挂载点路径
+#   $2 - file_size: 源文件大小（字节）
+# 返回值：
+#   0 - 空间足够
+#   1 - 空间不足或参数无效
+# 说明：
+#   - 预留1MB额外空间，防止拷贝失败
+#   - 使用df命令获取实际可用空间（以KB为单位）
+#   - 比较可用空间与（文件大小+预留空间）
+# ----------------------------------------------------------------------------
+check_available_space() {
+    local mount_point="$1"
+    local file_size="$2"
+    local reserve_kb=1024  # 预留1MB额外空间（防止拷贝过程中空间不足）
+    
+    # 参数验证
+    [ -z "$mount_point" ] && { echo false; return; }
+    
+    # 使用 df -Pk 命令获取可用空间（KB）
+    # -P: 使用POSIX格式输出（便于解析）
+    # -k: 以KB为单位显示
+    # tail -1: 取最后一行（实际挂载点信息）
+    # awk '{print $4}': 提取第4列（可用空间）
+    local avail_kb=$(df -Pk "$mount_point" 2>/dev/null | tail -1 | awk '{print $4}')
+    
+    # 计算所需空间：文件大小（转换为KB）+ 预留空间
+    local need_kb=$((file_size / 1024 + reserve_kb))
+    
+    # 比较可用空间与所需空间
+    if [ -n "$avail_kb" ] && [ "$avail_kb" -gt "$need_kb" ]; then
+        echo true  # 空间足够
+        return
+    fi
+    echo false   # 空间不足
+    return
+}
+
+# ----------------------------------------------------------------------------
+# 函数名：safe_copy_to_usb
+# 功能：安全拷贝文件到U盘（使用临时文件+原子重命名确保数据一致性）
+# 参数：
+#   $1 - src_file: 源文件完整路径
+#   $2 - dst_dir: 目标目录路径
+#   $3 - dst_name: 目标文件名
+# 返回值：
+#   0 - 拷贝成功
+#   1 - 拷贝失败（源文件不存在、目标目录无效、拷贝失败、校验失败等）
+# 安全机制：
+#   1. 先拷贝到临时文件（.文件名.tmp），避免直接覆盖损坏目标文件
+#   2. 同步到磁盘（sync），确保数据真正写入存储设备
+#   3. 验证文件大小，确保拷贝完整
+#   4. 原子重命名（mv），一次性完成替换，避免部分写入
+#   5. 最终再次验证目标文件大小
+# 优点：
+#   - 即使拷贝过程中断电，原文件不会损坏（临时文件可以删除）
+#   - 文件大小校验确保数据完整性
+#   - 原子操作确保文件要么完整写入，要么不存在（不会出现损坏文件）
+# ----------------------------------------------------------------------------
+safe_copy_to_usb() {
+    local src_file="$1"
+    local dst_dir="$2"
+    local dst_name="$3"
+    # 构造临时文件和目标文件路径
+    # 临时文件：.文件名.tmp（隐藏文件，避免冲突）
+    # 例如：目标文件是upgrade.log，临时文件是.upgrade.log.tmp
+    local tmp_file="$dst_dir/.${dst_name}.tmp"
+    local dst_file="$dst_dir/$dst_name"
+    
+    # 参数验证：检查源文件和目标目录是否存在
+    [ ! -f "$src_file" ] && { echo fail; return; }
+    [ ! -d "$dst_dir" ] && { echo fail; return; }
+    
+    # 步骤1：拷贝到临时文件
+    # -f: 强制覆盖（如果临时文件已存在）
+    # 2>/dev/null: 屏蔽错误输出
+    if ! cp -f "$src_file" "$tmp_file" 2>/dev/null; then
+        log_err "USB copy failed: Cannot write to temporary file $tmp_file"
+        rm -f "$tmp_file" 2>/dev/null
+        echo fail
+        return
+    fi
+    
+    # 步骤2：同步到磁盘
+    # sync命令确保所有缓冲区数据写入物理存储设备
+    # 这对U盘等可移动设备很重要，防止数据仍在缓冲区中
+    sync 2>/dev/null
+    
+    # 步骤3：验证临时文件大小（确保拷贝完整）
+    # stat -c%s: 获取文件大小（字节）
+    local src_size=$(stat -c%s "$src_file" 2>/dev/null)
+    local tmp_size=$(stat -c%s "$tmp_file" 2>/dev/null)
+    if [ "$src_size" != "$tmp_size" ]; then
+        log_err "USB copy failed: File size mismatch (Source:${src_size} Temp:${tmp_size})"
+        rm -f "$tmp_file" 2>/dev/null
+        echo fail
+        return
+    fi
+    
+    # 步骤4：原子重命名（mv命令是原子操作）
+    # 这是关键步骤：一次性完成文件替换，避免部分写入
+    # -f: 强制覆盖（如果目标文件已存在）
+    if ! mv -f "$tmp_file" "$dst_file" 2>/dev/null; then
+        log_err "USB copy failed: Cannot rename to target file $dst_file"
+        rm -f "$tmp_file" 2>/dev/null
+        echo fail
+        return
+    fi
+    
+    # 步骤5：最终同步
+    # 再次同步，确保重命名后的文件已真正写入
+    sync 2>/dev/null
+    
+    # 步骤6：再次验证目标文件大小（双重保险）
+    local dst_size=$(stat -c%s "$dst_file" 2>/dev/null)
+    if [ "$src_size" != "$dst_size" ]; then
+        log_err "USB copy failed: Target file size verification failed"
+        rm -f "$dst_file" 2>/dev/null
+        echo fail
+        return
+    fi
+    
+    # 所有步骤成功，返回成功
+    echo ok
+    return
+}
+
+# ----------------------------------------------------------------------------
+# 函数名：copy_upgrade_log_to_usb
+# 功能：拷贝升级日志到U盘（主函数，封装完整的拷贝流程）
+# 说明：
+#   这是U盘拷贝备份功能的主函数，用于将日志从备用路径拷贝到U盘
+#   与日志实时写入是分开的机制：
+#     - 日志实时写入：优先写入U盘，无U盘时写入备用路径
+#     - 拷贝备份功能：定期将备用路径中的日志拷贝到U盘作为备份
+# 工作流程：
+#   1. 刷新日志路径，确保使用最新路径
+#   2. 检查功能是否启用
+#   3. 检查日志是否已在U盘中（如果是，跳过拷贝）
+#   4. 检查源文件是否存在且非空
+#   5. 生成目标文件名（带或不带时间戳）
+#   6. 扫描所有U盘挂载点
+#   7. 遍历挂载点，找到第一个可写且空间充足的进行拷贝
+#   8. 拷贝失败时重试，或尝试下一个挂载点
+# 返回值：
+#   0 - 拷贝成功
+#   1 - 拷贝失败（功能未启用、文件不存在、所有U盘失败等）
+# ----------------------------------------------------------------------------
+copy_upgrade_log_to_usb() {
+    # 获取当前日志文件路径（固定路径，不动态切换）
+    local current_log_file=$(get_current_log_file)
+    
+    log_info "========== USB Copy Task Started =========="
+    
+    # 检查功能是否启用
+    if [ "$USB_COPY_ENABLED" != "1" ]; then
+        log_info "USB copy function is disabled, skipping"
+        COPY_RESULT=0
+    fi
+    
+    # 检查：如果日志已经在U盘中，不需要拷贝（避免重复拷贝）
+    # dirname命令提取目录路径（去掉文件名）
+    # 例如：/mnt/media_rw/ABCD/upgrade.log -> /mnt/media_rw/ABCD
+    local log_dir=$(dirname "$current_log_file")
+    
+    # 判断目录是否是U盘挂载点（使用正则表达式匹配常见U盘路径模式）
+    # /mnt/media_rw: 系统级USB挂载点
+    # /mnt/vendor/public: MTK平台USB挂载点
+    # /storage/usbotg*: MTK USB OTG路径
+    # /storage/.*-[0-9A-F]{4}: Android标准USB路径格式（如：/storage/ABCD-EFGH）
+    if echo "$log_dir" | grep -qE "/mnt/media_rw|/mnt/vendor/public|/storage/usbotg|/storage/.*-[0-9A-F]{4}"; then
+        log_info "Log file is already on USB drive: $current_log_file, skipping copy"
+        COPY_RESULT=0
+        # 不返回，继续走到结尾设置结果
+    fi
+    
+    # 检查源文件是否存在
+    if [ ! -f "$current_log_file" ]; then
+        log_err "Source log file does not exist: $current_log_file"
+        COPY_RESULT=1
+    fi
+    
+    # 检查源文件大小
+    local src_size=$(stat -c%s "$current_log_file" 2>/dev/null)
+    if [ -z "$src_size" ] || [ "$src_size" -eq 0 ]; then
+        log_warn "Source log file is empty or unreadable, skipping copy"
+        COPY_RESULT=1
+    fi
+    
+    log_info "Source file: $current_log_file (Size: ${src_size} bytes)"
+    
+    # 生成目标文件名
+    local base_name="upgrade.log"
+    if [ "$USB_COPY_WITH_TIMESTAMP" = "1" ]; then
+        local timestamp=$(date +%Y%m%d_%H%M%S)
+        base_name="upgrade_${timestamp}.log"
+        log_info "Using timestamp filename: $base_name"
+    else
+        log_info "Using default filename: $base_name"
+    fi
+    
+    # 扫描U盘挂载点
+    local mount_points=$(scan_usb_mount_points)
+    if [ -z "$mount_points" ]; then
+        log_err "No available USB mount points found"
+        COPY_RESULT=1
+    fi
+    
+    # 遍历每个挂载点，找到第一个可用的进行拷贝
+    # 策略：按顺序检查每个U盘，找到第一个可写且空间充足的即停止
+    local success=0          # 拷贝成功标志
+    local mount_count=0     # 已检查的挂载点计数
+    for mount_point in $mount_points; do
+        mount_count=$((mount_count + 1))
+        log_info "---------- Checking mount point #${mount_count}: $mount_point ----------"
+        
+        # 检查挂载点是否存在且为目录
+        if [ ! -d "$mount_point" ]; then
+            log_warn "Mount point is not a valid directory: $mount_point"
+            continue
+        fi
+        
+        # 检查可写性
+        log_info "Checking mount point writability..."
+        if [ "$(is_mount_point_writable "$mount_point")" != "true" ]; then
+            log_warn "Mount point is not writable: $mount_point (may be read-only filesystem)"
+            continue
+        fi
+        log_info "✓ Mount point is writable"
+        
+        # 检查空间
+        log_info "Checking available space..."
+        if [ "$(check_available_space "$mount_point" "$src_size")" != "true" ]; then
+            log_warn "Mount point has insufficient space: $mount_point"
+            continue
+        fi
+        log_info "✓ Sufficient space available"
+        
+        # 尝试拷贝（带重试机制）
+        # 重试可以提高成功率（应对U盘临时故障、IO错误等）
+        log_info "Starting file copy to: $mount_point/$base_name"
+        local retry=0
+        while [ $retry -lt $USB_COPY_RETRY_COUNT ]; do
+            # 调用安全拷贝函数
+            if [ "$(safe_copy_to_usb "$current_log_file" "$mount_point" "$base_name")" = "ok" ]; then
+                # 拷贝成功
+                log_info "✓✓✓ Copy successful! ✓✓✓"
+                log_info "Target file: $mount_point/$base_name"
+                log_info "File size: ${src_size} bytes"
+                success=1
+                break  # 跳出重试循环
+            else
+                # 拷贝失败，准备重试
+                retry=$((retry + 1))
+                if [ $retry -lt $USB_COPY_RETRY_COUNT ]; then
+                    # 还有重试机会，等待1秒后重试（避免频繁IO）
+                    log_warn "Copy failed, retry $retry of $USB_COPY_RETRY_COUNT..."
+                    sleep 1
+                fi
+                # 如果重试次数已用完，会继续循环，尝试下一个挂载点
+            fi
+        done
+        
+        if [ "$success" = "1" ]; then
+            break
+        else
+            log_err "Mount point $mount_point copy failed, trying next mount point"
+        fi
+    done
+    
+    if [ "$success" = "1" ]; then
+        log_info "========== USB Copy Task Completed (Success) =========="
+        COPY_RESULT=0
+    else
+        log_err "========== USB Copy Task Failed =========="
+        log_err "All $mount_count mount point(s) attempted, all failed"
+        COPY_RESULT=1
+    fi
+}
+
+# ----------------------------------------------------------------------------
+# 函数名：usb_copy_daemon
+# 功能：U盘拷贝守护进程模式（周期性自动拷贝）
+# 说明：
+#   以守护进程方式运行，定期执行拷贝操作
+#   可以通过init.rc配置为系统服务，开机自启动
+# 运行条件：
+#   - USB_COPY_ENABLED=1（功能已启用）
+#   - USB_COPY_INTERVAL>0（间隔时间不为0）
+# 行为：
+#   - 每USB_COPY_INTERVAL秒执行一次拷贝操作
+#   - 无限循环运行，直到进程被终止
+# ----------------------------------------------------------------------------
+usb_copy_daemon() {
+    # 检查功能是否启用
+    if [ "$USB_COPY_ENABLED" != "1" ]; then
+        log_info "USB copy daemon: disabled, not starting"
+        COPY_DAEMON_STARTED=0
+        return
+    fi
+    # 检查间隔时间是否有效（0表示仅手动触发，不启动守护进程）
+    if [ "$USB_COPY_INTERVAL" = "0" ]; then
+        log_info "USB copy daemon: interval=0, not starting"
+        COPY_DAEMON_STARTED=0
+        return
+    fi
+    
+    log_info "USB copy daemon: Started, check interval ${USB_COPY_INTERVAL} seconds"
+    
+    # 守护进程主循环：定期执行拷贝操作
+    while true; do
+        # 等待指定间隔时间
+        sleep $USB_COPY_INTERVAL
+        # 执行拷贝操作
+        copy_upgrade_log_to_usb
+    done
+}
+
+# ============================================================================
+# 主程序入口
+# ============================================================================
+# 说明：
+#   脚本有两种使用方式：
+#   1. source方式：被其他脚本source引入，使用日志函数（如：source /vendor/bin/NovaLog）
+#   2. 直接执行：作为独立脚本执行，支持命令行参数
+# ============================================================================
+
+# 初始化日志路径（脚本加载时立即确定日志写入位置）
+# 这确保后续所有日志输出都能使用正确的路径
+LOG_FILE=$(get_log_file_path)
+
+# 如果脚本被直接执行（非source方式），根据参数执行相应功能
+# ${0##*/} 提取脚本名称（去掉路径，只保留文件名）
+# 判断是否是直接执行：如果脚本名称是"NovaLog"，说明是直接执行
+if [ "${0##*/}" = "NovaLog" ]; then
+    # 根据命令行参数执行相应功能
+    case "$1" in
+        copy_usb|copy-usb|copy)
+            # 命令：手动触发U盘拷贝
+            # 用途：立即执行一次拷贝操作，不等待定时器
+            # 示例：/vendor/bin/NovaLog copy_usb
+            copy_upgrade_log_to_usb
+            # 不退出进程，仅记录结果变量（0=成功，1=失败）
+            : # noop
+            ;;
+        daemon)
+            # 命令：启动守护进程模式（周期性自动拷贝）
+            # 用途：以守护进程方式运行，定期执行拷贝操作
+            # 示例：/vendor/bin/NovaLog daemon
+            # 可以在init.rc中配置为系统服务
+
+            # 获取当前日志路径（固定路径，不动态切换）
+            log_info "Starting USB copy daemon mode"
+
+            # 如果功能关闭或间隔为0，仅记录日志并不启动循环
+            if [ "$USB_COPY_ENABLED" != "1" ]; then
+                log_warn "USB copy function is disabled, daemon not started"
+            elif [ "$USB_COPY_INTERVAL" = "0" ]; then
+                log_warn "Copy interval is set to 0, daemon not started"
+            else
+                log_info "Check interval: ${USB_COPY_INTERVAL} seconds"
+                # 交给封装函数运行守护循环
+                usb_copy_daemon
+            fi
+            ;;
+        *)
+            # 默认行为：无参数时自动进入daemon模式（如果功能启用且间隔>0）
+            if [ "$USB_COPY_ENABLED" = "1" ] && [ "$USB_COPY_INTERVAL" != "0" ]; then
+                log_info "No args: auto start daemon (interval=${USB_COPY_INTERVAL}s)"
+                usb_copy_daemon
+            else
+                log_warn "No args: daemon not started (USB_COPY_ENABLED=${USB_COPY_ENABLED}, USB_COPY_INTERVAL=${USB_COPY_INTERVAL})"
+                # 不退出，保持脚本常驻由上层管理
+            fi
+            ;;
+    esac
+fi
+
+# 注意：如果是source方式使用（被其他脚本引入），脚本不会执行case语句
+# 只会初始化LOG_FILE变量和定义函数，供调用方使用

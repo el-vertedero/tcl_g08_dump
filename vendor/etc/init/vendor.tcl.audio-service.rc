@@ -1,0 +1,4 @@
+service tcl_audio_aidl_service /vendor/bin/hw/vendor.tcl.audio-service
+    class hal
+    user system
+    group system

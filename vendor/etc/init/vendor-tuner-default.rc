@@ -1,0 +1,11 @@
+service vendor.tuner-default /vendor/bin/hw/vendor.mediatek.hardware.tv.aidltuner-service
+    class hal
+    user media
+    group mediadrm drmrpc
+    capabilities SYS_NICE
+    ioprio rt 4
+    writepid /dev/cpuset/foreground/tasks
+    onrestart restart media.tuner
+
+on property:init.svc.zygote=restarting
+    restart vendor.tuner-default

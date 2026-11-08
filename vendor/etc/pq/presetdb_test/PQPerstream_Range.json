@@ -1,0 +1,684 @@
+{
+  "$HearderComment": [
+    "PresetDB for Capability and Range",
+    "Struct Version 0.100 : 1st version ",
+    "Struct Version 0.200 : Separated Keys from the setting for Global and only for Per-Stream."
+  ],
+  "Range": {
+    "Brightness": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "Contrast": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "Hue": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": -50,
+      "Max": 50
+    },
+    "SR_Strength": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 20
+    },
+    "COLORTUNER_SWITCH": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "COLORTUNER_H_R": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_H_G": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_H_B": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_H_C": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_H_M": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_H_Y": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_H_F": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_S_R": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_S_G": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_S_B": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_S_C": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_S_M": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_S_Y": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_S_F": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_Y_R": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_Y_G": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_Y_B": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_Y_C": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_Y_M": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_Y_Y": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_Y_F": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_R_OFFSET": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_G_OFFSET": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_B_OFFSET": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_R_GAIN": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_G_GAIN": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "COLORTUNER_B_GAIN": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "NR": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "Low",
+        "Middle",
+        "High"
+      ]
+    },
+    "MPEG_NR": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "Low",
+        "Middle",
+        "High"
+      ]
+    },
+    "SWDR_STRENGTH": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "Low",
+        "Middle",
+        "High",
+        "AIPQ"
+      ]
+    },
+    "DLC_STRENGTH": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "Low",
+        "Middle",
+        "High",
+        "AIPQ"
+      ]
+    },
+    "TMO_Range": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "Low",
+        "Mid",
+        "High"
+      ]
+    },
+    "HDR_Mode": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "SDR",
+        "HDR10",
+        "HLG"
+      ]
+    },
+    "Level_Range": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "Limited",
+        "Full"
+      ]
+    },
+    "Gamut_Mapping": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Disable",
+        "Enable"
+      ]
+    },
+    "Film_Mode": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "PC_Mode": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "Low_Latency": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "VRR": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "CVRR": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "HDMI_RGB_Range": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "Full",
+        "Limit"
+      ]
+    },
+    "Dynamic_Color_Booster": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "Low",
+        "Middle",
+        "High"
+      ]
+    },
+    "Flesh_Tone": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "Low",
+        "Middle",
+        "High"
+      ]
+    },
+    "Fresh_Tone": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "off",
+        "Low",
+        "Medium",
+        "High"
+      ]
+    },
+    "ABF": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "off",
+        "Low",
+        "Middle",
+        "High"
+      ]
+    },
+    "Color space": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "sRGB/BT.709",
+        "DCI",
+        "Adobe RGB",
+        "BT.2020"
+      ]
+    },
+    "MJC_Effect": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "Low",
+        "Middle",
+        "High"
+      ]
+    },
+    "MJC_Demo": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "MJC_Demo_Partition": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "All",
+        "Right",
+        "Left"
+      ]
+    },
+    "BLE_Stope": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 127
+    },
+    "BLE_Strart": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 2047
+    },
+    "WLE_Stope": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 127
+    },
+    "WLE_Strart": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 2047
+    },
+    "BLUESTRETCH": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "EDGE_ENHANCER": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "Low",
+        "Middle",
+        "High"
+      ]
+    },
+    "ULTRA_CLEAR": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "Low",
+        "Middle",
+        "High",
+        "None"
+      ]
+    },
+    "PQBYPASS": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "AI_PQ": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "AISR": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "Low",
+        "Middle",
+        "High"
+      ]
+    },
+    "Local_Contrast": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "Low",
+        "Middle",
+        "High",
+        "AIPQ"
+      ]
+    },
+    "Tmo_Mode": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "12P",
+        "256P"
+      ]
+    },
+    "Tmo_Manual_Mode": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "Xvycc_Manual_Mode": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "Gamut_Manual_Mode": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "Hdr_in_csc_Manual_Mode": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "Ip2csc_Manual_Mode": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "Vopcsc_Manual_Mode": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "InputCSC_Input_Range": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "Limited",
+        "Full"
+      ]
+    },
+    "InputCSC_Input_DataFormat": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "YUV",
+        "RGB"
+      ]
+    },
+    "InputCSC_Input_ColorSpace": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "BT.601",
+        "BT.709",
+        "BT.2020"
+      ]
+    },
+    "InputCSC_Output_Range": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "Limited",
+        "Full"
+      ]
+    },
+    "SRC_CSC_Output_DataFormat": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "YUV",
+        "RGB"
+      ]
+    },
+    "FrameInCSC_Output_DataFormat": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "YUV",
+        "RGB"
+      ]
+    },
+    "FrameOutCSC_Input_Range": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "Limited",
+        "Full"
+      ]
+    },
+    "FrameOutCSC_Input_DataFormat": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "YUV",
+        "RGB"
+      ]
+    },
+    "FrameOutCSC_Input_ColorSpace": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "BT.601",
+        "BT.709",
+        "BT.2020"
+      ]
+    },
+    "FrameOutCSC_Output_Range": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "Limited",
+        "Full"
+      ]
+    },
+    "FrameOutCSC_Output_DataFormat": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Auto",
+        "YUV",
+        "RGB"
+      ]
+    },
+    "Primary_Window": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "Picture_Mode": {
+    "Capability": "Enable",
+    "Value_Type": "List",
+    "Item": [
+      "User",
+      "Standard",
+      "Vivid",
+      "Sport",
+      "Movie",
+      "Game",
+      "Energy Saving",
+      "AIPQ",
+      "DolbyVisionVivid",
+      "DolbyVisionGame",
+      "DolbyVisionIQ",
+      "DolbyVisionBright",
+      "DolbyVisionDark"
+    ]
+    }
+  }
+}

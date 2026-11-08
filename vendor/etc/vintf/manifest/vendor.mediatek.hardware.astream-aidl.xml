@@ -1,0 +1,7 @@
+<manifest version="1.0" type="device">
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.astream</name>
+        <version>1</version>
+        <fqname>IAStream/astream</fqname>
+    </hal>
+</manifest>

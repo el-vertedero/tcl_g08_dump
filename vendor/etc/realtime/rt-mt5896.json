@@ -1,0 +1,440 @@
+{
+    "_description": "All the numbers in this json are implemented as INT, make sure the setting meet the correct range.",
+    "System_Capability" :{
+        "_description": "Unit of Util is DMIPS. E.g. CA76/1.8GHz. (6.56*1800)=11808",
+        "_description": "Total capability of RT framework = ($Util) * ($BudgetCpuNum) * ($Reservation)",
+        "_description": "$Enabled is to enable or disable the feature",
+        "_description": "$DbgLevel can be 0: None, 1: FATAL, 2: ERR, 3: WRN, 4: INFO, 5: TRACE, 6: ALL, 7: MAGIC",
+        "Util": 11808,
+        "Reservation": 80,
+        "Enabled": 1,
+        "BudgetCpuNum": 2,
+        "DbgLevel": 2
+    },
+    "Domain_Audio_RR": {
+        "Util": 3000,
+        "Cpuset": "2-3",
+        "_description": "Unit of Util is DMIPS, which can be seen as local maximum Util for this Domain. When $RT_Priority is set, use RR scheduler.",
+        "Class_Audio_Sched_RR": {
+            "PerThreadUtil": 100,
+            "RT_Priority":30,
+            "_description": "Unit of PerThreadUtil is DMIPS, which each thread in the class occupy $PerThreadUtil util."
+        }
+    },
+    "Domain_Audio_DL": {
+        "_description": "The domain is not used so far, so Util is 1 temporarily",
+        "Util": 1,
+        "Cpuset": "2-3",
+        "Class_Audio_Sched_DL": {
+            "DL_RuntimeUs": 0,
+            "DL_DeadlineUs": 0,
+            "DL_PeriodUs": 0
+        }
+    },
+    "Domain_CODEC2_HAL": {
+        "Util": 1000,
+        "Cpuset": "2-3",
+        "Class_Process": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 10
+        },
+        "Class_PostProcess": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 10
+        },
+        "Class_SideBand_SyncThread": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 10
+        },
+        "Class_Video_Deque": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 10
+        },
+        "Class_Video_PollDeque": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 10
+        },
+        "Class_Hdmi_Deque": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 20
+        },
+        "Class_Hdmi_EventHandle": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 20
+        },
+        "Class_DispLink_ReadEventThread": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 20
+        },
+        "Class_Focus_Process": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 30
+        },
+        "Class_Focus_PostProcess": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 30
+        },
+        "Class_Focus_SideBand_SyncThread": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 30
+        },
+        "Class_Focus_Video_Deque": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 30
+        },
+        "Class_Focus_Video_PollDeque": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 30
+        },
+        "Class_Focus_Hdmi_Deque": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_Focus_Hdmi_EventHandle": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_Focus_DispLink_ReadEventThread": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 30
+        }
+    },
+    "Domain_OMX_Common": {
+        "Util": 1000,
+        "Cpuset": "2-3",
+        "Class_OMX_InputProc": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 10
+        },
+        "Class_OMX_OutputProc": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 10
+        }
+    },
+    "Domain_OMX_Focus": {
+        "Util": 1000,
+        "Cpuset": "2-3",
+        "Class_OMX_InputProc": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 10
+        },
+        "Class_OMX_OutputProc": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 10
+        }
+    },
+    "Domain_Sideband_Common": {
+        "Util": 1000,
+        "Cpuset": "2-3",
+        "Class_Sideband_SyncThread": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 10
+        }
+    },
+    "Domain_Sideband_Focus": {
+        "Util": 1000,
+        "Cpuset": "2-3",
+        "Class_Sideband_SyncThread": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 10
+        }
+    },
+    "Domain_Render_DD": {
+        "Util": 300,
+        "Cpuset": "2-3",
+        "_description": "For Render_DD",
+        "Class_KMS_Commit_tail_Video": {
+            "PerThreadUtil": 120,
+            "RT_Priority": 40,
+            "_description": "Commit tail_CRTC0"
+        },
+        "Class_KMS_Commit_tail_Graphic": {
+            "PerThreadUtil": 120,
+            "RT_Priority": 40,
+            "_description": "Commit tail_CRTC1"
+        }
+    },
+    "Domain_PquModule": {
+        "Util": 198,
+        "Cpuset": "2-3",
+        "_description": "For Pqu Module",
+        "Class_Pqu_Module_Sched_Standard": {
+            "PerThreadUtil": 10,
+            "RT_Priority":40,
+            "_description": "Pqu fw module task - pqu_module"
+        },
+        "Class_Pqu_Cmdq_Done_Sched_Standard": {
+            "PerThreadUtil": 10,
+            "RT_Priority":50,
+            "_description": "Pqu cmdq done thread - pqu_cmdq_done_t"
+        },
+        "Class_Pqu_Vsync_Sched_Standard": {
+            "PerThreadUtil": 10,
+            "RT_Priority":50,
+            "_description": "Pqu vsync TS thread - pqu_vsync_ts_th"
+        },
+        "Class_Pqu_Vsync_Legacy": {
+            "PerThreadUtil": 10,
+            "RT_Priority":50,
+            "_description": "Pqu vsync Legacy thread - pqu_vsync_legac"
+        },
+        "Class_Pqu_Vsync_Op2": {
+            "PerThreadUtil": 10,
+            "RT_Priority":50,
+            "_description": "Pqu vsync op2 thread - pqu_vsync_op2_t"
+        },
+        "Class_Pqu_Dip_Done_Sched_Standard": {
+            "PerThreadUtil": 10,
+            "RT_Priority":20,
+            "_description": "Pqu dip done thread - pqu_dip_thread"
+        },
+        "Class_Pqu_Cpuif_Event": {
+            "PerThreadUtil": 10,
+            "RT_Priority":40,
+            "_description": "Pqu cpuif event thread - pqu_cpuif_thread"
+        },
+        "Class_Pqu_Extcmd_Event": {
+            "PerThreadUtil": 10,
+            "RT_Priority":40,
+            "_description": "Pqu extcmd event thread - pqu_extcmd_thread"
+        },
+        "Class_Pqu_Pq_Vsync": {
+            "PerThreadUtil": 118,
+            "RT_Priority":50,
+            "_description": "Pqu PQ vsyc thread - pqu_pq_vsync"
+        }
+    },
+    "Domain_Disp_Path": {
+        "_description": "For display path",
+        "Util": 200,
+        "Cpuset": "2-3",
+        "Class_DispSync_PQSyncThread": {
+            "_description": "HWC, dispsync, SyncQueueToPQ::syncThread",
+            "PerThreadUtil": 1,
+            "RT_Priority": 30
+        },
+        "Class_DispSync_RenderSyncThread": {
+            "_description": "HWC, dispsync, SyncQueueToRender::syncThread",
+            "PerThreadUtil": 1,
+            "RT_Priority": 30
+        },
+        "Class_DispLink_ReadFlipThread": {
+            "_description": "HWC, displink, ReadFlipQueueThread::readQueueLoop",
+            "PerThreadUtil": 1,
+            "RT_Priority": 30
+        },
+        "Class_DispLink_RenderCbThread": {
+            "_description": "HWC, dispservice, displink::renderCbThread",
+            "PerThreadUtil": 1,
+            "RT_Priority": 30
+        },
+        "Class_DispLink_RenderedThread": {
+            "_description": "HWC, dispservice, displink::renderedThread",
+            "PerThreadUtil": 1,
+            "RT_Priority": 30
+        },
+        "Class_Focus_DispSync_PQSyncThread": {
+            "_description": "HWC, dispsync, SyncQueueToPQ::syncThread",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_Focus_DispSync_RenderSyncThread": {
+            "_description": "HWC, dispsync, SyncQueueToRender::syncThread",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_Focus_DispLink_ReadFlipThread": {
+            "_description": "HWC, displink, ReadFlipQueueThread::readQueueLoop",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_Focus_DispLink_RenderCbThread": {
+            "_description": "HWC, dispservice, displink::renderCbThread",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_Focus_DispLink_RenderedThread": {
+            "_description": "HWC, dispservice, displink::renderedThread",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_DispService_VsyncThread": {
+            "_description": "HWC, dispservice, DispService::vsyncThread",
+            "_description": "vsyncThread is global, not a per-stream setting",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        }
+    },
+    "Domain_PqLink": {
+        "Util": 50,
+        "Cpuset": "2-3",
+        "Class_PqLink_DeqThread": {
+            "_description": "HWC, pqlink, DeqThread",
+            "PerThreadUtil": 1,
+            "RT_Priority": 30
+        },
+        "Class_PqLink_EnqInThread": {
+            "_description": "HWC, pqlink, EnqInThread",
+            "PerThreadUtil": 1,
+            "RT_Priority": 30
+        },
+        "Class_PqLink_EnqOutThread": {
+            "_description": "HWC, pqlink, EnqOutThread",
+            "PerThreadUtil": 1,
+            "RT_Priority": 30
+        },
+        "Class_Focus_PqLink_DeqThread": {
+            "_description": "HWC, pqlink, DeqThread",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_Focus_PqLink_EnqInThread": {
+            "_description": "HWC, pqlink, EnqInThread",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_Focus_PqLink_EnqOutThread": {
+            "_description": "HWC, pqlink, EnqOutThread",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        }
+    },
+    "Domain_Render": {
+        "Util": 100,
+        "Cpuset": "2-3",
+        "Class_Render_VBlank": {
+            "_description": "Render DD VBlanktask, USBMM 8K60, CPU max = 3%, Util = (4*11808)*(3/400) = 355",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_Render_GfxVBlank": {
+            "_description": "Render DD GfxVBlanktask, implemented when VG separate, USBMM 8K60, CPU max = 3%, Util = (4*11808)*(3/400) = 355",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_Render_WinPriorCalc": {
+            "_description": "Render DD WinPriorCalctask, USBMM 8K60, CPU max = 1%, Util = (4*11808)*(1/400) = 119",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_Render_PageFlipDone": {
+            "_description": "Render DD PageFlipDonetask, USBMM 8K60, CPU max = 2%, Util = (4*11808)*(2/400) = 237",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_Render_DispModeManager": {
+            "_description": "Render DD DispModeManagertask, USBMM 8K60, CPU max = ?%, Util = (4*11808)*(?/400) = ?",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_Render_OutputFmtCtrl": {
+            "_description": "Render DD OutputFmtCtrltask, USBMM 8K60, CPU max = ?%, Util = (4*11808)*(?/400) = ?",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        },
+        "Class_Render_ProcDispMode": {
+            "_description": "Render DD ProcDispModetask, USBMM 8K60, CPU max = ?%, Util = (4*11808)*(?/400) = ?",
+            "PerThreadUtil": 1,
+            "RT_Priority": 40
+        }
+    },
+    "Domain_VideoDecoder": {
+        "Util": 800,
+        "Cpuset": "2-3",
+        "_description": "Video decode path, For multi-view playback, two classes (Prime/Standard) may co-exist",
+        "Class_Video_Core_Sched_Prime": {
+            "PerThreadUtil": 1,
+            "RT_Priority":40,
+            "_description": "Core thread focus win "
+        },
+        "Class_Video_Core_Sched_Standard": {
+            "PerThreadUtil": 1,
+            "RT_Priority":40,
+            "_description": "Core thread non focus win"
+        },
+        "Class_Video_Lat_Sched_Prime": {
+            "PerThreadUtil": 1,
+            "RT_Priority":40,
+            "_description": "Lat thread focus win "
+        },
+        "Class_Video_Lat_Sched_Standard": {
+            "PerThreadUtil": 1,
+            "RT_Priority":40,
+            "_description": "Lat thread non focus win"
+        }
+    },
+    "Domain_Subhal_Inputsrc": {
+        "Util": 1000,
+        "Cpuset": "2-3",
+        "Class_Inputsrc_DqEvent": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 20
+        }
+    },
+    "Domain_Srccap_DD": {
+        "Util": 1148,
+        "Cpuset": "2-3",
+        "_description": "For Srccap_DD",
+        "Class_Srccap_SignalStatus0": {
+            "PerThreadUtil": 120,
+            "RT_Priority": 10,
+            "_description": "timing monitor task 0"
+        },
+        "Class_Srccap_SignalStatus1": {
+            "PerThreadUtil": 120,
+            "RT_Priority": 10,
+            "_description": "timing monitor task 1"
+        },
+        "Class_Srccap_SyncStatus": {
+            "PerThreadUtil": 120,
+            "RT_Priority": 10,
+            "_description": "sync monitor task"
+        },
+        "Class_Srccap_BufferHandling0": {
+            "PerThreadUtil": 120,
+            "RT_Priority": 10,
+            "_description": "buffer handling task 0"
+        },
+        "Class_Srccap_BufferHandling1": {
+            "PerThreadUtil": 120,
+            "RT_Priority": 10,
+            "_description": "buffer handling task 1"
+        }
+        "Class_Srccap_PreSignal": {
+            "PerThreadUtil": 548,
+            "RT_Priority": 10,
+            "_description": "pre signal task"
+        }
+    },
+    "Domain_HWC_Path": {
+        "_description": "For HWC path : 1*VsyncThread + 1*DisplayThread + 2*CmdThread ",
+        "_description": "Util equal to 0 means there is no budget limitation in the domain",
+        "_description": "if Util is equal 0, support schedule RR policy only, not support schedule Deadline policy",
+        "_description": "if Util is equal 0, use the default cpuset setting",
+        "Util": 0,
+        "Cpuset": "0-3",
+        "Class_HWC_VsyncThread": {
+            "_description": "HWC, osd, Vsync Thread, CPU max = 1%, Util = 1800 * 6.56 * 1.0% = 118",
+            "PerThreadUtil": 0,
+            "RT_Priority": 30
+        },
+        "Class_HWC_DisplayThread": {
+            "_description": "HWC, osd, Display Thread, CPU max = 2%, Util = 1530 * 2.71 * 2% = 83",
+            "PerThreadUtil": 0,
+            "RT_Priority": 50
+        },
+        "Class_HWC_CmdThread": {
+            "_description": "HWC, osd, Command Thread, CPU max = 3%, Util = 1800 * 6.56 * 3.0% = 354",
+            "PerThreadUtil": 0,
+            "RT_Priority": 2
+        }
+    },
+    "Domain_APP": {
+        "Util": 100,
+        "Cpuset": "2-3",
+        "Class_APP_RR_LOW": {
+            "PerThreadUtil": 1,
+            "RT_Priority": 10
+        }
+    }
+}

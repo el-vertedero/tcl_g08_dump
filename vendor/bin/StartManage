@@ -1,0 +1,1656 @@
+#!/vendor/bin/sh
+
+######################################################脚本说明################################################################
+
+#############################################################################################################################
+#保证第一次启动和升级过程，data挂载比较慢，以其挂载情况作为判断依据
+#setenforce 0 #配置selinux 不需要了
+#sleep 15
+
+# 在加载 NovaLog 前，尽量等待 U 盘挂载并存在 nova.txt（且可写），确保日志一开始就落到 U 盘
+MAX_USB_WAIT=3
+USB_FOUND=0
+for _ in $(seq 0 $MAX_USB_WAIT); do
+    for dir in /mnt/media_rw/* /storage/*; do
+        [ -d "$dir" ] || continue
+        case "$dir" in
+            */emulated|*/self|*/USB*)
+                continue
+                ;;
+        esac
+        if [ -f "$dir/nova.txt" ]; then
+            # 可写性简单校验
+            if touch "$dir/.nova_usb_write_test" 2>/dev/null; then
+                rm -f "$dir/.nova_usb_write_test" 2>/dev/null
+                USB_FOUND=1
+                break
+            fi
+        fi
+    done
+    [ $USB_FOUND -eq 1 ] && break
+    sleep 1
+done
+
+if [ $USB_FOUND -eq 0 ]; then
+    echo "[WARN] $(date '+%Y-%m-%d %H:%M:%S') USB+nova.txt not ready within ${MAX_USB_WAIT}s, may fall back to /tmp"
+fi
+
+source /vendor/bin/NovaLog
+
+ii=0
+
+while true
+do
+{
+        if [ -d /data/data ]; then
+                log_info "start manage start"
+                break
+        else
+		
+		
+                sleep 1
+                ii=$((ii+1))
+        fi
+
+        if [ $ii -gt 180 ]; then  #若data一直不存在超时则主动退出
+                log_info "start manage overtime"
+                break
+        fi
+}
+done
+
+
+# while true
+# do
+# {
+        # if [ -d /sdcard/Android ]; then
+                # log_info "start /sdcard/Android start"
+                # break
+        # else
+                # sleep 1
+                # ii=$((ii+1))
+        # fi
+
+        # if [ $(ii) -gt 180 ]; then  #若data一直不存在超时则主动退出
+                # log_info "start manage overtime"
+                # break
+        # fi
+# }
+# done
+
+################################################################################################################################
+#初始化阶段：
+version="V1.1.0, 2024-04-26  Build"
+log_info "version : $version "
+
+# 辅助函数：打印当前 xserver 启动参数，便于排查
+log_xserver_param() {
+    enforce_log_param
+    log_info "XSERVER_LOG_PARAM=${XSERVER_LOG_PARAM:-<empty>}"
+}
+
+# 辅助函数：同时检查 /mnt/media_rw/<id> 与 /storage/<id> 是否存在 nova.txt
+check_nova_on_usb_mount() {
+    local mount_point="$1"
+    [ -z "$mount_point" ] && return 1
+
+    # 直接检查当前挂载点
+    if usb_has_nova_flag "$mount_point"; then
+        return 0
+    fi
+
+    # 补充检查对应的 /storage/<id> 或 /mnt/media_rw/<id>
+    local base_name
+    base_name=$(basename "$mount_point")
+    for alt in "/storage/$base_name" "/mnt/media_rw/$base_name"; do
+        [ "$alt" = "$mount_point" ] && continue
+        [ -d "$alt" ] || continue
+        if usb_has_nova_flag "$alt"; then
+            log_info "found nova.txt on alt path: $alt (origin: $mount_point)"
+            return 0
+        fi
+    done
+    return 1
+}
+
+# 辅助函数：在不增加额外等待的前提下做一次全量兜底扫描，找到可写且有 nova.txt 的U盘
+full_scan_usb_with_nova_once() {
+    local candidates=""
+    candidates="$candidates /mnt/media_rw/*"
+    candidates="$candidates /mnt/vendor/public"
+    candidates="$candidates /storage/usbotg* /storage/USBOTG*"
+    candidates="$candidates /storage/*"
+    candidates="$candidates /mnt/usb* /mnt/USB*"
+    candidates="$candidates /sdcard/UDISK"
+
+    for dir in $candidates; do
+        case "$dir" in
+            *"/storage/emulated"*|*"/storage/self"*|*"/storage/USB"*)
+                continue
+                ;;
+        esac
+        [ -d "$dir" ] || continue
+
+        # 可写性检查：以 is_mount_point_writable 为主，兼容偶发 mount 输出差异
+        local writable="false"
+        if [ "$(is_mount_point_writable "$dir")" = "true" ]; then
+            writable="true"
+        elif [ -w "$dir" ]; then
+            writable="true"
+        fi
+
+        if [ "$writable" != "true" ]; then
+            continue
+        fi
+
+        if check_nova_on_usb_mount "$dir"; then
+            echo "$dir"
+            return
+        fi
+    done
+    echo ""
+}
+
+# 辅助函数：宽松扫描（不校验可写性），仅用于启动参数决策兜底
+relaxed_scan_usb_with_nova_once() {
+    local candidates=""
+    candidates="$candidates /mnt/media_rw/*"
+    candidates="$candidates /mnt/vendor/public"
+    candidates="$candidates /storage/usbotg* /storage/USBOTG*"
+    candidates="$candidates /storage/*"
+    candidates="$candidates /mnt/usb* /mnt/USB*"
+    candidates="$candidates /sdcard/UDISK"
+
+    for dir in $candidates; do
+        case "$dir" in
+            *"/storage/emulated"*|*"/storage/self"*|*"/storage/USB"*)
+                continue
+                ;;
+        esac
+        [ -d "$dir" ] || continue
+        if check_nova_on_usb_mount "$dir"; then
+            echo "$dir"
+            return
+        fi
+    done
+    echo ""
+}
+
+# 辅助函数：根据当前环境强制校正 XSERVER_LOG_PARAM（无等待）
+enforce_log_param() {
+    # 工厂模式：始终不带 -LogFilename
+    if is_factory_mode; then
+        XSERVER_LOG_PARAM=""
+        return
+    fi
+
+    # 优先使用已有 USB_MOUNT_RESULT
+    if [ -n "$USB_MOUNT_RESULT" ] && check_nova_on_usb_mount "$USB_MOUNT_RESULT"; then
+        XSERVER_LOG_PARAM=""
+        return
+    fi
+
+    # 其次检查软链接指向
+    local symlink_target=""
+    symlink_target=$(readlink -f /data/vendor/nova/xserver/log 2>/dev/null || echo "")
+    if [ -n "$symlink_target" ] && { echo "$symlink_target" | grep -qE "^/mnt/media_rw/|^/storage/"; }; then
+        local mount_root="$symlink_target"
+        [ -d "$mount_root" ] || mount_root=$(dirname "$mount_root")
+        if ! check_nova_on_usb_mount "$mount_root"; then
+            mount_root=$(dirname "$mount_root")
+        fi
+        if check_nova_on_usb_mount "$mount_root"; then
+            USB_MOUNT_RESULT="$mount_root"
+            XSERVER_LOG_PARAM=""
+            return
+        fi
+    fi
+
+    # 再尝试无等待的宽松扫描
+    local quick_relaxed=""
+    quick_relaxed=$(relaxed_scan_usb_with_nova_once)
+    if [ -n "$quick_relaxed" ] && check_nova_on_usb_mount "$quick_relaxed"; then
+        USB_MOUNT_RESULT="$quick_relaxed"
+        XSERVER_LOG_PARAM=""
+        return
+    fi
+
+    # 都没有，则按属性决定
+    if should_enable_tmp_log_user_mode; then
+        XSERVER_LOG_PARAM=""
+    else
+        XSERVER_LOG_PARAM=""
+    fi
+}
+
+# 辅助函数：根据当前软链接指向快速判断是否已选中“U盘+nova.txt”
+update_usb_flag_from_symlink() {
+    local symlink_target=""
+    symlink_target=$(readlink -f /data/vendor/nova/xserver/log 2>/dev/null || echo "")
+    if [ -n "$symlink_target" ] && { echo "$symlink_target" | grep -qE "^/mnt/media_rw/|^/storage/"; }; then
+        local mount_root="$symlink_target"
+        [ -d "$mount_root" ] || mount_root=$(dirname "$mount_root")
+        if ! check_nova_on_usb_mount "$mount_root"; then
+            mount_root=$(dirname "$mount_root")
+        fi
+        if check_nova_on_usb_mount "$mount_root"; then
+            USB_MOUNT_RESULT="$mount_root"
+            usb_nova_found=1
+            log_info "user mode: symlink confirms USB with nova.txt ($mount_root)"
+        fi
+    fi
+}
+rm -f /data/vendor/nova/xserver/log
+#删除软连接
+#设置xserver log目录的函数
+setup_xserver_log() {
+    log_info "setup xserver log directory"
+    
+    # 使用统一决策逻辑确定目标路径
+    local target_path=""
+    
+    # U盘检测等待机制：尝试3次，每次间隔1秒（总共3秒）
+    local usb_mount=""
+    local retry_count=0
+    local max_retries=3
+    
+    log_info "waiting for USB mount point (max ${max_retries}s)..."
+    while [ $retry_count -lt $max_retries ]; do
+        usb_mount=$(find_writable_usb_mount)
+        if [ -n "$usb_mount" ]; then
+            log_info "USB mount point found after ${retry_count}s: $usb_mount"
+            break
+        fi
+        retry_count=$((retry_count + 1))
+        if [ $retry_count -lt $max_retries ]; then
+            log_info "USB not found, waiting... (retry $retry_count/$max_retries)"
+            sleep 1
+        fi
+    done
+    
+    if [ -z "$usb_mount" ]; then
+        log_info "no USB mount point found after ${max_retries}s"
+    fi
+    
+    # 保存U盘扫描结果到全局变量，供后续使用
+    USB_MOUNT_RESULT="$usb_mount"
+    
+    # 判断工厂模式/用户模式（复用 NovaLog 中的函数）
+    if is_factory_mode; then
+        # ========== 工厂模式分支 ==========
+        log_info "factory mode detected"
+        # 使用已扫描的U盘结果
+        if [ -n "$usb_mount" ]; then
+            # 有U盘：使用U盘路径
+            target_path="$usb_mount/xserver_log"
+            log_info "factory mode: using USB path: $target_path"
+        else
+            # 无U盘：使用 /tmp 路径
+            target_path="/tmp/xserver_log"
+            log_info "factory mode: no USB found, using tmp path: $target_path"
+        fi
+    else
+        # ========== 用户模式分支 ==========
+        log_info "user mode detected"
+        # 使用已扫描的U盘结果（不再重新扫描）
+        if [ -n "$usb_mount" ] && check_nova_on_usb_mount "$usb_mount"; then
+            # 有U盘 + nova.txt：使用U盘路径
+            target_path="$usb_mount/xserver_log"
+            log_info "user mode: USB with nova.txt found, using USB path: $target_path"
+            # 刷新 NovaLog 日志路径到 U 盘
+            if command -v refresh_log_file_path >/dev/null 2>&1; then
+                refresh_log_file_path >/dev/null 2>&1
+                log_info "refreshed NovaLog path: ${LOG_FILE:-<empty>}"
+            fi
+        else
+            # 兜底：再做一次无等待的全量扫描，防止挂载路径差异或短暂延迟
+            local usb_mount_fallback=""
+            usb_mount_fallback=$(full_scan_usb_with_nova_once)
+            if [ -n "$usb_mount_fallback" ]; then
+                USB_MOUNT_RESULT="$usb_mount_fallback"
+                target_path="$usb_mount_fallback/xserver_log"
+                log_info "user mode: fallback full scan found USB with nova.txt, using USB path: $target_path"
+                # 刷新 NovaLog 日志路径到 U 盘
+                if command -v refresh_log_file_path >/dev/null 2>&1; then
+                    refresh_log_file_path >/dev/null 2>&1
+                    log_info "refreshed NovaLog path: ${LOG_FILE:-<empty>}"
+                fi
+            else
+                # 未找到 nova.txt，则视为无U盘
+                USB_MOUNT_RESULT=""
+            # 无U盘或无nova.txt：检查 persist.sys.normallog
+            if should_enable_tmp_log_user_mode; then
+                # persist.sys.normallog == true：允许写 /tmp
+                target_path="/tmp/xserver_log"
+                log_info "user mode: persist.sys.normallog=true, using tmp path: $target_path"
+            else
+                # persist.sys.normallog != true：不写日志（target_path 为空）
+                target_path=""
+                log_info "user mode: logging disabled (no USB+nova.txt, persist.sys.normallog!=true)"
+            fi
+            fi
+        fi
+    fi
+    
+    # 如果 target_path 为空（用户模式禁止日志），删除软链接并返回
+    if [ -z "$target_path" ]; then
+        log_info "user mode: logging disabled (persist.sys.normallog=false)"
+        # 删除软链接（如果存在）
+        if [ -L /data/vendor/nova/xserver/log ] || [ -e /data/vendor/nova/xserver/log ]; then
+            log_info "removing existing symlink/directory: /data/vendor/nova/xserver/log"
+            rm -rf /data/vendor/nova/xserver/log
+            if [ $? -eq 0 ]; then
+                log_info "successfully removed symlink/directory"
+            else
+                log_warn "failed to remove symlink/directory"
+            fi
+        fi
+        return 0
+    fi
+    
+    # 3. 检查xserver进程是否正在运行
+    xserver_pid=$(pgrep NeoController)
+    xserver_running=0
+    if [ -n "$xserver_pid" ]; then
+        xserver_running=1
+        log_info "xserver process is running (PID: $xserver_pid)"
+    else
+        log_info "xserver process is not running"
+    fi
+    
+    # 4. 检查现有的软链接是否指向正确的路径
+    need_create_link=1
+    if [ -L /data/vendor/nova/xserver/log ]; then
+        current_link=$(readlink -f /data/vendor/nova/xserver/log 2>/dev/null || readlink /data/vendor/nova/xserver/log 2>/dev/null || echo "")
+        if [ -n "$current_link" ]; then
+            target_abs_path=$(readlink -f "$target_path" 2>/dev/null || echo "$target_path")
+            
+            # 如果软链接已存在且指向正确路径，跳过删除重建
+            if [ "$current_link" = "$target_abs_path" ] || [ "$current_link" = "$target_path" ]; then
+                log_info "symlink already exists and points to correct path: $target_path"
+                # 确保目标目录存在
+                mkdir -p "$target_path" 2>/dev/null
+                need_create_link=0
+            else
+                log_info "symlink exists but points to different path: $current_link, need to update"
+                # 如果xserver正在运行，不能删除log目录，需要先kill进程
+                if [ $xserver_running -eq 1 ]; then
+                    log_warn "xserver is running, cannot change log path. Please kill xserver first"
+                    log_warn "current log path: $current_link, target path: $target_path"
+                    # xserver运行中，不删除log目录，也不创建新链接
+                    need_create_link=0
+                else
+                    rm -f /data/vendor/nova/xserver/log
+                    need_create_link=1
+                fi
+            fi
+        else
+            log_warn "failed to read symlink, will recreate"
+            rm -f /data/vendor/nova/xserver/log
+            need_create_link=1
+        fi
+    elif [ -e /data/vendor/nova/xserver/log ]; then
+        # 如果是目录或其他类型，需要删除
+        # 即使xserver正在运行，也要删除目录并创建软链接（因为正常状态应该是软链接）
+        if [ -d /data/vendor/nova/xserver/log ]; then
+            if [ $xserver_running -eq 1 ]; then
+                log_warn "xserver is running, but log is a directory (should be symlink), removing it anyway"
+            fi
+            log_info "removed existing log directory"
+            rm -rf /data/vendor/nova/xserver/log
+            need_create_link=1
+        else
+            # 如果是其他类型文件，也需要删除
+            if [ $xserver_running -eq 1 ]; then
+                log_warn "xserver is running, but log is not a symlink, removing it anyway"
+            fi
+            log_info "removed existing log file/link"
+            rm -rf /data/vendor/nova/xserver/log
+            need_create_link=1
+        fi
+    fi
+    
+    # 5. 创建目标目录
+    mkdir -p "$target_path"
+    if [ $? -eq 0 ]; then
+        log_info "created target log directory: $target_path"
+    else
+        log_warn "failed to create target log directory: $target_path"
+        # 如果创建失败，尝试使用/tmp作为最后备选
+        if [ "$target_path" != "/tmp/xserver_log" ]; then
+            log_info "fallback to /tmp/xserver_log"
+            target_path="/tmp/xserver_log"
+            mkdir -p "$target_path"
+            if [ $? -ne 0 ]; then
+                log_warn "failed to create /tmp/xserver_log"
+                # 目标目录创建失败，无法创建软链接，但继续执行
+                log_warn "cannot create symlink because target directory creation failed"
+            fi
+        else
+            log_warn "target path creation failed, cannot create symlink"
+        fi
+    fi
+    
+    # 验证目标目录是否存在且可写（每次启动前都检查）
+    # 如果U盘路径不可用，回退到/tmp
+    if [ ! -d "$target_path" ] || [ ! -w "$target_path" ]; then
+        log_warn "target directory does not exist or is not writable: $target_path"
+        # 如果当前路径不是/tmp，回退到/tmp
+        if [ "$target_path" != "/tmp/xserver_log" ]; then
+            log_info "fallback to /tmp/xserver_log"
+            target_path="/tmp/xserver_log"
+            mkdir -p "$target_path"
+            if [ $? -ne 0 ] || [ ! -w "$target_path" ]; then
+                log_warn "cannot create or write to /tmp/xserver_log, will skip symlink creation"
+            fi
+        else
+            log_warn "cannot use target path, will skip symlink creation"
+        fi
+    fi
+    
+    # 6. 创建软链接（如果需要创建）
+    if [ $need_create_link -eq 1 ]; then
+        # 再次验证目标目录是否可用（防止在创建软链接前u盘被拔掉）
+        if [ -d "$target_path" ] && [ -w "$target_path" ]; then
+            if [ ! -e /data/vendor/nova/xserver/log ]; then
+                ln -s "$target_path" /data/vendor/nova/xserver/log
+                if [ $? -eq 0 ]; then
+                    log_info "created symlink: /data/vendor/nova/xserver/log -> $target_path"
+                else
+                    log_warn "failed to create symlink, continuing anyway"
+                fi
+            else
+                log_warn "cannot create symlink, /data/vendor/nova/xserver/log already exists (not a symlink)"
+            fi
+        else
+            log_warn "target directory is not available, skipping symlink creation"
+        fi
+    else
+        log_info "symlink already exists or xserver is running, skipping creation"
+    fi
+}
+
+#初始化阶段：设置xserver log目录
+#setup_xserver_log
+
+# 参数决策起始日志，便于定位
+pmode_value=$(getprop odm.tcl.factory.pmode 2>/dev/null)
+log_info "param decision begin: pmode=${pmode_value:-<unset>}, USB_MOUNT_RESULT=${USB_MOUNT_RESULT:-<empty>}"
+
+#根据统一决策逻辑设置 xserver 启动参数（U盘优先）
+if is_factory_mode; then
+    # 工厂模式：使用默认配置（通过软链接控制）
+    XSERVER_LOG_PARAM=""
+    log_info "factory mode: xserver will use default log path (via symlink)"
+else
+    # 用户模式：U盘+nova.txt 优先级最高
+    log_info "user mode param decision: USB_MOUNT_RESULT=${USB_MOUNT_RESULT:-<empty>}"
+    usb_nova_found=0
+    # 先用已有软链接快速判定（处理 setup_xserver_log 已落在 U 盘但变量丢失的情况）
+    symlink_target=$(readlink -f /data/vendor/nova/xserver/log 2>/dev/null || echo "")
+    if [ -n "$symlink_target" ] && { echo "$symlink_target" | grep -qE "^/mnt/media_rw/|^/storage/"; }; then
+        mount_root=$(dirname "$symlink_target")
+        if ! check_nova_on_usb_mount "$mount_root"; then
+            mount_root=$(dirname "$mount_root")
+        fi
+        if check_nova_on_usb_mount "$mount_root"; then
+            USB_MOUNT_RESULT="$mount_root"
+            usb_nova_found=1
+            XSERVER_LOG_PARAM=""
+            log_info "user mode: symlink confirms USB with nova.txt ($mount_root), keep USB log path"
+        fi
+    fi
+
+    if [ $usb_nova_found -eq 0 ]; then
+        if [ -n "$USB_MOUNT_RESULT" ] && check_nova_on_usb_mount "$USB_MOUNT_RESULT"; then
+            usb_nova_found=1
+            XSERVER_LOG_PARAM=""
+            log_info "user mode: USB with nova.txt found, xserver will use USB log path (via symlink)"
+        else
+            usb_mount_fallback=$(full_scan_usb_with_nova_once)
+            if [ -n "$usb_mount_fallback" ] && check_nova_on_usb_mount "$usb_mount_fallback"; then
+                USB_MOUNT_RESULT="$usb_mount_fallback"
+                usb_nova_found=1
+                XSERVER_LOG_PARAM=""
+                log_info "user mode: fallback full scan found USB with nova.txt, xserver will use USB log path (via symlink)"
+            else
+                usb_mount_relaxed=$(relaxed_scan_usb_with_nova_once)
+                if [ -n "$usb_mount_relaxed" ] && check_nova_on_usb_mount "$usb_mount_relaxed"; then
+                    USB_MOUNT_RESULT="$usb_mount_relaxed"
+                    usb_nova_found=1
+                    XSERVER_LOG_PARAM=""
+                    log_info "user mode: relaxed scan found USB with nova.txt, xserver will use USB log path (via symlink)"
+                fi
+            fi
+        fi
+    fi
+
+    # 无 U盘或无 nova.txt：检查 persist.sys.normallog
+    if [ $usb_nova_found -eq 1 ]; then
+        log_info "user mode: USB+nova.txt branch chosen, skip persist.sys.normallog"
+    else
+        if should_enable_tmp_log_user_mode; then
+            XSERVER_LOG_PARAM=""
+            log_info "user mode: persist.sys.normallog=true, xserver will use /tmp log path (via symlink)"
+        else
+            XSERVER_LOG_PARAM=""
+            log_info "user mode: persist.sys.normallog=false, xserver will use log path: /qcx/test"
+        fi
+    fi
+fi
+
+# 最终兜底：如果仍决定使用 -LogFilename，再尝试一次宽松扫描避免错判
+if [ "$XSERVER_LOG_PARAM" = "" ]; then
+    late_usb_mount=$(relaxed_scan_usb_with_nova_once)
+    if [ -n "$late_usb_mount" ] && check_nova_on_usb_mount "$late_usb_mount"; then
+        USB_MOUNT_RESULT="$late_usb_mount"
+        XSERVER_LOG_PARAM=""
+        log_info "user mode: late promotion found USB with nova.txt, remove -LogFilename"
+    fi
+fi
+
+# 最终保护：只要能找到任何含 nova.txt 的挂载点（含已有 symlink 指向），就强制去掉 -LogFilename
+final_guard_clear_logfilename() {
+    local candidates=""
+    candidates="$candidates $USB_MOUNT_RESULT"
+    candidates="$candidates $(readlink -f /data/vendor/nova/xserver/log 2>/dev/null || echo "")"
+    candidates="$candidates /mnt/media_rw/*"
+    candidates="$candidates /storage/*"
+
+    for dir in $candidates; do
+        [ -z "$dir" ] && continue
+        # 先尝试当前目录，再尝试父目录（处理 xserver_log 子目录被传入的场景）
+        local try_dir="$dir"
+        for _ in 1 2; do
+            [ -d "$try_dir" ] || { try_dir=$(dirname "$try_dir"); }
+            [ -d "$try_dir" ] || continue
+            if check_nova_on_usb_mount "$try_dir"; then
+                XSERVER_LOG_PARAM=""
+                log_info "user mode: final guard found nova.txt at $try_dir, remove -LogFilename"
+                return
+            fi
+            # 尝试父目录一次
+            try_dir=$(dirname "$try_dir")
+        done
+        # 回到下一候选
+        if check_nova_on_usb_mount "$dir"; then
+            XSERVER_LOG_PARAM=""
+            log_info "user mode: final guard found nova.txt at $dir, remove -LogFilename"
+            return
+        fi
+    done
+}
+
+if [ "$XSERVER_LOG_PARAM" = "" ]; then
+    final_guard_clear_logfilename
+fi
+
+# 参数决策结束日志
+log_info "param decision end: usb_nova_found=${usb_nova_found:-0}, XSERVER_LOG_PARAM=${XSERVER_LOG_PARAM:-<empty>}"
+
+#备份总路径
+NovaBackup_path=/sdcard/NovaBackup  
+xserver_backupdir=$NovaBackup_path/xserver/oem
+upgrade_backupdir=$NovaBackup_path/upgrader	
+#默认总路径
+XserverUserdata_path=/data/vendor/nova/xserver
+XserverWork_path=$XserverUserdata_path/oem          #相当于之前的/data/xserver/oem
+UpgraderWork_path=/data/vendor/nova/upgrader
+
+#默认可执行程序路径
+system_defpath=/vendor/bin
+upgrade_defpath=$system_defpath/upgrade  
+xserver_defpath=$system_defpath/NeoController
+transfer_defpath=$system_defpath/transfer_tool
+upgradetool_defpath=$system_defpath/upgrade_tool
+#备份可执行程序路径
+xserver_backuppath=$xserver_backupdir/NeoController 
+upgrade_backuppath=$upgrade_backupdir/tools/upgrade
+upgradetools_backuppath=$upgrade_backupdir/tools
+
+#备份库路径
+libxserver_backuppath=$xserver_backupdir/controller/lib
+
+#配置文件路径
+XserverConfig_path=/vendor/etc/controller.tar.gz
+UpgraderConfig_path=/vendor/etc/UpgradeConfig.tar.gz
+mcu_defpath=$UpgraderWork_path/UpgradeConfig/mcu
+fpga_defpath=$UpgraderWork_path/UpgradeConfig/fpga
+#备份配置文件目录与路径
+Config_backupdir=$NovaBackup_path/etc
+XserverConfig_backuppath=$Config_backupdir/controller.tar.gz
+UpgraderConfig_backuppath=$Config_backupdir/UpgradeConfig.tar.gz	
+mcu_backuppath=$upgrade_backupdir/UpgradeConfig/mcu
+fpga_backuppath=$upgrade_backupdir/UpgradeConfig/fpga
+
+bin_path="defpath"
+
+#判断目录是否存在，不存在则进行创建
+if [ ! -d $xserver_backupdir ]; then
+	mkdir -p $xserver_backupdir
+	mkdir -p $xserver_backupdir/upgrader
+fi
+
+if [ ! -d $upgrade_backupdir ]; then
+	mkdir -p $upgrade_backupdir
+fi
+
+if [ ! -d $Config_backupdir ]; then
+	mkdir -p $Config_backupdir
+fi
+
+if [ ! -d $upgradetools_backuppath ]; then
+	mkdir -p $upgradetools_backuppath
+fi
+
+if [ ! -d $XserverUserdata_path ]; then
+	mkdir -p $XserverUserdata_path
+fi		
+
+#解压Xserver配置文件
+if [ ! -d $XserverWork_path ]; then
+	mkdir -p $XserverWork_path
+	mkdir -p $XserverWork_path/upgrader
+else
+	#rm -rf $XserverWork_path
+	mkdir -p $XserverWork_path
+	mkdir -p $XserverWork_path/upgrader
+fi
+
+#解压缩xserver目录
+if [ "$(getprop ro.product.device)" == "Hi3751V811" ];then
+	log_info "start defpath xserver 811"
+	busybox tar -xzvf $XserverConfig_path -C $XserverWork_path
+fi
+
+if [ "$(getprop ro.product.device)" == "expo" ] || [ "$(getprop ro.product.device)" == "tcl_mt5879_cn" ] || [ "$(getprop ro.product.device)" == "G08" ];then
+	log_info "start defpath xserver"
+	
+	# 文件路径
+	file_xserver_path="/data/vendor/nova/tar_xserver_judge.txt"
+	touch "$file_xserver_path"
+	if [ -f "$file_xserver_path" ]; then
+		if [ ! -s "$file_xserver_path" ]; then  #如果文件内容是空的
+			/vendor/bin/tar --no-same-owner -xzvf $XserverConfig_path -C $XserverWork_path
+			if [ $? -eq 0 ]; then
+				log_info "xserver tar success"
+				echo "0" > "$file_xserver_path"
+			fi
+		else
+			log_info "xserver have file"
+		fi
+	fi
+	
+fi
+mv $XserverWork_path/controller/header $XserverWork_path/upgrader
+log_info "Xserver controller config install success"
+
+
+#解压Upgrader配置文件
+if [ ! -d $UpgraderWork_path ]; then
+	mkdir -p $UpgraderWork_path
+else 
+	#rm -rf $UpgraderWork_path
+	mkdir -p $UpgraderWork_path
+fi
+
+if [ "$(getprop ro.product.device)" == "Hi3751V811" ];then
+	busybox tar -xzvf $UpgraderConfig_path -C $UpgraderWork_path
+fi
+if [ "$(getprop ro.product.device)" == "expo" ] || [ "$(getprop ro.product.device)" == "tcl_mt5879_cn" ] || [ "$(getprop ro.product.device)" == "G08" ];then
+	
+	# 文件路径
+	file_path="/data/vendor/nova/tar_upgrade_judge.txt"
+	touch "$file_path"
+	if [ -f "$file_path" ]; then
+		if [ ! -s "$file_path" ]; then  #如果文件内容是空的
+			/vendor/bin/tar --no-same-owner -xzvf $UpgraderConfig_path -C $UpgraderWork_path
+			if [ $? -eq 0 ]; then
+				log_info "upgrader tar success"
+				echo "0" > "$file_path"
+			fi
+		else
+			log_info "upgrade have file"
+		fi
+	fi
+fi
+log_info "upgrader config install success"
+
+#将备份的屏参信息复制到xserver的工作目录
+# 要检查的目录路径
+DIR="/data/vendor/nova/xserver/controller/usrconfig"
+USRCONFIG="/data/vendor/nova/xserver/controller/usrconfig/screenConfig.toml"
+SCREEN_DIR="/userdata/usrconfig"
+# 使用 stat 命令获取文件大小（以字节为单位）,正确的screenConfig.toml大小为25374字节，默认为40字节
+# file_size=$(stat -c %s "$USRCONFIG")
+# log_info "screenConfig.toml size is $file_size."
+
+if [ "$(getprop ro.product.device)" == "tcl_mt5879_cn" ] || [ "$(getprop ro.product.device)" == "G08" ];then
+	# 检查目录存在且目录中有文件（非空）
+	if [ -d "$SCREEN_DIR" ] && [ -f "$SCREEN_DIR/screenConfig.toml" ]; then
+		cp -r /userdata/usrconfig/* /data/vendor/nova/xserver/controller/usrconfig/
+		log_info "return $?"
+		file_size=$(stat -c %s "$USRCONFIG")
+		log_info "file size is $file_size."
+		log_info "cp /userdata/usrconfig screen"
+	else
+		log_info "cp /vendor/etc/usrconfig screen"
+		if [ -d "$DIR" ]; then
+			log_info "Directory $DIR exists."
+			if [ -f "$USRCONFIG" ]; then
+				log_info "file $USRCONFIG exists."
+				# 判断文件大小是否小于 25KB
+				if [ $file_size -gt 20000 ]; then
+					log_info "file screenConfig.toml fromed by /vendor/etc/usrconfig."
+				else
+					mkdir -p $XserverUserdata_path/controller
+					mkdir -p $XserverUserdata_path/controller/usrconfig
+					if [ -d "$DIR" ]; then
+						log_info "1-Directory $DIR mkdir success."
+					fi
+					cp -r /vendor/etc/usrconfig/* /data/vendor/nova/xserver/controller/usrconfig/
+					log_info "return $?"
+					file_size=$(stat -c %s "$USRCONFIG")
+					log_info "file size is $file_size."
+					# 计算MD5并保存到变量
+					# md5_hash=$(md5sum "$USRCONFIG" | awk '{print $1}')
+					# log_info "file md5 is $md5_hash."
+
+					log_info "screenconfig tar success888888"
+				fi
+			else
+				mkdir -p $XserverUserdata_path/controller
+				mkdir -p $XserverUserdata_path/controller/usrconfig
+				if [ -d "$DIR" ]; then
+					log_info "2-Directory $DIR mkdir success."
+				fi
+				cp -r /vendor/etc/usrconfig/* /data/vendor/nova/xserver/controller/usrconfig/
+				#/vendor/bin/tar --no-same-owner -xzvf /vendor/etc/usrconfig.tar.gz -C $UpgraderWork_path/controller
+				log_info "return $?"
+				file_size=$(stat -c %s "$USRCONFIG")
+				log_info "file size is $file_size."
+				# 计算MD5并保存到变量
+				# md5_hash=$(md5sum "$USRCONFIG" | awk '{print $1}')
+				# log_info "file md5 is $md5_hash."
+				log_info "screenconfig tar success999999"
+			fi
+		else
+			mkdir -p $XserverUserdata_path/controller
+			mkdir -p $XserverUserdata_path/controller/usrconfig
+			if [ -d "$DIR" ]; then
+				log_info "3-Directory $DIR mkdir success."
+			fi
+			cp -r /vendor/etc/usrconfig/* $XserverUserdata_path/controller/usrconfig/
+			#/vendor/bin/tar --no-same-owner -xzvf /vendor/etc/usrconfig.tar.gz -C $UpgraderWork_path/controller
+			log_info "return $?"
+			file_size=$(stat -c %s "$USRCONFIG")
+			log_info "file size is $file_size."
+			# 计算MD5并保存到变量
+			# md5_hash=$(md5sum "$USRCONFIG" | awk '{print $1}')
+			# log_info "file md5 is $md5_hash."
+			log_info "screenconfig tar success"
+		fi
+	fi
+fi
+
+
+
+##################################################################################################################################
+#准备阶段，网络初始化
+#ls /sys/bus/usb/devices/2-3:1.0/net/
+if [ "$(getprop ro.product.device)" == "tcl_mt5879_cn" ];then
+	node_path="/sys/bus/usb/devices/2-3:1.0/net/eth1"  # 替换成你要检查的节点路径
+	wait_time=1  # 设置循环检查的间隔时间，单位为秒
+
+	# 循环检测节点是否存在
+	while true; do
+		# 如果已完成一次网络配置，直接退出此循环，避免重复打印
+
+		if [ -e "$node_path" ]; then
+			log_info "$node_path exist，continue..."
+			# 在这里可以添加进一步的操作，如读取节点内容或执行其他命令
+			break  # 可以选择在找到节点后退出循环
+		else
+			log_info "$node_path not exist，wait $wait_time sec..."
+			sleep $wait_time
+			node_path_copy="/sys/bus/usb/devices/2-3:1.0/net/nova_eth1"
+			if [ -e "$node_path_copy" ]; then
+				log_info "$node_path_copy exist，continue..."
+				break
+			fi
+		fi
+	done
+fi
+#sleep 1
+
+#TU20需要将网卡eth1设置为固定ip，并关闭防火墙；与KT60Pro进行通信；其他SOC视情况而定
+if [ "$(getprop ro.product.device)" == "Hi3751V811" ]; then
+	log_info ">>>>>>>>>>>>>device is 811<<<<<<<<<<<<<<<"
+	ifconfig eth1 down
+	/vendor/bin/ip -4 addr add 240.1.1.100/16 dev eth1
+	ifconfig eth1 mtu 9000
+	ifconfig eth1 up
+fi
+
+#sleep 3
+count=0
+if [ "$(getprop ro.product.device)" == "tcl_mt5879_cn" ] || [ "$(getprop ro.product.device)" == "G08" ];then
+
+	log_info ">>>>>>>>>>>>>device is tcl_mt5879_cn<<<<<<<<<<<<<<<"
+	while true; do
+		if [ "$(/vendor/bin/ip route | grep "240.1.0.0/16" | awk '{print $NF}')" == "240.1.1.100" ];then
+			MCU_FLAGE="$(/vendor/bin/upgrade_tool -v -s 0 -f 1 -i 1 | grep "ERROR_CODE" | wc -l)"
+			if [ "$MCU_FLAGE" != "1" ];then
+				log_info "the eth1 net config succcess" 
+				break
+			fi
+		else
+			
+			while true; do 
+				IPRULE=$(/vendor/bin/ip rule | grep "22000:" | awk '{print $NF}')
+				IPROUTE=$(/vendor/bin/ip route | grep "240.1.0.0/16" | awk '{print $1}')
+				IPRULE2=$(/vendor/bin/ip rule | grep "2100:" | awk '{print $NF}')
+				if [[ $IPRULE != "eth0" || $IPROUTE != "240.1.0.0/16" || $IPRULE2 != "eth1" ]];then
+					get_eth0() {
+								eth0_result=$(/vendor/bin/ip rule | grep "22000:" | awk '{print $NF}')
+								log_info "$eth0_result"
+								} 
+
+					eth0_info=$(get_eth0)
+					log_info "$eth0_info"
+
+					while true; do 
+						log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>enter loop"
+						if [ "$(/vendor/bin/ip rule | grep "22000:" | awk '{print $NF}')" == "eth1" ] || [ "$(/vendor/bin/ip rule | grep "22000:" | awk '{print $NF}')" == "1016" ];then
+							log_info "$(/vendor/bin/ip rule | grep "22000:")"
+							#sleep 2
+							#ifconfig eth1 down
+							#log_info ">>>>>>>>>>>>>>>>>>>>eth1 down "
+							#sleep 2
+							#/vendor/bin/ip -4 addr add 240.1.1.100/16 dev eth1
+							#ifconfig eth1 mtu 9000
+							#ifconfig eth1 up
+                            ifconfig eth1 down
+                            /vendor/bin/ip link set eth1 name nova_eth1
+
+                            /vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+                           
+							ifconfig nova_eth1 mtu 9000
+							ifconfig nova_eth1 up
+							log_info ">>>>>>>>>>>>>>>>>>>>eth1 up "
+							eth0_info=$(get_eth0)
+							log_info "$eth0_info"
+							break
+						else
+							break
+						fi
+					done
+
+					log_info ">>>>>>>>>>>>>>>>>>>>enter eth0 "
+					#sleep 5
+					if [ "$(/vendor/bin/ip rule | grep "22000:" | awk '{print $NF}')" == "eth0" ] || [ "$(/vendor/bin/ip rule | grep "22000:" | awk '{print $NF}')" == "1015" ];then	
+						log_info "$(/vendor/bin/ip rule | grep "22000:")"
+						log_info ">>>>>>>>>>>>>>>>>>>>is eth0 "
+				
+						if [ "$(/vendor/bin/ip rule | grep "240.1.1.100" | awk '{print $NF}')" != "nova_eth1" ];then
+							log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>enter eth1"	
+					
+							/vendor/bin/ip rule add from all to 240.1.1.100 lookup 1016 table 1 pref 2000
+					
+							/vendor/bin/ip rule add from all to 240.1.1.1 lookup 1016 table 1 pref 2100
+
+							log_info "$(/vendor/bin/ip rule | grep "240.1.1.1")"
+							log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>quit eth1"	
+							#sleep 1
+							ifconfig eth1 down
+							/vendor/bin/ip link set eth1 name nova_eth1
+							
+                                /vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+							ifconfig nova_eth1 mtu 9000
+							ifconfig nova_eth1 up
+							log_info "first config 240.1.0.0/16"
+							log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 1 -i 1 | grep "ver" | cut -d ":" -sf 2)"
+							#log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 2 -i 0 | grep "ver" | cut -d ":" -sf 2)"
+							#log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 3 -i 0 | grep "ver" | cut -d ":" -sf 2)"
+						fi
+						/vendor/bin/ip rule add from all to 240.1.1.100 lookup 1016 table 1 pref 2000
+						/vendor/bin/ip rule add from all to 240.1.1.1 lookup 1016 table 1 pref 2100
+				
+						#sleep 2
+						while true; do 
+							if [ "$(/vendor/bin/ip route | grep "240.1.0.0/16" | awk '{print $NF}')" == "240.1.1.100" ];then
+								log_info "already have 240.1.0.0/16"
+								log_info "$(/vendor/bin/ip route | grep "240.1.0.0/16" | awk '{print $1}')"
+								log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>version start"
+								log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 1 -i 1 )"
+								#log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 1 -i 1 | grep "ver" | cut -d ":" -sf 2)"
+								#log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 2 -i 0 | grep "ver" | cut -d ":" -sf 2)"
+								#log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 3 -i 0 | grep "ver" | cut -d ":" -sf 2)"
+								#log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>version end"
+								break
+							else
+								log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+								log_info "not 240.1.0.0/16"
+								#ifconfig eth1 down
+                                /vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+								ifconfig nova_eth1 mtu 9000
+								#ifconfig eth1 up
+								log_info "config 240.1.0.0/16"
+								log_info "$(/vendor/bin/ip route | grep "240.1.0.0/16" | awk '{print $1}')"
+								
+							fi
+
+							if [ "$(/vendor/bin/ip route | grep "240.1.0.0/16" | awk '{print $NF}')" == "240.1.1.100" ];then
+								break
+							else
+                            /vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+								log_info "config 240.1.0.0/16 again"
+								log_info "$(/vendor/bin/ip route | grep "240.1.0.0/16" | awk '{print $1}')"
+								log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 1 -i 1 | grep "ver" | cut -d ":" -sf 2)"
+								log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 2 -i 0 | grep "ver" | cut -d ":" -sf 2)"
+								log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 3 -i 0 | grep "ver" | cut -d ":" -sf 2)"
+							fi
+
+						done 
+						log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>end "
+					fi
+
+					#log_info "config end"
+					#log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+					#log_info "$(/vendor/bin/ip rule | grep "22000:")"
+					#log_info "$(/vendor/bin/ip route | grep "240.1.0.0/16")"
+					#log_info "$(/vendor/bin/ip rule | grep "240.1.1.1")" 
+					#log_info "last config 240.1.0.0/16"
+					#log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 1 -i 1 | grep "ver" | cut -d ":" -sf 2)"
+					#log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 2 -i 0 | grep "ver" | cut -d ":" -sf 2)"
+					#log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 3 -i 0 | grep "ver" | cut -d ":" -sf 2)"
+					#log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>right and end "
+					break
+				else 
+					break
+				fi
+			done
+			#ifconfig eth1 down
+			#/vendor/bin/ip -4 addr add 240.1.1.100/16 dev eth1
+			#ifconfig eth1 mtu 9000
+			#ifconfig eth1 up
+			
+			ifconfig eth1 down
+			/vendor/bin/ip link set eth1 name nova_eth1
+
+							/vendor/bin/ip -4 addr replace 240.1.1.100/16 dev nova_eth1
+			ifconfig nova_eth1 mtu 9000
+			ifconfig nova_eth1 up
+			
+			log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>eth1 config end"
+			# 成功一次配置后计数并跳出当前配置循环，避免日志反复刷屏
+			count=$((count+1))
+			ETH_CONFIG_DONE=1
+			break
+		fi
+	done
+fi
+
+if [ "$(getprop ro.product.device)" == "G08" ];then
+  	 sleep 1
+	/vendor/bin/ip rule del pref 11000
+	/vendor/bin/ip rule del pref 16000
+	/vendor/bin/ip rule del pref 17000
+	/vendor/bin/ip rule del pref 18000
+	/vendor/bin/ip rule del pref 19000
+	/vendor/bin/ip rule del pref 20000
+	sleep 1
+	/vendor/bin/ip rule add from all fwmark 0x0/0x10000 lookup legacy_system pref 15000
+	/vendor/bin/ip rule add from all fwmark 0x0/0x10000 lookup legacy_network pref 16000
+	/vendor/bin/ip rule add from all fwmark 0x0/0x10000 lookup local_network pref 17000
+	/vendor/bin/ip rule add from all lookup main pref 19000
+	/vendor/bin/ip rule add iif lo oif dummy0 uidrange 0-0 lookup dummy0 pref 10500
+	/vendor/bin/ip rule add from all fwmark 0x10063/0x1ffff iif lo lookup local_network pref 13000
+	/vendor/bin/ip rule add iif lo oif dummy0 lookup dummy0 pref 14000
+
+
+fi
+
+
+
+if [ "$(getprop ro.product.device)" == "expo" ];then
+	log_info ">>>>>>>>>>>>>device is expo<<<<<<<<<<<<<<<"
+	while true; do 
+		IPRULE=$(/vendor/bin/ip rule | grep "22000:" | awk '{print $NF}')
+		IPROUTE=$(/vendor/bin/ip route | grep "240.1.0.0/16" | awk '{print $1}')
+		IPRULE2=$(/vendor/bin/ip rule | grep "2100:" | awk '{print $NF}')
+		if [[ $IPRULE != "eth0" || $IPROUTE != "240.1.0.0/16" || $IPRULE2 != "eth1" ]];then
+			get_eth0() {
+						eth0_result=$(/vendor/bin/ip rule | grep "22000:" | awk '{print $NF}')
+						log_info "$eth0_result"
+						} 
+			log_info "111"
+			eth0_info=$(get_eth0)
+			log_info "$eth0_info"
+
+			while true; do 
+					log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>enter loop"
+				if [ "$(/vendor/bin/ip rule | grep "22000:" | awk '{print $NF}')" == "eth1" ] || [ "$(/vendor/bin/ip rule | grep "22000:" | awk '{print $NF}')" == "1010" ];then
+					log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+					log_info "$(/vendor/bin/ip rule | grep "22000:")"
+					#sleep 2
+					#ifconfig eth1 down
+					log_info ">>>>>>>>>>>>>>>>>>>>eth1 down "
+					sleep 2
+					ifconfig eth1 mtu 9000
+					/vendor/bin/ip -4 addr add 240.1.1.100/16 dev eth1
+					ifconfig eth1 up
+					log_info ">>>>>>>>>>>>>>>>>>>>eth1 up "
+					eth0_info=$(get_eth0)
+					log_info "$eth0_info"
+				else
+					break
+				fi
+			done
+
+				log_info ">>>>>>>>>>>>>>>>>>>>enter eth0 "
+			sleep 2
+			if [ "$(/vendor/bin/ip rule | grep "22000:" | awk '{print $NF}')" == "eth0" ] || [ "$(/vendor/bin/ip rule | grep "22000:" | awk '{print $NF}')" == "1003" ];then	
+				log_info "$(/vendor/bin/ip rule | grep "22000:")"
+				log_info ">>>>>>>>>>>>>>>>>>>>is eth0 "
+		
+				if [ "$(/vendor/bin/ip rule | grep "240.1.1.100" | awk '{print $NF}')" != "eth1" ];then
+					log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>enter eth1"	
+			
+					/vendor/bin/ip rule add from all to 240.1.1.100 lookup 1010 table 1 pref 2000
+			
+					/vendor/bin/ip rule add from all to 240.1.1.1 lookup 1010 table 1 pref 2100
+
+					log_info "$(/vendor/bin/ip rule | grep "240.1.1.1")"
+					log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>quit eth1"	
+			
+					sleep 1
+					/vendor/bin/ip -4 addr add 240.1.1.100/16 dev eth1
+				
+				fi
+			
+					/vendor/bin/ip rule add from all to 240.1.1.100 lookup 1010 table 1 pref 2000
+			
+					/vendor/bin/ip rule add from all to 240.1.1.1 lookup 1010 table 1 pref 2100
+
+				sleep 2
+				while true; do 
+
+					if [ "$(/vendor/bin/ip route | grep "240.1.0.0/16" | awk '{print $NF}')" == "240.1.1.100" ];then
+						log_info "already have 240.1.0.0/16"
+						log_info "$(/vendor/bin/ip route | grep "240.1.0.0/16" | awk '{print $1}')"
+						log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>version start"
+						log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 1 -i 1 | grep "ver" | cut -d ":" -sf 2)"
+						log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 2 -i 0 | grep "ver" | cut -d ":" -sf 2)"
+						log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 3 -i 0 | grep "ver" | cut -d ":" -sf 2)"
+						log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>version end"
+						break
+					else
+						log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+						log_info "not 240.1.0.0/16"
+						/vendor/bin/ip -4 addr add 240.1.1.100/16 dev eth1
+						log_info "config 240.1.0.0/16"
+						log_info "$(/vendor/bin/ip route | grep "240.1.0.0/16" | awk '{print $1}')"
+						
+					fi
+
+					if [ "$(/vendor/bin/ip route | grep "240.1.0.0/16" | awk '{print $NF}')" == "240.1.1.100" ];then
+						break
+					else
+						/vendor/bin/ip -4 addr add 240.1.1.100/16 dev eth1
+						log_info "config 240.1.0.0/16 again"
+						log_info "$(/vendor/bin/ip route | grep "240.1.0.0/16" | awk '{print $1}')"
+						log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 1 -i 1 | grep "ver" | cut -d ":" -sf 2)"
+						log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 2 -i 0 | grep "ver" | cut -d ":" -sf 2)"
+						log_info "$(/vendor/bin/upgrade_tool -v -s 0 -f 3 -i 0 | grep "ver" | cut -d ":" -sf 2)"
+						
+					fi
+
+				done 
+				log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>end "
+			fi
+
+			log_info "config end"
+			log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+			log_info "$(/vendor/bin/ip rule | grep "22000:")"
+			log_info "$(/vendor/bin/ip route | grep "240.1.0.0/16")"
+			log_info "$(/vendor/bin/ip rule | grep "240.1.1.1")" 
+			log_info ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>right and end "
+			break
+		else 
+			break
+		fi
+	done
+	/vendor/bin/ip -4 addr add 240.1.1.100/16 dev eth1
+fi
+
+##################################################################################################################################
+#第一阶段，upgrade模块启动
+#脚本依赖：upgrade模块的返回值
+#        如果返回0：正常启动无升级动作
+#   		   99: 有升级动作升级成功
+#              -1：获取当前器件版本失败
+#              -2：获取升级后器件版本失败
+#              -3：MCU复位失败
+#			   -4：MCU升级失败
+#			   -5：FPGA升级失败
+#			   -6：GOLDEN升级失败
+log_info ">>>>>>>>>>>>>>>>>>>>start upgrade: "
+#sleep 1
+MCU_CURRENT_VER=$(/vendor/bin/upgrade_tool -v -s 0 -f 1 -i 1 | grep "ver" | cut -d ":" -sf 2)
+FPGA_CURRENT_VER=$(/vendor/bin/upgrade_tool -v -s 0 -f 2 -i 0 | grep "ver" | cut -d ":" -sf 2)
+
+#网络未准备好
+if [ "$MCU_CURRENT_VER" = " " ] && [ "$FPGA_CURRENT_VER" = " " ]; then
+	log_info "the network not connect, don't upgrade"
+else
+	$upgrade_defpath $mcu_defpath $fpga_defpath $bin_path
+	upgradeStatus=$?
+	updateSign=NotUpdate
+	log_info "upgrade return $upgradeStatus"
+
+
+	if [ $upgradeStatus -eq 99  ]; then #升级成功
+		log_info ">>>>>>>>>>>>>>>>>>>> update mcu&fpga success"
+		updateSign=UpdateSuccess
+	fi
+
+	if [ $upgradeStatus -ge 250 ] && [ $upgradeStatus -le 256 ]; then #升级失败
+		log_info ">>>>>>>>>>>>>>>>>>>> update mcu&fpga fail, retry"
+		bin_path="defpath"
+		$upgrade_defpath $mcu_defpath $fpga_defpath $bin_path #再次重试一下升级
+		upgradeStatus=$?
+		
+		if [ $upgradeStatus -eq 99  ]; then #升级成功
+			log_info ">>>>>>>>>>>>>>>>>>>> retry update mcu&fpga success"
+			updateSign=UpdateSuccess
+		fi
+
+		if [ $upgradeStatus -ge 250 ] && [ $upgradeStatus -le 256 ]; then #升级再次失败
+			log_info ">>>>>>>>>>>>>>>>>>>> retry update mcu&fpga fail, update backup mcu&fpga"
+			
+			if [ -e $upgrade_backuppath ]; then
+				#修改成备份位置的fpga和mcu
+				bin_path="backup"
+				chmod 0777 $upgradetools_backuppath/*
+				if [ "$(getprop ro.product.device)" == "Hi3751V811" ];then
+					busybox tar -xzvf $UpgraderConfig_backuppath -C $upgrade_backupdir #压缩tar -zcvf
+				fi
+				if [ "$(getprop ro.product.device)" == "expo" ] || [ "$(getprop ro.product.device)" == "tcl_mt5879_cn" ] || [ "$(getprop ro.product.device)" == "G08" ];then
+					tar -xzvf $UpgraderConfig_backuppath -C $upgrade_backupdir #压缩tar -zcvf
+				fi
+				  
+				cp $upgrade_backupdir/UpgradeConfig/config/* $UpgraderWork_path/UpgradeConfig/config
+				$upgrade_backuppath $mcu_backuppath  $fpga_backuppath $bin_path
+				log_info "start backup upgrade success"
+			fi
+			updateSign=UpdateFail
+		fi
+	fi
+fi
+
+
+#########################################################################################################
+# XserverBackup_path=/vendor/persist 
+# # #针对TCl升级系统造成配屏信息丢失问题，impdata目录下不会清除，因此将备份信息存到该目录下，存储路径为/impdata/xserver/controller
+# if [ "$(getprop ro.product.device)" == "tcl_mt5879_cn" ];then
+	# if [ ! -d "$XserverUserdata_path/controller/usrconfig" ]; then
+		# if [ -d "$XserverBackup_path/xserver/controller/usrconfig" ]; then	#xserver 无  /vendor/persist 有
+		    # if [ ! -d "$XserverUserdata_path/controller" ]; then
+				# mkdir -p $XserverUserdata_path/controller
+				# mkdir -p $XserverUserdata_path/controller/usrconfig
+			# fi
+			# cp -r $XserverBackup_path/xserver/controller/usrconfig/* $XserverUserdata_path/controller/usrconfig/
+			
+		# fi
+	# fi
+
+
+	# if [ -d "$XserverUserdata_path/controller/usrconfig" ]; then
+		# if [ ! -d "$XserverBackup_path/xserver/controller/usrconfig" ]; then	 #xserver 有  /vendor/persist 无
+			# mkdir -p $XserverBackup_path/xserver/controller
+			# mkdir -p $XserverBackup_path/xserver/controller/usrconfig
+			# cp -r $XserverUserdata_path/controller/usrconfig/* $XserverBackup_path/xserver/controller/usrconfig/
+		# fi
+
+		# if [ -d "$XserverBackup_path/xserver/controller/usrconfig" ]; then	 #xserver 有  /vendor/persist 有
+			# cp -r $XserverUserdata_path/controller/usrconfig/* $XserverBackup_path/xserver/controller/usrconfig/
+		# fi
+	# fi
+
+# fi
+# file_size=$(stat -c %s "$USRCONFIG")
+# log_info "file size is $file_size."
+# 计算MD5并保存到变量
+# md5_hash=$(md5sum "$USRCONFIG" | awk '{print $1}')
+# log_info "file md5 is $md5_hash."
+########################################################################################################################################
+#进入第二阶段，Xserver的启动流程
+log_info ">>>>>>>>>>>>>>>>>>>>start Xserver: "
+#在这里配置网络是因为str会重新拉起StartManage，所以在xserver前配置一次网络
+
+
+ifconfig eth1 down
+/vendor/bin/ip link set eth1 name nova_eth1
+/vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+ifconfig nova_eth1 mtu 9000
+ifconfig nova_eth1 up
+file_size=$(stat -c %s "$USRCONFIG")
+log_info "file size is $file_size."
+
+
+# 设置 Neo 运行状态属性，1=已运行，0=未运行
+set_neo_ready_prop() {
+    setprop sys.nova.neo.ready "$1" 2>/dev/null || true
+	log_info "set prop sys.nova.neo.ready $1"
+}
+
+
+
+# # 计算MD5并保存到变量
+# md5_hash=$(md5sum "$USRCONFIG" | awk '{print $1}')
+# log_info "file md5 is $md5_hash."
+if [ $updateSign == "UpdateFail" ]; then
+	log_info"start backup xserver"
+	#修改成备份位置的Xserver
+	chmod 0777 $xserver_backuppath
+	if [ "$(getprop ro.product.device)" == "Hi3751V811" ];then
+		busybox tar -xzvf $XserverConfig_backuppath -C $xserver_backupdir #压缩tar -zcvf
+	fi
+	if [ "$(getprop ro.product.device)" == "expo" ] || [ "$(getprop ro.product.device)" == "tcl_mt5879_cn" ] || [ "$(getprop ro.product.device)" == "G08" ];then
+		tar -xzvf $XserverConfig_backuppath -C $xserver_backupdir #压缩tar -zcvf
+	fi
+
+	mv $xserver_backupdir/controller/header $xserver_backupdir/upgrader
+	export LD_LIBRARY_PATH=$libxserver_backuppath:"${LD_LIBRARY_PATH}"
+	setup_xserver_log
+	log_xserver_param
+	$xserver_backuppath -UserdataPath="$XserverUserdata_path" -OemPath="$XserverWork_path" -FPGAIface=nova_eth1 $XSERVER_LOG_PARAM &
+	XserverSign=backup
+else 
+	log_info "start defpath xserver"
+	file_size=$(stat -c %s "$USRCONFIG")
+	log_info "file size is $file_size."
+	# file_size=$(stat -c %s "$USRCONFIG")
+	# log_info "file size is $file_size."
+	# 计算MD5并保存到变量
+	# md5_hash=$(md5sum "$USRCONFIG" | awk '{print $1}')
+	# log_info "file md5 is $md5_hash."
+	export LD_LIBRARY_PATH=/vendor/bin:$LD_LIBRARY_PATH
+	export LD_LIBRARY_PATH=/vendor/lib:$LD_LIBRARY_PATH
+	setup_xserver_log
+	log_xserver_param
+	$xserver_defpath -UserdataPath="$XserverUserdata_path" -OemPath="$XserverWork_path" -FPGAIface=nova_eth1 $XSERVER_LOG_PARAM &
+	XserverSign=defpath
+fi
+
+sleep 2
+ps -ef | grep NeoController | grep -v grep
+
+if [ $? -eq 0 ]; then
+	file_size=$(stat -c %s "$USRCONFIG")
+	log_info "file size is $file_size."
+	set_neo_ready_prop 1
+    log_info ">>>>>>>>>>>>>>>>> Xserver One start is success"
+else #能走到这里，肯定是从defpath中启动xserver的
+	
+	export LD_LIBRARY_PATH=/vendor/bin:$LD_LIBRARY_PATH
+	export LD_LIBRARY_PATH=/vendor/lib:$LD_LIBRARY_PATH
+    log_warn "Xserver one start is fail"
+	file_size=$(stat -c %s "$USRCONFIG")
+	log_info "file size is $file_size."
+	# 计算MD5并保存到变量
+	# md5_hash=$(md5sum "$USRCONFIG" | awk '{print $1}')
+	# log_info "file md5 is $md5_hash."
+	sleep 2
+	setup_xserver_log
+	log_xserver_param
+	$xserver_defpath -UserdataPath="$XserverUserdata_path" -OemPath="$XserverWork_path" -FPGAIface=nova_eth1 $XSERVER_LOG_PARAM &       #第二次尝试启动xserver
+	sleep 2
+	ps -ef | grep NeoController | grep -v grep
+	
+	export LD_LIBRARY_PATH=/vendor/bin:$LD_LIBRARY_PATH
+	export LD_LIBRARY_PATH=/vendor/lib:$LD_LIBRARY_PATH
+	if [ $? -eq 0 ]; then
+		set_neo_ready_prop 1
+		file_size=$(stat -c %s "$USRCONFIG")
+		log_info "file size is $file_size."
+		# file_size=$(stat -c %s "$USRCONFIG")
+		# log_info "file size is $file_size."
+		# # 计算MD5并保存到变量
+		# md5_hash=$(md5sum "$USRCONFIG" | awk '{print $1}')
+		# log_info "file md5 is $md5_hash."
+		
+    	log_info "Xserver two start is success"
+		XserverSign=defpath
+	else
+		# log_warn "Xserver two start is fail"
+		# file_size=$(stat -c %s "$USRCONFIG")
+		# log_info "file size is $file_size."
+		# # 计算MD5并保存到变量
+		# md5_hash=$(md5sum "$USRCONFIG" | awk '{print $1}')
+		# log_info "file md5 is $md5_hash."
+		sleep 2
+		setup_xserver_log
+		log_xserver_param
+		$xserver_defpath -UserdataPath="$XserverUserdata_path" -OemPath="$XserverWork_path" -FPGAIface=nova_eth1 $XSERVER_LOG_PARAM &   #第三次尝试启动xserver
+		sleep 2
+		ps -ef | grep NeoController | grep -v grep
+		
+		export LD_LIBRARY_PATH=/vendor/bin:$LD_LIBRARY_PATH
+		export LD_LIBRARY_PATH=/vendor/lib:$LD_LIBRARY_PATH
+		if [ $? -eq 0 ]; then
+			set_neo_ready_prop 1
+    		log_info "Xserver thress is success"
+			XserverSign=defpath
+		else
+			log_warn ">>>>>>>>>>>>>>>> Xserver three  is fail, start backup upgrade and xserver"
+			#这里需要修改成备份位置的fpga和mcu
+			bin_path="backup"
+			chmod 0777 $upgradetools_backuppath/*
+			if [ "$(getprop ro.product.device)" == "Hi3751V811" ];then
+				busybox tar -xzvf $UpgraderConfig_backuppath -C $upgrade_backupdir #压缩tar -zcvf
+			fi
+			if [ "$(getprop ro.product.device)" == "expo" ] || [ "$(getprop ro.product.device)" == "tcl_mt5879_cn" ] || [ "$(getprop ro.product.device)" == "G08" ];then
+				tar -xzvf $UpgraderConfig_backuppath -C $upgrade_backupdir #压缩tar -zcvf
+			fi
+			 
+			cp $upgrade_backupdir/UpgradeConfig/config/* $UpgraderWork_path/UpgradeConfig/config
+			$upgrade_backuppath $mcu_backuppath  $fpga_backuppath $bin_path
+
+			#修改成备份位置的Xserver
+			chmod 0777 $xserver_backuppath
+			if [ "$(getprop ro.product.device)" == "Hi3751V811" ];then
+				busybox tar -xzvf $XserverConfig_backuppath -C $xserver_backupdir #压缩tar -zcvf
+			fi
+			if [ "$(getprop ro.product.device)" == "expo" ] || [ "$(getprop ro.product.device)" == "tcl_mt5879_cn" ] || [ "$(getprop ro.product.device)" == "G08" ];then
+				tar -xzvf $XserverConfig_backuppath -C $xserver_backupdir #压缩tar -zcvf
+			fi
+			  
+			mv $xserver_backupdir/controller/header $xserver_backupdir/upgrader
+			export LD_LIBRARY_PATH=$libxserver_backuppath:"${LD_LIBRARY_PATH}"
+			killall -9 NeoController
+			setup_xserver_log
+			log_xserver_param
+			$xserver_backuppath -UserdataPath="$XserverUserdata_path" -OemPath="$XserverWork_path" -FPGAIface=nova_eth1 $XSERVER_LOG_PARAM &
+			XserverSign=backup
+		fi
+	fi
+
+fi
+
+#如果顺利从bin中启动xserver，则将mcu+fpga+xserver备份到backup位置
+if [ $XserverSign == "defpath" ]; then
+	log_info ">>>>>>>>>>>>>>>>>>>>>> defpath Xserver is start,  backup xserver&mcu&fpga"
+	#备份配置文件（包含lib库）
+	cp -rf $XserverConfig_path $Config_backupdir
+	cp -rf $UpgraderConfig_path $Config_backupdir
+
+	#备份可执行程序
+	cp -rf $upgrade_defpath $upgradetools_backuppath
+	cp -rf $transfer_defpath $upgradetools_backuppath
+	cp -rf $upgradetool_defpath $upgradetools_backuppath
+	cp -rf $xserver_defpath $xserver_backupdir
+	log_info ">>>>>>>>>>>>>>>>>>>>>> backup xserver&mcu&fpga success"
+fi
+########################################################################################################################################
+
+
+
+###########################################################################################################################################
+#进入第三阶段，Xserver保活流程
+
+#Xserver保活的查询周期，单位s， 如果是 0，则代表关闭保活机制	 		   
+cycle=60
+
+if [ $cycle -eq 0 ]; then
+	log_info "close xserver guard"
+fi
+
+# 仅在网卡配置完成后，首轮杀 1 次 NeoController，后续正常守护（STR 掉线后可再次触发）
+KILLED_ONCE=0
+# 仅在经历“掉线→重配→恢复”后才允许杀一次
+NET_WAS_BAD=0
+
+# 定义一个函数，用于执行需要每 5 秒执行配置网络的命令，应对tcL的str快速开机，会down掉eth1
+command_eth1_5s() {
+    while true; do
+        # 在这里写入需要每 5 秒执行一次的命令
+		ETH_OK=0
+		while true; do
+		if [ "$(/vendor/bin/ip addr show nova_eth1 | awk '/inet / {print $2}' | cut -d'/' -f1)" != "240.1.1.100" ];then
+            # STR 可能导致网卡掉线，重配前重置“一次性杀进程”标志
+            KILLED_ONCE=0
+            NET_WAS_BAD=1
+            log_info "config eth1"
+
+          	ifconfig eth1 down
+			/vendor/bin/ip link set eth1 name nova_eth1
+			log_info "/vendor/bin/ip link set eth1 name nova_eth1"
+            # 设置地址使用 replace，保持幂等
+            /vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+            log_info "ip -4 addr add 240.1.1.100/16 dev nova_eth1"
+
+            ifconfig nova_eth1 mtu 9000
+            log_info "ifconfig nova_eth1 mtu 9000"
+
+            ifconfig nova_eth1 up
+            log_info "loop config eth1 already success"
+            sleep 3
+		
+            log_info "sleep 3"
+            if [ "$(getprop ro.product.device)" == "G08" ];then
+                log_info "config ip rule"
+                sleep 1
+                /vendor/bin/ip rule del pref 11000
+                /vendor/bin/ip rule del pref 16000
+                /vendor/bin/ip rule del pref 17000
+                /vendor/bin/ip rule del pref 18000
+                /vendor/bin/ip rule del pref 19000
+                /vendor/bin/ip rule del pref 20000
+                sleep 1
+                /vendor/bin/ip rule add from all fwmark 0x0/0x10000 lookup legacy_system pref 15000
+                /vendor/bin/ip rule add from all fwmark 0x0/0x10000 lookup legacy_network pref 16000
+                /vendor/bin/ip rule add from all fwmark 0x0/0x10000 lookup local_network pref 17000
+                /vendor/bin/ip rule add from all lookup main pref 19000
+                /vendor/bin/ip rule add iif lo oif dummy0 uidrange 0-0 lookup dummy0 pref 10500
+                /vendor/bin/ip rule add from all fwmark 0x10063/0x1ffff iif lo lookup local_network pref 13000
+                /vendor/bin/ip rule add iif lo oif dummy0 lookup dummy0 pref 14000
+
+                log_info "config ip rule success"
+            fi
+		else
+			log_info "eth1 already have111111"
+			# sleep 1
+			ETH_OK=1
+			break
+		fi
+			done
+			#/system/bin/tcpdump -i nova_eth1 -xxx -w /sdcard/xserver.pcap  &
+            #在此处配网之后再加入将xserver进程杀死的逻辑，就是为了执行配网之后再启动xserver时序
+            # 获取名为 NeoController 的进程的 PID
+            pid=$(pgrep NeoController)
+            log_info "pid: $pid"
+            # 检查是否成功获取到 PID
+            if [ -z "$pid" ]; then   #NeoController未起来
+                log_info "start NeoController again"
+
+                mkdir -p $XserverUserdata_path/controller
+                mkdir -p $XserverUserdata_path/controller/usrconfig
+                if [ -d "$SCREEN_DIR" ] && [ -f "$SCREEN_DIR/screenConfig.toml" ]; then
+                    cp -r /userdata/usrconfig/* /data/vendor/nova/xserver/controller/usrconfig/
+                    log_info "return $?"
+                    file_size=$(stat -c %s "$USRCONFIG")
+                    log_info "file size is $file_size."
+                    log_info "cp /userdata/usrconfig screen"
+                else
+                    cp -r /vendor/etc/usrconfig/* /data/vendor/nova/xserver/controller/usrconfig/
+                fi
+                #log_info "return $?"
+                log_info "screenconfig tar success1111"
+                file_size=$(stat -c %s "$USRCONFIG")
+                log_info "file size is $file_size."
+
+                # setup_xserver_log
+                # log_xserver_param
+                $xserver_defpath -UserdataPath="$XserverUserdata_path" -OemPath="$XserverWork_path" -FPGAIface=nova_eth1 $XSERVER_LOG_PARAM &
+                # 刚拉起一次，认为已完成首轮动作，避免后续立即杀进程；
+                # 若后续掉线，前面的掉线检测会重置 KILLED_ONCE/NET_WAS_BAD。
+                KILLED_ONCE=1
+                NET_WAS_BAD=0
+                set_neo_ready_prop 1
+            else
+                # 仅在网卡正常后首轮杀一次 Neo，且确认曾掉线过
+                if [ "$ETH_OK" -eq 1 ] && [ "$KILLED_ONCE" -eq 0 ] && [ "$NET_WAS_BAD" -eq 1 ]; then
+                    # 再次确认 IP 仍正常，避免误杀
+                    if [ "$(/vendor/bin/ip addr show nova_eth1 | awk '/inet / {print $2}' | cut -d'/' -f1)" = "240.1.1.100" ]; then
+                        log_info "kill -9 Neo (one-shot after eth ok)"
+                        kill -9 $pid
+                        if [ $? -eq 0 ]; then
+                    #log_info "kill NeoController (PID: $pid)。"
+                    mkdir -p $XserverUserdata_path/controller
+                    mkdir -p $XserverUserdata_path/controller/usrconfig
+                    if [ -d "$SCREEN_DIR" ] && [ -f "$SCREEN_DIR/screenConfig.toml" ]; then
+                        cp -r /userdata/usrconfig/* /data/vendor/nova/xserver/controller/usrconfig/
+                        log_info "return $?"
+                        file_size=$(stat -c %s "$USRCONFIG")
+                        log_info "file size is $file_size."
+                        log_info "cp /userdata/usrconfig screen"
+                    else
+                        cp -r /vendor/etc/usrconfig/* /data/vendor/nova/xserver/controller/usrconfig/
+                    fi
+                    #log_info "return $?"
+                    log_info "screenconfig tar success22222"
+                    file_size=$(stat -c %s "$USRCONFIG")
+                    log_info "file size is $file_size."
+					#/system/bin/tcpdump -i nova_eth1 -xxx -w /sdcard/xserver.pcap &
+                    # setup_xserver_log
+                    # log_xserver_param
+                    $xserver_defpath -UserdataPath="$XserverUserdata_path" -OemPath="$XserverWork_path" -FPGAIface=nova_eth1 $XSERVER_LOG_PARAM &
+                    ps -ef | grep NeoController | grep -v grep
+                    if [ $? -eq 0 ]; then #正常运行
+                        
+                        log_info "Xserver after kill run is normal"
+                        KILLED_ONCE=1
+                        NET_WAS_BAD=0
+						set_neo_ready_prop 1
+                    else
+
+                        mkdir -p $XserverUserdata_path/controller
+                        mkdir -p $XserverUserdata_path/controller/usrconfig
+                        if [ -d "$SCREEN_DIR" ] && [ -f "$SCREEN_DIR/screenConfig.toml" ]; then
+                            cp -r /userdata/usrconfig/* /data/vendor/nova/xserver/controller/usrconfig/
+                            log_info "return $?"
+                            file_size=$(stat -c %s "$USRCONFIG")
+                            log_info "file size is $file_size."
+                            log_info "cp /userdata/usrconfig screen"
+                        else
+                            cp -r /vendor/etc/usrconfig/* /data/vendor/nova/xserver/controller/usrconfig/
+                        fi
+                        #log_info "return $?"
+                        log_info "screenconfig tar success444444"
+						#/system/bin/tcpdump -i nova_eth1 -xxx -w /sdcard/xserver.pcap &
+                        file_size=$(stat -c %s "$USRCONFIG")
+                        log_info "file size is $file_size."
+                        # setup_xserver_log
+                        # log_xserver_param
+                        $xserver_defpath -UserdataPath="$XserverUserdata_path" -OemPath="$XserverWork_path" -FPGAIface=nova_eth1 $XSERVER_LOG_PARAM &
+                        set_neo_ready_prop 1
+                    fi
+                fi
+                    else
+                        log_info "skip kill: ip check failed"
+                    fi
+                else
+                    log_info "not kill NeoController (PID: $pid)。"
+                fi
+            fi
+	
+		if [ $cycle -eq 0 ]; then
+			sleep 300
+		else
+			#sleep $cycle
+			ps -ef | grep NeoController | grep -v grep
+			if [ $? -eq 0 ]; then #正常运行
+				log_info "Xserver run is normal"
+			
+			else #进程不存在了
+				if [ $XserverSign = "defpath" ]; then
+					mkdir -p $XserverUserdata_path/controller
+					mkdir -p $XserverUserdata_path/controller/usrconfig
+					if [ -d "$SCREEN_DIR" ] && [ -f "$SCREEN_DIR/screenConfig.toml" ]; then
+						cp -r /userdata/usrconfig/* /data/vendor/nova/xserver/controller/usrconfig/
+						log_info "return $?"
+						file_size=$(stat -c %s "$USRCONFIG")
+						log_info "file size is $file_size."
+						log_info "cp /userdata/usrconfig screen"
+					else
+						cp -r /vendor/etc/usrconfig/* /data/vendor/nova/xserver/controller/usrconfig/
+					fi
+					#log_info "return $?"
+					log_info "screenconfig tar success6666666"
+					file_size=$(stat -c %s "$USRCONFIG")
+					log_info "file size is $file_size."
+				#/system/bin/tcpdump -i nova_eth1 -xxx -w /sdcard/xserver.pcap &
+				log_warn "start system xserver"
+				# setup_xserver_log
+				# log_xserver_param
+				$xserver_defpath -UserdataPath="$XserverUserdata_path" -OemPath="$XserverWork_path" -FPGAIface=nova_eth1 $XSERVER_LOG_PARAM &
+			else
+					mkdir -p $XserverUserdata_path/controller
+					mkdir -p $XserverUserdata_path/controller/usrconfig
+					if [ -d "$SCREEN_DIR" ] && [ -f "$SCREEN_DIR/screenConfig.toml" ]; then
+						cp -r /userdata/usrconfig/* /data/vendor/nova/xserver/controller/usrconfig/
+						log_info "return $?"
+						file_size=$(stat -c %s "$USRCONFIG")
+						log_info "file size is $file_size."
+						log_info "cp /userdata/usrconfig screen"
+					else
+						cp -r /vendor/etc/usrconfig/* /data/vendor/nova/xserver/controller/usrconfig/
+					fi
+					#log_info "return $?"
+					log_info "screenconfig tar success777777"
+					file_size=$(stat -c %s "$USRCONFIG")
+					log_info "file size is $file_size."
+					
+				log_warn "start backup xserver"
+				#/system/bin/tcpdump -i nova_eth1 -xxx -w /sdcard/xserver.pcap &
+				export LD_LIBRARY_PATH=$libxserver_backuppath:${LD_LIBRARY_PATH}
+				# setup_xserver_log
+				# log_xserver_param
+				$xserver_backuppath -UserdataPath="$XserverUserdata_path" -OemPath="$XserverWork_path" -FPGAIface=nova_eth1 $XSERVER_LOG_PARAM &
+			fi
+			fi
+		fi
+		log_info "eth1 already have"
+		sleep 3
+		file_size=$(stat -c %s "$USRCONFIG")
+		log_info "file size is $file_size."
+    done
+}
+
+#保活60s，原来配置保留
+command_alive_60s() {
+	while true
+	do
+	{
+		
+		 sleep 3
+	}
+	done
+}
+
+# 循环执行两个命令
+
+# 主循环：监控后台任务状态，如果进程退出则重启
+# 注意：这里监控的是后台任务的PID，如果任务正常退出会被重启
+while true; do
+        command_eth1_5s &
+       
+        command_alive_60s &
+       
+		wait
+done
+
+
+

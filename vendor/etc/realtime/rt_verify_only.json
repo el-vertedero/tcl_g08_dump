@@ -1,0 +1,110 @@
+{
+    "System_Capability" :{
+        "Util": 11808,
+        "Reservation": 80,
+        "_description": "Unit of Util is DMIPS, which is also the maximum total util per core.",
+        "_description": "However, the RT framework does not guarantee the sum of Util in each domain does not over the $Util.",
+        "_description": "the domain's system capability is equal to (System_Capability per core) * (cpuset core number) ."
+        "Enabled": 1,
+        "BudgetCpuNum": 2,
+        "DbgLevel": 6
+    },
+
+
+    "Domain_Vts1": {
+        "Util": 2500,
+        "Cpuset": "2-3",
+        "_description": "Unit of Util is DMIPS, which can be seen as local maximum Util for this Domain. When $RT_Priority is set, use RR scheduler.",
+        "Class_RR1": {
+            "PerThreadUtil": 500,
+            "RT_Priority": 60,
+            "_description": "Unit of PerThreadUtil is DMIPS, which each thread in the class occupy $PerThreadUtil util."
+        },
+        "Class_RR2": {
+            "PerThreadUtil": 700,
+            "RT_Priority": 40
+        }
+    },
+    "Domain_Vts2": {
+        "_description": "Util equal to 0 means there is no budget limitation in the domain",
+        "_description": "if Util is equal 0, support schedule RR policy only, not support schedule Deadline policy",
+        "_description": "if Util is equal 0, use the default cpuset setting",
+        "Util": 0,
+        "Cpuset": "0-3",
+        "Class_RR_All": {
+            "PerThreadUtil": 0,
+            "RT_Priority": 50
+        }
+    },
+    "Domain_Vts3": {
+        "Util": 2000,
+        "Cpuset": "2,3",
+        "Class_DL_30FPS": {
+            "_description": "converted util = (DL_RuntimeUs/DL_DeadlineUs) * (Util in System_Capability), e.g. (1000/33333) * 2500 = 75",
+            "DL_RuntimeUs": 1000,
+            "DL_DeadlineUs": 16000,
+            "DL_PeriodUs": 33333
+        },
+        "Class_DL_50FPS": {
+            "_description": "converted util = (DL_RuntimeUs/DL_DeadlineUs) * (Util in System_Capability), e.g. (1000/33333) * 2500 = 125",
+            "DL_RuntimeUs": 1000,
+            "DL_DeadlineUs": 10000,
+            "DL_PeriodUs": 20000
+        },
+        "Class_DL_60FPS": {
+            "_description": "converted util = (DL_RuntimeUs/DL_DeadlineUs) * (Util in System_Capability), e.g. (1000/33333) * 2500 = 150",
+            "DL_RuntimeUs": 1000,
+            "DL_DeadlineUs": 8000,
+            "DL_PeriodUs": 16666
+        }
+    },
+    "Domain_Vts4_error": {
+        "_description": "DL & RR in the same domain is error.",
+        "Util": 0,
+        "Cpuset": "0-3",
+        "Class_DL": {
+            "DL_RuntimeUs": 1000,
+            "DL_DeadlineUs": 8000,
+            "DL_PeriodUs": 16666
+        },
+        "Class_RR": {
+            "PerThreadUtil": 700,
+            "RT_Priority": 40
+        }
+    },
+    "Domain_Vts5": {
+        "Util": 100,
+        "Cpuset": "2,3",
+        "Class_DL": {
+            "DL_RuntimeUs": 1000,
+            "DL_DeadlineUs": 8000,
+            "DL_PeriodUs": 16666
+        },
+        "Class_DL_error": {
+            "_description": "Rule: Period >= Deadline >= Runtime",
+            "DL_RuntimeUs": 10000,
+            "DL_DeadlineUs": 6666,
+            "DL_PeriodUs": 16666
+        }
+    },
+    "Domain_Vts6": {
+        "Util":500,
+        "Cpuset": "2,3",
+        "Class_RR": {
+            "PerThreadUtil": 600,
+            "RT_Priority": 40
+        },
+        "Class_RR_invalid_priority": {
+            "PerThreadUtil": 300,
+            "RT_Priority": 0
+        }
+    },
+    "Domain_Vts7": {
+        "Util":500,
+        "Cpuset": "2,3",
+        "Class_RR": {
+            "PerThreadUtil": 600,
+            "RT_Priority": 40
+        }
+    }
+}

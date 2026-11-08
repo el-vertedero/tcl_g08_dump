@@ -1,0 +1,457 @@
+#!/vendor/bin/sh
+#        upgrade模块的返回值
+#        如果返回0：正常启动无升级动作
+#   		   99: 有升级动作升级成功
+#              -1：获取器件版本失败
+#              -2：升级后器件版本不一致
+#              -3：MCU复位失败
+#			   -4：MCU升级失败
+#			   -5：FPGA升级失败
+#			   -6：GOLDEN升级失败
+
+source /vendor/bin/NovaLog
+
+log_info "upgrade start"
+
+if [ "$3" = "defpath" ];then
+    #header_path=/sdcard/upgrader/UpgradeConfig/config/header
+	#调整到/data/vendor/nova目录，selinux权限优化
+	header_path=/data/vendor/nova/upgrader/UpgradeConfig/config/header
+    upgrade_tool=/vendor/bin/upgrade_tool
+    transfer_tool=/vendor/bin/transfer_tool
+else
+    export LD_LIBRARY_PATH=/data/NovaBackup/upgrader/UpgradeConfig/lib:"${LD_LIBRARY_PATH}"
+    header_path=/sdcard/NovaBackup/upgrader/UpgradeConfig/config/header
+    upgrade_tool=/sdcard/NovaBackup/upgrader/tools/upgrade_tool
+    transfer_tool=/sdcard/NovaBackup/upgrader/tools/transfer_tool
+fi
+
+if [ "$(getprop ro.product.device)" == "Hi3751V811" ];then
+	MCU_PATH="$1/$(ls -l "$1" | busybox awk '{print $NF}' | grep "MCU")"
+	FPGA_PATH="$2/$(ls -l "$2" | busybox awk '{print $NF}' | sed '/GOLDEN/d' | grep "FPGA*")"
+	GOLDEN_PATH="$2/$(ls -l "$2" | busybox awk '{print $NF}' | grep "GOLDEN")"
+fi
+if [ "$(getprop ro.product.device)" == "expo" ] || [ "$(getprop ro.product.device)" == "tcl_mt5879_cn" ] || [ "$(getprop ro.product.device)" == "G08" ];then
+	MCU_PATH="$1/$(ls -l "$1" | awk '{print $NF}' | grep "MCU")"
+	FPGA_PATH="$2/$(ls -l "$2" | awk '{print $NF}' | sed '/GOLDEN/d' | grep "FPGA*")"
+	GOLDEN_PATH="$2/$(ls -l "$2" | awk '{print $NF}' | grep "GOLDEN")"
+fi
+
+log_info "$MCU_PATH"
+log_info "$FPGA_PATH"
+log_info "$GOLDEN_PATH"
+MCU_RESET_FLAG=0
+
+function GetUpgradeVer() {
+    FPGA_UPGRADE_VER=$(grep -A0 "version" $header_path | sed 's/,//g' | cut -d ":" -sf 2 | sed 's/\"//g' | sed -e 's/^[ ]*//g' | sed -e 's/[ ]*$//g' | sed -n '1p')
+    GOLDEN_UPGRADE_VER=$(grep -A0 "version" $header_path | sed 's/,//g' | cut -d ":" -sf 2 | sed 's/\"//g' | sed -e 's/^[ ]*//g' | sed -e 's/[ ]*$//g' | sed -n '2p')
+    MCU_UPGRADE_VER=$(grep -B0  "version" $header_path | sed 's/,//g' | cut -d ":" -sf 2 | sed 's/\"//g' | sed -e 's/^[ ]*//g' | sed -e 's/[ ]*$//g' | sed -n '3p')
+}
+
+function GetCurrentVer() {
+    cnt=1
+    while [ $cnt -le 15 ]
+    do
+		ifconfig eth1 down
+		/vendor/bin/ip link set eth1 name nova_eth1
+
+		/vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+		ifconfig nova_eth1 mtu 9000
+		ifconfig nova_eth1 up
+		
+        MCU_FLAGE="$(/vendor/bin/upgrade_tool -v -s 0 -f 1 -i 1 | grep "ERROR_CODE" | wc -l)"
+        FPGA_FLAGE="$(/vendor/bin/upgrade_tool -v -s 0 -f 2 -i 0 | grep "ERROR_CODE" | wc -l)"
+        GODLEN_FLAGE="$(/vendor/bin/upgrade_tool -v -s 0 -f 3 -i 0 | grep "ERROR_CODE" | wc -l)"
+        if [ "$MCU_FLAGE" != "1" ] && [ "$FPGA_FLAGE" != "1" ] && [ "$GODLEN_FLAGE" != "1" ];then
+            MCU_CURRENT_VER=$(/vendor/bin/upgrade_tool -v -s 0 -f 1 -i 1 | grep "ver" | cut -d ":" -sf 2)
+			#MCU_CURRENT_VER=$(/vendor/bin/upgrade_tool -v -s 0 -f 1 -i 1 )
+            FPGA_CURRENT_VER=$(/vendor/bin/upgrade_tool -v -s 0 -f 2 -i 0 | grep "ver" | cut -d ":" -sf 2)
+			#FPGA_CURRENT_VER=xx
+            GOLDEN_CURRENT_VER=$(/vendor/bin/upgrade_tool -v -s 0 -f 3 -i 0 | grep "ver" | cut -d ":" -sf 2)
+            break
+        fi
+        sleep 1
+        cnt=$(($cnt+1))
+    done
+
+    if [ $cnt -eq 16 ];then
+        log_err "GetCurrentVer fail"
+        exit -1 
+    fi
+}
+
+function Upgrade() {
+
+    #获取将要升级的器件版本
+    GetUpgradeVer
+    #获取当前的器件版本
+    GetCurrentVer
+    # 清除所有现有规则
+	/vendor/bin/iptables -F
+	log_info "return $?"
+	# 允许回环接口的流量
+	/vendor/bin/iptables -A INPUT -i lo -j ACCEPT
+	log_info "return $?"
+	/vendor/bin/iptables -A OUTPUT -o lo -j ACCEPT
+	log_info "return $?"
+	# 允许从 240.1.1.1 访问 eth1，并且只允许回应
+	/vendor/bin/iptables -A INPUT -i nova_eth1 -s 240.1.1.1 -m state --state RELATED,ESTABLISHED -j ACCEPT
+	log_info "return $?"
+	/vendor/bin/iptables -A OUTPUT -o nova_eth1 -d 240.1.1.1 -j ACCEPT
+	log_info "return $?"
+	#允许从 240.1.1.100 访问 eth1，并且只允许回应
+	/vendor/bin/iptables -A INPUT -i nova_eth1 -s 240.1.1.100 -m state --state RELATED,ESTABLISHED -j ACCEPT
+	log_info "return $?"
+	/vendor/bin/iptables -A OUTPUT -o nova_eth1 -d 240.1.1.100 -j ACCEPT
+	log_info "return $?"
+	# 允许从240.1.1.100:58042到240.1.1.1:58042的通信
+	/vendor/bin/iptables -A INPUT -i nova_eth1 -p udp --dport 58042 -s 240.1.1.100 -d 240.1.1.1 -j ACCEPT
+	log_info "return $?"
+	/vendor/bin/iptables -A OUTPUT -o nova_eth1 -p udp --sport 58042 --dport 58042 -s 240.1.1.1 -d 240.1.1.100 -j ACCEPT
+	log_info "return $?"
+	# 清除 FORWARD 链上的所有规则
+	/vendor/bin/iptables -F FORWARD
+	log_info "return $?"
+	# 如果 eth0 有连接（有流量发出），允许流量通过
+    /vendor/bin/iptables -A FORWARD -i eth0 -o nova_eth1 -m state --state ESTABLISHED,RELATED -j ACCEPT
+	log_info "return $?"
+    # 如果 eth0 没有连接，阻止所有从 eth0 到 eth1 的流量
+    /vendor/bin/iptables -A FORWARD -i eth0 -o nova_eth1 -j DROP
+	log_info "return $?"
+	# 阻止所有其他流量
+	/vendor/bin/iptables -A INPUT -i nova_eth1 -j DROP
+	log_info "return $?"
+	/vendor/bin/iptables -A OUTPUT -o nova_eth1 -j DROP
+	log_info "return $?"
+    log_info "MCU_CURRENT_VER11 : $MCU_CURRENT_VER"
+    log_info "MCU_UPGRADE_VER1 : $MCU_UPGRADE_VER"
+    #升级MCU
+	if [ "$MCU_CURRENT_VER" != " " ] && [ "$FPGA_CURRENT_VER" != " " ]; then
+		if [ "$MCU_CURRENT_VER" = "$MCU_UPGRADE_VER" ];then
+			log_info "MCU not upgrade"
+		else
+			log_info "upgrade MCU"
+			FLAG=0
+			FLAG="$(/vendor/bin/upgrade_tool -s 0 -p "$MCU_PATH" -l 1024 -t 3000 -f 0 -i 1 | grep "check data  ok" | wc -l)"
+			if [ "$FLAG" = "1" ];then
+				log_info "upgrade MCU succeed"
+				MCU_RESET_FLAG=1
+			else
+				log_err "upgrade MCU fail,again"
+				FLAG="$(/vendor/bin/upgrade_tool -s 0 -p "$MCU_PATH" -l 1024 -t 3000 -f 0 -i 1 | grep "check data  ok" | wc -l)"
+					if [ "$FLAG" = "1" ];then
+						log_info "upgrade MCU succeed"
+						MCU_RESET_FLAG=1
+					else
+						log_err "upgrade MCU fail,again"
+						FLAG="$(/vendor/bin/upgrade_tool -s 0 -p "$MCU_PATH" -l 1024 -t 3000 -f 0 -i 1 | grep "check data  ok" | wc -l)"
+						MCU_RESET_FLAG=0
+						#exit -4
+					fi
+			fi
+		fi
+	else
+		ifconfig eth1 down
+		/vendor/bin/ip link set eth1 name nova_eth1
+
+		/vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+		ifconfig nova_eth1 mtu 9000
+		ifconfig nova_eth1 up
+	fi
+
+    log_info "FPGA_CURRENT_VER2 : $FPGA_CURRENT_VER"
+    log_info "FPGA_UPGRADE_VER2 : $FPGA_UPGRADE_VER"
+    #升级FPGA
+	if [ "$MCU_CURRENT_VER" != " " ] && [ "$FPGA_CURRENT_VER" != " " ]; then
+		if [ "$FPGA_CURRENT_VER" = "$FPGA_UPGRADE_VER" ];then
+			log_info "FPGA not upgrade"
+		else
+			log_info "upgrade FPGA"
+			/vendor/bin/iptables -A OUTPUT -o nova_eth1 -p tcp --dport 80 -j DROP  #屏蔽eth1的干扰http/1.1包
+			#iptables -A INPUT -i eth1 -p udp --dport 67 -s 0.0.0.0 --destination 255.255.255.255
+			/vendor/bin/iptables -A OUTPUT -o nova_eth1 -p udp --dport 67:68 --sport 67:68 -j DROP
+			#iptables -A OUTPUT -o eth1 -p udp --dport 67 -j DROP   #屏蔽eth1上的干扰dhcp Discover包
+			/vendor/bin/iptables -A OUTPUT -o nova_eth1 -p udp --dport 6537 -j DROP #屏蔽eth1上的干扰包
+			/vendor/bin/iptables -A OUTPUT -o nova_eth1 -p udp --dport 5353 -j DROP #屏蔽eth1上的干扰包
+			log_info "Remove interference: $?"
+			FLAG=0
+			#FLAG=`/vendor/bin/upgrade_tool -s 0 -p "$FPGA_PATH" -l 1024 -t 3000 -f 1 -i 0 | grep "check data  ok" | wc -l`
+			FLAG="$(/vendor/bin/upgrade_tool -s 0 -p "$FPGA_PATH" -l 1024 -t 3000 -f 1 -i 0 | grep "check data  ok" | wc -l)"
+			log_info $FLAG
+			if [ "$FLAG" = "1" ];then
+				log_info "upgrade FPGA succeed"
+				MCU_RESET_FLAG=1
+			else
+				log_err "upgrade FPGA again"
+				sleep 10
+				FLAG=`/vendor/bin/upgrade_tool -s 0 -p "$FPGA_PATH" -l 1024 -t 3000 -f 1 -i 0 | grep "check data  ok" | wc -l`
+				log_info $FLAG
+				if [ "$FLAG" = "1" ];then
+					log_info "upgrade FPGA succeed"
+					MCU_RESET_FLAG=1
+				else
+					log_err "upgrade FPGA fail"
+					#/vendor/bin/transfer_tool w 0 m 0 0x00000005 1 0 2 | grep "TAG" | wc -l
+					MCU_RESET_FLAG=0
+					log_err "upgrade FPGA again"
+					sleep 10
+					FLAG=`/vendor/bin/upgrade_tool -s 0 -p "$FPGA_PATH" -l 1024 -t 3000 -f 1 -i 0 | grep "check data  ok" | wc -l`
+					log_info $FLAG
+					if [ "$FLAG" = "1" ];then
+						log_info "upgrade FPGA succeed"
+						MCU_RESET_FLAG=1
+					else
+						log_err "upgrade FPGA fail"
+						MCU_RESET_FLAG=0
+						log_info "FPGA_CURRENT_VER2 : $FPGA_CURRENT_VER"
+						log_info "FPGA_UPGRADE_VER2 : $FPGA_UPGRADE_VER"
+						log_err "upgrade FPGA again"
+						sleep 10
+						FLAG=`/vendor/bin/upgrade_tool -s 0 -p "$FPGA_PATH" -l 1024 -t 3000 -f 1 -i 0 | grep "check data  ok" | wc -l`
+						log_info $FLAG
+						if [ "$FLAG" = "1" ];then
+							log_info "upgrade FPGA succeed"
+							MCU_RESET_FLAG=1
+						else
+							log_err "upgrade FPGA fail"
+							MCU_RESET_FLAG=0
+							log_err "upgrade FPGA again"
+							sleep 10
+							FLAG=`/vendor/bin/upgrade_tool -s 0 -p "$FPGA_PATH" -l 1024 -t 3000 -f 1 -i 0 | grep "check data  ok" | wc -l`
+							log_info $FLAG
+							if [ "$FLAG" = "1" ];then
+								log_info "upgrade FPGA succeed"
+								MCU_RESET_FLAG=1
+							else
+								log_err "upgrade FPGA fail"
+								
+								MCU_RESET_FLAG=0
+								exit -5
+							fi
+						fi
+					fi
+				fi
+			fi
+		fi
+	else
+		ifconfig eth1 down
+		/vendor/bin/ip link set eth1 name nova_eth1
+
+		/vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+		ifconfig nova_eth1 mtu 9000
+		ifconfig nova_eth1 up
+	fi
+	
+    log_info "GOLDEN_CURRENT_VER : $GOLDEN_CURRENT_VER"
+    log_info "GOLDEN_UPGRADE_VER : $GOLDEN_UPGRADE_VER"
+}
+
+function McuReset() {
+    if [ $MCU_RESET_FLAG -eq 1 ];then
+        mcu_reset_status=$($transfer_tool w 0 m 0 0x00000005 1 0 2 | grep "TAG" | wc -l)
+        if [ "$mcu_reset_status" == "1" ];then
+            log_err "MCU reset fail"
+            exit -3
+        else
+            log_info "MCU reset sucessed"
+        fi
+    else
+        log_info "MCU no need to reset"
+        exit 0
+    fi
+}
+
+function Configeth1() {
+	expected_vid="0bda"
+	expected_pid="8153"
+
+	search_vid="0bda"
+	search_pid="8153"
+	while true; do
+			if [ "$(getprop ro.product.device)" == "Hi3751V811" ];then
+		        usb_info=$(lsusb | busybox awk '{print $6}')
+			fi
+			if [ "$(getprop ro.product.device)" == "expo" ] || [ "$(getprop ro.product.device)" == "tcl_mt5879_cn" ] || [ "$(getprop ro.product.device)" == "G08" ];then
+				 usb_info=$(lsusb | awk '{print $6}')
+			fi
+				vid=$(echo "$usb_info" | cut -d ':' -f 1)
+				pid=$(echo "$usb_info" | cut -d ':' -f 2)
+			if [ "$(sed -n "/$search_vid/p" <<< "$vid")" == "$expected_vid" ] && [ "$(sed -n "/$search_pid/p" <<< "$pid")" == "$expected_pid" ]; then
+				log_info "USB device detection successful！"
+				break  # 如果匹配成功，退出循环
+			else
+				log_info "USB device not recognized, continuing to try..."
+			fi
+	done <<< "$usb_info"
+
+	if [ "$(getprop ro.product.device)" == "Hi3751V811" ];then
+		log_info "device is 811"
+        if [ -z "$(/vendor/bin/ip addr show eth1 | busybox awk '/inet / {print $2}' | cut -d'/' -f1)" ];then
+			log_info "no eth1,config again."
+				ifconfig eth1 down
+				/vendor/bin/ip link set eth1 name nova_eth1
+
+				/vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+				ifconfig nova_eth1 mtu 9000
+				ifconfig nova_eth1 up
+			log_info "config successfully."
+		fi
+	fi
+	if [ "$(getprop ro.product.device)" == "expo" ] || [  "$(getprop ro.product.device)" == "tcl_mt5879_cn" ];then
+		if [ -z "$(/vendor/bin/ip addr show nova_eth1 | awk '/inet / {print $2}' | cut -d'/' -f1)" ];then
+			log_info "tcl no eth1,config again."
+		
+				ifconfig eth1 down
+				/vendor/bin/ip link set eth1 name nova_eth1
+
+				/vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+				ifconfig nova_eth1 mtu 9000
+				ifconfig nova_eth1 up
+					
+			log_info "config successfully."
+		fi
+	fi
+	
+	while true; do 
+		sleep 3
+		ifconfig eth1 down
+		/vendor/bin/ip link set eth1 name nova_eth1
+
+		/vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+		ifconfig nova_eth1 mtu 9000
+		ifconfig nova_eth1 up
+		
+		eth1_info=$(ifconfig nova_eth1 2>&1)
+		log_info ">>>>>>>$eth1_info<<<<<<<<<"
+		
+		# 检查是否成功获取eth1
+		if [ "$(getprop ro.product.device)" == "Hi3751V811" ];then
+			if [[ $eth1_info == "ifconfig: eth1: No such device" ]]; then
+				log_info "USB device not found. Please insert the USB device into the USB port."
+			else
+				if [ "$(/vendor/bin/ip addr show nova_eth1 | busybox awk '/inet / {print $2}' | cut -d'/' -f1)" == "240.1.1.100" ];then
+					#ifconfig eth1 up
+					log_info "Successfully acquired the other party's eth1."
+					log_info "$eth1_info"
+					break
+				else
+					ifconfig eth1 down
+					/vendor/bin/ip link set eth1 name nova_eth1
+
+					/vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+					ifconfig nova_eth1 mtu 9000
+					ifconfig nova_eth1 up
+					log_info "nova_eth1 has been configured successfully."
+					log_info "$(ifconfig nova_eth1 2>&1)"
+					break;	
+				fi
+			fi
+		fi
+		
+		if [ "$(getprop ro.product.device)" == "expo" ] || [ "$(getprop ro.product.device)" == "tcl_mt5879_cn" ] || [ "$(getprop ro.product.device)" == "G08" ];then
+			if [[ $eth1_info == "ifconfig: eth1: No such device" ]]; then
+				log_info "USB device not found. Please insert the USB device into the USB port."
+			else
+				sleep 5
+				if [ "$(/vendor/bin/ip addr show nova_eth1 | awk '/inet / {print $2}' | cut -d'/' -f1)" == "240.1.1.100" ];then
+					#ifconfig eth1 up
+					log_info "Successfully acquired the other party's eth1."
+					break
+				else
+					ifconfig eth1 down
+					/vendor/bin/ip link set eth1 name nova_eth1
+
+					/vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+					ifconfig nova_eth1 mtu 9000
+					ifconfig nova_eth1 up
+					log_info "nova_eth1 has been configured successfully."
+					log_info "$(ifconfig nova_eth1 2>&1)"
+					sleep 1
+					if [ "$(getprop ro.product.device)" == "G08" ];then
+						sleep 1
+						/vendor/bin/ip rule del pref 11000
+						/vendor/bin/ip rule del pref 16000
+						/vendor/bin/ip rule del pref 17000
+						/vendor/bin/ip rule del pref 18000
+						/vendor/bin/ip rule del pref 19000
+						/vendor/bin/ip rule del pref 20000
+						sleep 1
+						/vendor/bin/ip rule add from all fwmark 0x0/0x10000 lookup legacy_system pref 15000
+						/vendor/bin/ip rule add from all fwmark 0x0/0x10000 lookup legacy_network pref 16000
+						/vendor/bin/ip rule add from all fwmark 0x0/0x10000 lookup local_network pref 17000
+						/vendor/bin/ip rule add from all lookup main pref 19000
+						/vendor/bin/ip rule add iif lo oif dummy0 uidrange 0-0 lookup dummy0 pref 10500
+						/vendor/bin/ip rule add from all fwmark 0x10063/0x1ffff iif lo lookup local_network pref 13000
+						/vendor/bin/ip rule add iif lo oif dummy0 lookup dummy0 pref 14000
+					fi 
+					break;	
+				fi
+			fi
+		 fi
+		
+	done 	
+}
+
+function GetUpgradeAfterVer() {
+    MCU_CURRENT_VER=null
+	
+	sleep 3
+	Configeth1  #mcu复位后8153会掉电一次，需要重新配网
+	sleep 3
+	
+    GetCurrentVer
+    if [ "$MCU_CURRENT_VER" ];then
+        echo "$MCU_CURRENT_VER"
+    else
+        log_err "GetUpgradeAfterVer fail"
+        exit -1
+    fi
+}
+
+function UpgradeSucceed() {
+    GetUpgradeAfterVer
+	log_info "FPGA_CURRENT_VER : $FPGA_CURRENT_VER"
+    log_info "FPGA_UPGRADE_VER : $FPGA_UPGRADE_VER"
+	log_info "MCU_CURRENT_VER  : $MCU_CURRENT_VER"
+    log_info "MCU_CURRENT_VER  : $MCU_CURRENT_VER"
+    if [ "$MCU_CURRENT_VER" = "$MCU_UPGRADE_VER" ] && [ "$FPGA_CURRENT_VER" = "$FPGA_UPGRADE_VER" ] && [ "$GOLDEN_CURRENT_VER" = "$GOLDEN_UPGRADE_VER" ];then
+        log_info "updated succeed"
+        exit 99
+    else
+        log_err "version is diff after the upgrade"
+        exit -2
+    fi
+}
+#获取将要升级的器件版本
+GetUpgradeVer
+ifconfig eth1 down
+/vendor/bin/ip link set eth1 name nova_eth1
+
+/vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+ifconfig nova_eth1 mtu 9000
+ifconfig nova_eth1 up
+MCU_CURRENT_VER1=$(/vendor/bin/upgrade_tool -v -s 0 -f 1 -i 1 | grep "ver" | cut -d ":" -sf 2)	
+FPGA_CURRENT_VER1=$(/vendor/bin/upgrade_tool -v -s 0 -f 2 -i 0 | grep "ver" | cut -d ":" -sf 2)
+
+if [ "$MCU_CURRENT_VER1" != " " ] && [ "$FPGA_CURRENT_VER1" != " " ]; then
+	if [ "$FPGA_CURRENT_VER1" != "$FPGA_UPGRADE_VER" ] || [ "$MCU_CURRENT_VER1" != "$MCU_UPGRADE_VER" ]; then
+		Upgrade
+		McuReset
+		UpgradeSucceed
+	else
+	ifconfig eth1 down
+	/vendor/bin/ip link set eth1 name nova_eth1
+
+	/vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+	ifconfig nova_eth1 mtu 9000
+	ifconfig nova_eth1 up
+	fi
+else
+	ifconfig eth1 down
+	/vendor/bin/ip link set eth1 name nova_eth1
+
+	/vendor/bin/ip -4 addr add 240.1.1.100/16 dev nova_eth1
+	ifconfig nova_eth1 mtu 9000
+	ifconfig nova_eth1 up
+fi
+log_info "upgrade end"

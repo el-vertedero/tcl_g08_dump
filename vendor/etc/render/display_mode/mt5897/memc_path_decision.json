@@ -1,0 +1,100 @@
+{
+    "version": 1,
+    "syntax description": {
+        "memc-path-decision-table": {
+            "input-src": "SRCCAP | B2R | ignore",
+            "panel-group": "group-<num>[, group-<num>]",
+            "display-mode": "legacy | time sharing | ignore",
+            "scene": "[NORMAL | GAME | GAME_CROP | PC | PHOTO | FORCE_P | HFR | GAME_WITH_MEMC | 3D | SLICED_GAME], each delimits by ,",
+            "vrr": "true | false | ignore",
+            "src-fps": "<op> <POSITIVE-INT-NUM> | ignore",
+            "interlace": "true | false | ignore",
+            "memc-path": "true | false"
+        },
+        "panel-group": [
+            {
+                "group-id": "<NONNEGATIVE-INT-NUMBER>",
+                "panels":"[2K1K60 | 2K1K120 | 4K1K120 | 4K2K60 | 4K1K144 | 4K1K240 | 4K2K120], each delimits by ,"
+            }
+        ]
+    },
+    "panel-group": [
+        {
+            "group-id": 0,
+            "panels": "8K4K60"
+        },
+        {
+            "group-id": 1,
+            "panels": "8K4K120, 8K4K144"
+        },
+        {
+            "group-id": 2,
+            "panels": "4K1K240, 4K2K120, 4K2K60, 4K1K120"
+        }
+    ],
+    "memc-path-decision-table": [
+        {
+            "panel-group": "0, 1, 2",
+            "display-mode": "legacy",
+            "scene": "GAME",
+            "memc-path": "false"
+        },
+        {
+            "input-src": "SRCCAP",
+            "panel-group": "0, 1, 2",
+            "display-mode": "legacy",
+            "scene": "GAME_CROP",
+            "memc-path": "false"
+        },
+        {
+            "input-src": "SRCCAP",
+            "panel-group": "0, 1, 2",
+            "display-mode": "legacy",
+            "scene": "GAME_WITH_MEMC",
+            "memc-path": "true"
+        },
+        {
+            "input-src": "SRCCAP",
+            "panel-group": "0, 2",
+            "display-mode": "legacy",
+            "scene": "PC",
+            "memc-path": "false"
+        },
+        {
+            "input-src": "SRCCAP",
+            "panel-group": "1",
+            "display-mode": "legacy",
+            "scene": "PC",
+            "memc-path": "true"
+        },
+        {
+            "input-src": "SRCCAP",
+            "panel-group": "0, 1, 2",
+            "display-mode": "legacy",
+            "scene": "GAME_PC",
+            "dma-path": "other"
+        },
+        {
+            "input-src": "B2R",
+            "panel-group": "0, 1, 2",
+            "display-mode": "legacy",
+            "scene": "SLICED_GAME",
+            "dma-path": "none"
+        },
+        {
+            "note":"NOT USED, time sharing mode does not consult this setting",
+            "input-src": "B2R",
+            "panel-group": "0, 1, 2",
+            "display-mode": "time sharing",
+            "scene": "PHOTO",
+            "memc-path": "false"
+        },
+        {
+            "note":"NOT USED, time sharing mode does not consult this setting",
+            "panel-group": "0, 1, 2",
+            "display-mode": "time sharing",
+            "scene": "NORMAL,HFR,FORCE_P",
+            "memc-path": "false"
+        }
+    ]
+}

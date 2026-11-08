@@ -1,0 +1,7 @@
+import /vendor/etc/init/hw/init.cf.${ro.boot.vendor.cf.hardware}.rc
+import /vendor/etc/init/hw/init.common.rc
+import /vendor/etc/init/hw/init.tcl.rc
+
+# NOTE: chip family specific settings -> init.cf.(mt5896|mt5897).rc
+#       chip family common actions    -> init.common.rc
+

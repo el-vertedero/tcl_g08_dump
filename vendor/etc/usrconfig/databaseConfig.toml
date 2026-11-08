@@ -1,0 +1,2 @@
+DbAddress = "/data/vendor/nova/xserver/controller/system.db"
+MaxCount = 20000

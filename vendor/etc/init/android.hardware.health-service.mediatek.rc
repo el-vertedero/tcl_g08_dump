@@ -1,0 +1,8 @@
+service vendor.health-mediatek /vendor/bin/hw/android.hardware.health-service.mediatek
+    class hal
+    user system
+    group system
+    capabilities WAKE_ALARM
+    file /dev/kmsg w
+
+# tv device has no charger mode.

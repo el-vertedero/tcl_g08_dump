@@ -1,0 +1,5 @@
+service vendor.mediator-hal /vendor/bin/hw/vendor.mediatek.hardware.mediator-service
+    interface aidl vendor.mediatek.hardware.mediator.IMediator/default
+    class hal
+    user system
+    group system

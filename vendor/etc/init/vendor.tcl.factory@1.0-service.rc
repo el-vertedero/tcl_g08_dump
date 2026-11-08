@@ -1,0 +1,6 @@
+service tcl-factory-1-0 /vendor/bin/hw/vendor.tcl.factory@1.0-service
+    class hal
+    user root
+    group  system root media_rw drmrpc everybody readproc
+    interface vendor.tcl.factory@1.0::IFactory default
+    interface vendor.tcl.factory.ext@1.0::IFactoryExt default

@@ -1,0 +1,11 @@
+Mode = 0
+WorkMode = 0
+SNMPState = false
+TotalRuntime = 0
+DeviceUUID = "{4c1d30c6-79b7-42f4-864c-8f7e5299c3b4}"
+GroupName = ""
+IsDeviceGroup = false
+
+[Network]
+  NetworkType = 0
+  Enable = false

@@ -1,0 +1,5 @@
+service tcl_bootreason_service /vendor/bin/hw/vendor.tcl.bootreason-service
+    class hal
+    user root
+    group system
+    capabilities SYS_NICE

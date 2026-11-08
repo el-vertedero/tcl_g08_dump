@@ -1,0 +1,137 @@
+[[Infos]]
+  Id = 1
+  Name = "KT60 Pro"
+  ModelId = 8464
+  SlotId = 0
+  HwSlotId = 1
+  CardType = 3
+  CardStatus = 0
+  [Infos.HardwareVersion]
+    VersionName = ""
+    VersionNumber = "V11"
+    VersionRemark = ""
+    FileNum = ""
+  [Infos.FirmwareVersion]
+    VersionName = ""
+    VersionNumber = "V1.0.0.V1.0.0.2"
+    VersionRemark = "CTM0200\u000005 kt60pro V1.0.0.V1.0.0.2.CTM0200\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+    FileNum = ""
+
+  [[Infos.CanvasList]]
+    Id = 256
+    CanvasId = 256
+    Frequency = 0.0
+    [Infos.CanvasList.Resolution]
+      Width = 0
+      Height = 0
+    [Infos.CanvasList.Position]
+      X = 0
+      Y = 0
+    [Infos.CanvasList.OutputPortInfo]
+      OpticalPortInfoList = []
+
+      [[Infos.CanvasList.OutputPortInfo.NetPortInfoList]]
+        ID = 256
+        Status = true
+        OpticalId = 268
+        BackupState = false
+        LoopBackState = false
+        SilkScreenNo = 1
+
+      [[Infos.CanvasList.OutputPortInfo.NetPortInfoList]]
+        ID = 257
+        Status = true
+        OpticalId = 268
+        BackupState = false
+        LoopBackState = false
+        SilkScreenNo = 2
+
+      [[Infos.CanvasList.OutputPortInfo.NetPortInfoList]]
+        ID = 258
+        Status = true
+        OpticalId = 268
+        BackupState = false
+        LoopBackState = false
+        SilkScreenNo = 3
+
+      [[Infos.CanvasList.OutputPortInfo.NetPortInfoList]]
+        ID = 259
+        Status = true
+        OpticalId = 268
+        BackupState = false
+        LoopBackState = false
+        SilkScreenNo = 4
+
+      [[Infos.CanvasList.OutputPortInfo.NetPortInfoList]]
+        ID = 260
+        Status = true
+        OpticalId = 268
+        BackupState = false
+        LoopBackState = false
+        SilkScreenNo = 5
+
+      [[Infos.CanvasList.OutputPortInfo.NetPortInfoList]]
+        ID = 261
+        Status = true
+        OpticalId = 268
+        BackupState = false
+        LoopBackState = false
+        SilkScreenNo = 6
+
+      [[Infos.CanvasList.OutputPortInfo.NetPortInfoList]]
+        ID = 262
+        Status = true
+        OpticalId = 268
+        BackupState = false
+        LoopBackState = false
+        SilkScreenNo = 7
+
+      [[Infos.CanvasList.OutputPortInfo.NetPortInfoList]]
+        ID = 263
+        Status = true
+        OpticalId = 268
+        BackupState = false
+        LoopBackState = false
+        SilkScreenNo = 8
+
+      [[Infos.CanvasList.OutputPortInfo.NetPortInfoList]]
+        ID = 264
+        Status = true
+        OpticalId = 268
+        BackupState = false
+        LoopBackState = false
+        SilkScreenNo = 9
+
+      [[Infos.CanvasList.OutputPortInfo.NetPortInfoList]]
+        ID = 265
+        Status = true
+        OpticalId = 268
+        BackupState = false
+        LoopBackState = false
+        SilkScreenNo = 10
+
+      [[Infos.CanvasList.OutputPortInfo.NetPortInfoList]]
+        ID = 266
+        Status = true
+        OpticalId = 268
+        BackupState = false
+        LoopBackState = false
+        SilkScreenNo = 11
+
+      [[Infos.CanvasList.OutputPortInfo.NetPortInfoList]]
+        ID = 267
+        Status = true
+        OpticalId = 268
+        BackupState = false
+        LoopBackState = false
+        SilkScreenNo = 12
+
+    [[Infos.CanvasList.SupportSizeList]]
+      Width = 4096
+      Height = 2160
+      MaxFrameRate = 120.0
+
+    [[Infos.CanvasList.SupportSizeList]]
+      Width = 3840
+      Height = 2160
+      MaxFrameRate = 120.0

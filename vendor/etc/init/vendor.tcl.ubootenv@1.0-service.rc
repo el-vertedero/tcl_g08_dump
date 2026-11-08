@@ -1,0 +1,6 @@
+service tcl_ubootenv_service /vendor/bin/hw/vendor.tcl.ubootenv@1.0-service
+    class hal
+    user root
+    group system root
+    capabilities SYS_NICE
+

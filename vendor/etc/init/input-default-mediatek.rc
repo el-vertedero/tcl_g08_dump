@@ -1,0 +1,4 @@
+service vendor.input-default /vendor/bin/hw/android.hardware.tv.input-service.mediatek
+    class hal
+    user system
+    group system

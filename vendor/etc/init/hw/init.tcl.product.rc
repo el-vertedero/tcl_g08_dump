@@ -1,0 +1,155 @@
+#copyright (C),2014-2020,Tcl Comm Corp., Ltd
+# VENDOR_EDIT,All rights reserved.
+#
+# FILE:-
+# Description:tclinit.rc
+#    Define the tcl init service by init
+import /vendor/etc/init/hw/init.tcl.amati8k.rc
+
+on boot
+    # ifdef VENDOR_EDIT
+    # lei6.yao@tcl.com, 2023/01/12, Add for kfault
+    chown system system /dev/block/by-name/tcllog
+    mount kfault kfault /sys/fs/kfault setuid=1000,setgid=1000
+    chown system system /sys/fs/kfault/
+    chown system system /sys/fs/kfault/ctrl
+    chown system system /sys/fs/kfault/kfault_tmp/
+    restorecon -r -v /sys/fs/kfault/
+    # endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# lei6.yao@tcl.com, 2023/02/03, add for kfault kernel init timeout
+on early-init
+    write /proc/kfaultfs_uboot stopwdg
+
+# endif /* VENDOR_EDIT */
+service motionclient /system/xbin/motionclient
+    class core
+    user root
+    group root
+    oneshot
+    seclabel u:r:tmmgr:s0
+
+service tcl_sitatvservice /vendor/bin/sh /vendor/tvos/bin/run.sh
+    class core
+    user root
+    group root system media_rw audio wifi readproc drmrpc everybody graphics
+    oneshot
+    seclabel u:r:tcl_sitatvservice:s0
+
+# ifdef VENDOR_EDIT
+# ruituan.zhou@tcl.com, 2023/01/14, add kdump service
+on property:persist.tcl.kdump.enable=1
+    setprop persist.tcl.crashkernel.config 1
+    exec /vendor/bin/kdump_set_bootargs 64M@768M
+
+on property:persist.tcl.kdump.enable=0
+    setprop persist.tcl.crashkernel.config 0
+    exec /vendor/bin/kdump_set_bootargs 0M
+
+on property:persist.tcl.kdump.enable=1 && property:persist.tcl.crashkernel.config=1
+    start tcl_kdump_loader
+
+# set_kdump service
+service tcl_kdump_loader /vendor/bin/sh /vendor/bin/set_kdump.sh
+    oneshot
+    disabled
+    seclabel u:r:kdump_set_bootargs:s0
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# huan22.wang@tcl.com 2022/08/30, add for gmc
+on boot
+    chmod 664 /proc/gmc/device0/compress
+    chmod 664 /proc/gmc/device0/decompress
+    chown system system /proc/gmc/device0/compress
+    chown system system /proc/gmc/device0/decompress
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# yixuan8.zhang@tcl.com,2025/05/20,modify for esticker
+# yixuan8.zhang@tcl.com, 2025/5/9, modify /data/vendor/tcl 0771 for LINTHYOSU-4632
+# ex_yang.he@tcl.com, 2023/02/28, create /data/vendor/tcl
+on post-fs-data
+    mkdir /data/vendor/tcl 0777 root system
+# endif /* VENDOR_EDIT */
+
+on property:sys.boot_completed=1
+    # ifdef VENDOR_EDIT
+    # hongsheng2.yu@tcl.com 2023/05/08, modify kswpad watermark
+    write /proc/sys/vm/watermark_scale_factor 100
+    write /proc/sys/vm/swappiness 100
+    # endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# qiyx@tcl.com,2023/04/12,for P mode MGK key state
+on property:odm.tcl.factory.pmode=1 && property:odm.tcl.factory.halready=1
+    chmod 0644 /mnt/vendor/certificate/netflix50/ESNID
+    chown root system /mnt/vendor/certificate/netflix50/ESNID
+    start testida
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# guangjian.guo@tcl.com, 2023/10/09, add for CTS IDAttest
+on property:ro.serialno=*
+    setprop odm.tcl.factory.serialno ${ro.serialno}
+
+service testida /vendor/bin/IDAttestationProvision
+    class main
+    user root
+    group root system  everybody
+    disabled
+    oneshot
+    seclabel u:r:tcl_idatest_service_default:s0
+
+
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# wentao10.liu@tcl.com, 2025/6/3 add for totalruntime
+on boot
+    chmod 0770 /persist
+    chown system system /persist
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# zhipeng5.wei@tcl.com. 2023/10/19, add for texfat
+on property:ro.odm.tcl.texfat_support=true
+    insmod /vendor/lib/modules/texfat.ko
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# zixuan1.sun@tcl.com 2025/07/04, add for launcher image loading speed
+# yilan.guo@tcl.com 2025/06/24, sync from bbc branch
+on post-fs-data
+    exec u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -d /vendor/lib/modules  mtk_and.ko poll_delay=5000 th_eff=1 conf=glide-disk-cach%com.google.android.apps.tv.launcherx=S:N-20,animation%com.netflix.ninja=S:N-10,Thread-17%com.amazon.amazonvideo.livingroom=S:R1,Thread-18%com.amazon.amazonvideo.livingroom=S:R1
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# hongsheng2.yu@tcl.com 2025/07/09, add cpuset set
+on property:sys.boot_completed=1
+    write /dev/cpuset/background/cpus 0
+    write /dev/cpuset/system-background/cpus 1-2
+    write /dev/cpuset/restricted/cpus 0-1
+    write /dev/cpuset/camera-daemon/cpus 0-1
+    write /dev/cpuset/foreground/cpus 1-3
+    write /dev/cpuset/top-app/cpus 0-3
+    write /proc/sys/vm/swappiness 100
+    write /dev/cpuset/sched_relax_domain_level 1
+    write /dev/cpuset/top-app/sched_relax_domain_level 1
+# endif /* VENDOR_EDIT */
+
+# ifdef VENDOR_EDIT
+# yixuan8.zhang@tcl.com, 2025/11/17, the modification is for nova to access userdata/usconfig
+# yixuan8.zhang@tcl.com, 2025/08/14, add for nova micro led project
+on property:ro.boot.nova_micro_led_support=true
+    start StartManage
+
+service StartManage /vendor/bin/StartManage
+    disabled
+    class main
+    user  root
+    group  root system
+    seclabel u:r:StartManage:s0
+# endif /* VENDOR_EDIT */
+

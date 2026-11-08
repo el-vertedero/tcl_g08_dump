@@ -1,0 +1,7 @@
+<manifest version="1.0" type="device">
+    <hal format="aidl">
+        <name>mtk.fairplay_mfi</name>
+        <version>1</version>
+        <fqname>IMFIInterface/default</fqname>
+    </hal>
+</manifest>

@@ -1,0 +1,1084 @@
+CanvasDefaultSizeInfo = []
+
+[[Screens]]
+  ScreenID = "{1fe4f2ff-1df9-4482-9ea9-c491ca9e76be}"
+  ScreenName = "屏幕1"
+  CreateTime = "2024-05-13 09:31:12"
+  WorkingMode = 0
+  LowLatency = false
+  LayoutMode = 0
+  ScreenIndex = 0
+  MasterFrameRate = 120.0
+  [Screens.Position]
+    X = 0
+    Y = 0
+
+  [[Screens.Canvases]]
+    CanvasID = 256
+    BackupType = 0
+    OutputCardID = 1
+    CanvasSerialNum = 0
+    InputID = 0
+    IsCustomSize = false
+    Groups = []
+    MaxFrameRate = 120.0
+    LayoutLines = []
+    Zorder = 0
+    FrequencyPhaseStatus = 0
+    [Screens.Canvases.Size]
+      Width = 3840
+      Height = 2160
+    [Screens.Canvases.Position]
+      X = 0
+      Y = 0
+    [Screens.Canvases.RectSize]
+      Width = 3840
+      Height = 2160
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447001088
+      ConnectID = 0
+      OutputID = 256
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2560
+        Y = 1800
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447001089
+      ConnectID = 1
+      OutputID = 256
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2560
+        Y = 1440
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447001090
+      ConnectID = 2
+      OutputID = 256
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2560
+        Y = 1080
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447001091
+      ConnectID = 3
+      OutputID = 256
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2560
+        Y = 720
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447001092
+      ConnectID = 4
+      OutputID = 256
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2560
+        Y = 360
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447001093
+      ConnectID = 5
+      OutputID = 256
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2560
+        Y = 0
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447197696
+      ConnectID = 0
+      OutputID = 259
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 3520
+        Y = 1800
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447197697
+      ConnectID = 1
+      OutputID = 259
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 3520
+        Y = 1440
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447197698
+      ConnectID = 2
+      OutputID = 259
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 3520
+        Y = 1080
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447197699
+      ConnectID = 3
+      OutputID = 259
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 3520
+        Y = 720
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447197700
+      ConnectID = 4
+      OutputID = 259
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 3520
+        Y = 360
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447197701
+      ConnectID = 5
+      OutputID = 259
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 3520
+        Y = 0
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447132160
+      ConnectID = 0
+      OutputID = 258
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 3200
+        Y = 1800
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447132161
+      ConnectID = 1
+      OutputID = 258
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 3200
+        Y = 1440
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447132162
+      ConnectID = 2
+      OutputID = 258
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 3200
+        Y = 1080
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447132163
+      ConnectID = 3
+      OutputID = 258
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 3200
+        Y = 720
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447132164
+      ConnectID = 4
+      OutputID = 258
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 3200
+        Y = 360
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447132165
+      ConnectID = 5
+      OutputID = 258
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 3200
+        Y = 0
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447066624
+      ConnectID = 0
+      OutputID = 257
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2880
+        Y = 1800
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447066625
+      ConnectID = 1
+      OutputID = 257
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2880
+        Y = 1440
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447066626
+      ConnectID = 2
+      OutputID = 257
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2880
+        Y = 1080
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447066627
+      ConnectID = 3
+      OutputID = 257
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2880
+        Y = 720
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447066628
+      ConnectID = 4
+      OutputID = 257
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2880
+        Y = 360
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447066629
+      ConnectID = 5
+      OutputID = 257
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2880
+        Y = 0
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447263232
+      ConnectID = 0
+      OutputID = 260
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2240
+        Y = 1800
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447263233
+      ConnectID = 1
+      OutputID = 260
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2240
+        Y = 1440
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447263234
+      ConnectID = 2
+      OutputID = 260
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2240
+        Y = 1080
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447263235
+      ConnectID = 3
+      OutputID = 260
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2240
+        Y = 720
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447263236
+      ConnectID = 4
+      OutputID = 260
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2240
+        Y = 360
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447263237
+      ConnectID = 5
+      OutputID = 260
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 2240
+        Y = 0
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447328768
+      ConnectID = 0
+      OutputID = 261
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1920
+        Y = 1800
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447328769
+      ConnectID = 1
+      OutputID = 261
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1920
+        Y = 1440
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447328770
+      ConnectID = 2
+      OutputID = 261
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1920
+        Y = 1080
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447328771
+      ConnectID = 3
+      OutputID = 261
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1920
+        Y = 720
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447328772
+      ConnectID = 4
+      OutputID = 261
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1920
+        Y = 360
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447328773
+      ConnectID = 5
+      OutputID = 261
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1920
+        Y = 0
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447394304
+      ConnectID = 0
+      OutputID = 262
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1600
+        Y = 1800
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447394305
+      ConnectID = 1
+      OutputID = 262
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1600
+        Y = 1440
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447394306
+      ConnectID = 2
+      OutputID = 262
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1600
+        Y = 1080
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447394307
+      ConnectID = 3
+      OutputID = 262
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1600
+        Y = 720
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447394308
+      ConnectID = 4
+      OutputID = 262
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1600
+        Y = 360
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447394309
+      ConnectID = 5
+      OutputID = 262
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1600
+        Y = 0
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447459840
+      ConnectID = 0
+      OutputID = 263
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1280
+        Y = 1800
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447459841
+      ConnectID = 1
+      OutputID = 263
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1280
+        Y = 1440
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447459842
+      ConnectID = 2
+      OutputID = 263
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1280
+        Y = 1080
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447459843
+      ConnectID = 3
+      OutputID = 263
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1280
+        Y = 720
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447459844
+      ConnectID = 4
+      OutputID = 263
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1280
+        Y = 360
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447459845
+      ConnectID = 5
+      OutputID = 263
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 1280
+        Y = 0
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447525376
+      ConnectID = 0
+      OutputID = 264
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 960
+        Y = 1800
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447525377
+      ConnectID = 1
+      OutputID = 264
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 960
+        Y = 1440
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447525378
+      ConnectID = 2
+      OutputID = 264
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 960
+        Y = 1080
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447525379
+      ConnectID = 3
+      OutputID = 264
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 960
+        Y = 720
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447525380
+      ConnectID = 4
+      OutputID = 264
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 960
+        Y = 360
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447525381
+      ConnectID = 5
+      OutputID = 264
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 960
+        Y = 0
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447590912
+      ConnectID = 0
+      OutputID = 265
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 640
+        Y = 1800
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447590913
+      ConnectID = 1
+      OutputID = 265
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 640
+        Y = 1440
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447590914
+      ConnectID = 2
+      OutputID = 265
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 640
+        Y = 1080
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447590915
+      ConnectID = 3
+      OutputID = 265
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 640
+        Y = 720
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447590916
+      ConnectID = 4
+      OutputID = 265
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 640
+        Y = 360
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447590917
+      ConnectID = 5
+      OutputID = 265
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 640
+        Y = 0
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447656448
+      ConnectID = 0
+      OutputID = 266
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 320
+        Y = 1800
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447656449
+      ConnectID = 1
+      OutputID = 266
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 320
+        Y = 1440
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447656450
+      ConnectID = 2
+      OutputID = 266
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 320
+        Y = 1080
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447656451
+      ConnectID = 3
+      OutputID = 266
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 320
+        Y = 720
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447656452
+      ConnectID = 4
+      OutputID = 266
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 320
+        Y = 360
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447656453
+      ConnectID = 5
+      OutputID = 266
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 320
+        Y = 0
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447721984
+      ConnectID = 0
+      OutputID = 267
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 0
+        Y = 1800
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447721985
+      ConnectID = 1
+      OutputID = 267
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 0
+        Y = 1440
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447721986
+      ConnectID = 2
+      OutputID = 267
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 0
+        Y = 1080
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447721987
+      ConnectID = 3
+      OutputID = 267
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 0
+        Y = 720
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447721988
+      ConnectID = 4
+      OutputID = 267
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 0
+        Y = 360
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+    [[Screens.Canvases.Cabinets]]
+      ID = 14562331447721989
+      ConnectID = 5
+      OutputID = 267
+      Angle = 0.0
+      LockStatus = false
+      [Screens.Canvases.Cabinets.Position]
+        X = 0
+        Y = 0
+      [Screens.Canvases.Cabinets.Size]
+        Width = 320
+        Height = 360
+
+  [[Screens.LayersInWorkingMode]]
+    WorkingMode = 0
+    LayerLayoutMode = 0
+
+    [[Screens.LayersInWorkingMode.Layers]]
+      LayerID = 1
+      LayerIndex = 1
+      CanvasId = 0
+      Index = 0
+      Source = 1
+      ZOrder = 2147483646
+      Lock = false
+      FollowState = false
+      LayerInCanvasId = 256
+      [Screens.LayersInWorkingMode.Layers.Position]
+        X = 0
+        Y = 0
+      [Screens.LayersInWorkingMode.Layers.Border]
+        Enable = false
+        Width = 0
+        [Screens.LayersInWorkingMode.Layers.Border.Color]
+          Red = 255
+          Green = 0
+          Blue = 0
+      [Screens.LayersInWorkingMode.Layers.Cut]
+        Enable = false
+        [Screens.LayersInWorkingMode.Layers.Cut.Rect]
+          X = 0
+          Y = 0
+          Width = 3840
+          Height = 2160
+      [Screens.LayersInWorkingMode.Layers.Scaler]
+        Width = 3840
+        Height = 2160
+      [Screens.LayersInWorkingMode.Layers.SourceSize]
+        Width = 3840
+        Height = 2160
+
+  [[Screens.LayersInWorkingMode]]
+    WorkingMode = 1
+    LayerLayoutMode = 0
+    Layers = []
+  [Screens.InputPort]
+    CardId = 0
+    ModelId = 8464
+    LogicId = 0
+    HardwareID = "0 0 8464"
+    GroupId = 1
+    [Screens.InputPort.InputDetailInfo]
+      SlotId = 0
+      PortIndex = 0
+      GroupId = 1
+      Type = 1
+      InputType = 21
+      SourceNumber = 0
+      MaxBandWidth = 0
+      MaxWidth = 3840
+      MaxHeight = 2160
+      MinWidth = 3840
+      MinHeight = 2160
+      WidthStepVal = 4
+      HeightStepVal = 1
+      MaxSourceDepth = 0
+      InterlacedInputSupport = 0
+      HDCPVersion = 0
+      InterfaceUseState = 0
+      YcbcrSwapIn = 0
+      IsSupportHDR = true
+      SilkNumber = 1
+    [Screens.InputPort.InputSrcInfo]
+      InputType = 21
+      InputID = 0
+      ChannelId = 0
+      IsSupportHDR = 0
+      SourceStatus = 1
+      ColorSpaceType = 0
+      Range = 1
+      InterlacedInputFlag = 0
+      HDRSDRInformation = 0
+      CurrentSourceDepth = 1
+      SourceDetInColPixel = 3840
+      SourceDetInRowPixel = 2160
+      SourceFieldRate = 12000
+      HdcpState = 0
+      ColorGamut = 2
+      OverWriteColorGamut = 2
+      InPhase = 0
+      SourceHTotal = 0
+      SourceVTotal = 0
+      SourceHSyncPulse = 0
+      SourceVSyncPulse = 0
+      SourceHFrontPorch = 0
+      SourceVFrontPorch = 0
+      SourceHBackPorch = 0
+      SourceVBackPorch = 0
+      InterfaceUseState = 0
+      XOffset = 0
+      YOffset = 0
+    [Screens.InputPort.MetaData]
+      InfoFrameType = 0
+      InfoFrameVersion = 0
+      InfoFramLength = 0
+      Checksum = 0
+      SourceTye = 0
+      MaxLight = 0
+      MinMasterDisplayLight = 0.0
+      MaxMasterDisplayLight = 0.0
+      MaxContentLight = 0.0
+      MaxFrameAvgLight = 0.0
+      WhitePointX = 0.0
+      WhitePointY = 0.0

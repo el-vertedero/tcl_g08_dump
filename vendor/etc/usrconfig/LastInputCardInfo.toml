@@ -1,0 +1,94 @@
+[[Infos]]
+  Id = 0
+  Name = "KT60 Pro"
+  ModelId = 8464
+  SlotId = 0
+  HwSlotId = 0
+  CardType = 2
+  CardStatus = 0
+  [Infos.HardwareVersion]
+    VersionName = ""
+    VersionNumber = "V11"
+    VersionRemark = ""
+    FileNum = ""
+  [Infos.FirmwareVersion]
+    VersionName = ""
+    VersionNumber = "V1.0.0.V1.0.0.2"
+    VersionRemark = "CTM0200\u000005 kt60pro V1.0.0.V1.0.0.2.CTM0200\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+    FileNum = ""
+
+  [[Infos.SourceList]]
+    ID = 0
+    CardId = 0
+    InputType = 21
+    InputName = "VByOne"
+    Step = 4
+    SourceStatus = 1
+    SupportFrameRate = "60|120"
+    SupportResolution = "3840*2160"
+    MaxWidth = 3840
+    MaxHeight = 2160
+    MinWidth = 3840
+    MinHeight = 2160
+    ActualRefreshRate = 120.0
+    BitDepth = 1
+    ColorSpace = "RGB 4:4:4"
+    DynamicRange = "SDR"
+    Gamut = "Rec.709"
+    Range = 1
+    ScanMode = 0
+    InPhase = false
+    Usable = true
+    GroupId = 1
+    IsSupportHDR = true
+    IsSupportMetaData = true
+    IsSupportEDID = false
+    IsSupportInputOverride = false
+    IsSupportColorAdjust = false
+    SourceChannel = 0
+    IsSupportHDRParams = true
+    IsSupportPQMaxCllChecked = true
+    IsEdidCustom = false
+    IsSupportCapacity = false
+    [Infos.SourceList.ActualResolution]
+      Height = 2160
+      Width = 3840
+    [Infos.SourceList.DefaultEDID]
+      RefreshRate = 120.0
+      IsCustom = false
+      [Infos.SourceList.DefaultEDID.Resolution]
+        Width = 3840
+        Height = 2160
+    [Infos.SourceList.MetaData]
+      InfoFrameType = 0
+      InfoFrameVersion = 0
+      InfoFramLength = 0
+      Checksum = 0
+      SourceTye = 0
+      MaxLight = 0
+      MinMasterDisplayLight = 0.0
+      MaxMasterDisplayLight = 0.0
+      MaxContentLight = 0.0
+      MaxFrameAvgLight = 0.0
+      WhitePointX = 0.0
+      WhitePointY = 0.0
+
+[[Infos]]
+  Id = 101
+  Name = ""
+  ModelId = 8464
+  SlotId = 101
+  HwSlotId = 101
+  CardType = 1
+  CardStatus = 0
+  SourceList = []
+  [Infos.HardwareVersion]
+    VersionName = ""
+    VersionNumber = "V11"
+    VersionRemark = ""
+    FileNum = ""
+  [Infos.FirmwareVersion]
+    VersionName = ""
+    VersionNumber = "V1.0.0.V1.0.0.2"
+    VersionRemark = "CTM0200\u000005 kt60pro V1.0.0.V1.0.0.2.CTM0200\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+    FileNum = ""

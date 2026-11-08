@@ -1,0 +1,78 @@
+AutoSourceEnable = false
+HDMIMode = 0
+BackupEnable = false
+MosaicInfos = []
+
+[[InputPortConfig]]
+  LogicId = 0
+  ModelId = 8464
+  HardwareID = "0 0 8464"
+  IsEdidSeting = false
+  IsLimitToFull = false
+  Range = 255
+  ColorSpaceType = 255
+  ColorGamut = 255
+  Capacity = 2
+  [InputPortConfig.CscParameter]
+    PortID = 255
+    HueValue = 0
+    ContrastValue = 100
+    SaturationValue = 100
+  [InputPortConfig.EdidInfo]
+    RefreshRate = 120.0
+    IsCustom = false
+    [InputPortConfig.EdidInfo.Resolution]
+      Width = 3840
+      Height = 2160
+  [InputPortConfig.HdrParameter]
+    OverrideHDRType = 255
+    PQMode = 0
+    PQMaxCllChecked = true
+    PQMaxCll = 1000
+    RealHdrType = 2
+  [InputPortConfig.BlackLevelInfo]
+    [InputPortConfig.BlackLevelInfo.Shadow]
+      R = 100
+      G = 100
+      B = 100
+      W = 100
+    [InputPortConfig.BlackLevelInfo.HighLight]
+      R = 100
+      G = 100
+      B = 100
+      W = 100
+
+[InternalSource]
+  Type = 0
+  ID = 0
+  Width = 3840
+  Height = 2160
+  RefreshRate = 60.0
+  BitDepth = 0
+  IsEdidCustom = false
+  [InternalSource.TestPattern]
+    Mode = 0
+    [InternalSource.TestPattern.Parameters]
+      Red = 0
+      Green = 0
+      Blue = 0
+      Gray = 255
+      GridWidth = 8
+      MoveSpeed = 50
+      GradientStretch = 1
+      State = 0
+  [InternalSource.CinemaTestPattern]
+    Index = 0
+    [InternalSource.CinemaTestPattern.Parameters]
+      X = 0
+      Y = 0
+      Z = 0
+
+[[InputCfg]]
+  InputID = 25856
+  [InputCfg.Position]
+    Px = 0
+    Py = 0
+  [InputCfg.Size]
+    W = 3840
+    H = 2160

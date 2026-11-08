@@ -1,0 +1,5 @@
+component_version=V8-T653T01-VND-V670
+component_build_date=2610240113
+vintf_compatibility_version=0004
+trom_sdk_version=6.0.0
+android_sdk_version=34

@@ -1,0 +1,80 @@
+RvCardGatherPeriod = 10
+RvCardRunTimeGatherPeriod = 60
+Times = 1000
+Count = 50
+ErrorBitMonitorEnable = true
+MotherBordFanMonitorEnable = true
+ChassisFanMonitorEnable = true
+ConPortGatherPeriod = 2
+
+[[Threshold]]
+  MonitorItem = 0
+  MonitorStatus = 0
+  Max = 80.0
+  Min = -20.0
+
+[[Threshold]]
+  MonitorItem = 0
+  MonitorStatus = 1
+  Max = 80.0
+  Min = -20.0
+
+[[Threshold]]
+  MonitorItem = 0
+  MonitorStatus = 2
+  Max = 90.0
+  Min = -30.0
+
+[[Threshold]]
+  MonitorItem = 1
+  MonitorStatus = 0
+  Max = 80.0
+  Min = -20.0
+
+[[Threshold]]
+  MonitorItem = 1
+  MonitorStatus = 1
+  Max = 80.0
+  Min = -20.0
+
+[[Threshold]]
+  MonitorItem = 1
+  MonitorStatus = 2
+  Max = 90.0
+  Min = -30.0
+
+[[Threshold]]
+  MonitorItem = 3
+  MonitorStatus = 0
+  Max = 5.5
+  Min = 3.4
+
+[[Threshold]]
+  MonitorItem = 3
+  MonitorStatus = 1
+  Max = 5.5
+  Min = 3.4
+
+[[Threshold]]
+  MonitorItem = 3
+  MonitorStatus = 2
+  Max = 6.0
+  Min = 3.3
+
+[[Threshold]]
+  MonitorItem = 4
+  MonitorStatus = 0
+  Max = 5.5
+  Min = 3.4
+
+[[Threshold]]
+  MonitorItem = 4
+  MonitorStatus = 1
+  Max = 5.5
+  Min = 3.4
+
+[[Threshold]]
+  MonitorItem = 4
+  MonitorStatus = 2
+  Max = 6.0
+  Min = 3.3

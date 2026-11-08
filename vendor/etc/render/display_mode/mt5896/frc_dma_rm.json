@@ -1,0 +1,1160 @@
+{
+    "PqRuleGroups": {
+        "hwmap_FRC_DMA_MainRuleMap": {
+            "#version": {
+                "JsonVersionFormat": "0001.0000",
+                "Note": "1348c4f",
+                "Revision": "1348c4f"
+            },
+            "rules": [
+                {
+                    "comparator": {
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Scene": [
+                            "Game"
+                        ],
+                        "Source": [
+                            "MM_VIDEO"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Scene": [
+                            "SliceGame"
+                        ],
+                        "Source": [
+                            "MM_VIDEO"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "NA"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            "<=61"
+                        ],
+                        "Interlace": [
+                            "progressive"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Scene": [
+                            "Game"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            "<=61"
+                        ],
+                        "Interlace": [
+                            "interlace"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Scene": [
+                            "Game"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            ">61"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Scene": [
+                            "Game"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Scene": [
+                            "PC"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "FRC"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            "<=61"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "Gaming-VRR"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            ">61"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "Gaming-VRR"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Scene": [
+                            "GameMEMC"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "FRC"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "Y"
+                        ],
+                        "MJC_UI": [
+                            "Y"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Scene": [
+                            "Normal"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "FRC"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "Y"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Scene": [
+                            "Normal"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Scene": [
+                            "Normal"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "Y"
+                        ],
+                        "MJC_UI": [
+                            "Y"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Scene": [
+                            "HFR"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "FRC"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "Y"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Scene": [
+                            "HFR"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K120"
+                        ],
+                        "Scene": [
+                            "HFR"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Scene": [
+                            "Game"
+                        ],
+                        "Source": [
+                            "MM_VIDEO"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Scene": [
+                            "SliceGame"
+                        ],
+                        "Source": [
+                            "MM_VIDEO"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "NA"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            "<=61"
+                        ],
+                        "Interlace": [
+                            "progressive"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Scene": [
+                            "Game"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            "<=61"
+                        ],
+                        "Interlace": [
+                            "interlace"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Scene": [
+                            "Game"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            ">61"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Scene": [
+                            "Game"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Scene": [
+                            "PC"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "FRC"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            "<=61"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "Gaming-VRR"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            ">61"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "Gaming-VRR"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Scene": [
+                            "GameMEMC"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "FRC"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "Y"
+                        ],
+                        "MJC_UI": [
+                            "Y"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Scene": [
+                            "Normal"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "FRC"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "Y"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Scene": [
+                            "Normal"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Scene": [
+                            "Normal"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "Y"
+                        ],
+                        "MJC_UI": [
+                            "Y"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Scene": [
+                            "HFR"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "FRC"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "Y"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Scene": [
+                            "HFR"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K144"
+                        ],
+                        "Scene": [
+                            "HFR"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Scene": [
+                            "Game"
+                        ],
+                        "Source": [
+                            "MM_VIDEO"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            "<=61"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Scene": [
+                            "SliceGame"
+                        ],
+                        "Source": [
+                            "MM_VIDEO"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "NA"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            "<=61"
+                        ],
+                        "Interlace": [
+                            "progressive"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Scene": [
+                            "Game"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            "<=61"
+                        ],
+                        "Interlace": [
+                            "interlace"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Scene": [
+                            "Game"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            ">61"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Scene": [
+                            "Game"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Scene": [
+                            "PC"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "FRC"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            "<=61"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "Gaming-VRR"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Fps": [
+                            ">61"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "Gaming-VRR"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Mode": [
+                            "Legacy"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Scene": [
+                            "GameMEMC"
+                        ],
+                        "Source": [
+                            "EXTIN"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "FRC"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "Y"
+                        ],
+                        "MJC_UI": [
+                            "Y"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Scene": [
+                            "Normal"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "FRC"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "Y"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Scene": [
+                            "Normal"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Scene": [
+                            "Normal"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "Y"
+                        ],
+                        "MJC_UI": [
+                            "Y"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Scene": [
+                            "HFR"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "FRC"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "Y"
+                        ],
+                        "MJC_UI": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Scene": [
+                            "HFR"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Focus_Win": [
+                            "N"
+                        ],
+                        "Mode": [
+                            "Timesharing"
+                        ],
+                        "Panel": [
+                            "8K4K60"
+                        ],
+                        "Scene": [
+                            "HFR"
+                        ],
+                        "VRR": [
+                            "off"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                },
+                {
+                    "comparator": {
+                        "Mode": [
+                            "default"
+                        ]
+                    },
+                    "settings": {
+                        "DMA_Setting": "MDGW"
+                    }
+                }
+            ]
+        }
+    }
+}

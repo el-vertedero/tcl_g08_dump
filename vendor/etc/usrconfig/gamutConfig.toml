@@ -1,0 +1,32 @@
+[[GamutConfigList]]
+  ScreenId = "{1fe4f2ff-1df9-4482-9ea9-c491ca9e76be}"
+  [GamutConfigList.ColorSpaceCoefficientList]
+
+    [[GamutConfigList.ColorSpaceCoefficientList.List]]
+      FromInputStatus = false
+      IsCustomGamut = true
+      [GamutConfigList.ColorSpaceCoefficientList.List.ColorGamutInfo]
+        ColorTemperature = 6500
+        [GamutConfigList.ColorSpaceCoefficientList.List.ColorGamutInfo.TargetGamut]
+          Name = "Custom"
+          [GamutConfigList.ColorSpaceCoefficientList.List.ColorGamutInfo.TargetGamut.Gamut]
+            [GamutConfigList.ColorSpaceCoefficientList.List.ColorGamutInfo.TargetGamut.Gamut.RLxy]
+              Name = ""
+              Lum = 900.0
+              Cx = 0.68
+              Cy = 0.32
+            [GamutConfigList.ColorSpaceCoefficientList.List.ColorGamutInfo.TargetGamut.Gamut.GLxy]
+              Name = ""
+              Lum = 1900.0
+              Cx = 0.265
+              Cy = 0.6899
+            [GamutConfigList.ColorSpaceCoefficientList.List.ColorGamutInfo.TargetGamut.Gamut.BLxy]
+              Name = ""
+              Lum = 320.0
+              Cx = 0.15
+              Cy = 0.06
+            [GamutConfigList.ColorSpaceCoefficientList.List.ColorGamutInfo.TargetGamut.Gamut.WLxy]
+              Name = ""
+              Lum = 946.7588
+              Cx = 0.3136
+              Cy = 0.3236

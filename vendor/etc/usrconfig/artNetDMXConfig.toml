@@ -1,0 +1,1275 @@
+State = false
+Universe = 1
+SelectConfigID = 0
+
+[[DmxConfigs]]
+  ConfigID = 0
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 1
+    ByteCount = 1
+    Min = 0
+    Max = 100
+    Function = "Brightness"
+    Arg = ""
+    ArgType = 0
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 2
+    ByteCount = 1
+    Min = 1700
+    Max = 15000
+    Function = "ColorTemp"
+    Arg = ""
+    ArgType = 0
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 3
+    ByteCount = 1
+    Min = 0
+    Max = 2
+    Function = "DisplayMode"
+    Arg = ""
+    ArgType = 0
+    RangeSet = 0
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 4
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlackLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 5
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "WhiteLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 6
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "Saturation"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 7
+    ByteCount = 1
+    Min = -180
+    Max = 180
+    Function = "Hue"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 8
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 9
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 10
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 11
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 12
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 13
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 14
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlackLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 15
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "WhiteLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 16
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "Saturation"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 17
+    ByteCount = 1
+    Min = -180
+    Max = 180
+    Function = "Hue"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 18
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 19
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 20
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 21
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 22
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 23
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 24
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlackLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 25
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "WhiteLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 26
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "Saturation"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 27
+    ByteCount = 1
+    Min = -180
+    Max = 180
+    Function = "Hue"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 28
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 29
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 30
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 31
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 32
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 33
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 34
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlackLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 35
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "WhiteLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 36
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "Saturation"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 37
+    ByteCount = 1
+    Min = -180
+    Max = 180
+    Function = "Hue"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 38
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 39
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 40
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 41
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 42
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 43
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 44
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlackLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 45
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "WhiteLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 46
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "Saturation"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 47
+    ByteCount = 1
+    Min = -180
+    Max = 180
+    Function = "Hue"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 48
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 49
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 50
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 51
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 52
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 53
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 54
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlackLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 55
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "WhiteLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 56
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "Saturation"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 57
+    ByteCount = 1
+    Min = -180
+    Max = 180
+    Function = "Hue"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 58
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 59
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 60
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 61
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 62
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 63
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+[[DmxConfigs]]
+  ConfigID = 1
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 1
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlackLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 2
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "WhiteLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 3
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "Saturation"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 4
+    ByteCount = 1
+    Min = -180
+    Max = 180
+    Function = "Hue"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 5
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 6
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 7
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 8
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 9
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 10
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 11
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlackLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 12
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "WhiteLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 13
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "Saturation"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 14
+    ByteCount = 1
+    Min = -180
+    Max = 180
+    Function = "Hue"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 15
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 16
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 17
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 18
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 19
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 20
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 21
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlackLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 22
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "WhiteLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 23
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "Saturation"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 24
+    ByteCount = 1
+    Min = -180
+    Max = 180
+    Function = "Hue"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 25
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 26
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 27
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 28
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 29
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 30
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 31
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlackLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 32
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "WhiteLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 33
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "Saturation"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 34
+    ByteCount = 1
+    Min = -180
+    Max = 180
+    Function = "Hue"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 35
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 36
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 37
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 38
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 39
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 40
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 41
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlackLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 42
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "WhiteLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 43
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "Saturation"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 44
+    ByteCount = 1
+    Min = -180
+    Max = 180
+    Function = "Hue"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 45
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 46
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 47
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 48
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 49
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 50
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 51
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlackLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 52
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "WhiteLevel"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 53
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "Saturation"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 54
+    ByteCount = 1
+    Min = -180
+    Max = 180
+    Function = "Hue"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 55
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 56
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 57
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueShadow"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 58
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "RedHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 59
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "GreenHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 60
+    ByteCount = 1
+    Min = 0
+    Max = 200
+    Function = "BlueHighLight"
+    Arg = "0"
+    ArgType = 1
+    RangeSet = 3
+
+[[DmxConfigs]]
+  ConfigID = 2
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 1
+    ByteCount = 1
+    Min = 0
+    Max = 100
+    Function = "Brightness"
+    Arg = ""
+    ArgType = 0
+    RangeSet = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 2
+    ByteCount = 1
+    Min = 1700
+    Max = 15000
+    Function = "ColorTemp"
+    Arg = ""
+    ArgType = 0
+    RangeSet = 3
+
+[[DmxConfigs]]
+  ConfigID = 3
+
+  [[DmxConfigs.DmxInfo]]
+    Index = 1
+    ByteCount = 1
+    Min = 1
+    Max = 50
+    Function = "Preset"
+    Arg = ""
+    ArgType = 0
+    RangeSet = 0
