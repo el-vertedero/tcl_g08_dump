@@ -1,0 +1,258 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+
+			vdec_fb {
+				id = <0x01>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x57700000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x02>;
+			};
+
+			vdec_es {
+				id = <0x02>;
+				heaptype = <0x03>;
+				max_size = <0x00 0x6000000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x02>;
+			};
+
+			xc_main {
+				id = <0x03>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x5800000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			xc_hse {
+				id = <0x04>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x1000000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			xc_frc_pq {
+				id = <0x07>;
+				heaptype = <0x00>;
+				max_size = <0x00 0xf00000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			xc_frc_l {
+				id = <0x08>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x14e00000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x02>;
+			};
+
+			tsp_pvr {
+				id = <0x10>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x1f68000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			tsp_filein {
+				id = <0x11>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x240000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			scpu_buf {
+				id = <0x14>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x1900000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			disp_source {
+				id = <0x16>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x57700000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x02>;
+			};
+
+			disp_pq_dv {
+				id = <0x17>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x1000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			disp_pq_scmi {
+				id = <0x18>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x3f480000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			disp_pq_ucm {
+				id = <0x1b>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x5eec0000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			disp_window {
+				id = <0x1d>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x5eec0000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x02>;
+			};
+
+			disp_ren_frcme {
+				id = <0x1e>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x10000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			disp_ren_frcpq {
+				id = <0x1f>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x10000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			disp_gpucomp {
+				id = <0x20>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x10000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			mdla_buf {
+				id = <0x28>;
+				heaptype = <0x00>;
+				max_size = <0x00 0xec00000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x02>;
+			};
+
+			dip_gpu {
+				id = <0x29>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x18000000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			dip_fb_buf {
+				id = <0x2a>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x29000000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x00>;
+			};
+
+			gpu_workbuf {
+				id = <0x2f>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x2800000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			shm_buf_vdec {
+				id = <0x31>;
+				heaptype = <0x00>;
+				max_size = <0x00 0xb000000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			aipq_buffer {
+				id = <0x34>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x621000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			disp_srccap_dv {
+				id = <0x44>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x1000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			tsp_tlvfr {
+				id = <0x46>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x1000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x01>;
+			};
+
+			tso_filein {
+				id = <0x58>;
+				heaptype = <0x00>;
+				max_size = <0x00 0x540000>;
+				miu = <0x00>;
+				normal_zone = <0x00>;
+				cache = <0x00>;
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			asym_start = <0xffffffff 0xffffffff>;
+		};
+	};
+
+	__fixups__ {
+		buf_tag = "/fragment@0:target:0";
+		mem_cust_policy = "/fragment@1:target:0";
+	};
+};

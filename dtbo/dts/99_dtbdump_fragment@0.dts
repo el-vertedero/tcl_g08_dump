@@ -1,0 +1,87 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			data-xfer-cfg = <0x01>;
+			speed = <0x7a1200>;
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			data-xfer-cfg = <0x01>;
+			speed = <0x7a1200>;
+		};
+	};
+
+	fragment@2 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			data-xfer-cfg = <0x01>;
+			speed = <0x7a1200>;
+		};
+	};
+
+	fragment@3 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			data-xfer-cfg = <0x01>;
+			speed = <0x7a1200>;
+		};
+	};
+
+	fragment@4 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			data-xfer-cfg = <0x01>;
+			speed = <0x7a1200>;
+		};
+	};
+
+	fragment@5 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			data-xfer-cfg = <0x01>;
+			speed = <0x7a1200>;
+		};
+	};
+
+	fragment@6 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			data-xfer-cfg = <0x01>;
+			speed = <0x7a1200>;
+		};
+	};
+
+	fragment@7 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			data-xfer-cfg = <0x01>;
+			speed = <0x7a1200>;
+		};
+	};
+
+	__fixups__ {
+		mspi0 = "/fragment@0:target:0";
+		mspi1 = "/fragment@1:target:0";
+		mspi2 = "/fragment@2:target:0";
+		mspi3 = "/fragment@3:target:0";
+		mspi4 = "/fragment@4:target:0";
+		mspi5 = "/fragment@5:target:0";
+		mspi6 = "/fragment@6:target:0";
+		mspi7 = "/fragment@7:target:0";
+	};
+};

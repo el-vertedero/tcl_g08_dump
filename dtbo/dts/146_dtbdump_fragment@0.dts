@@ -1,0 +1,44 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			codec-dai-name = "AMP_RT9120";
+			amp-model-cnt = "1";
+			amp-1-name = "rt9120";
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			audio-codec = <0xffffffff>;
+		};
+	};
+
+	fragment@2 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+
+			mtk-amp9120 {
+				compatible = "mediatek, rt9120";
+				reg = <0x1b>;
+				status = "disabled";
+				amppowerdown-gpios = <0xffffffff 0x1e 0x01>;
+			};
+		};
+	};
+
+	__fixups__ {
+		mtk_tv_machine = "/fragment@0:target:0";
+		mtk_sound_soc = "/fragment@1:target:0";
+		rt9120_1 = "/fragment@1/__overlay__:audio-codec:0";
+		i2c1 = "/fragment@2:target:0";
+		pm_gpio0 = "/fragment@2/__overlay__/mtk-amp9120:amppowerdown-gpios:0";
+	};
+};

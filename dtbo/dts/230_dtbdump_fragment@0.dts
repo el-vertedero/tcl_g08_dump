@@ -1,0 +1,62 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			mediatek,auto-boot;
+			dtbo-name = "pqu_mt5897_h1v1_6g.dtbo";
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			rv55_boot;
+		};
+	};
+
+	fragment@2 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			rv55_boot;
+		};
+	};
+
+	fragment@3 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			rv55_boot;
+		};
+	};
+
+	fragment@4 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			rv55_boot;
+		};
+	};
+
+	fragment@5 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			rv55_boot;
+		};
+	};
+
+	__fixups__ {
+		mtk_pqu = "/fragment@0:target:0";
+		mtk_pq = "/fragment@1:target:0";
+		mtk_tvpqu = "/fragment@2:target:0";
+		script_management = "/fragment@3:target:0";
+		mediatek_drm_tv_kms = "/fragment@4:target:0";
+		video_out = "/fragment@5:target:0";
+	};
+};

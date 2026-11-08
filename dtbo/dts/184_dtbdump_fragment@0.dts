@@ -1,0 +1,614 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			lane_duplicate = <0x01>;
+			tcon_dlg-gpios = <0xffffffff 0x0a 0x00>;
+			panel_info_name_list = "panel_info\0panel_info_vby1_3840x2160_50\0panel_info_vby1_3840x2160_48\0panel_info_DLG\0panel_info_vby1_3840x1080_100\0panel_info_vby1_3840x1080_96";
+
+			panel_info {
+				panel_name = "4K60_PANEL_8LANE";
+				link_type = <0x01>;
+				vbo_byte_mode = <0x04>;
+				div_section = <0x01>;
+				on_timing1 = <0x1e>;
+				on_timing2 = <0xc8>;
+				off_timing1 = <0xdc>;
+				off_timing2 = <0x0a>;
+				hsync_start = <0x00>;
+				hsync_width = <0x1e>;
+				hsync_polarity = <0x01>;
+				vsync_start = <0x00>;
+				vsync_width = <0x02>;
+				vsync_polarity = <0x01>;
+				de_hstart = <0x6e>;
+				de_vstart = <0x54>;
+				resolution_width = <0xf00>;
+				resolution_height = <0x870>;
+				max_h_total = <0x1194>;
+				typ_h_total = <0x1130>;
+				min_h_total = <0x10cc>;
+				max_v_total = <0x900>;
+				typ_v_total = <0x8ca>;
+				min_v_total = <0x8c4>;
+				max_v_total_panelprotect = <0xb38>;
+				min_v_total_panelprotect = <0x8c4>;
+				typ_clk_high = <0x00>;
+				typ_clk_low = <0x2367b880>;
+				output_format = <0x00>;
+				content_output_format = <0x00>;
+				output_color_range = <0x01>;
+				output_color_space = <0x00>;
+				vrr_en = <0x00>;
+				min_vrr_framerate = <0x1e0>;
+				max_vrr_framerate = <0x4e2>;
+				graphic_mixer1_outmode = <0x00>;
+				graphic_mixer2_outmode = <0x01>;
+				dlg_on = <0x00>;
+			};
+
+			panel_info_vby1_3840x2160_50 {
+				panel_name = "4K50_PANEL_8LANE";
+				link_type = <0x01>;
+				vbo_byte_mode = <0x04>;
+				div_section = <0x01>;
+				on_timing1 = <0x1e>;
+				on_timing2 = <0xc8>;
+				off_timing1 = <0xdc>;
+				off_timing2 = <0x0a>;
+				hsync_start = <0x00>;
+				hsync_width = <0x1e>;
+				hsync_polarity = <0x01>;
+				vsync_start = <0x00>;
+				vsync_width = <0x02>;
+				vsync_polarity = <0x01>;
+				de_hstart = <0x6e>;
+				de_vstart = <0x54>;
+				resolution_width = <0xf00>;
+				resolution_height = <0x870>;
+				max_h_total = <0x1194>;
+				typ_h_total = <0x1130>;
+				min_h_total = <0x10cc>;
+				max_v_total = <0xad0>;
+				typ_v_total = <0xa8c>;
+				min_v_total = <0xa71>;
+				max_v_total_panelprotect = <0xb38>;
+				min_v_total_panelprotect = <0xa71>;
+				typ_clk_high = <0x00>;
+				typ_clk_low = <0x2367b880>;
+				output_format = <0x00>;
+				content_output_format = <0x00>;
+				output_color_range = <0x01>;
+				output_color_space = <0x00>;
+				vrr_en = <0x00>;
+				min_vrr_framerate = <0x1e0>;
+				max_vrr_framerate = <0x4e2>;
+				graphic_mixer1_outmode = <0x00>;
+				graphic_mixer2_outmode = <0x01>;
+				dlg_on = <0x00>;
+			};
+
+			panel_info_vby1_3840x2160_48 {
+				panel_name = "4K48_PANEL_8LANE";
+				link_type = <0x01>;
+				vbo_byte_mode = <0x04>;
+				div_section = <0x01>;
+				on_timing1 = <0x1e>;
+				on_timing2 = <0xc8>;
+				off_timing1 = <0xdc>;
+				off_timing2 = <0x0a>;
+				hsync_start = <0x00>;
+				hsync_width = <0x1e>;
+				hsync_polarity = <0x01>;
+				vsync_start = <0x00>;
+				vsync_width = <0x02>;
+				vsync_polarity = <0x01>;
+				de_hstart = <0x6e>;
+				de_vstart = <0x54>;
+				resolution_width = <0xf00>;
+				resolution_height = <0x870>;
+				max_h_total = <0x1194>;
+				typ_h_total = <0x1130>;
+				min_h_total = <0x10cc>;
+				max_v_total = <0xb40>;
+				typ_v_total = <0xafc>;
+				min_v_total = <0xadf>;
+				max_v_total_panelprotect = <0xb38>;
+				min_v_total_panelprotect = <0xadf>;
+				typ_clk_high = <0x00>;
+				typ_clk_low = <0x2367b880>;
+				output_format = <0x00>;
+				content_output_format = <0x00>;
+				output_color_range = <0x01>;
+				output_color_space = <0x00>;
+				vrr_en = <0x00>;
+				min_vrr_framerate = <0x1e0>;
+				max_vrr_framerate = <0x4e2>;
+				graphic_mixer1_outmode = <0x00>;
+				graphic_mixer2_outmode = <0x01>;
+				dlg_on = <0x00>;
+			};
+
+			panel_info_DLG {
+				panel_name = "4K1K120_PANEL_8LANE";
+				link_type = <0x01>;
+				vbo_byte_mode = <0x04>;
+				div_section = <0x01>;
+				on_timing1 = <0x1e>;
+				on_timing2 = <0xc8>;
+				off_timing1 = <0xdc>;
+				off_timing2 = <0x0a>;
+				hsync_start = <0x00>;
+				hsync_width = <0x1e>;
+				hsync_polarity = <0x01>;
+				vsync_start = <0x00>;
+				vsync_width = <0x02>;
+				vsync_polarity = <0x01>;
+				de_hstart = <0x6e>;
+				de_vstart = <0x27>;
+				resolution_width = <0xf00>;
+				resolution_height = <0x438>;
+				max_h_total = <0x1194>;
+				typ_h_total = <0x1130>;
+				min_h_total = <0x10cc>;
+				max_v_total = <0x480>;
+				typ_v_total = <0x465>;
+				min_v_total = <0x460>;
+				max_v_total_panelprotect = <0xb38>;
+				min_v_total_panelprotect = <0x45f>;
+				typ_clk_high = <0x00>;
+				typ_clk_low = <0x2367b880>;
+				output_format = <0x00>;
+				content_output_format = <0x00>;
+				output_color_range = <0x01>;
+				output_color_space = <0x00>;
+				vrr_en = <0x00>;
+				min_vrr_framerate = <0x1e0>;
+				max_vrr_framerate = <0x4e2>;
+				graphic_mixer1_outmode = <0x00>;
+				graphic_mixer2_outmode = <0x01>;
+				dlg_on = <0x01>;
+			};
+
+			panel_info_vby1_3840x1080_100 {
+				panel_name = "4K1K100_PANEL_8LANE";
+				link_type = <0x01>;
+				vbo_byte_mode = <0x04>;
+				div_section = <0x01>;
+				on_timing1 = <0x1e>;
+				on_timing2 = <0xc8>;
+				off_timing1 = <0xdc>;
+				off_timing2 = <0x0a>;
+				hsync_start = <0x00>;
+				hsync_width = <0x1e>;
+				hsync_polarity = <0x01>;
+				vsync_start = <0x00>;
+				vsync_width = <0x02>;
+				vsync_polarity = <0x01>;
+				de_hstart = <0x6e>;
+				de_vstart = <0x27>;
+				resolution_width = <0xf00>;
+				resolution_height = <0x438>;
+				max_h_total = <0x1194>;
+				typ_h_total = <0x1130>;
+				min_h_total = <0x10cc>;
+				max_v_total = <0x568>;
+				typ_v_total = <0x546>;
+				min_v_total = <0x538>;
+				max_v_total_panelprotect = <0xb38>;
+				min_v_total_panelprotect = <0x538>;
+				typ_clk_high = <0x00>;
+				typ_clk_low = <0x2367b880>;
+				output_format = <0x00>;
+				content_output_format = <0x00>;
+				output_color_range = <0x01>;
+				output_color_space = <0x00>;
+				vrr_en = <0x00>;
+				min_vrr_framerate = <0x1e0>;
+				max_vrr_framerate = <0x4e2>;
+				graphic_mixer1_outmode = <0x00>;
+				graphic_mixer2_outmode = <0x01>;
+				dlg_on = <0x01>;
+			};
+
+			panel_info_vby1_3840x1080_96 {
+				panel_name = "4K1K96_PANEL_8LANE";
+				link_type = <0x01>;
+				vbo_byte_mode = <0x04>;
+				div_section = <0x01>;
+				on_timing1 = <0x1e>;
+				on_timing2 = <0xc8>;
+				off_timing1 = <0xdc>;
+				off_timing2 = <0x0a>;
+				hsync_start = <0x00>;
+				hsync_width = <0x1e>;
+				hsync_polarity = <0x01>;
+				vsync_start = <0x00>;
+				vsync_width = <0x02>;
+				vsync_polarity = <0x01>;
+				de_hstart = <0x6e>;
+				de_vstart = <0x27>;
+				resolution_width = <0xf00>;
+				resolution_height = <0x438>;
+				max_h_total = <0x1194>;
+				typ_h_total = <0x1130>;
+				min_h_total = <0x10cc>;
+				max_v_total = <0x5a0>;
+				typ_v_total = <0x57e>;
+				min_v_total = <0x570>;
+				max_v_total_panelprotect = <0xb38>;
+				min_v_total_panelprotect = <0x570>;
+				typ_clk_high = <0x00>;
+				typ_clk_low = <0x2367b880>;
+				output_format = <0x00>;
+				content_output_format = <0x00>;
+				output_color_range = <0x01>;
+				output_color_space = <0x00>;
+				vrr_en = <0x00>;
+				min_vrr_framerate = <0x30>;
+				max_vrr_framerate = <0x4e2>;
+				graphic_mixer1_outmode = <0x00>;
+				graphic_mixer2_outmode = <0x01>;
+				dlg_on = <0x01>;
+			};
+
+			panel_tgen_info {
+				panel_tgen_max_vtotal = <0xb38>;
+				panel_tgen_min_vtotal = <0x45f>;
+			};
+
+			panel-color-info {
+				COLOR_SPACE = <0x04>;
+				COLOR_FORAMT = <0x00>;
+				COLOR_RANGE = <0x03>;
+				Rx = <0x7d00>;
+				Rx_variation = <0x64>;
+				Ry = <0x4047>;
+				Ry_variation = <0x64>;
+				Gx = <0x3a98>;
+				Gx_variation = <0x64>;
+				Gy = <0x7530>;
+				Gy_variation = <0x64>;
+				Bx = <0x1d4c>;
+				Bx_variation = <0x64>;
+				By = <0xbb8>;
+				By_variation = <0x64>;
+				Wx = <0x3d13>;
+				Wx_variation = <0x64>;
+				Wy = <0x4042>;
+				Wy_variation = <0x64>;
+				MaxLuminance = <0x64>;
+				MedLuminance = <0x32>;
+				MinLuminance = <0x1f4>;
+				LinearRGB = <0x01>;
+				HDRPanelNits = <0x18f>;
+				DynamicLuminance = <0x00>;
+			};
+
+			usr_lane_order {
+				usr_define = <0x00>;
+				ctrl_lanes = <0x08>;
+				laneorder = <0x00 0x01 0x02 0x03 0x04 0x05 0x06 0x07>;
+			};
+
+			panel-dither-info {
+				dither_out_depth = <0x02>;
+				dither_pattern_type = <0x00>;
+				dither_capability = <0x00>;
+			};
+
+			ext_graph_combo_info {
+				graph_vbo_byte_mode = <0x05>;
+			};
+
+			tcon_info {
+				bVRR_HighFrameRateMode_Support = <0x01>;
+				ucVRR_HFR_ON_I2C_DATA_SIZE = <0x04>;
+				ucVRR_HFR_ON_I2C_DATA_0 = <0xfe>;
+				ucVRR_HFR_ON_I2C_DATA_1 = <0xea>;
+				ucVRR_HFR_ON_I2C_DATA_2 = <0x0c>;
+				ucVRR_HFR_ON_I2C_DATA_3 = <0x02>;
+				ucVRR_HFR_ON_I2C_DATA_4 = <0x00>;
+				ucVRR_HFR_ON_I2C_DATA_5 = <0x00>;
+				ucVRR_HFR_ON_I2C_DATA_6 = <0x00>;
+				ucVRR_HFR_ON_I2C_bus = <0x02>;
+				ucVRR_HFR_ON_I2C_mode = <0x01>;
+				ucVRR_HFR_ON_I2C_dev_addr = <0x61>;
+				ucVRR_HFR_ON_I2C_offst = <0x00>;
+				bVRR_HighPixelClockMode_Support = <0x00>;
+				bGAME_Direct60HzMode_Support = <0x00>;
+				ucGAME_60HZ_ON_I2C_DATA_SIZE = <0x00>;
+				ucGAME_60HZ_ON_I2C_DATA_0 = <0x00>;
+				ucGAME_60HZ_ON_I2C_DATA_1 = <0x00>;
+				bSupportGpioModeChange = <0x01>;
+				u16GPIO_NUM_MODE_CHG = <0x0a>;
+				ucGPIO_CTRL_MODE_CHG_ON = <0x01>;
+				ucGPIO_CTRL_MODE_CHG_OFF = <0x00>;
+				u16DELAY_MODE_CHG = <0x00>;
+				bSupportTconI2cWP = <0x00>;
+				u16GPIO_NUM_TCON_I2C_WP = <0xc2>;
+				ucGPIO_TCON_I2C_WP_ON = <0x00>;
+				ucGPIO_TCON_I2C_WP_OFF = <0x01>;
+			};
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			PanelGamma_Enable = <0x00>;
+			PanelGamme_BinPath = [00];
+			TCON_Enable = <0x00>;
+			TCON_BinPath = [00];
+			PanelMirrorMode = <0x00>;
+			PanelOutputFormat = <0x00>;
+			SSC_Enable = <0x00>;
+			SSC_Step = <0x00>;
+			SSC_Span = <0x00>;
+			OverDrive_Enable = <0x00>;
+			OverDrive_Buf_Addr = <0x00>;
+			OverDrive_Buf_Size = <0x00>;
+			GPIO_Backlight = <0x00>;
+			GPIO_VCC = <0x00>;
+			M_delta = <0x7fff>;
+			CustomerColorPrimaries = <0x00>;
+			SourceWx = <0x3d13>;
+			SourceWy = <0x4042>;
+			VIDEO_GFX_DISPLAY_MODE = <0x00>;
+			OSD_Height = <0x870>;
+			OSD_Width = <0xf00>;
+			OSD_HsyncStart = <0x00>;
+			OSD_HsyncEnd = <0x00>;
+			OSD_HDEStart = <0x00>;
+			OSD_HDEEnd = <0x00>;
+			OSD_HTotal = <0x00>;
+			OSD_VsyncStart = <0x00>;
+			OSD_VsyncEnd = <0x00>;
+			OSD_VDEStart = <0x00>;
+			OSD_VDEEnd = <0x00>;
+			OSD_VTotal = <0x00>;
+			cus_x_dpi = <0x4d>;
+			cus_y_dpi = <0x4d>;
+			u32PeriodPWM = <0x5f5e10>;
+			u32DutyPWM = <0x307258>;
+			u32DivPWM = <0x00>;
+			u32ShiftPWM = <0x00>;
+			bPolPWM = <0x00>;
+			u32MaxPWMvalue = <0x5f5e10>;
+			u32MinPWMvalue = <0x186a0>;
+			bBakclightFreq2Vfreq = <0x00>;
+			u32PwmPeriodMulti = <0x01>;
+			graphic_mixer1_outmode = <0x00>;
+			graphic_mixer2_outmode = <0x01>;
+			panel_frc_table_type = <0x00>;
+			RENDER_IN_COLOR_FORMAT = <0x01>;
+			RENDER_IN_COLOR_RANGE = <0x01>;
+			RENDER_IN_COLOR_SPACE = <0x00>;
+			DLG_Enable = <0x01>;
+			DLG_GPIO_CusCtrl = <0x01>;
+			DLG_I2C_CusCtrl = <0x00>;
+		};
+	};
+
+	fragment@2 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			tcon_i2c_name_list = "DLG_4k_60hz\0DLG_4k_120hz";
+
+			DLG_4k_60hz {
+				tcon_i2c_bus = <0x02>;
+				tcon_i2c_mode = <0x01>;
+				tcon_i2c_dev_addr = <0xc2>;
+				tcon_i2c_reg_offst = <0x00>;
+				tcon_i2c_info_length = <0x04>;
+				tcon_i2c_info_row = <0x01>;
+				tcon_i2c_info_column_num = <0x04>;
+				tcon_i2c_info_data = <0xfe 0xea 0x0c 0x00>;
+			};
+
+			DLG_4k_120hz {
+				tcon_i2c_bus = <0x02>;
+				tcon_i2c_mode = <0x01>;
+				tcon_i2c_dev_addr = <0xc2>;
+				tcon_i2c_reg_offst = <0x00>;
+				tcon_i2c_info_length = <0x04>;
+				tcon_i2c_info_row = <0x01>;
+				tcon_i2c_info_column_num = <0x04>;
+				tcon_i2c_info_data = <0xfe 0xea 0x0c 0x02>;
+			};
+		};
+	};
+
+	fragment@3 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disable";
+			panel_info_name_list = "panel_info\0timing_info_50\0timing_info_48";
+
+			panel_info {
+				panel_name = "SONY BE";
+				link_type = <0x01>;
+				vbo_byte_mode = <0x04>;
+				div_section = <0x01>;
+				on_timing1 = <0x1e>;
+				on_timing2 = <0xc8>;
+				off_timing1 = <0xdc>;
+				off_timing2 = <0x0a>;
+				hsync_start = <0x00>;
+				hsync_width = <0x1e>;
+				hsync_polarity = <0x01>;
+				vsync_start = <0x00>;
+				vsync_width = <0x02>;
+				vsync_polarity = <0x01>;
+				de_hstart = <0x70>;
+				de_vstart = <0x54>;
+				resolution_width = <0xf00>;
+				resolution_height = <0x870>;
+				max_h_total = <0x1194>;
+				typ_h_total = <0x1130>;
+				min_h_total = <0x10cc>;
+				max_v_total = <0x92e>;
+				typ_v_total = <0x8ca>;
+				min_v_total = <0x8c4>;
+				typ_clk_high = <0x00>;
+				typ_clk_low = <0x2367b880>;
+				output_format = <0x00>;
+				content_output_format = <0x00>;
+				output_color_range = <0x01>;
+				output_color_space = <0x00>;
+				graphic_mixer1_outmode = <0x00>;
+				graphic_mixer2_outmode = <0x01>;
+			};
+
+			timing_info_50 {
+				panel_name = "SONY BE 4k 50";
+				link_type = <0x01>;
+				vbo_byte_mode = <0x04>;
+				div_section = <0x01>;
+				on_timing1 = <0x1e>;
+				on_timing2 = <0xc8>;
+				off_timing1 = <0xdc>;
+				off_timing2 = <0x0a>;
+				hsync_start = <0x00>;
+				hsync_width = <0x1e>;
+				hsync_polarity = <0x01>;
+				vsync_start = <0x00>;
+				vsync_width = <0x02>;
+				vsync_polarity = <0x01>;
+				de_hstart = <0x70>;
+				de_vstart = <0x54>;
+				resolution_width = <0xf00>;
+				resolution_height = <0x870>;
+				max_h_total = <0x1194>;
+				typ_h_total = <0x1130>;
+				min_h_total = <0x10cc>;
+				max_v_total = <0xaf0>;
+				typ_v_total = <0xa8c>;
+				min_v_total = <0xa28>;
+				typ_clk_high = <0x00>;
+				typ_clk_low = <0x2367b880>;
+				output_format = <0x00>;
+				content_output_format = <0x00>;
+				output_color_range = <0x01>;
+				output_color_space = <0x00>;
+				graphic_mixer1_outmode = <0x00>;
+				graphic_mixer2_outmode = <0x01>;
+			};
+
+			timing_info_48 {
+				panel_name = "SONY BE 4k 48";
+				link_type = <0x01>;
+				vbo_byte_mode = <0x04>;
+				div_section = <0x01>;
+				on_timing1 = <0x1e>;
+				on_timing2 = <0xc8>;
+				off_timing1 = <0xdc>;
+				off_timing2 = <0x0a>;
+				hsync_start = <0x00>;
+				hsync_width = <0x1e>;
+				hsync_polarity = <0x01>;
+				vsync_start = <0x00>;
+				vsync_width = <0x02>;
+				vsync_polarity = <0x01>;
+				de_hstart = <0x70>;
+				de_vstart = <0x54>;
+				resolution_width = <0xf00>;
+				resolution_height = <0x870>;
+				max_h_total = <0x1194>;
+				typ_h_total = <0x1130>;
+				min_h_total = <0x10cc>;
+				max_v_total = <0xb60>;
+				typ_v_total = <0xafc>;
+				min_v_total = <0xa98>;
+				typ_clk_high = <0x00>;
+				typ_clk_low = <0x2367b880>;
+				output_format = <0x00>;
+				content_output_format = <0x00>;
+				output_color_range = <0x01>;
+				output_color_space = <0x00>;
+				graphic_mixer1_outmode = <0x00>;
+				graphic_mixer2_outmode = <0x01>;
+			};
+		};
+	};
+
+	fragment@4 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disable";
+			panel_info_name_list = "panel_info";
+
+			panel_info {
+				panel_name = "GFX output";
+				link_type = <0x01>;
+				vbo_byte_mode = <0x05>;
+				div_section = <0x01>;
+				on_timing1 = <0x1e>;
+				on_timing2 = <0xc8>;
+				off_timing1 = <0xdc>;
+				off_timing2 = <0x0a>;
+				hsync_start = <0x00>;
+				hsync_width = <0x1e>;
+				hsync_polarity = <0x01>;
+				vsync_start = <0x00>;
+				vsync_width = <0x02>;
+				vsync_polarity = <0x01>;
+				de_hstart = <0x70>;
+				de_vstart = <0x54>;
+				resolution_width = <0xf00>;
+				resolution_height = <0x870>;
+				max_h_total = <0x1194>;
+				typ_h_total = <0x1130>;
+				min_h_total = <0x10cc>;
+				max_v_total = <0x92e>;
+				typ_v_total = <0x8ca>;
+				min_v_total = <0x8c4>;
+				typ_clk_high = <0x00>;
+				typ_clk_low = <0x2367b880>;
+				output_format = <0x08>;
+				content_output_format = <0x04>;
+				output_color_range = <0x01>;
+				output_color_space = <0x00>;
+				graphic_mixer1_outmode = <0x00>;
+				graphic_mixer2_outmode = <0x01>;
+			};
+
+			loadfw-timing-info {
+				panel_name = "GFX output";
+				hsync_start = <0x00>;
+				hsync_width = <0x1e>;
+				vsync_start = <0x00>;
+				vsync_width = <0x02>;
+				de_hstart = <0x70>;
+				de_vstart = <0x54>;
+				resolution_width = <0xf00>;
+				resolution_height = <0x870>;
+				max_h_total = <0x1194>;
+				typ_h_total = <0x1130>;
+				min_h_total = <0x10cc>;
+				max_v_total = <0x92e>;
+				typ_v_total = <0x8ca>;
+				min_v_total = <0x8c4>;
+				typ_clk_high = <0x00>;
+				typ_clk_low = <0x2367b880>;
+			};
+		};
+	};
+
+	__fixups__ {
+		video_out = "/fragment@0:target:0";
+		gpio0 = "/fragment@0/__overlay__:tcon_dlg-gpios:0";
+		panel_cus_setting = "/fragment@1:target:0";
+		panel_tcon_i2c_info = "/fragment@2:target:0";
+		ext_video_out = "/fragment@3:target:0";
+		graphic_out = "/fragment@4:target:0";
+	};
+};

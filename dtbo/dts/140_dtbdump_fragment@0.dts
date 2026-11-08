@@ -1,0 +1,58 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			mtk,keypad-lowbd = <0x384>;
+			mtk,keypad-upwbd = <0x3ff>;
+			mtk,keypad-num = <0x08>;
+
+			key_1 {
+				linux,code = <0x8b>;
+				keypad,threshold = <0x339>;
+			};
+
+			key_2 {
+				linux,code = <0x4f>;
+				keypad,threshold = <0x2db>;
+			};
+
+			key_3 {
+				linux,code = <0x1c>;
+				keypad,threshold = <0x275>;
+			};
+
+			key_4 {
+				linux,code = <0x72>;
+				keypad,threshold = <0x210>;
+			};
+
+			key_5 {
+				linux,code = <0x73>;
+				keypad,threshold = <0x175>;
+			};
+
+			key_6 {
+				linux,code = <0x193>;
+				keypad,threshold = <0xf9>;
+			};
+
+			key_7 {
+				linux,code = <0x192>;
+				keypad,threshold = <0x81>;
+			};
+
+			key_8 {
+				linux,code = <0x74>;
+				keypad,threshold = <0x00>;
+			};
+		};
+	};
+
+	__fixups__ {
+		keypad = "/fragment@0:target:0";
+	};
+};

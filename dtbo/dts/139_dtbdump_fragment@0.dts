@@ -1,0 +1,24 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			mtk,keypad-lowbd = <0x64>;
+			mtk,keypad-upwbd = <0x3ff>;
+			mtk,keypad-num = <0x01>;
+			mtk,keypad-chanel = <0x00>;
+
+			key_1 {
+				linux,code = <0xd5>;
+				keypad,threshold = <0x00>;
+			};
+		};
+	};
+
+	__fixups__ {
+		keypad = "/fragment@0:target:0";
+	};
+};

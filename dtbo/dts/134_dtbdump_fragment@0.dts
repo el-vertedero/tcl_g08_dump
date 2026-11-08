@@ -1,0 +1,31 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			compatible = "mediatek,mt5896-bdma";
+			interrupt-parent = <0xffffffff>;
+			interrupts = <0x00 0x0b 0x04>;
+			reg = <0x00 0x1c603200 0x00 0x200 0x00 0x1c207fe0 0x00 0x10>;
+			mediatek,channel = "bdma_ch3";
+			status = "ok";
+		};
+	};
+
+	__fixups__ {
+		frc_bdma = "/fragment@0:target:0";
+		vdec_bdma = "/fragment@1:target:0";
+		mtk_intc2_irq_low = "/fragment@1/__overlay__:interrupt-parent:0";
+	};
+};

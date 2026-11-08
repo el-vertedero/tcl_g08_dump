@@ -1,0 +1,113 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			audio-codec = <0xffffffff>;
+			codec-dai-name = "AMP_RT9119";
+			codec-dai-name-1 = "AMP_RT9119_1";
+			codec-dai-name-2 = "AMP_RT9119_2";
+			codec-dai-name-3 = "AMP_RT9119_3";
+			codec-dai-name-4 = "AMP_RT9119_4";
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			codec-dai-name = "AMP_RT9119";
+			codec-dai-name-1 = "AMP_RT9119_1";
+			codec-dai-name-2 = "AMP_RT9119_2";
+			codec-dai-name-3 = "AMP_RT9119_3";
+			codec-dai-name-4 = "AMP_RT9119_4";
+			amp-model-cnt = "1";
+			amp-1-name = "rt9119";
+		};
+	};
+
+	fragment@2 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			audio-codec = <0xffffffff>;
+		};
+	};
+
+	fragment@3 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			compatible = "mediatek, rt9119";
+			mtk_ini = "../tvconfig/bsp/chip/mt5896/amp/audio_amp_device_rt9119.ini";
+			reg = <0x1a>;
+			status = "okay";
+			type = <0x00>;
+			amppowerdown-gpios = <0xffffffff 0x10 0x01>;
+			ampreset-gpios = <0xffffffff 0x05 0x01>;
+		};
+	};
+
+	fragment@4 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			compatible = "mediatek, rt9119";
+			mtk_ini = "../tvconfig/bsp/chip/mt5896/amp/audio_amp_device_rt9119.ini";
+			reg = <0x1b>;
+			type = <0x01>;
+			status = "okay";
+		};
+	};
+
+	fragment@5 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			compatible = "mediatek, rt9119";
+			mtk_ini = "../tvconfig/bsp/chip/mt5896/amp/audio_amp_device_rt9119.ini";
+			reg = <0x1a>;
+			status = "okay";
+			type = <0x02>;
+		};
+	};
+
+	fragment@6 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			compatible = "mediatek, rt9119";
+			mtk_ini = "../tvconfig/bsp/chip/mt5896/amp/audio_amp_device_rt9119.ini";
+			reg = <0x1b>;
+			status = "okay";
+			type = <0x03>;
+		};
+	};
+
+	fragment@7 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			compatible = "mediatek, rt9119";
+			mtk_ini = "../tvconfig/bsp/chip/mt5896/amp/audio_amp_device_rt9119.ini";
+			reg = <0x1a>;
+			status = "okay";
+			type = <0x04>;
+		};
+	};
+
+	__fixups__ {
+		mtk_sound_machine = "/fragment@0:target:0";
+		cus_i2c0_amp0 = "/fragment@0/__overlay__:audio-codec:0\0/fragment@2/__overlay__:audio-codec:0\0/fragment@3:target:0";
+		mtk_tv_machine = "/fragment@1:target:0";
+		mtk_sound_soc = "/fragment@2:target:0";
+		pm_gpio0 = "/fragment@3/__overlay__:amppowerdown-gpios:0\0/fragment@3/__overlay__:ampreset-gpios:0";
+		cus_i2c0_amp1 = "/fragment@4:target:0";
+		cus_i2c1_amp0 = "/fragment@5:target:0";
+		cus_i2c1_amp1 = "/fragment@6:target:0";
+		cus_i2c2_amp0 = "/fragment@7:target:0";
+	};
+};
