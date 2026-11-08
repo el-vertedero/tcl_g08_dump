@@ -1,0 +1,114 @@
+<!--
+    Input:
+        device/tcl/tcl9618_osv///common/configs/manifest.xml
+        vendor/tcl/non_ssi/vendor/manifest/manifest.xml
+-->
+<manifest version="7.0" type="device" target-level="8">
+    <hal format="hidl">
+        <name>android.hardware.audio</name>
+        <transport>hwbinder</transport>
+        <fqname>@7.1::IDevicesFactory/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.audio.effect</name>
+        <transport>hwbinder</transport>
+        <fqname>@7.0::IEffectsFactory/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.graphics.composer3</name>
+        <version>2</version>
+        <fqname>IComposer/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.graphics.mapper</name>
+        <transport arch="32+64">passthrough</transport>
+        <fqname>@4.0::IMapper/default</fqname>
+    </hal>
+    <hal format="hidl">
+        <name>android.hardware.media.c2</name>
+        <transport>hwbinder</transport>
+        <fqname>@1.1::IComponentStore/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>android.hardware.neuralnetworks</name>
+        <version>4</version>
+        <fqname>IDevice/mtk-mdla_shim</fqname>
+        <fqname>IDevice/mtk-neuron_shim</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.ExternIn</name>
+        <fqname>IExternIn/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.c2.info</name>
+        <fqname>ICodec2InfoService/c2.info</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.capture</name>
+        <fqname>ICapture/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.demuxext</name>
+        <fqname>IDemuxExt/demuxext</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.dispservice</name>
+        <fqname>IDispService/default</fqname>
+        <fqname>IHwcCmtInfo/HwcCmtInfoService</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.filterext</name>
+        <fqname>IFilterExt/filterext</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.halconnect</name>
+        <fqname>IHalConnection/tvinput</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.iommupool</name>
+        <fqname>IIommuPool/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.mediator</name>
+        <fqname>IMediator/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.pq</name>
+        <fqname>IPq/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.render</name>
+        <fqname>IRender/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.stc</name>
+        <fqname>IStc/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.tpc</name>
+        <fqname>ITpcCmtInfo/default</fqname>
+        <fqname>ITpcConnection/Codec2</fqname>
+        <fqname>ITpcConnection/audio</fqname>
+        <fqname>ITpcConnection/hwc</fqname>
+        <fqname>ITpcConnection/tuner</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.tunercmt</name>
+        <fqname>ITunerCmtInfoService/tunerCmtInfoService</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.tunerext</name>
+        <fqname>ITunerExt/tunerext</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.mediatek.hardware.utility</name>
+        <fqname>IUtility/default</fqname>
+    </hal>
+    <hal format="aidl">
+        <name>vendor.tcl.audio</name>
+        <fqname>ITclAudio/default</fqname>
+    </hal>
+    <sepolicy>
+        <version>34.0</version>
+    </sepolicy>
+</manifest>

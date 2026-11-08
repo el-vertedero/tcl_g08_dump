@@ -1,0 +1,3 @@
+on early-boot
+    exec u:r:vendor_modprobe:s0 -- /vendor/bin/modprobe -d /vendor/lib/modules \
+    mtk_xcalg3pty_hdrvivid.ko mtk_xcalg3pty_TCH.ko

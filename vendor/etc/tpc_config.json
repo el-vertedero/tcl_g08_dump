@@ -1,0 +1,28 @@
+{
+    "SRC_DTV": {
+        "videoFreeRunThresholdNS": 5000000000,
+        "audioFreeRunThresholdNS": 3000000000,
+        "sourceClockOffsetNS": 180000000
+    },
+    "SRC_MM_TUNNEL": {
+        "bMMFirstPTSAlignment": 0,
+        "videoFreeRunThresholdNS": 20000000000,
+        "audioFreeRunThresholdNS": 20000000000
+    },
+    "SRC_TVINPUT": {
+        "videoFreeRunThresholdNS": 150000000,
+        "audioFreeRunThresholdNS": 3000000000,
+        "sourceClockOffsetNS": 100000000
+    },
+    "SRC_ATV": {
+        "sourceClockOffsetNS": 100000000
+    },
+    "COMMON": {
+        "TPC_DEBUG_LOG": 1,
+        "RESYNC_SETTING": {
+            "latencyChangeUsingNothingThresholdNS": 8000000,
+            "latencyChangeUsingAudioSrcThresholdNS": 40000000,
+            "latencyChangeUsingResyncThresholdNS": 45000000
+        }
+    }
+}

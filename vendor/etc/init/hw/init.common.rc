@@ -1,0 +1,444 @@
+import /vendor/etc/init/hw/init.common.usb.rc
+import /vendor/etc/init/hw/init.boottime_trace.rc
+
+on early-init
+    mount debugfs debugfs /sys/kernel/debug
+    # Fix lockedmem limit for bpf createMap
+    setrlimit 8 10485760 10485760
+
+on init
+
+    # usb/other sdcard/iso/samba mount point
+    mkdir /userdata 0770 system system
+    mkdir /mnt/usb 0775 root system
+    mkdir /mnt/other_sdcard 0775 root system
+    mkdir /mnt/iso 0775 root system
+    mkdir /mnt/samba 0775 root system
+    # AOW platform
+    mkdir /mnt/vendor/bootdata 0775 root system
+    mkdir /mnt/vendor/config 0775 root system
+    #only used for Turnkey data separation
+    mkdir /mnt/vendor/tvconfig 0775 root system
+    mkdir /mnt/vendor/persist 0775 root system
+    mkdir /mnt/vendor/certificate 0775 root system
+    mkdir /mnt/vendor/uenv 0775 root system
+
+    # cache/log/temp... mount point
+    mkdir /var 0775 system system
+    mount tmpfs tmpfs /var mode=0775,gid=1000
+
+    # create /tmp point to /var/tmp
+    mkdir /var/tmp 0775 system system
+    symlink /var/tmp /tmp
+
+    # create /var/tmp/media for camera/ve/dwin
+    mkdir /var/tmp/media 0775 media media
+    mkdir /var/tmp/hwc 0775 system system
+    mkdir /var/tmp/providers.media 0775 system sdcard_rw
+
+    # DFB use socket mode for 64bit kernel
+    mkdir /dev/shm
+    mount -t tmpfs tmpfs /dev/shm
+
+    # initialize the default value of memory region index
+    write /dev/cpuset/memory_allocator_idx 0
+    write /dev/cpuset/system-background/memory_allocator_idx 1
+    write /dev/cpuset/background/memory_allocator_idx 1
+    write /dev/cpuset/foreground/memory_allocator_idx 0
+    write /dev/cpuset/top-app/memory_allocator_idx 0
+
+    # [FIXME] Because MTAL is removed, QHB and IR received controller need to be refactory.
+    # enable ir input for reboot recovery case
+    write /sys/module/mdrv_ir/parameters/input_event_en 1
+    write /sys/module/mdrv_ir/parameters/input_dev_event_enable 1
+
+    # to load chip specific xml
+    setprop vendor.mtk.realtime.cfg_name ${ro.boot.vendor.cf.hardware}
+    setprop vendor.mtk.neuron.board.cfg_name ${ro.boot.vendor.cf.hardware}
+
+    # set mali userspace driver library suffix name for dlopen of libEGL.so
+    setprop ro.hardware.egl "mali.${ro.boot.vendor.cf.hardware}"
+    # set vulkan driver library suffix name for dlopen of libVulkan.so
+    setprop ro.hardware.vulkan "${ro.boot.vendor.cf.hardware}"
+    # set pool mask for SVP 4.8
+    setprop debug.stagefright.c2-poolmask 0x7FF5FFFF
+    # set drop error for vdec
+    setprop vendor.mtk.subhalvdec.dropErrFrame 0
+    setprop vendor.mtk.subhalvdec.dropToIFrame 0
+
+on init && property:ro.boot.mtk.media.xml_variant.codecs=""
+    setprop ro.media.xml_variant.codecs "-${ro.boot.vendor.cf.hardware}"
+    setprop ro.media.xml_variant.codecs_performance "-${ro.boot.vendor.cf.hardware}"
+
+on init && property:ro.boot.mtk.media.xml_variant.codecs=*
+    setprop ro.media.xml_variant.codecs "_${ro.boot.mtk.media.xml_variant.codecs}"
+    setprop ro.media.xml_variant.codecs_performance "_${ro.boot.mtk.media.xml_variant.codecs}"
+
+on early-fs
+    # We need vold early for metadata encryption
+    start vold
+
+on fs
+    mount_all /vendor/etc/fstab.${ro.board.platform} --early
+    #Create AB update symlink
+    symlink /dev/block/mmcblk0boot0 /dev/block/by-name/rom_emmc_boot_a
+    symlink /dev/block/mmcblk0boot1 /dev/block/by-name/rom_emmc_boot_b
+
+    chmod 0777 /mnt/vendor/persist
+on post-fs
+    # start console service earlier here
+    start console
+    # start tee-supplicant service for file based encryption to use keymaster
+    start optee
+
+on late-fs
+    # To avoid the issue of getting service failed while waiting for Keymaster, 
+    # Wait for keymaster
+    exec_start wait_for_keymaster
+    mount_all /vendor/etc/fstab.${ro.board.platform} --late
+
+on post-fs-data
+    mkdir /data/system 0771 system system
+    mkdir /data/system/wpa_supplicant 0770 wifi wifi
+    mkdir /data/vendor/misc/dhcp 0770 dhcp dhcp
+    chmod 0775 /data/vendor/misc/dhcp
+    chown dhcp dhcp /data/vendor/misc/dhcp
+
+    # for tcl userdata
+    chmod 0660 /userdata/AtvData.db
+    chown system system /userdata/AtvData.db
+    chmod 0660 /userdata/DtvData.db
+    chown system system /userdata/DtvData.db
+    chmod 0660 /userdata/satellite.db
+    chown system system /userdata/satellite.db
+    chmod 0660 /userdata/AtscData.db
+    chown system system /userdata/AtscData.db
+
+    # create atmos wireless speaker wspk directory
+    mkdir /data/vendor/wspk 0770 wifi wifi
+
+    # realtek bluetooth
+    mkdir /data/misc/bluedroid 0770 bluetooth bluetooth
+    # bluetooth LPM
+    chown bluetooth bluetooth /proc/bluetooth/sleep/lpm
+    chown bluetooth bluetooth /proc/bluetooth/sleep/btwrite
+    # rfkill
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chmod 0660 /sys/class/rfkill/rfkill0/type
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
+    # bluetooth MAC address programming
+    chown bluetooth bluetooth "/data/misc/bluetooth/bdaddr"
+
+    # pppoe.conf/resolv.conf for read-write
+    mkdir /data/misc/ppp 0777 system system
+    chmod 0666 /sys/devices/virtual/pm/pm/PM_Info
+    chmod 0666 /sys/devices/virtual/pm/pm/WakeCfg
+    chmod 0666 /sys/devices/virtual/pm/pm/SARCfg
+    chmod 0666 /sys/devices/virtual/pm/pm/WoBTCfg
+    chmod 0666 /sys/power/pm_copy
+    chown root graphics /mnt/vendor/persist/dolby_vision/DOLBY_USER.cfg
+    chmod 0660 /mnt/vendor/persist/dolby_vision/DOLBY_USER.cfg
+    chown root graphics /mnt/vendor/persist/dolby_vision/DOLBY_FACTORY.cfg
+    chmod 0660 /mnt/vendor/persist/dolby_vision/DOLBY_FACTORY.cfg
+
+    # factory customizable config
+    chmod 0660 /mnt/vendor/persist/pq/presetdb/NLA.json
+    chown root system /mnt/vendor/persist/pq/presetdb/NLA.json
+    chmod 0660 /mnt/vendor/persist/config/wdt.ini
+    chown root system /mnt/vendor/persist/config/wdt.ini
+    chmod 0660 /mnt/vendor/persist/config/console.ini
+    chown root system /mnt/vendor/persist/config/console.ini
+    chmod 0660 /mnt/vendor/persist/standby/standby_mode.ini
+    chown root system /mnt/vendor/persist/standby/standby_mode.ini
+    chmod 0220 /sys/devices/platform/uart_control/uart_switch
+    chown root system /sys/devices/platform/uart_control/uart_switch
+    chmod 0775 /mnt/vendor/certificate
+    chown root system /mnt/vendor/certificate
+    chmod 0660 /mnt/vendor/certificate/hashkey.sign
+    chown root system /mnt/vendor/certificate/hashkey.sign
+    chmod 0640 /mnt/vendor/certificate/netflix50/ESNID
+    chown vendor_netflix vendor_netflix /mnt/vendor/certificate/netflix50/ESNID
+    mkdir /mnt/vendor/persist/calman 0755 system system
+    chmod 0660 /mnt/vendor/persist/pq/presetdb/${ro.boot.vendor.cf.hardware}/presetDB_cfd.json
+    chown root system /mnt/vendor/persist/pq/presetdb/${ro.boot.vendor.cf.hardware}/presetDB_cfd.json
+    chmod 0660 /mnt/vendor/persist/pq/presetdb/mtk_adc_gain_offset.json
+    chown root system /mnt/vendor/persist/pq/presetdb/mtk_adc_gain_offset.json
+    chmod 0660 /mnt/vendor/persist/panel_mode_cfg.ini
+    chown root system /mnt/vendor/persist/panel_mode_cfg.ini
+
+    # demura config
+    chmod 0660 /mnt/vendor/persist/demura_out.bin
+    chown root system /mnt/vendor/persist/demura_out.bin
+    chmod 0660 /mnt/vendor/persist/demura_out2.bin
+    chown root system /mnt/vendor/persist/demura_out2.bin
+
+    # voc config
+    chmod 0640 /mnt/vendor/persist/config/voc_env.ini
+    chown root system /mnt/vendor/persist/config/voc_env.ini
+    
+    # font config
+    chmod 0640 /vendor/tvconfig/config/font/CC0_TiresiasScreenfont.ttf
+    chmod 0640 /vendor/tvconfig/config/font/CC1_Gentium.ttf
+    chmod 0640 /vendor/tvconfig/config/font/CC2_BitstreamVeraSerif.ttf
+    chmod 0640 /vendor/tvconfig/config/font/CC3_BitstreamVeraSansMono.ttf
+    chmod 0640 /vendor/tvconfig/config/font/CC4_BitstreamVeraSans.ttf
+    chmod 0640 /vendor/tvconfig/config/font/CC5_MinyaNouvelle.ttf
+    chmod 0640 /vendor/tvconfig/config/font/CC6_MarketingScript.ttf
+    chmod 0640 /vendor/tvconfig/config/font/CC7_EngebrechtreExpand.ttf
+    chmod 0640 /vendor/tvconfig/config/font/MStarTTXFont.ttf
+    chmod 0660 /vendor/tvconfig/config/hashkey.sign
+    chown root system /vendor/tvconfig/config/hashkey.sign
+
+    # uuenv
+    mkdir /mnt/vendor/uuenv 0775 root system
+    chmod 0766 /mnt/vendor/uuenv/uuenv.ini
+    chmod 0766 /mnt/vendor/uuenv/uuenv.ini.bak
+
+    # boottime ftrace
+    chmod 0666 /sys/kernel/debug/tracing/instances/boottime/trace_marker
+
+on firmware_mounts_complete
+    start midaemon
+
+on early-boot
+    # Update dm-verity state and set partition.*.verified properties
+    verity_update_state
+    start set_project_id
+
+on boot
+    # Allow system processes to read/write LED device
+    chown system root /sys/class/leds/ga:0/brightness
+    chown system root /sys/class/leds/ga:1/brightness
+    chown system root /sys/class/leds/ga:2/brightness
+    chown system root /sys/class/leds/ga:3/brightness
+    chmod 666 /sys/module/leds_breath/parameters/rpmsg_txn
+    chmod 0664 /sys/class/leds/ga:0/brightness
+    chmod 0664 /sys/class/leds/ga:1/brightness
+    chmod 0664 /sys/class/leds/ga:2/brightness
+    chmod 0664 /sys/class/leds/ga:3/brightness
+
+    # create the coredump file
+    write /proc/sys/kernel/core_pattern /var/coredump.%p.gz
+    write /proc/sys/net/core/rmem_max 1048576
+    write /proc/sys/net/core/wmem_max 1048576
+
+    #wpa_supplicant
+    mkdir /data/vendor/wifi 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa 0770 wifi wifi
+    mkdir /data/vendor/wifi/wpa/sockets 0770 wifi wifi
+    chown root system /sys/power/wake_lock
+    chown root system /sys/power/wake_unlock
+
+    # Allow system processes to read wakeup info
+    chown root system /sys/mtk_pm/wakeup_reason/name
+    chown root system /sys/mtk_pm/wakeup_reason/id
+    chown root system /sys/mtk_pm/wakeup_key
+    chown root system /sys/mtk_pm/boot_reason
+    chown root system /sys/mtk_pm/max_cnt
+    chmod 660  /sys/mtk_pm/max_cnt
+
+    chmod 0660 /sys/bus/platform/drivers/mtk-dramc/dramc_ssc
+    chown root system /sys/bus/platform/drivers/mtk-dramc/dramc_ssc
+
+    chown root system /sys/bus/iio/devices/iio:device1/in_illuminance0_input
+    chmod 0660 /sys/bus/iio/devices/iio:device1/in_illuminance0_input
+
+    mkdir /data/vendor/mediadrm 0770 media mediadrm
+    start copy_atsc3_glp
+
+# after launcher is displayed, trigger other drivers initialization
+on property:sys.boot_completed=1
+    write /dev/kmsg "<1>[AT][AN][finish boot]"
+    write /proc/mtk_boot/ab_boot 1
+    start zram-svc
+
+    chmod 0666 /sys/devices/platform/mediatek-drm-tv-kms/mtk_dbg/mtk_drm_GOP_PQEn
+    chown root system /sys/devices/platform/mediatek-drm-tv-kms/mtk_dbg/mtk_drm_GOP_PQEn
+
+# Set up AT test
+on property:persist.vendor.mtk.setupAT=1 && property:sys.boot_completed=1
+    start setupAT
+
+# mempool setting
+on property:vendor.mtk.mempool.size=*
+    write /sys/class/iommu/mtk-dtv-iommu/mtk_dbg/agile_pool_size ${vendor.mtk.mempool.size}
+
+service setupAT /vendor/bin/sh /vendor/bin/pre_test.sh
+    user root
+    group root
+    oneshot
+    seclabel u:r:pre_test:s0
+
+# service for optee
+service optee /vendor/bin/tee-supplicant
+    class main
+    user  vendor_tee
+    group vendor_tee system
+    seclabel u:r:tee:s0
+
+#servie for intertaca
+service intertaca /vendor/bin/intertaca /vendor/optee/config/
+    class main
+    oneshot
+    seclabel u:r:intertaca:s0
+
+# service for common wificond
+service wificond /system/bin/wificond
+    class main
+    user wifi
+    group wifi net_raw net_admin
+    capabilities NET_RAW NET_ADMIN
+
+# service for virtual keypad
+service virtualkeypad /vendor/bin/virtualkeypad
+    class main
+    user uhid
+    group uhid
+    oneshot
+    seclabel u:r:virtualkeypad:s0
+
+#add wireless related service
+service fast_connect /vendor/bin/fast_connect
+    class main
+    oneshot
+    seclabel u:r:fast_connect:s0
+
+#service for p2p_supplicant.conf
+service pre-init /vendor/bin/sh /vendor/etc/service/pre-init.sh
+    class main
+    oneshot
+    group wifi
+    seclabel u:r:mt_pre-init:s0
+
+#add wireless related service
+service wpa_supplicant /vendor/bin/hw/wpa_supplicant -g@android:wpa_wlan0 -G1010 -O/data/vendor/wifi/wpa/sockets -Dnl80211 -iwlan0 -c /vendor/etc/wifi/wpa_supplicant.conf -N -Dnl80211 -ip2p0 -c /data/vendor/wifi/wpa/p2p_supplicant.conf -puse_p2p_group_interface=1 -d
+    interface aidl android.hardware.wifi.supplicant.ISupplicant/default
+    class main
+    socket wpa_wlan0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
+service wpa_supplicantrt /vendor/bin/hw/wpa_supplicantrt -Dnl80211 -iwlan0 -c /data/vendor/misc/wifi/wpa.conf
+    class main
+    disabled
+    oneshot
+    seclabel u:r:wpa:s0
+
+service p2p_supplicantrt /vendor/bin/hw/wpa_supplicantrt -Dnl80211 -iwlan0 -c /data/vendor/misc/wifi/p2p.conf -e /data/vendor/misc/wifi/entropy.bin
+    class main
+    disabled
+    oneshot
+    seclabel u:r:wpa:s0
+
+service wpa_supplicant6k /vendor/bin/hw/wpa_supplicantat6k -iwlan0 -Dnl80211 -c /data/vendor/misc/wifi/wpa.conf
+    class main
+    disabled
+    oneshot
+    #seclabel u:r:wpa:s0
+
+service p2p_supplicant6k /vendor/bin/hw/wpa_supplicantat6k -ip2p0 -Dnl80211 -c /data/vendor/misc/wifi/p2p.conf
+    class main
+    disabled
+    oneshot
+    seclabel u:r:wpa:s0
+
+service dhcpcd /vendor/bin/dhcpcd -BK
+    class main
+    disabled
+    oneshot
+
+service dhcpcd_eth0 /vendor/bin/dhcpcd -BK
+    class main
+    disabled
+    oneshot
+
+service dhcpcd_wlan0 /vendor/bin/dhcpcd -BK
+    class main
+    disabled
+    oneshot
+
+service dhcpcd_p2p /vendor/bin/dhcpcd -BK
+    class main
+    disabled
+    oneshot
+#support ipv6
+
+service dhcp6cDNS_wlan0 /vendor/bin/dhcp6c -c "/etc/wide-dhcpv6/dhcp6cDNS_wlan0.conf" -Df wlan0
+    class main
+    disabled
+    oneshot
+    seclabel u:r:mt_dhcpv6:s0
+
+service dhcp6c_eth0 /vendor/bin/dhcp6c -c "/etc/wide-dhcpv6/dhcp6c.conf" -Df eth0
+    class main
+    disabled
+    oneshot
+    seclabel u:r:mt_dhcpv6:s0
+
+service dhcp6c_wlan0 /vendor/bin/dhcp6c -c "/etc/wide-dhcpv6/dhcp6c_wifi.conf" -Df wlan0
+    class main
+    disabled
+    oneshot
+    seclabel u:r:mt_dhcpv6:s0
+
+service dhcp6cDNS_eth0 /vendor/bin/dhcp6c -c "/etc/wide-dhcpv6/dhcp6cDNS_eth0.conf" -Df eth0
+    class main
+    disabled
+    oneshot
+    seclabel u:r:mt_dhcpv6:s0
+
+on property:service.dhcp6c_wlan0.enable=0
+    stop dhcp6c_wlan0
+
+on property:service.dhcp6c_wlan0.enable=1
+    start dhcp6c_wlan0
+
+service dhcp6c_PD /vendor/bin/dhcp6c -c "/etc/wide-dhcpv6/dhcp6cPD.conf" -Df
+    disabled
+    oneshot
+    seclabel u:r:mt_dhcpv6:s0
+
+service bugreport /system/bin/dumpstate -d -p -B -z \
+        -o /data/user_de/0/com.android.shell/files/bugreports/bugreport
+    class main
+    disabled
+    oneshot
+
+# service for mi
+service midaemon /vendor/bin/mi3daemon
+    class core
+    console
+    oneshot
+    user system
+    group system audio drmrpc vendor_tee
+    seclabel u:r:midaemon:s0
+
+
+# service for insert audio ko
+service setup_audio_ko /vendor/bin/sh /vendor/bin/setup_audio_ko.sh
+    console
+    oneshot
+    seclabel u:r:setup_audio_ko:s0
+
+# service for audio cpu decode
+service cpu-audio /vendor/bin/sh /vendor/bin/cpu_audio.sh
+    console
+    oneshot
+    user vendor_cpu_audio
+    group audio
+    capabilities SYS_NICE
+    seclabel u:r:mt_cpu_audio-svc:s0
+
+# service for project_id property
+service set_project_id /vendor/bin/sh /vendor/bin/set_project_id.sh
+    oneshot
+    seclabel u:r:set_project_id_service:s0
+
+service copy_atsc3_glp /vendor/bin/sh /vendor/bin/copy_atsc3_glp.sh ${ro.software.version_id}
+    class main
+    console
+    oneshot
+    user media
+    group mediadrm
+    seclabel u:r:tcl_sitatvservice:s0

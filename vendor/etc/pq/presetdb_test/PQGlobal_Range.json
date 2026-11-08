@@ -1,0 +1,355 @@
+{
+  "$HearderComment": [
+    "PresetDB for Capability and Range",
+    "Struct Version 0.100 : 1st version ",
+    "Struct Version 0.200 : Separated Keys from the setting for Global and only for Per-Stream."
+  ],
+  "Range": {
+    "Saturation": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "Backlight": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "Gamma": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Dark",
+        "Middle",
+        "Bright"
+      ]
+    },
+    "Color_Temperature": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "User",
+        "Cool",
+        "Standard",
+        "Warm"
+      ]
+    },
+    "Color_Temperature_Red_Gain": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": -100,
+      "Max": 100
+    },
+    "Color_Temperature_Green_Gain": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": -100,
+      "Max": 100
+    },
+    "Color_Temperature_Blue_Gain": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": -100,
+      "Max": 100
+    },
+    "Color_Temperature_Red_Offset": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": -100,
+      "Max": 100
+    },
+    "Color_Temperature_Green_Offset": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": -100,
+      "Max": 100
+    },
+    "Color_Temperature_Blue_Offset": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": -100,
+      "Max": 100
+    },
+    "11_Point_0_Red": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_0_Green": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_0_Blue": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_1_Red": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_1_Green": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_1_Blue": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_2_Red": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_2_Green": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_2_Blue": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_3_Red": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_3_Green": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_3_Blue": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_4_Red": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_4_Green": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_4_Blue": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_5_Red": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_5_Green": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_5_Blue": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_6_Red": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_6_Green": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_6_Blue": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_7_Red": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_7_Green": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_7_Blue": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_8_Red": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_8_Green": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_8_Blue": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_9_Red": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_9_Green": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_9_Blue": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_10_Red": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_10_Green": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "11_Point_10_Blue": {
+      "Capability": "Enable",
+      "Value_Type": "value",
+      "Min": 0,
+      "Max": 100
+    },
+    "Low_Blue_Light": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "off",
+        "Low",
+        "Middle",
+        "High"
+      ]
+    },
+    "LD_MODE": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "Low",
+        "Middle",
+        "High"
+      ]
+    },
+    "Precision_Rendering": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "DV_IQ_APO": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "DV_IQ_LS": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    },
+    "DV_IQ_EUC_Update": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "Update",
+        "Reset"
+      ]
+    },
+    "Private": {
+      "Picture_Mode": {
+        "Capability": "Enable",
+        "Value_Type": "List",
+        "Item": [
+          "User",
+          "Standard",
+          "Vivid",
+          "Sport",
+          "Movie",
+          "Game",
+          "Energy Saving",
+          "DolbyVisionVivid",
+          "DolbyVisionGame",
+          "DolbyVisionIQ",
+          "DolbyVisionBright",
+          "DolbyVisionDark"
+        ]
+      }
+    },
+    "Live_Tone": {
+      "Capability": "Enable",
+      "Value_Type": "List",
+      "Item": [
+        "Off",
+        "On"
+      ]
+    }
+  }
+}

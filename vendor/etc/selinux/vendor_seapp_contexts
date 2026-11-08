@@ -1,0 +1,28 @@
+user=_app seinfo=platform name=com.android.externalstorage domain=platform_app type=mt_aosp_app_data_file
+user=_app seinfo=platform name=com.android.managedprovisioning domain=platform_app type=mt_aosp_app_data_file
+user=_app seinfo=platform name=com.android.systemui domain=platform_app type=mt_aosp_app_data_file
+user=_app seinfo=platform name=com.android.packageinstaller domain=platform_app type=mt_aosp_app_data_file
+user=_app seinfo=platform name=com.mediatek.dtv.tvinput.framework.server domain=platform_app type=mt_cus_app_data_file
+user=_app seinfo=platform name=com.mediatek.dtv.tvinput.dvbtuner domain=platform_app type=mt_cus_app_data_file
+user=_app seinfo=platform name=com.mediatek.AirplayAPK domain=platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.airplaydaemon domain=platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.backgrounddetection domain=platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.extservice domain=platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.network domain=platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.tis domain=platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.wwtv.mediaplayer domain=platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.tv.systemupdater domain=platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=tv.mopa.ginga domain=platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.dialservice domain=platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.browservice domain=mt_platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.partner.airplay_sys domain=platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.tv.agent domain=mt_platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.tv.oneworld.wizardkt domain=mt_platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.tv.oneworld.tvcenter domain=mt_platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.tv.tvagentservice.tests domain=mt_platform_app type=mt_tvapk_app_data_file
+user=_app seinfo=platform name=com.mediatek.android.tv.mdns.offload domain=googlecast_offload_app type=googlecast_offload_app_data_file
+user=_app isPrivApp=true name=com.netflix.tokenmanager domain=tokenmanager type=mt_cus_app_data_file
+user=_app seinfo=platform name=com.phorus.playfi.tv domain=mt_platform_app type=mt_cus_app_data_file
+user=_app seinfo=dolby domain=dolby_audio_service type=app_data_file
+user=_app seinfo=platform name=com.dolby.android.audio.calibration domain=mt_platform_app type=mt_cus_app_data_file
+user=network_stack seinfo=platform name=com.tcl.cast.framework domain=platform_app

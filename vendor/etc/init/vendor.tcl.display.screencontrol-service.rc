@@ -1,0 +1,4 @@
+service tcl_screencontrol_service /vendor/bin/hw/vendor.tcl.display.screencontrol-service
+    class hal
+    user system
+    group system

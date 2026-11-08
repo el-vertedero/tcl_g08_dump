@@ -1,0 +1,7 @@
+service vendor.drm-fairplay-service /vendor/bin/hw/android.hardware.drm-service.fairplay
+    class hal
+    user media
+    group mediadrm drmrpc system
+    ioprio rt 4
+    task_profiles ProcessCapacityHigh
+    interface aidl android.hardware.drm.IDrmFactory/fairplay

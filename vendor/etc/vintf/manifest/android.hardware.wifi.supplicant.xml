@@ -1,0 +1,12 @@
+<manifest version="1.0" type="device">
+	<hal format="aidl">
+		<name>android.hardware.wifi.supplicant</name>
+		<version>2</version>
+		<fqname>ISupplicant/default</fqname>
+	</hal>
+	<hal format="aidl">
+		<name>vendor.tcl.hardware.wifi.supplicant</name>
+		<version>1</version>
+		<fqname>ITclSupplicant/default</fqname>
+	</hal>
+</manifest>

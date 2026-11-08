@@ -1,0 +1,144 @@
+{
+    "version": "1.0",
+    "BufferBudget": {
+        "SupportedPreference": [
+            "quality",
+            "avsync"
+        ],
+        "Preference": "quality"
+    },
+    "CpuBudget": {
+        "INIT": {
+            "CASE1": {
+                "Width": 1280,
+                "Hieght": 768,
+                "FrameRate": 60000,
+                "Cost": 25
+            },
+            "CASE2": {
+                "Width": 1920,
+                "Hieght": 1088,
+                "FrameRate": 30000,
+                "Cost": 25
+            },
+            "CASE3": {
+                "Width": 1920,
+                "Hieght": 1088,
+                "FrameRate": 60000,
+                "Cost": 25
+            },
+            "CASE4": {
+                "Width": 3840,
+                "Hieght": 2176,
+                "FrameRate": 30000,
+                "Cost": 25
+            },
+            "CASE5": {
+                "Width": 3840,
+                "Hieght": 2176,
+                "FrameRate": 60000,
+                "Cost": 25
+            },
+            "CASE6": {
+                "Width": 3840,
+                "Hieght": 2176,
+                "FrameRate": 120000,
+                "Cost": 25
+            }
+        },
+        "STABLE": {
+            "CASE1": {
+                "Width": 1280,
+                "Hieght": 768,
+                "FrameRate": 60000,
+                "Cost": 4
+            },
+            "CASE2": {
+                "Width": 1920,
+                "Hieght": 1088,
+                "FrameRate": 30000,
+                "Cost": 3
+            },
+            "CASE3": {
+                "Width": 1920,
+                "Hieght": 1088,
+                "FrameRate": 60000,
+                "Cost": 5
+            },
+            "CASE4": {
+                "Width": 3840,
+                "Hieght": 2176,
+                "FrameRate": 30000,
+                "Cost": 11
+            },
+            "CASE5": {
+                "Width": 3840,
+                "Hieght": 2176,
+                "FrameRate": 60000,
+                "Cost": 21
+            },
+            "CASE6": {
+                "Width": 3840,
+                "Hieght": 2176,
+                "FrameRate": 120000,
+                "Cost": 46
+            }
+        }
+    },
+    "DolbyVisionResourceManager": {
+        "InputSrc": {
+            "SupportedOutOfResourceDecision": [
+                "fatal_error",
+                "mute",
+            ],
+            "OutOfResourceDecision": "mute"
+        },
+        "MM": {
+            "SupportedOutOfResourceDecision": [
+                "fatal_error",
+                "out_of_memory",
+                "mute",
+            ],
+            "OutOfResourceDecision": "out_of_memory"
+        }
+    },
+    "PerfManager": {
+        "MM": {
+            "Enable": 1,
+            "NormalMode": {
+                "LateThresholdUs": 2000000
+            },
+            "LowLatencyMode": {
+                "LateThresholdUs": 2000000
+            },
+            "LateToleranceDurationUs": 0
+        },
+        "DTV": {
+            "Enable": 0,
+            "NormalMode": {
+                "LateThresholdUs": 2000000
+            },
+            "LowLatencyMode": {
+                "LateThresholdUs": 2000000
+            },
+            "LateToleranceDurationUs": 500000
+        }
+    },
+    "OpRateMode": {
+        "Undefined": {
+            "RealTime": 1
+        },
+    },
+    "CspSupportFfrManager": {
+         "SupportedCsp": {
+                "com.netflix.ninja": true,
+                "com.google.android.youtube.tv": true,
+                "com.disney.disneyplus": false,
+                "com.amazon.amazonvideo.livingroom": false,
+                "com.google.android.apps.mediashell": true,
+                "com.mediatek.tv.oneworld.tvcenter": true,
+                "com.mitv.livetv": true,
+        }
+    }
+}
+

@@ -1,0 +1,115 @@
+{
+  "device": [
+    {
+      "Name": "mt76x3",
+      "ProductId": "0x0e8d:0x7663",
+      "Wifi": [
+        {
+          "DriverNum": 3,
+          "DriverInfo": [
+            {
+              "name": "mtreset_mt7663",
+              "path": "mtreset_mt7663.ko",
+              "arg": "",
+              "unload": 0
+            },
+            {
+              "name": "wlan_mt76x3_usb_prealloc",
+              "path": "wlan_mt76x3_usb_prealloc.ko",
+              "arg": "",
+              "unload": 0
+            },
+            {
+              "name": "wlan_mt76x3_usb",
+              "path": "wlan_mt76x3_usb.ko",
+              "arg": "",
+              "unload": 1
+            }
+          ],
+          "VendorHal": "libwifi-hal-mt66xx.so",
+          "ExtraHal": "lib_driver_cmd_mtk"
+        }
+      ],
+      "Bluetooth": [
+        {
+          "DriverNum": 2,
+          "DriverInfo": [
+            {
+              "name": "mtreset_mt7663",
+              "path": "mtreset_mt7663.ko",
+              "arg": "",
+              "unload": 0
+            },
+            {
+              "name": "btmtk_usb_7663",
+              "path": "btmtk_usb_7663.ko",
+              "arg": "",
+              "unload": 0
+            }
+          ],
+          "VendorHal": "libbt-vendor-mtk76xx.so",
+          "ExtraHal": "libbluetooth.so"
+        }
+      ]
+    },
+    {
+      "Name": "mt79x1",
+      "ProductId": "0x0e8d:0x7961",
+      "Wifi": [
+        {
+          "DriverNum": 3,
+          "DriverInfo": [
+            {
+              "name": "mtreset_mt79x1",
+              "path": "mtreset_mt79x1.ko",
+              "arg": "",
+              "unload": 0
+            },
+            {
+              "name": "wlan_mt79x1_usb_prealloc",
+              "path": "wlan_mt79x1_usb_prealloc.ko",
+              "arg": "",
+              "unload": 0
+            },
+            {
+              "name": "wlan_mt79x1_usb",
+              "path": "wlan_mt79x1_usb.ko",
+              "arg": "",
+              "unload": 1
+            }
+          ],
+          "VendorHal": "libwifi-hal-mt66xx.so",
+          "ExtraHal": "lib_driver_cmd_mtk"
+        }
+      ],
+      "Bluetooth": [
+        {
+          "DriverNum": 3,
+          "DriverInfo": [
+            {
+              "name": "mtreset_mt79x1",
+              "path": "mtreset_mt79x1.ko",
+              "arg": "",
+              "unload": 0
+            },
+            {
+              "name": "bluetooth",
+              "path": "bluetooth.ko",
+              "arg": "",
+              "unload": 0
+            },
+            {
+              "name": "btmtk_usb_mt79x1",
+              "path": "btmtk_usb_mt79x1.ko",
+              "arg": "",
+              "unload": 0
+            }
+          ],
+          "VendorHal": "libbt-vendor-mtk76xx.so",
+          "ExtraHal": "libbluetooth.so"
+        }
+      ]
+   }
+  ]
+}
+

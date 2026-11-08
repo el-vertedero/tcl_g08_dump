@@ -1,0 +1,87 @@
+#copyright (C),2014-2020,Tcl Comm Corp., Ltd
+# VENDOR_EDIT,All rights reserved.
+#
+# FILE:-
+# Description:init.tcl.rc
+#    Define the tcl init service by init
+import /vendor/etc/init/hw/init.tcl.product.rc
+# ifdef VENDOR_EDIT
+# kaixuan.ning@tcl.com, 2022/09/13, modify for dynamic fingerprint
+import /vendor/etc/init/init.vendor.chome.rc
+# endif /* VENDOR_EDIT */
+
+on property:odm.tcl.factory.pmode=1 && property:odm.tcl.factory.halready=1
+    start tclfactoryos
+
+on property:odm.tcl.factory.pmode=1 && property:odm.tcl.factory.logcat=100
+    start factory_log_start
+
+on property:odm.tcl.factory.pmode=1 && property:odm.tcl.factory.logcat=101
+    start factory_log_stop
+
+on property:odm.tcl.factory.pmode=1 && property:odm.tcl.factory.logcat=102
+    start factory_log_copy
+
+service tclfactoryos /vendor/bin/sh /vendor/bin/tclfactoryos.sh
+    class main
+    user root
+    group root system  everybody
+    disabled
+    oneshot
+    seclabel u:r:tcl_factory_service_default:s0
+
+on post-fs-data
+    start factory_locale
+
+on boot
+    chown system system /sys/class/rtc/rtc0/wakealarm
+    # add file permission
+    chmod 660 /userdata/satellite.db
+    chmod 660 /userdata/DtvData.db
+    chmod 660 /userdata/AtvData.db
+    chmod 660 /userdata/AtscData.db
+    chown system system /userdata/satellite.db
+    chown system system /userdata/DtvData.db
+    chown system system /userdata/AtvData.db
+    chown system system /userdata/AtscData.db
+
+service factory_locale /system/bin/sh /system_ext/bin/factory_shop.sh
+    class core
+#   console
+    user root
+    group root system
+    oneshot
+    seclabel u:r:fty_locale_service:s0
+
+service factory_log_start /system/bin/sh /system_ext/bin/factory_log.sh "fty_start_log"
+    class core
+    user root
+    group root system
+    disabled
+    oneshot
+    seclabel u:r:fty_locale_service:s0
+
+service factory_log_stop  /system/bin/sh /system_ext/bin/factory_log.sh "fty_stop_log"
+    class core
+    user root
+    group root system
+    disabled
+    oneshot
+    seclabel u:r:fty_locale_service:s0
+
+service factory_log_copy  /system/bin/sh /system_ext/bin/factory_log.sh "fty_copy_log"
+    class core
+    user root
+    group root system
+    disabled
+    oneshot
+    seclabel u:r:fty_locale_service:s0
+
+#ifdef VENDOR_EDIT
+# jiehua2.li@tcl.com, 2024/11/07, add for tcl watchdog control module
+on property:persist.tcl.watchdog.enable=1
+    exec u:r:tcl_wdt_controller_default:s0 root system -- /vendor/bin/tcl_wdt_controller enable
+
+on property:persist.tcl.watchdog.enable=0
+    exec u:r:tcl_wdt_controller_default:s0 root system -- /vendor/bin/tcl_wdt_controller disable
+#endif /* VENDOR_EDIT */

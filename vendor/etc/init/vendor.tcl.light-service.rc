@@ -1,0 +1,4 @@
+service tcl_light_aidl_service /vendor/bin/hw/vendor.tcl.light-service
+    class hal
+    user system
+    group system

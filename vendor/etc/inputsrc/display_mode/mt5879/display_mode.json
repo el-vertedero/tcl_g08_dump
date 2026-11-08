@@ -1,0 +1,29 @@
+{
+    "version": 1,
+    "syntax description": {
+        "scenario-table": {
+            "group-id": "<NONNEGATIVE-INT-NUMBER>",
+            "display-mode": "legacy | time sharing | ignore",
+            "buffer-control-mode": "sw | hw | bypass"
+        },
+        "resource-limit-table": {
+            "group-id": "<NONNEGATIVE-INT-NUMBER>",
+            "max-count": "<POSITIVE-INT-NUM>",
+            "hw-id" : "<NONNEGATIVE-INT-NUMBER>"
+        }
+    },
+    "scenario-table": [
+        {
+            "group-id": 0,
+            "display-mode": "ignore",
+            "buffer-control-mode": "bypass"
+        }
+    ],
+    "resource-limit-table": [
+        {
+            "group-id": 0,
+            "max-count": 1,
+            "hw-id" : 0
+        }
+    ]
+}

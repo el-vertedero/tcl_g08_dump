@@ -1,0 +1,5 @@
+service vendor.tcl.tvinput.extend-service /vendor/bin/hw/vendor.tcl.tvinput.extend-service
+    interface aidl vendor.tcl.tvinput.extend.ITvExtendService/default
+    class hal
+    user root
+    group system root

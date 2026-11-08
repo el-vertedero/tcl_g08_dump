@@ -1,0 +1,7 @@
+service android-hardware-media-c2-hal-1-1 /vendor/bin/hw/android.hardware.media.c2@1.1-mediatek
+    class hal
+    user mediacodec
+    group camera mediadrm drmrpc system vendor_realtime graphics audio vendor_tee vendor_mtk_lmkd
+    capabilities SYS_NICE
+    ioprio rt 4
+    writepid /dev/cpuset/foreground/tasks

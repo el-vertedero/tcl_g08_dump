@@ -1,0 +1,22 @@
+{
+  "appJsVersion": "63.146.0",
+  "hlsJsVersion": "2.920.8",
+  "lunaJsVersion": "1.16.0",
+  "appAssets": {
+    "fonts": "assets/4.7.0/airplayapp",
+    "rtcStoreBag": "store_bags/hlsjs/v1"
+  },
+  "featureList": {
+    "additionalAirPlayFeatures": [
+      0,
+      64
+    ],
+    "playerCapabilities": {
+      "supportsOfflineHLS": false,
+      "supportsAirPlayVideoWithSharePlay": true,
+      "supportsInterstitials": true
+    },
+    "allowTeardownMetrics": true
+  },
+  "atvekitJsVersion": "27.1.0"
+}

@@ -1,0 +1,7 @@
+service vendor.stc-default /vendor/bin/hw/vendor.mediatek.hardware.aidlstc-service
+    class hal
+    user media
+    group mediadrm drmrpc
+    capabilities SYS_NICE
+    ioprio rt 4
+    writepid /dev/cpuset/foreground/tasks

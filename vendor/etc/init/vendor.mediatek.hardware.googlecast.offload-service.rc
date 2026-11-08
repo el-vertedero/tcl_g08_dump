@@ -1,0 +1,4 @@
+service googlecast-offload-hal /vendor/bin/hw/vendor.mediatek.hardware.googlecast.offload-service
+    class hal
+    user system
+    group system

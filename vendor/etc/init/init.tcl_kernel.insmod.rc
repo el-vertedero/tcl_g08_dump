@@ -1,0 +1,70 @@
+# ramdisk: tcl_uxthread.ko, tkperf.ko, tcl_kto_monitor.ko
+
+on early-init
+    write /proc/kfaultfs_uboot stopwdg
+
+    insmod /vendor/lib/modules/tcl_state.ko
+    chown system system /proc/tcl_state
+    chmod 0644 /proc/tcl_state
+    # ifndef VENDOR_EDIT
+    # lei6.yao@tcl.com, 2024.08.22.add for standby qhb mode
+    # kangwei.liu@tcl.com, 2025.07.11.add for standby qhb mode
+    insmod /vendor/lib/modules/tcl_qhb_reset.ko gl_qhb_status=${ro.boot.qhbquiescent}
+    # endif  /* VENDOR_EDIT End*/
+
+    insmod /vendor/lib/modules/tcl_rebootreason.ko
+    insmod /vendor/lib/modules/tcl_kfault.ko
+    #insmod /vendor/lib/modules/kfault_tasks_mem.ko
+    #insmod /vendor/lib/modules/kfault_meminfo.ko
+    #insmod /vendor/lib/modules/kfault_module.ko
+    #insmod /vendor/lib/modules/kfault_memory_layout.ko
+
+    insmod /vendor/lib/modules/hardlockup.ko
+
+    # must before mtk_mic_mute_drv.ko, rtk_dmic.ko
+    insmod /vendor/lib/modules/tcl_speech.ko
+
+    # must before mali_kbase_mt5877.ko, which in early-boot
+    insmod /vendor/lib/modules/resourcemonitor.ko
+
+    insmod /vendor/lib/modules/tcl_dybridge.ko
+    chown system system /dev/tcl_dybridge
+    chmod 0664 /dev/tcl_dybridge
+
+    insmod /vendor/lib/modules/tcl_common_data.ko
+    insmod /vendor/lib/modules/cpu_perf_monitor.ko
+    chown root system /proc/tcl_perf_monitor/threshold
+    chown root system /proc/tcl_perf_monitor/sampling_period
+    chown root system /proc/tcl_perf_monitor/show_excced_process
+
+on early-boot
+    insmod /vendor/lib/modules/tcl_vdf.ko
+    insmod /vendor/lib/modules/tcl_perf_bdt.ko
+
+on boot
+    chown system system /dev/block/by-name/tcllog
+    mount kfault kfault /sys/fs/kfault setuid=1000,setgid=1000
+    chmod 0775 /sys/fs/kfault/
+    chown system system /sys/fs/kfault/
+    chown system system /sys/fs/kfault/ctrl
+    chown system system /sys/fs/kfault/kfault_tmp/
+    restorecon -r -v /sys/fs/kfault/
+
+    insmod /vendor/lib/modules/tcl_action_monitor.ko
+    write /proc/kfaultfs_uboot stopwdg
+    write /proc/tcl_state 2
+
+    insmod /vendor/lib/modules/tcl_stability_test.ko
+
+    insmod /vendor/lib/modules/input_panic.ko
+
+    chown root system /proc/resourcemonitor/
+    chown root system /proc/resourcemonitor/iostats
+    chown root system /proc/resourcemonitor/estats
+    chown root system /proc/resourcemonitor/memstats
+    chown root system /proc/resourcemonitor/gpu_memstats
+    chown root system /proc/resourcemonitor/cpustats
+    chown root system /proc/resourcemonitor/filestats
+    chown root system /proc/resourcemonitor/wmswitch
+    chmod 0660 /proc/resourcemonitor/wmswitch
+    chmod 0771 /proc/resourcemonitor

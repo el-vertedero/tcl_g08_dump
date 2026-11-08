@@ -1,0 +1,227 @@
+#VirtualX_Module
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+VX_Params=--virtualx-discard 0 --tbhdx-discard 1 --virtualx-en 1 --virtualx-out-mode 0 --virtualx-headroom-gain 0.355 --virtualx-reference-level 0.0625 --virtualx-tsx-en 1 --virtualx-tsx-pssv-mtrx-en 1 --virtualx-tsx-hght-upmix-en 1 --virtualx-dialogclarity-en 1 --virtualx-definition-en 1 --virtualx-tsx-vxtopspk-loc 0 --tbhdx-front-en 0 --tbhdx-front-proc-mode 1 --tbhdx-front-spksize 2 --tbhdx-rear-en 0 --tbhdx-front-proc-mode 1 --tbhdx-rear-proc-mode 1 --tbhdx-surround-proc-mode 1 --loudness-control-en 0 --loudness-control-discard 1 --mbhl-discard 1 --mbhl-reference-level 0.0625 --mbhl-boost 2.0 --mbhl-ac-en 1 --mbhl-comp-low-release 1000 --mbhl-comp-low-thresh 0.064 --mbhl-comp-low-makeup 1.12 --mbhl-comp-mid-release 500 --mbhl-comp-mid-thresh 0.1 --mbhl-comp-mid-makeup 1.12 --mbhl-comp-high-release 200 --mbhl-comp-high-thresh 0.1585 --mbhl-comp-high-makeup 1.12 --aeq-enable 0 --aeq-discard 1 --geq-enable 0 --geq-discard 1
+VX_Test01=--virtualx-in-mode 0  --virtualx-en 0  --virtualx-discard 1
+VX_Test02=--virtualx-in-mode 0  --virtualx-en 0  --virtualx-discard 1
+VX_Test03=--virtualx-in-mode 0  --virtualx-en 0  --virtualx-discard 1
+VX_Test04=--virtualx-in-mode 0  --virtualx-en 0  --virtualx-discard 1
+VX_Test05=--virtualx-in-mode 0  --virtualx-en 0  --virtualx-discard 1
+VX_Test06=--virtualx-in-mode 0  --virtualx-en 0  --virtualx-discard 1
+VX_Test07=--virtualx-in-mode 0
+VX_Test08=--virtualx-in-mode 0
+VX_Test09=--virtualx-in-mode 0
+VX_Test10=--virtualx-in-mode 0
+VX_Test11=--virtualx-in-mode 0
+VX_Test12=--virtualx-in-mode 0
+VX_Test13=--virtualx-in-mode 0
+VX_Test14=--virtualx-in-mode 1
+VX_Test15=--virtualx-in-mode 1
+VX_Test16=--virtualx-in-mode 1
+VX_Test17=--virtualx-in-mode 1
+VX_Test18=--virtualx-in-mode 1
+VX_Test19=--virtualx-in-mode 1
+VX_Test20=--virtualx-in-mode 1
+VX_Test21=--virtualx-in-mode 1
+VX_Test22=--virtualx-in-mode 1
+VX_Test23=--virtualx-in-mode 1
+VX_Test24=--virtualx-in-mode 1
+VX_Test25=--virtualx-in-mode 1
+VX_Test26=--virtualx-in-mode 0
+VX_Test27=--virtualx-in-mode 0
+VX_Test28=--virtualx-in-mode 0
+VX_Test29=--virtualx-in-mode 0
+VX_Test30=--virtualx-in-mode 0
+VX_Test31=--virtualx-in-mode 0
+VX_Test32=--virtualx-in-mode 0
+VX_Test33=--virtualx-in-mode 0
+VX_Test34=--virtualx-in-mode 1
+VX_Test35=--virtualx-in-mode 1
+VX_Test36=--virtualx-in-mode 1
+VX_Test37=--virtualx-in-mode 1
+VX_Test38=--virtualx-in-mode 1
+VX_Test39=--virtualx-in-mode 1
+VX_Test40=--virtualx-in-mode 1
+VX_Test41=--virtualx-in-mode 1
+VX_Test42=--virtualx-in-mode 1
+VX_Test43=--virtualx-in-mode 0
+VX_Test44=--virtualx-in-mode 1
+VX_Test45=--virtualx-in-mode 1
+VX_Test46=--virtualx-in-mode 1
+VX_Test47=--virtualx-in-mode 1
+VX_Test48=--virtualx-in-mode 1
+VX_Test49=--virtualx-in-mode 1
+VX_Test50=--virtualx-in-mode 1
+VX_Test51=--virtualx-in-mode 1
+VX_Test52=--virtualx-in-mode 1
+VX_Test53=--virtualx-in-mode 1
+VX_Test54=--virtualx-in-mode 1
+VX_Test55=--virtualx-in-mode 1
+VX_Test56=--virtualx-in-mode 1  --tbhdx-discard 0  --tbhdx-front-en 1  --tbhdx-rear-en 1  --tbhdx-center-en 1  --tbhdx-surround-en 1
+VX_Test57=--virtualx-in-mode 1  --tbhdx-discard 0  --tbhdx-front-en 1  --tbhdx-rear-en 1  --tbhdx-center-en 1  --tbhdx-surround-en 1
+VX_Test58=--virtualx-in-mode 1  --tbhdx-discard 0  --tbhdx-front-en 1  --tbhdx-front-bass-lvl 1.0  --tbhdx-rear-en 1  --tbhdx-rear-bass-lvl 1.0  --tbhdx-center-en 1  --tbhdx-center-bass-lvl 1.0  --tbhdx-surround-en 1  --tbhdx-surround-bass-lvl 1.0
+VX_Test59=--virtualx-in-mode 1  --tbhdx-discard 0  --tbhdx-front-en 1  --tbhdx-front-bass-lvl 1.0  --tbhdx-rear-en 1  --tbhdx-rear-bass-lvl 1.0  --tbhdx-center-en 1  --tbhdx-center-bass-lvl 1.0  --tbhdx-surround-en 1  --tbhdx-surround-bass-lvl 1.0
+VX_Test60=--virtualx-in-mode 1  --tbhdx-discard 0  --tbhdx-front-en 1  --tbhdx-front-dynms 1.0  --tbhdx-rear-en 1  --tbhdx-rear-dynms 1.0  --tbhdx-center-en 1  --tbhdx-center-dynms 1.0  --tbhdx-surround-en 1  --tbhdx-surround-dynms 1.0
+VX_Test61=--virtualx-in-mode 1  --virtualx-dialogclarity-level 1.0
+VX_Test62=--virtualx-in-mode 1  --virtualx-definition-lvl 1.0
+VX_Test63=--virtualx-in-mode 1  --virtualx-tsx-app-lstnr-dist 10.0
+VX_Test64=--virtualx-in-mode 1  --virtualx-tsx-app-bttmspktoctr-dist 10.0
+VX_Test65=--virtualx-in-mode 1  --virtualx-tsx-app-topspktoctr-dist 10.0
+
+
+#MBHL_Module
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MBHL_Params=--virtualx-discard 0 --tbhdx-discard 1 --virtualx-en 1 --virtualx-out-mode 0 --virtualx-headroom-gain 0.355 --virtualx-reference-level 0.0625 --virtualx-tsx-en 1 --virtualx-tsx-pssv-mtrx-en 1 --virtualx-tsx-hght-upmix-en 1 --virtualx-dialogclarity-en 1 --virtualx-definition-en 1 --virtualx-tsx-vxtopspk-loc 0 --tbhdx-front-en 0 --tbhdx-front-proc-mode 1 --tbhdx-front-spksize 2 --tbhdx-rear-en 0 --tbhdx-front-proc-mode 1 --tbhdx-rear-proc-mode 1 --tbhdx-surround-proc-mode 1 --loudness-control-en 0 --loudness-control-discard 1 --mbhl-discard 0 --mbhl-reference-level 0.0625 --mbhl-boost 2.0 --mbhl-ac-en 1 --mbhl-comp-low-release 1000 --mbhl-comp-low-thresh 0.064 --mbhl-comp-low-makeup 1.12 --mbhl-comp-mid-release 500 --mbhl-comp-mid-thresh 0.1 --mbhl-comp-mid-makeup 1.12 --mbhl-comp-high-release 200 --mbhl-comp-high-thresh 0.1585 --mbhl-comp-high-makeup 1.12 --aeq-enable 0 --aeq-discard 1 --geq-enable 0 --geq-discard 1
+MBHL_Test01=--virtualx-in-mode 0
+MBHL_Test02=--virtualx-in-mode 0
+MBHL_Test03=--virtualx-in-mode 0
+MBHL_Test04=--virtualx-in-mode 1
+MBHL_Test05=--virtualx-in-mode 0  --mbhl-mode 1
+MBHL_Test06=--virtualx-in-mode 0  --mbhl-mode 1
+MBHL_Test07=--virtualx-in-mode 0  --mbhl-mode 1
+MBHL_Test08=--virtualx-in-mode 0  --mbhl-mode 1
+MBHL_Test09=--virtualx-in-mode 0  --mbhl-mode 1
+MBHL_Test10=--virtualx-in-mode 1  --mbhl-mode 1
+MBHL_Test11=--virtualx-in-mode 0  --mbhl-mode 2
+MBHL_Test12=--virtualx-in-mode 0  --mbhl-mode 2
+MBHL_Test13=--virtualx-in-mode 0  --mbhl-mode 2
+MBHL_Test14=--virtualx-in-mode 0  --mbhl-mode 2
+MBHL_Test15=--virtualx-in-mode 0  --mbhl-mode 2
+MBHL_Test16=--virtualx-in-mode 1  --mbhl-mode 2
+MBHL_Test17=--virtualx-in-mode 0  --mbhl-mode 3
+MBHL_Test18=--virtualx-in-mode 0  --mbhl-mode 3
+MBHL_Test19=--virtualx-in-mode 0  --mbhl-mode 3
+MBHL_Test20=--virtualx-in-mode 0  --mbhl-mode 3
+MBHL_Test21=--virtualx-in-mode 0  --mbhl-mode 3
+MBHL_Test22=--virtualx-in-mode 1  --mbhl-mode 3
+MBHL_Test23=--virtualx-in-mode 0  --mbhl-mode 4
+MBHL_Test24=--virtualx-in-mode 0  --mbhl-mode 4
+MBHL_Test25=--virtualx-in-mode 0  --mbhl-mode 4
+MBHL_Test26=--virtualx-in-mode 0  --mbhl-mode 4
+MBHL_Test27=--virtualx-in-mode 0  --mbhl-mode 4
+MBHL_Test28=--virtualx-in-mode 1  --mbhl-mode 4
+
+
+#LoudnessControl_Module
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+LC_Params=--virtualx-discard 0 --tbhdx-discard 1 --virtualx-en 1 --virtualx-out-mode 0 --virtualx-headroom-gain 0.355 --virtualx-reference-level 0.0625 --virtualx-tsx-en 1 --virtualx-tsx-pssv-mtrx-en 1 --virtualx-tsx-hght-upmix-en 1 --virtualx-dialogclarity-en 1 --virtualx-definition-en 1 --virtualx-tsx-vxtopspk-loc 0 --tbhdx-front-en 0 --tbhdx-front-proc-mode 1 --tbhdx-front-spksize 2 --tbhdx-rear-en 0 --tbhdx-front-proc-mode 1 --tbhdx-rear-proc-mode 1 --tbhdx-surround-proc-mode 1 --loudness-control-en 0 --loudness-control-discard 1 --mbhl-discard 1 --mbhl-reference-level 0.0625 --mbhl-boost 2.0 --mbhl-ac-en 1 --mbhl-comp-low-release 1000 --mbhl-comp-low-thresh 0.064 --mbhl-comp-low-makeup 1.12 --mbhl-comp-mid-release 500 --mbhl-comp-mid-thresh 0.1 --mbhl-comp-mid-makeup 1.12 --mbhl-comp-high-release 200 --mbhl-comp-high-thresh 0.1585 --mbhl-comp-high-makeup 1.12 --aeq-enable 0 --aeq-discard 1 --geq-enable 0 --geq-discard 1
+LC_Test01=--virtualx-in-mode 0  --loudness-control-en 1  --loudness-control-io-mode 0  --loudness-control-discard 0 --loudness-control-preset 0
+LC_Test02=--virtualx-in-mode 0  --loudness-control-en 1  --loudness-control-io-mode 0  --loudness-control-discard 0 --loudness-control-preset 0
+LC_Test03=--virtualx-in-mode 0  --loudness-control-en 1  --loudness-control-io-mode 0  --loudness-control-discard 0 --loudness-control-preset 0
+LC_Test04=--virtualx-in-mode 0  --loudness-control-en 1  --loudness-control-io-mode 0  --loudness-control-discard 0 --loudness-control-preset 0
+LC_Test05=--virtualx-in-mode 1  --loudness-control-en 1  --loudness-control-io-mode 4  --loudness-control-discard 0 --loudness-control-preset 0
+LC_Test05=--virtualx-in-mode 1  --loudness-control-en 1  --loudness-control-io-mode 4  --loudness-control-discard 0 --loudness-control-preset 0
+LC_Test07=--virtualx-in-mode 1  --loudness-control-en 1  --loudness-control-io-mode 4  --loudness-control-discard 0 --loudness-control-preset 0
+
+
+#GEQ_Module
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+GEQ_Params=--virtualx-discard 0 --tbhdx-discard 1 --virtualx-en 1 --virtualx-out-mode 0 --virtualx-headroom-gain 0.355 --virtualx-reference-level 0.0625 --virtualx-tsx-en 1 --virtualx-tsx-pssv-mtrx-en 1 --virtualx-tsx-hght-upmix-en 1 --virtualx-dialogclarity-en 1 --virtualx-definition-en 1 --virtualx-tsx-vxtopspk-loc 0 --tbhdx-front-en 0 --tbhdx-front-proc-mode 1 --tbhdx-front-spksize 2 --tbhdx-rear-en 0 --tbhdx-front-proc-mode 1 --tbhdx-rear-proc-mode 1 --tbhdx-surround-proc-mode 1 --loudness-control-en 0 --loudness-control-discard 1 --mbhl-discard 1 --mbhl-reference-level 0.0625 --mbhl-boost 2.0 --mbhl-ac-en 1 --mbhl-comp-low-release 1000 --mbhl-comp-low-thresh 0.064 --mbhl-comp-low-makeup 1.12 --mbhl-comp-mid-release 500 --mbhl-comp-mid-thresh 0.1 --mbhl-comp-mid-makeup 1.12 --mbhl-comp-high-release 200 --mbhl-comp-high-thresh 0.1585 --mbhl-comp-high-makeup 1.12 --aeq-enable 0 --aeq-discard 1 --geq-enable 1 --geq-discard 0 --geq-ch-ctrl-mask 0x0000A027 --geq-band2-gain 0.177 --geq-band6-gain 5.63 --geq-band3-gain 1.41 --geq-band7-gain 0.707 --geq-band0-gain 1.99 --geq-band1-gain 0.5 --geq-band4-gain 0.35 --geq-band5-gain 2.82 --geq-band8-gain 0.25 --geq-band9-gain 3.98
+GEQ_Test01=--virtualx-in-mode 0  --virtualx-en 0  --virtualx-discard 1
+GEQ_Test02=--virtualx-in-mode 0
+GEQ_Test03=--virtualx-in-mode 1
+GEQ_Test04=--virtualx-in-mode 1
+GEQ_Test05=--virtualx-in-mode 1
+GEQ_Test06=--virtualx-in-mode 1
+GEQ_Test07=--virtualx-in-mode 0  --loudness-control-en 1  --loudness-control-io-mode 0  --loudness-control-discard 0 --loudness-control-preset 0
+GEQ_Test08=--virtualx-in-mode 1  --loudness-control-en 1  --loudness-control-io-mode 4  --loudness-control-discard 0 --loudness-control-preset 0
+GEQ_Test09=--virtualx-in-mode 1  --loudness-control-en 1  --loudness-control-io-mode 4  --loudness-control-discard 0 --loudness-control-preset 0
+
+
+#AEQ_Module
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AEQ_Params=--virtualx-discard 0 --tbhdx-discard 1 --virtualx-en 1 --virtualx-out-mode 0 --virtualx-headroom-gain 0.355 --virtualx-reference-level 0.0625 --virtualx-tsx-en 1 --virtualx-tsx-pssv-mtrx-en 1 --virtualx-tsx-hght-upmix-en 1 --virtualx-dialogclarity-en 1 --virtualx-definition-en 1 --virtualx-tsx-vxtopspk-loc 0 --tbhdx-front-en 0 --tbhdx-front-proc-mode 1 --tbhdx-front-spksize 2 --tbhdx-rear-en 0 --tbhdx-front-proc-mode 1 --tbhdx-rear-proc-mode 1 --tbhdx-surround-proc-mode 1 --loudness-control-en 0 --loudness-control-discard 1 --mbhl-discard 1 --mbhl-reference-level 0.0625 --mbhl-boost 2.0 --mbhl-ac-en 1 --mbhl-comp-low-release 1000 --mbhl-comp-low-thresh 0.064 --mbhl-comp-low-makeup 1.12 --mbhl-comp-mid-release 500 --mbhl-comp-mid-thresh 0.1 --mbhl-comp-mid-makeup 1.12 --mbhl-comp-high-release 200 --mbhl-comp-high-thresh 0.1585 --mbhl-comp-high-makeup 1.12 --aeq-enable 1 --aeq-discard 0 --geq-enable 0 --geq-discard 1 --aeq-ch-ctrl-mask 0x0000A027 --aeq-input-gain 0.3548 --aeq-app-band-num 0 --aeq-app-band-en 1 --aeq-app-band-freq 60  --aeq-app-band-gain 12.00 --aeq-app-band-q 16.00  --aeq-app-band-type 2 --aeq-app-band-num 1 --aeq-app-band-en 1 --aeq-app-band-freq 500 --aeq-app-band-gain 6.00 --aeq-app-band-q 1.0 --aeq-app-band-type 0 --aeq-app-band-num 2 --aeq-app-band-en 1 --aeq-app-band-freq 15000 --aeq-app-band-gain -12.00 --aeq-app-band-q 0.25 --aeq-app-band-type 1 --aeq-app-band-num 2 --aeq-app-band-en 1 --aeq-app-band-freq 80 --aeq-app-band-gain -9.00 --aeq-app-band-q 0.50 --aeq-app-band-type 2 --aeq-app-band-num 3 --aeq-app-band-en 1 --aeq-app-band-freq 2000 --aeq-app-band-gain -3.00 --aeq-app-band-q 1.25 --aeq-app-band-type 0 --aeq-app-band-num 4 --aeq-app-band-en 1 --aeq-app-band-freq 18000 --aeq-app-band-gain 9.00 --aeq-app-band-q 4.00 --aeq-app-band-type 1
+AEQ_Test01=--virtualx-in-mode 0  --virtualx-en 0  --virtualx-discard 1
+AEQ_Test02=--virtualx-in-mode 0
+AEQ_Test03=--virtualx-in-mode 1
+AEQ_Test04=--virtualx-in-mode 1
+AEQ_Test05=--virtualx-in-mode 1
+AEQ_Test06=--virtualx-in-mode 1
+AEQ_Test07=--virtualx-in-mode 0  --loudness-control-en 1  --loudness-control-io-mode 0  --loudness-control-discard 0 --loudness-control-preset 0
+AEQ_Test08=--virtualx-in-mode 1  --loudness-control-en 1  --loudness-control-io-mode 4  --loudness-control-discard 0 --loudness-control-preset 0
+AEQ_Test09=--virtualx-in-mode 1  --loudness-control-en 1  --loudness-control-io-mode 4  --loudness-control-discard 0 --loudness-control-preset 0
+
+
+#ILD_Module
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ILD_Params=--virtualx-discard 0 --tbhdx-discard 1 --virtualx-en 1 --virtualx-out-mode 0 --virtualx-headroom-gain 0.355 --virtualx-reference-level 0.0625 --virtualx-tsx-en 1 --virtualx-tsx-pssv-mtrx-en 1 --virtualx-tsx-hght-upmix-en 1 --virtualx-dialogclarity-en 1 --virtualx-definition-en 1 --virtualx-tsx-vxtopspk-loc 0 --tbhdx-front-en 0 --tbhdx-front-proc-mode 1 --tbhdx-front-spksize 2 --tbhdx-rear-en 0 --tbhdx-front-proc-mode 1 --tbhdx-rear-proc-mode 1 --tbhdx-surround-proc-mode 1 --loudness-control-en 0 --loudness-control-discard 1 --mbhl-discard 1 --mbhl-reference-level 0.0625 --mbhl-boost 2.0 --mbhl-ac-en 1 --mbhl-comp-low-release 1000 --mbhl-comp-low-thresh 0.064 --mbhl-comp-low-makeup 1.12 --mbhl-comp-mid-release 500 --mbhl-comp-mid-thresh 0.1 --mbhl-comp-mid-makeup 1.12 --mbhl-comp-high-release 200 --mbhl-comp-high-thresh 0.1585 --mbhl-comp-high-makeup 1.12 --aeq-enable 0 --aeq-discard 1 --geq-enable 0 --geq-discard 1  --ildetect-upmix-en 1 --ildetect-upmix-low-level-threshold -93 --ildetect-upmix-discard 0
+ILD_Test01=--virtualx-in-mode 1
+ILD_Test02=--virtualx-in-mode 1
+ILD_Test03=--virtualx-in-mode 1
+ILD_Test04=--virtualx-in-mode 1
+ILD_Test05=--virtualx-in-mode 1
+ILD_Test06=--virtualx-in-mode 1
+ILD_Test07=--virtualx-in-mode 1
+ILD_Test08=--virtualx-in-mode 1
+ILD_Test09=--virtualx-in-mode 1
+ILD_Test10=--virtualx-in-mode 1
+ILD_Test11=--virtualx-in-mode 1  --virtualx-en 0
+ILD_Test12=--virtualx-in-mode 1  --virtualx-en 0
+
+
+#EIL_Module
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+EIL_Params=--virtualx-discard 0 --tbhdx-discard 1 --virtualx-en 1 --virtualx-out-mode 0 --virtualx-headroom-gain 0.355 --virtualx-reference-level 0.0625 --virtualx-tsx-en 1 --virtualx-tsx-pssv-mtrx-en 1 --virtualx-tsx-hght-upmix-en 1 --virtualx-dialogclarity-en 1 --virtualx-definition-en 1 --virtualx-tsx-vxtopspk-loc 0 --tbhdx-front-en 0 --tbhdx-front-proc-mode 1 --tbhdx-front-spksize 2 --tbhdx-rear-en 0 --tbhdx-front-proc-mode 1 --tbhdx-rear-proc-mode 1 --tbhdx-surround-proc-mode 1 --loudness-control-en 0 --loudness-control-discard 1 --mbhl-discard 1 --mbhl-reference-level 0.0625 --mbhl-boost 2.0 --mbhl-ac-en 1 --mbhl-comp-low-release 1000 --mbhl-comp-low-thresh 0.064 --mbhl-comp-low-makeup 1.12 --mbhl-comp-mid-release 500 --mbhl-comp-mid-thresh 0.1 --mbhl-comp-mid-makeup 1.12 --mbhl-comp-high-release 200 --mbhl-comp-high-thresh 0.1585 --mbhl-comp-high-makeup 1.12 --aeq-enable 0 --aeq-discard 1 --geq-enable 0 --geq-discard 1 
+EIL_Test01=--virtualx-in-mode 2  --virtualx-en 0  --virtualx-discard 1
+EIL_Test02=--virtualx-in-mode 2  --virtualx-en 0  --virtualx-discard 1
+EIL_Test03=--virtualx-in-mode 4  --virtualx-en 0  --virtualx-discard 1
+EIL_Test04=--virtualx-in-mode 4  --virtualx-en 0  --virtualx-discard 1
+EIL_Test05=--virtualx-in-mode 5  --virtualx-en 0  --virtualx-discard 1
+EIL_Test06=--virtualx-in-mode 5  --virtualx-en 0  --virtualx-discard 1
+EIL_Test07=--virtualx-in-mode 2
+EIL_Test08=--virtualx-in-mode 2
+EIL_Test09=--virtualx-in-mode 4
+EIL_Test10=--virtualx-in-mode 4
+EIL_Test11=--virtualx-in-mode 4
+EIL_Test12=--virtualx-in-mode 4
+EIL_Test13=--virtualx-in-mode 4
+EIL_Test14=--virtualx-in-mode 4
+EIL_Test15=--virtualx-in-mode 4
+EIL_Test16=--virtualx-in-mode 4
+EIL_Test17=--virtualx-in-mode 4
+EIL_Test18=--virtualx-in-mode 4
+EIL_Test19=--virtualx-in-mode 2
+EIL_Test20=--virtualx-in-mode 2
+EIL_Test21=--virtualx-in-mode 2
+EIL_Test22=--virtualx-in-mode 2
+EIL_Test23=--virtualx-in-mode 2
+EIL_Test24=--virtualx-in-mode 2
+EIL_Test25=--virtualx-in-mode 2
+EIL_Test26=--virtualx-in-mode 3
+EIL_Test27=--virtualx-in-mode 4
+EIL_Test28=--virtualx-in-mode 4
+EIL_Test29=--virtualx-in-mode 4  --tbhdx-discard 0  --tbhdx-front-en 1  --tbhdx-rear-en 1  --tbhdx-center-en 1  --tbhdx-surround-en 1
+EIL_Test30=--virtualx-in-mode 4  --tbhdx-discard 0  --tbhdx-front-en 1  --tbhdx-rear-en 1  --tbhdx-center-en 1  --tbhdx-surround-en 1
+EIL_Test31=--virtualx-in-mode 4  --tbhdx-discard 0  --tbhdx-front-en 1  --tbhdx-rear-en 1  --tbhdx-center-en 1  --tbhdx-surround-en 1
+EIL_Test32=--virtualx-in-mode 4  --tbhdx-discard 0  --tbhdx-front-en 1  --tbhdx-front-bass-lvl 1.0  --tbhdx-rear-en 1  --tbhdx-rear-bass-lvl 1.0  --tbhdx-center-en 1  --tbhdx-center-bass-lvl 1.0  --tbhdx-surround-en 1  --tbhdx-surround-bass-lvl 1.0
+EIL_Test33=--virtualx-in-mode 4  --tbhdx-discard 0  --tbhdx-front-en 1  --tbhdx-front-bass-lvl 1.0  --tbhdx-rear-en 1  --tbhdx-rear-bass-lvl 1.0  --tbhdx-center-en 1  --tbhdx-center-bass-lvl 1.0  --tbhdx-surround-en 1  --tbhdx-surround-bass-lvl 1.0
+EIL_Test34=--virtualx-in-mode 4  --tbhdx-discard 0  --tbhdx-front-en 1  --tbhdx-front-dynms 1.0  --tbhdx-rear-en 1  --tbhdx-rear-dynms 1.0  --tbhdx-center-en 1  --tbhdx-center-dynms 1.0  --tbhdx-surround-en 1  --tbhdx-surround-dynms 1.0
+EIL_Test35=--virtualx-in-mode 4  --tbhdx-discard 0  --tbhdx-front-en 1  --tbhdx-front-dynms 1.0  --tbhdx-rear-en 1  --tbhdx-rear-dynms 1.0  --tbhdx-center-en 1  --tbhdx-center-dynms 1.0  --tbhdx-surround-en 1  --tbhdx-surround-dynms 1.0
+EIL_Test36=--virtualx-in-mode 4  --virtualx-tsx-app-lstnr-dist 1.0
+EIL_Test37=--virtualx-in-mode 4  --virtualx-tsx-app-bttmspktoctr-dist 1.0
+EIL_Test38=--virtualx-in-mode 4  --virtualx-tsx-app-topspktoctr-dist 1.0
+EIL_Test39=--virtualx-in-mode 2  --mbhl-en 1  --mbhl-discard 0 --mbhl-mode 0
+EIL_Test40=--virtualx-in-mode 4  --mbhl-en 1  --mbhl-discard 0 --mbhl-mode 0
+EIL_Test41=--virtualx-in-mode 4  --mbhl-en 1  --mbhl-discard 0 --mbhl-mode 0
+EIL_Test42=--virtualx-in-mode 2  --loudness-control-en 1  --loudness-control-io-mode 5  --loudness-control-discard 0
+EIL_Test43=--virtualx-in-mode 2  --loudness-control-en 1  --loudness-control-io-mode 5  --loudness-control-discard 0
+EIL_Test44=--virtualx-in-mode 2  --loudness-control-en 1  --loudness-control-io-mode 5  --loudness-control-discard 0
+EIL_Test45=--virtualx-in-mode 4  --loudness-control-en 1  --loudness-control-io-mode 7  --loudness-control-discard 0
+EIL_Test46=--virtualx-in-mode 4  --loudness-control-en 1  --loudness-control-io-mode 7  --loudness-control-discard 0
+EIL_Test47=--virtualx-in-mode 4  --loudness-control-en 1  --loudness-control-io-mode 7  --loudness-control-discard 0
+EIL_Test48=--virtualx-in-mode 4  --loudness-control-en 1  --loudness-control-io-mode 7  --loudness-control-discard 0
+EIL_Test49=--virtualx-in-mode 4  --loudness-control-en 1  --loudness-control-io-mode 7  --loudness-control-discard 0
+EIL_Test50=--virtualx-in-mode 4  --loudness-control-en 1  --loudness-control-io-mode 7  --loudness-control-discard 0
+EIL_Test51=--virtualx-in-mode 4  --geq-ch-ctrl-mask 0x0000A027  --geq-band2-gain 0.177  --geq-band6-gain 5.63  --geq-band3-gain 1.41  --geq-band7-gain 0.707  --geq-band0-gain 1.99  --geq-band1-gain 0.5  --geq-band4-gain 0.35  --geq-band5-gain 2.82  --geq-band8-gain 0.25  --geq-band9-gain 3.98
+EIL_Test52=--virtualx-in-mode 4  --geq-ch-ctrl-mask 0x0000A027  --geq-band2-gain 0.177  --geq-band6-gain 5.63  --geq-band3-gain 1.41  --geq-band7-gain 0.707  --geq-band0-gain 1.99  --geq-band1-gain 0.5  --geq-band4-gain 0.35  --geq-band5-gain 2.82  --geq-band8-gain 0.25  --geq-band9-gain 3.98
+EIL_Test53=--virtualx-in-mode 4  --geq-ch-ctrl-mask 0x0000A027  --geq-band2-gain 0.177  --geq-band6-gain 5.63  --geq-band3-gain 1.41  --geq-band7-gain 0.707  --geq-band0-gain 1.99  --geq-band1-gain 0.5  --geq-band4-gain 0.35  --geq-band5-gain 2.82  --geq-band8-gain 0.25  --geq-band9-gain 3.98
+EIL_Test54=--virtualx-in-mode 4  --geq-ch-ctrl-mask 0x0000A027  --geq-band2-gain 0.177  --geq-band6-gain 5.63  --geq-band3-gain 1.41  --geq-band7-gain 0.707  --geq-band0-gain 1.99  --geq-band1-gain 0.5  --geq-band4-gain 0.35  --geq-band5-gain 2.82  --geq-band8-gain 0.25  --geq-band9-gain 3.98
+EIL_Test55=--virtualx-in-mode 2  --loudness-control-en 1  --loudness-control-io-mode 5  --loudness-control-discard 0  --virtualx-input-sample-rate 48000  --geq-ch-ctrl-mask 0x0000A027  --geq-band2-gain 0.177  --geq-band6-gain 5.63  --geq-band3-gain 1.41  --geq-band7-gain 0.707  --geq-band0-gain 1.99  --geq-band1-gain 0.5  --geq-band4-gain 0.35  --geq-band5-gain 2.82  --geq-band8-gain 0.25  --geq-band9-gain 3.98
+EIL_Test56=--virtualx-in-mode 4  --loudness-control-en 1  --loudness-control-io-mode 7  --loudness-control-discard 0  --virtualx-input-sample-rate 48000  --geq-ch-ctrl-mask 0x0000A027  --geq-band2-gain 0.177  --geq-band6-gain 5.63  --geq-band3-gain 1.41  --geq-band7-gain 0.707  --geq-band0-gain 1.99  --geq-band1-gain 0.5  --geq-band4-gain 0.35  --geq-band5-gain 2.82  --geq-band8-gain 0.25  --geq-band9-gain 3.98
+EIL_Test57=--virtualx-in-mode 4  --loudness-control-en 1  --loudness-control-io-mode 7  --loudness-control-discard 0  --virtualx-input-sample-rate 48000  --geq-ch-ctrl-mask 0x0000A027  --geq-band2-gain 0.177  --geq-band6-gain 5.63  --geq-band3-gain 1.41  --geq-band7-gain 0.707  --geq-band0-gain 1.99  --geq-band1-gain 0.5  --geq-band4-gain 0.35  --geq-band5-gain 2.82  --geq-band8-gain 0.25  --geq-band9-gain 3.98
+EIL_Test58=--virtualx-in-mode 4  --aeq-ch-ctrl-mask 0x0000A027  --aeq-app-band-num 0  --aeq-app-band-en 1  --aeq-app-band-freq 60  --aeq-app-band-gain 12.00  --aeq-app-band-q 16.00  --aeq-app-band-type 2  --aeq-app-band-num 1  --aeq-app-band-en 1  --aeq-app-band-freq 500  --aeq-app-band-gain 6.00  --aeq-app-band-q 1.0  --aeq-app-band-type 0  --aeq-app-band-num 2  --aeq-app-band-en 1  --aeq-app-band-freq 15000  --aeq-app-band-gain -12.00  --aeq-app-band-q 0.25  --aeq-app-band-type 1   --aeq-app-band-num 2  --aeq-app-band-en 1  --aeq-app-band-freq 80  --aeq-app-band-gain -9.00  --aeq-app-band-q 0.50  --aeq-app-band-type 2  --aeq-app-band-num 3  --aeq-app-band-en 1  --aeq-app-band-freq 2000  --aeq-app-band-gain -3.00  --aeq-app-band-q 1.25  --aeq-app-band-type 0  --aeq-app-band-num 4  --aeq-app-band-en 1  --aeq-app-band-freq 18000  --aeq-app-band-gain 9.00  --aeq-app-band-q 4.00  --aeq-app-band-type 1
+EIL_Test59=--virtualx-in-mode 4  --aeq-ch-ctrl-mask 0x0000A027  --aeq-app-band-num 0  --aeq-app-band-en 1  --aeq-app-band-freq 60  --aeq-app-band-gain 12.00  --aeq-app-band-q 16.00  --aeq-app-band-type 2  --aeq-app-band-num 1  --aeq-app-band-en 1  --aeq-app-band-freq 500  --aeq-app-band-gain 6.00  --aeq-app-band-q 1.0  --aeq-app-band-type 0  --aeq-app-band-num 2  --aeq-app-band-en 1  --aeq-app-band-freq 15000  --aeq-app-band-gain -12.00  --aeq-app-band-q 0.25  --aeq-app-band-type 1   --aeq-app-band-num 2  --aeq-app-band-en 1  --aeq-app-band-freq 80  --aeq-app-band-gain -9.00  --aeq-app-band-q 0.50  --aeq-app-band-type 2  --aeq-app-band-num 3  --aeq-app-band-en 1  --aeq-app-band-freq 2000  --aeq-app-band-gain -3.00  --aeq-app-band-q 1.25  --aeq-app-band-type 0  --aeq-app-band-num 4  --aeq-app-band-en 1  --aeq-app-band-freq 18000  --aeq-app-band-gain 9.00  --aeq-app-band-q 4.00  --aeq-app-band-type 1
+EIL_Test60=--virtualx-in-mode 4  --aeq-ch-ctrl-mask 0x0000A027  --aeq-app-band-num 0  --aeq-app-band-en 1  --aeq-app-band-freq 60  --aeq-app-band-gain 12.00  --aeq-app-band-q 16.00  --aeq-app-band-type 2  --aeq-app-band-num 1  --aeq-app-band-en 1  --aeq-app-band-freq 500  --aeq-app-band-gain 6.00  --aeq-app-band-q 1.0  --aeq-app-band-type 0  --aeq-app-band-num 2  --aeq-app-band-en 1  --aeq-app-band-freq 15000  --aeq-app-band-gain -12.00  --aeq-app-band-q 0.25  --aeq-app-band-type 1   --aeq-app-band-num 2  --aeq-app-band-en 1  --aeq-app-band-freq 80  --aeq-app-band-gain -9.00  --aeq-app-band-q 0.50  --aeq-app-band-type 2  --aeq-app-band-num 3  --aeq-app-band-en 1  --aeq-app-band-freq 2000  --aeq-app-band-gain -3.00  --aeq-app-band-q 1.25  --aeq-app-band-type 0  --aeq-app-band-num 4  --aeq-app-band-en 1  --aeq-app-band-freq 18000  --aeq-app-band-gain 9.00  --aeq-app-band-q 4.00  --aeq-app-band-type 1
+EIL_Test61=--virtualx-in-mode 4  --aeq-ch-ctrl-mask 0x0000A027  --aeq-app-band-num 0  --aeq-app-band-en 1  --aeq-app-band-freq 60  --aeq-app-band-gain 12.00  --aeq-app-band-q 16.00  --aeq-app-band-type 2  --aeq-app-band-num 1  --aeq-app-band-en 1  --aeq-app-band-freq 500  --aeq-app-band-gain 6.00  --aeq-app-band-q 1.0  --aeq-app-band-type 0  --aeq-app-band-num 2  --aeq-app-band-en 1  --aeq-app-band-freq 15000  --aeq-app-band-gain -12.00  --aeq-app-band-q 0.25  --aeq-app-band-type 1   --aeq-app-band-num 2  --aeq-app-band-en 1  --aeq-app-band-freq 80  --aeq-app-band-gain -9.00  --aeq-app-band-q 0.50  --aeq-app-band-type 2  --aeq-app-band-num 3  --aeq-app-band-en 1  --aeq-app-band-freq 2000  --aeq-app-band-gain -3.00  --aeq-app-band-q 1.25  --aeq-app-band-type 0  --aeq-app-band-num 4  --aeq-app-band-en 1  --aeq-app-band-freq 18000  --aeq-app-band-gain 9.00  --aeq-app-band-q 4.00  --aeq-app-band-type 1
+EIL_Test62=--virtualx-in-mode 2  --loudness-control-en 1  --loudness-control-io-mode 5  --loudness-control-discard 0  --virtualx-input-sample-rate 48000  --aeq-ch-ctrl-mask 0x0000A027  --aeq-app-band-num 0  --aeq-app-band-en 1  --aeq-app-band-freq 60  --aeq-app-band-gain 12.00  --aeq-app-band-q 16.00  --aeq-app-band-type 2  --aeq-app-band-num 1  --aeq-app-band-en 1  --aeq-app-band-freq 500  --aeq-app-band-gain 6.00  --aeq-app-band-q 1.0  --aeq-app-band-type 0  --aeq-app-band-num 2  --aeq-app-band-en 1  --aeq-app-band-freq 15000  --aeq-app-band-gain -12.00  --aeq-app-band-q 0.25  --aeq-app-band-type 1   --aeq-app-band-num 2  --aeq-app-band-en 1  --aeq-app-band-freq 80  --aeq-app-band-gain -9.00  --aeq-app-band-q 0.50  --aeq-app-band-type 2  --aeq-app-band-num 3  --aeq-app-band-en 1  --aeq-app-band-freq 2000  --aeq-app-band-gain -3.00  --aeq-app-band-q 1.25  --aeq-app-band-type 0  --aeq-app-band-num 4  --aeq-app-band-en 1  --aeq-app-band-freq 18000  --aeq-app-band-gain 9.00  --aeq-app-band-q 4.00  --aeq-app-band-type 1
+EIL_Test63=--virtualx-in-mode 4  --loudness-control-en 1  --loudness-control-io-mode 7  --loudness-control-discard 0  --virtualx-input-sample-rate 48000  --aeq-ch-ctrl-mask 0x0000A027  --aeq-app-band-num 0  --aeq-app-band-en 1  --aeq-app-band-freq 60  --aeq-app-band-gain 12.00  --aeq-app-band-q 16.00  --aeq-app-band-type 2  --aeq-app-band-num 1  --aeq-app-band-en 1  --aeq-app-band-freq 500  --aeq-app-band-gain 6.00  --aeq-app-band-q 1.0  --aeq-app-band-type 0  --aeq-app-band-num 2  --aeq-app-band-en 1  --aeq-app-band-freq 15000  --aeq-app-band-gain -12.00  --aeq-app-band-q 0.25  --aeq-app-band-type 1   --aeq-app-band-num 2  --aeq-app-band-en 1  --aeq-app-band-freq 80  --aeq-app-band-gain -9.00  --aeq-app-band-q 0.50  --aeq-app-band-type 2  --aeq-app-band-num 3  --aeq-app-band-en 1  --aeq-app-band-freq 2000  --aeq-app-band-gain -3.00  --aeq-app-band-q 1.25  --aeq-app-band-type 0  --aeq-app-band-num 4  --aeq-app-band-en 1  --aeq-app-band-freq 18000  --aeq-app-band-gain 9.00  --aeq-app-band-q 4.00  --aeq-app-band-type 1
+EIL_Test64=--virtualx-in-mode 4  --loudness-control-en 1  --loudness-control-io-mode 7  --loudness-control-discard 0  --virtualx-input-sample-rate 48000  --aeq-ch-ctrl-mask 0x0000A027  --aeq-app-band-num 0  --aeq-app-band-en 1  --aeq-app-band-freq 60  --aeq-app-band-gain 12.00  --aeq-app-band-q 16.00  --aeq-app-band-type 2  --aeq-app-band-num 1  --aeq-app-band-en 1  --aeq-app-band-freq 500  --aeq-app-band-gain 6.00  --aeq-app-band-q 1.0  --aeq-app-band-type 0  --aeq-app-band-num 2  --aeq-app-band-en 1  --aeq-app-band-freq 15000  --aeq-app-band-gain -12.00  --aeq-app-band-q 0.25  --aeq-app-band-type 1   --aeq-app-band-num 2  --aeq-app-band-en 1  --aeq-app-band-freq 80  --aeq-app-band-gain -9.00  --aeq-app-band-q 0.50  --aeq-app-band-type 2  --aeq-app-band-num 3  --aeq-app-band-en 1  --aeq-app-band-freq 2000  --aeq-app-band-gain -3.00  --aeq-app-band-q 1.25  --aeq-app-band-type 0  --aeq-app-band-num 4  --aeq-app-band-en 1  --aeq-app-band-freq 18000  --aeq-app-band-gain 9.00  --aeq-app-band-q 4.00  --aeq-app-band-type 1

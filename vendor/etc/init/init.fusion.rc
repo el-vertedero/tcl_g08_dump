@@ -1,0 +1,184 @@
+on post-fs
+    # Improve Android DM-Verify performance
+    write /sys/module/dm_bufio/parameters/max_cache_size_bytes 18481152
+    write /proc/sys/vm/watermark_boost_factor 0
+
+on late-fs
+    # improve performace from Google's suggestion
+    start set_google_perf-svc
+
+
+on early-boot
+    # for memtrack
+    chmod 711 /sys/kernel/debug
+
+    chmod 444 /proc/cmdline
+
+    # add for pqmap utility
+    mkdir /mnt/vendor/config/pq/materials
+    chmod 777 /mnt/vendor/config/pq/materials
+
+    # restore security contexts of device nodes here
+    restorecon /dev/gflip
+    restorecon /dev/ir
+    restorecon /dev/msmailbox
+    restorecon /dev/system
+
+    # add for temp path
+    mkdir /mnt/vendor/tmp
+    mount tmpfs tmpfs /mnt/vendor/tmp size=100M nr_inodes=1k mode=1771
+    restorecon_recursive /mnt/vendor/tmp
+
+    chmod 0771 /mnt/vendor/tmp
+    chown root system /mnt/vendor/tmp
+
+    mkdir /mnt/vendor/tmp/camera
+    chmod 0771 /mnt/vendor/tmp/camera
+    chown root camera /mnt/vendor/tmp/camera
+    chmod 0660 /dev/video*
+    chown root camera /dev/video*
+
+    mkdir /mnt/vendor/tmp/meminfo_log
+    chmod 0771 /mnt/vendor/tmp/meminfo_log
+    chown root system /mnt/vendor/tmp/meminfo_log
+
+    mkdir /mnt/vendor/tmp/image
+    chmod 0770 /mnt/vendor/tmp/image
+    chown root system /mnt/vendor/tmp/image
+
+    # create aq factory directory
+    mkdir /data/vendor/AqFactory
+    chmod 0771 /data/vendor/AqFactory
+    chown audioserver audioserver /data/vendor/AqFactory
+
+    mkdir /mnt/vendor/tmp/apaf
+    chmod 0771 /mnt/vendor/tmp/apaf
+    chown audioserver audioserver /mnt/vendor/tmp/apaf
+
+    write /mnt/vendor/tmp/perm_mounted 0
+    write /mnt/vendor/tmp/basic_mounted 0
+    write /mnt/vendor/tmp/mknod_util_end 0
+
+    #add for metrics path
+    mkdir /data/vendor/metrics
+    chmod 0771 /data/vendor/metrics
+    chown root system /data/vendor/metrics
+
+    mkdir /data/vendor/metrics/private
+    chmod 0771 /data/vendor/metrics/private
+    chown root system /data/vendor/metrics/private
+
+    mkdir /data/vendor/metrics/public
+    chmod 0771 /data/vendor/metrics/public
+    chown root system /data/vendor/metrics/public
+
+    mkdir /dev/cpuacct
+    mount cgroup none /dev/cpuacct/ cpuacct
+    chown system system /dev/cpuacct
+    chown system system /dev/cpuacct/tasks
+    chmod 0775 /dev/cpuacct
+    chmod 0664 /dev/cpuacct/tasks
+
+    chmod 0775 /dev/cpuset
+    chmod 0664 /dev/cpuset/tasks
+    chmod 0775 /dev/cpuctl
+    chmod 0664 /dev/cpuctl/tasks
+
+    mkdir /dev/shm/realtime
+    chown vendor_realtime vendor_realtime /dev/shm/realtime
+    chmod 770 /dev/shm/realtime
+
+    mkdir /data/vendor/realtime
+    chown vendor_realtime vendor_realtime /data/vendor/realtime
+    chmod 770 /data/vendor/realtime
+
+# Factory purpose
+    chmod 0775 /mnt/vendor/certificate
+    chmod 0775 /mnt/vendor/config
+    chown root system /mnt/vendor/config
+    chmod 0664 /mnt/vendor/config/panel/ssc_cfg.ini
+    chown root system /mnt/vendor/config/panel/ssc_cfg.ini
+
+    #add for dialserver
+    mkdir /data/vendor/3rd_rw
+    chmod 0770 /data/vendor/3rd_rw
+    chown root system /data/vendor/3rd_rw
+
+    mkdir /data/vendor/3rd_rw/dialserver
+    chmod 0770 /data/vendor/3rd_rw/dialserver
+    chown root system /data/vendor/3rd_rw/dialserver
+
+on property:init.svc.surfaceflinger=running
+    restorecon /dev/stune/foreground/tasks
+    restorecon /dev/stune/top-app/tasks
+
+on property:sys.boot_completed=1
+    start unset_google_perf-svc
+    write /proc/mtk_boot/ab_boot 1
+
+# Ai-Vision
+    chmod 644 /vendor/etc/mtk-640x480.bmp
+    chmod 644 /vendor/etc/mtk-480x640.bmp
+    chmod 644 /vendor/etc/mtk-1920x1080.bmp
+    chmod 644 /vendor/etc/mtk-1088x1920.bmp
+
+# QHB
+    chmod 660 /mnt/vendor/persist/standby/standby_mode.ini
+
+# For to set ro.oem.key1(DTV01352868)
+on property:ro.vendor.mtk.oem.lock=1
+    setprop ro.oem.key1 ${ro.vendor.mtk.oem.key}
+
+on property:sys.mtk.stay.awake=enable
+    write /sys/power/wake_lock "stay_awake"
+
+on property:sys.mtk.stay.awake=disable
+    write /sys/power/wake_unlock "stay_awake"
+
+on property:sys.tcl.running.application=*
+    setprop vendor.mtk.running.application ${sys.tcl.running.application}
+
+on property:sys.mtk.phot.vdp.render=*
+    setprop vendor.mtk.desk-enable-stillphoto ${sys.mtk.phot.vdp.render}
+
+on property:sys.mtk.phot.render.planar=*
+    setprop vendor.mtk.render.planar ${sys.mtk.phot.render.planar}
+
+on property:sys.mtk.capture_hal.loglevel=*
+    setprop vendor.mtk.capture_hal.loglevel ${sys.mtk.capture_hal.loglevel}
+
+# setup_zram iservice
+service zram-svc /vendor/bin/sh /vendor/bin/setup_zram.sh
+    class main
+    oneshot
+    seclabel u:r:mt_zram-svc:s0
+
+# set I/O tuning
+service set_google_perf-svc /vendor/bin/sh /vendor/bin/set_google_perf.sh 1
+    oneshot
+    seclabel u:r:mt_set_google_perf-svc:s0
+
+# unset I/O tuning
+service unset_google_perf-svc /vendor/bin/sh /vendor/bin/set_google_perf.sh 0
+    oneshot
+    seclabel u:r:mt_set_google_perf-svc:s0
+
+# execute rtconsumer
+    service realtime-svc /vendor/bin/sh /vendor/bin/setup_realtime.sh
+    class main
+    user vendor_realtime
+    group vendor_realtime system
+    capabilities SYS_NICE
+    oneshot
+    console
+    seclabel u:r:mt_realtime-svc:s0
+
+# Use to set Esticker show mode and switch the configuration when changing the default configuration
+on property:persist.sys.showmode.electroniccard=*
+    setprop vendor.showmode.electroniccard ${persist.sys.showmode.electroniccard}
+
+on property:sys.showmode.electroniccard.media=*
+    setprop vendor.showmode.electroniccard.media ${sys.showmode.electroniccard.media}
+
+on property:persist.sys.showmode.version=*
+    setprop vendor.electroniccard.version ${persist.sys.showmode.version}

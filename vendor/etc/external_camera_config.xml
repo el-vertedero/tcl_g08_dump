@@ -1,0 +1,31 @@
+<ExternalCamera>
+<Provider>
+<ignore>
+<!-- Internal video devices to be ignored by external camera HAL -->
+</ignore>
+</Provider>
+<!-- See ExternalCameraUtils.cpp for default values of Device configurations below -->
+<Device>
+<MaxJpegBufferSize bytes="3145728"/>
+<NumVideoBuffers count="4"/>
+<NumStillBuffers count="2"/>
+<MinimumStreamSize width="176" height="144"/>
+<SupportH264 value="1"/>
+<!-- Max JPEG buffer size in bytes-->
+
+<!-- List of maximum fps for various output sizes -->
+<!-- Any image size smaller than the size listed in Limit row will report
+    fps (as minimum frame duration) up to the fpsBound value. -->
+<FpsList>
+<!-- width/height must be increasing, fpsBound must be decreasing-->
+<Limit width="640" height="480" fpsBound="30.0"/>
+<Limit width="1280" height="720" fpsBound="30.0"/>
+<Limit width="1920" height="1080" fpsBound="30.0"/>
+<Limit width="3840" height="2160" fpsBound="30.0"/>
+
+<!-- image size larger than the last entry will not be supported-->
+</FpsList>
+</Device>
+</ExternalCamera>
+<!-- Interna-->
+
