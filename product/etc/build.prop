@@ -1,0 +1,58 @@
+####################################
+# from generate-common-build-props
+# These properties identify this partition image.
+####################################
+ro.product.product.brand=TCL
+ro.product.product.device=G08
+ro.product.product.manufacturer=TCL
+ro.product.product.model=Smart TV Pro
+ro.product.product.name=G08_4K_US
+ro.product.model_for_attestation=Smart TV Pro
+ro.product.brand_for_attestation=TCL
+ro.product.name_for_attestation=G08_4K_US
+ro.product.device_for_attestation=G08
+ro.product.manufacturer_for_attestation=TCL
+ro.product.build.date=Thu Jul 30 21:46:15 CST 2026
+ro.product.build.date.utc=1785419175
+ro.product.build.id=UTT2.250416.001
+ro.product.build.tags=release-keys
+ro.product.build.type=user
+ro.product.build.version.incremental=AU22
+ro.product.build.version.release=14
+ro.product.build.version.release_or_codename=14
+ro.product.build.version.sdk=34
+####################################
+# from variable ADDITIONAL_PRODUCT_PROPERTIES
+####################################
+ro.product.vndk.version=34
+ro.build.characteristics=tv
+ro.product.ab_ota_partitions=armfw,boot,bootdata,dtbo,mboot,oem,optee,product,system,system_ext,tclconfig,tvconfig,vbmeta,vendor,vendor_boot,vendor_dlkm
+ro.product.cpu.pagesize.max=4096
+ro.dalvik.vm.enable_uffd_gc=false
+####################################
+# from variable PRODUCT_PRODUCT_PROPERTIES
+####################################
+ro.com.google.gmsversion=GTVS_GTV_S_release
+ro.tcl.product_type=GTV
+ro.config.boot2min_opt=on
+ro.hwui.max_texture_allocation_size=398131200
+ro.vold.primary_physical=false
+remote_provisioning.hostname=remoteprovisioning.googleapis.com
+tombstoned.max_tombstone_count=10
+logd.logpersistd.size=5
+logd.logpersistd.rotate_kbytes=2048
+ro.build.reference.fingerprint=MediaTek/sanford2023/sanford2023:14/UKM3.240326.001/11631514:user/release-keys
+####################################
+# PRODUCT_OEM_PROPERTIES
+####################################
+import /oem/oem.prop ro.product.manufacturer
+import /oem/oem.prop ro.product.model
+import /oem/oem.prop ro.vendor.nrdp.oemmodel
+import /oem/oem.prop ro.com.google.clientidbase
+import /oem/oem.prop ro.vendor.nrdp.modelgroup
+import /oem/oem.prop ro.vendor.nrdp.validation
+import /oem/oem.prop ro.vendor.mtk.mgkid.version
+import /oem/oem.prop ro.product.brand
+import /oem/oem.prop ro.product.device
+import /oem/oem.prop ro.product.name
+# end of file

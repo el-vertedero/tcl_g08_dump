@@ -1,0 +1,29 @@
+<fonts-modification version="1">
+    <family customizationType="new-named-family" name="CC0_TiresiasScreenfont">
+        <font weight="400" style="normal">CC0_TiresiasScreenfont.ttf</font>
+    </family>
+    <family customizationType="new-named-family" name="CC1_Gentium">
+        <font weight="400" style="normal">CC1_Gentium.ttf</font>
+    </family>
+    <family customizationType="new-named-family" name="CC2_BitstreamVeraSerif">
+        <font weight="400" style="normal">CC2_BitstreamVeraSerif.ttf</font>
+    </family>
+    <family customizationType="new-named-family" name="CC3_BitstreamVeraSansMono">
+        <font weight="400" style="normal">CC3_BitstreamVeraSansMono.ttf</font>
+    </family>
+    <family customizationType="new-named-family" name="CC4_BitstreamVeraSans">
+        <font weight="400" style="normal">CC4_BitstreamVeraSans.ttf</font>
+    </family>
+    <family customizationType="new-named-family" name="CC5_MinyaNouvelle">
+        <font weight="400" style="normal">CC5_MinyaNouvelle.ttf</font>
+    </family>
+    <family customizationType="new-named-family" name="CC6_MarketingScript">
+        <font weight="400" style="normal">CC6_MarketingScript.ttf</font>
+    </family>
+    <family customizationType="new-named-family" name="CC7_EngebrechtreExpand">
+        <font weight="400" style="normal">CC7_EngebrechtreExpand.ttf</font>
+    </family>
+    <family customizationType="new-named-family" name="MStarTTXFont">
+        <font weight="400" style="normal">MStarTTXFont.ttf</font>
+    </family>
+</fonts-modification>

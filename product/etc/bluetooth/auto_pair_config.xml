@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="show_paired_info">true</bool>
+    <bool name="exclude_paired_device">true</bool>
+    <bool name="exclude_accessories_activity">false</bool>
+    <bool name="reconnect_device_forwardly">false</bool>
+
+    <integer name="auto_pair_device_number">1</integer>
+
+    <!-- This is RSSI threshold setting, value range -127 ~ 127  -->
+    <integer name="auto_pair_device_rssi">-70</integer>
+
+    <!-- RC device name setting  -->
+    <string-array name="supported_device_name">
+        <item>_RC</item>
+    </string-array>
+
+    <string-array name="auto_paired_conflict_activities">
+        <item>com.android.tv.settings.accessories.AddAccessoryActivity</item>
+        <item>com.android.tv.settings.accessories.BluetoothPairingDialog</item>
+    </string-array>
+
+    <integer-array name="vendor_manufacture_ids">
+        <item>0x7966</item>
+        <item>0x80ff</item>
+    </integer-array>
+
+    <!-- vendor_manufacture_contents_0 / vendor_manufacture_contents_1 / vendor_manufacture_contents_2 / ... -->
+    <!-- if data is valid, this data should be equal to manufacture data. e,g: 0xff -->
+    <!-- if data is out of range(like 0x80**), this data should be ignored and do not compare it. e,g: == 0x80fff -->
+    <!-- if data is out of range(like 0x40**), this data should not be equal to manufacture data. e,g: != 0x40ff -->
+    <!-- if data is out of range(like 0x20**), this data should not be equal to manufacture data. e,g:(data & 0x20ff) != 0 -->
+    <!-- if data is out of range(like 0x10**), this data should not be equal to manufacture data. e,g:(data | 0x10ff) != 0 -->
+    <integer-array name="vendor_manufacture_contents_0">
+        <item>0x30</item>
+        <item>0x01</item>
+    </integer-array>
+    <integer-array name="vendor_manufacture_contents_1">
+        <item>0xff</item>
+        <item>0xff</item>
+        <item>0xff</item>
+        <item>0xff</item>
+        <item>0xff</item>
+        <item>0xff</item>
+    </integer-array>
+
+</resources>
