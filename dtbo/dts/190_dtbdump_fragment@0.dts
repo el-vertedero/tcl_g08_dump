@@ -1,0 +1,486 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			device_type = "memory";
+			reg = <0x00 0x20000000 0x00 0xc0000000>;
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			device_type = "memory";
+			reg = <0x00 0x00 0x00 0x00>;
+		};
+	};
+
+	fragment@2 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			device_type = "memory";
+			reg = <0x00 0x00 0x00 0x00>;
+		};
+	};
+
+	fragment@3 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			device_type = "memory";
+			reg = <0x00 0x00 0x00 0x00>;
+		};
+	};
+
+	fragment@4 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+
+			MMAP_PROPERTY {
+				platfrom = "ANDROID";
+				mmap_size = "3G";
+				mmap_filename = "mmap_mt5879_mtk_3g_an_aow-iommu";
+				mmap_sha256 = <0x2612d14d>;
+			};
+
+			MI_DRAMC_HW_TRACKING {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x20000000 0x00 0x1000>;
+			};
+
+			MI_PM51_VAR_MEM {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x20001000 0x00 0x1000>;
+			};
+
+			MI_PM51_MEM {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x20002000 0x00 0x10000>;
+			};
+
+			MI_GE_VQCMD_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x20060000 0x00 0x00>;
+			};
+
+			MI_SBOOT_UBOOT_BANK {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x20100000 0x00 0x100000>;
+			};
+
+			MI_MAD_ADV_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x20200000 0x00 0x2e73000>;
+			};
+
+			MI_TSP_FW_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x23073000 0x00 0x11000>;
+			};
+
+			MI_TSP_VQ_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x23084000 0x00 0x20000>;
+			};
+
+			MI_DISP_AUTO_UPLOAD {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x25318000 0x00 0xfd000>;
+			};
+
+			MI_VRR_SHM {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x25415000 0x00 0x1000>;
+			};
+
+			MI_MENULOAD_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x25980000 0x00 0x280000>;
+			};
+
+			MI_MCDI_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x25c00000 0x00 0x200000>;
+			};
+
+			MI_CM4_VOICE {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x25e00000 0x00 0x200000>;
+			};
+
+			MI_KERNEL_POOL1 {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x26000000 0x00 0x25c00000>;
+			};
+
+			MI_KERNEL1_RANGE0 {
+				layer = <0x01>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x26000000 0x00 0x6200000>;
+			};
+
+			MI_MBOOT_MEM_USAGE {
+				layer = <0x01>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x2c200000 0x00 0x3000000>;
+			};
+
+			MI_DUMMY3 {
+				layer = <0x01>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x2f200000 0x00 0x10e00000>;
+			};
+
+			MI_JPD_OUT {
+				layer = <0x01>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x40000000 0x00 0x1000000>;
+			};
+
+			MI_JPD_READ_BUF {
+				layer = <0x01>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x41000000 0x00 0xd00000>;
+			};
+
+			MI_JPD_INTER_BUF {
+				layer = <0x01>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x41d00000 0x00 0xd00000>;
+			};
+
+			MI_FRC_FW_MEM {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4bc00000 0x00 0x300000>;
+			};
+
+			MI_FRC_SHM {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4bf00000 0x00 0x15000>;
+			};
+
+			MI_DISP_PQ_MEMORY {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4bf15000 0x00 0x10000>;
+			};
+
+			MI_DISP_PQ_DF_MEMORY_LAYER {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4bf25000 0x00 0xd000>;
+			};
+
+			MI_DISP_OD_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4bf32000 0x00 0x700000>;
+			};
+
+			MI_DISPOUT_DEMURA {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4c632000 0x00 0x500000>;
+			};
+
+			MI_DISP_AUTO_DOWNLOAD {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4cb32000 0x00 0xb00000>;
+			};
+
+			MI_DISP_GUCD_DMA {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4d632000 0x00 0x1b000>;
+			};
+
+			MI_MCU_DS {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4d64d000 0x00 0x14d000>;
+			};
+
+			MI_PQMAP_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4d79a000 0x00 0x00>;
+			};
+
+			MI_STREAMON_METADATA {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4d79a000 0x00 0x10000>;
+			};
+
+			MI_PQPARAM_METADATA {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4d7aa000 0x00 0x20000>;
+			};
+
+			MI_CONTROLMAP_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4d7ca000 0x00 0x8000>;
+			};
+
+			MI_ONLY_STR_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4d7d2000 0x00 0xa000>;
+			};
+
+			MI_DV_PYR_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4d7dc000 0x00 0x800000>;
+			};
+
+			MI_MEMC_REALDATA {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4dfdc000 0x00 0x14000>;
+			};
+
+			UCD_SHM_BUFFER {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4dff0000 0x00 0x10000>;
+			};
+
+			MI_BOOTLOGO_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4e000000 0x00 0x1000000>;
+			};
+
+			MI_EXTIN_VD_COMB_BUF {
+				layer = <0x01>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4e000000 0x00 0x400000>;
+			};
+
+			MI_DISP_CONFIG_MEMORY {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4f000000 0x00 0x1000>;
+			};
+
+			MI_MMAP_CFD_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4f001000 0x00 0x169000>;
+			};
+
+			MI_PQU_DOLBY_CONFIG_MEM {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4f16a000 0x00 0x50000>;
+			};
+
+			MI_FRAME_METADATA {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4f1ba000 0x00 0x00>;
+			};
+
+			MI_SRCCAP_SWREG_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4f1ba000 0x00 0x1a000>;
+			};
+
+			MI_HDMIRX_MEM_SHM {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4f1d4000 0x00 0x40000>;
+			};
+
+			MI_VBI_BUF {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4f214000 0x00 0xd000>;
+			};
+
+			MI_AUDIO_CPU_1 {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4f221000 0x00 0x00>;
+			};
+
+			MI_DISP_ACC_GAMMA {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4f221000 0x00 0x3000>;
+			};
+
+			MI_KERNEL_POOL2 {
+				layer = <0x00>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4f400000 0x00 0x90c00000>;
+			};
+
+			MI_DMD_DVBT {
+				layer = <0x01>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x17>;
+				reg = <0x00 0x4f400000 0x00 0x500000>;
+			};
+
+			MI_DUMMY {
+				layer = <0x01>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x17>;
+				reg = <0x00 0x4f900000 0x00 0x300000>;
+			};
+
+			MI_DISPOUT_LOCAL_DIMMING {
+				layer = <0x01>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x4fc00000 0x00 0x400000>;
+			};
+
+			MI_DUMMY2 {
+				layer = <0x01>;
+				miu = <0x00>;
+				is_cache = <0x00>;
+				cma_id = <0x00>;
+				reg = <0x00 0x50000000 0x00 0x00>;
+			};
+		};
+	};
+
+	__fixups__ {
+		lx_mem = "/fragment@0:target:0";
+		lx_mem2 = "/fragment@1:target:0";
+		lx_mem3 = "/fragment@2:target:0";
+		lx_mem4 = "/fragment@3:target:0";
+		mtk_mmap = "/fragment@4:target:0";
+	};
+};

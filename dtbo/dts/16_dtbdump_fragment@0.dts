@@ -1,0 +1,52 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			audio-codec = <0xffffffff>;
+			codec-dai-name = "AMP_AD82050";
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			codec-dai-name = "AMP_AD82050";
+			amp-model-cnt = "1";
+			amp-1-name = "ad82050";
+		};
+	};
+
+	fragment@2 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			audio-codec = <0xffffffff>;
+		};
+	};
+
+	fragment@3 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			compatible = "ESMT, ad82050";
+			reg = <0x30>;
+			status = "okay";
+			type = <0x00>;
+			amppowerdown-gpios = <0xffffffff 0x16 0x01>;
+			IniString = "IniFormatType = 0; \t\t\tcount = 88; \t\t\tindex_0 = 1, 0x00, 0x05;\t\t\tindex_1 = 1, 0x01, 0x82; \t\t\tindex_2 = 1, 0x02, 0x10; \t\t\tindex_3 = 1, 0x03, 0x0e; \t\t\tindex_4 = 1, 0x04, 0x09; \t\t\tindex_5 = 1, 0x05, 0x09; \t\t\tindex_6 = 1, 0x06, 0xa0; \t\t\tindex_7 = 1, 0x07, 0x36; \t\t\tindex_8 = 1, 0x08, 0xa0; \t\t\tindex_9 = 1, 0x09, 0x6a; \t\t\tindex_10 = 1, 0x0a, 0x55;\t\t\tindex_11 = 1, 0x0b, 0x00;\t\t\tindex_12 = 1, 0x0c, 0x1f;\t\t\tindex_13 = 1, 0x0d, 0xa2;\t\t\tindex_14 = 1, 0x0e, 0x3a;\t\t\tindex_15 = 1, 0x0f, 0x20;\t\t\tindex_16 = 1, 0x10, 0x00;\t\t\tindex_17 = 1, 0x11, 0x00;\t\t\tindex_18 = 1, 0x12, 0x00;\t\t\tindex_19 = 1, 0x13, 0x00;\t\t\tindex_20 = 1, 0x14, 0x70;\t\t\tindex_21 = 1, 0x15, 0x26;\t\t\tindex_22 = 1, 0x16, 0x1a;\t\t\tindex_23 = 1, 0x17, 0x80;\t\t\tindex_24 = 1, 0x18, 0x00;\t\t\tindex_25 = 1, 0x19, 0x00;\t\t\tindex_26 = 1, 0x1a, 0x00;\t\t\tindex_27 = 1, 0x1b, 0x00;\t\t\tindex_28 = 1, 0x1c, 0x1a;\t\t\tindex_29 = 1, 0x1d, 0x00;\t\t\tindex_30 = 1, 0x1e, 0x00;\t\t\tindex_31 = 1, 0x1f, 0x53;\t\t\tindex_32 = 1, 0x20, 0x00;\t\t\tindex_33 = 1, 0x21, 0x10;\t\t\tindex_34 = 1, 0x22, 0x0e;\t\t\tindex_35 = 1, 0x23, 0xbf;\t\t\tindex_36 = 1, 0x24, 0x37;\t\t\tindex_37 = 1, 0x25, 0x01;\t\t\tindex_38 = 1, 0x26, 0x73;\t\t\tindex_39 = 1, 0x27, 0xba;\t\t\tindex_40 = 1, 0x28, 0xff;\t\t\tindex_41 = 1, 0x29, 0xcd;\t\t\tindex_42 = 1, 0x2a, 0x0f;\t\t\tindex_43 = 1, 0x2b, 0x05;\t\t\tindex_44 = 1, 0x2c, 0x00;\t\t\tindex_45 = 1, 0x2d, 0x00;\t\t\tindex_46 = 1, 0x2e, 0x26;\t\t\tindex_47 = 1, 0x2f, 0x85;\t\t\tindex_48 = 1, 0x30, 0x00;\t\t\tindex_49 = 1, 0x31, 0x01;\t\t\tindex_50 = 1, 0x32, 0x41;\t\t\tindex_51 = 1, 0x33, 0xeb;\t\t\tindex_52 = 1, 0x34, 0x50;\t\t\tindex_53 = 1, 0x35, 0x30;\t\t\tindex_54 = 1, 0x36, 0x20;\t\t\tindex_55 = 1, 0x37, 0x00;\t\t\tindex_56 = 1, 0x38, 0x00;\t\t\tindex_57 = 1, 0x39, 0x08;\t\t\tindex_58 = 1, 0x3a, 0x00;\t\t\tindex_59 = 1, 0x3b, 0x00;\t\t\tindex_60 = 1, 0x3d, 0x0e;\t\t\tindex_61 = 1, 0x3e, 0x12;\t\t\tindex_62 = 1, 0x3f, 0x01;\t\t\tindex_63 = 1, 0x40, 0x00;\t\t\tindex_64 = 1, 0x41, 0x55;\t\t\tindex_65 = 1, 0x42, 0x55;\t\t\tindex_66 = 1, 0x43, 0x55;\t\t\tindex_67 = 1, 0x44, 0x55;\t\t\tindex_68 = 1, 0x45, 0x55;\t\t\tindex_69 = 1, 0x46, 0x55;\t\t\tindex_70 = 1, 0x47, 0x00;\t\t\tindex_71 = 1, 0x48, 0x62;\t\t\tindex_72 = 1, 0x49, 0x88;\t\t\tindex_73 = 1, 0x4a, 0x00;\t\t\tindex_74 = 1, 0x4b, 0x8c;\t\t\tindex_75 = 1, 0x4d, 0x00;\t\t\tindex_76 = 1, 0x4e, 0xff;\t\t\tindex_77 = 1, 0x4f, 0xff;\t\t\tindex_78 = 1, 0x50, 0x00;\t\t\tindex_79 = 1, 0x51, 0x30;\t\t\tindex_80 = 1, 0x52, 0x00;\t\t\tindex_81 = 1, 0x53, 0x00;\t\t\tindex_82 = 1, 0x54, 0x00;\t\t\tindex_83 = 1, 0x55, 0x00;\t\t\tindex_84 = 1, 0x56, 0x00;\t\t\tindex_85 = 1, 0x57, 0x00;\t\t\tindex_86 = 1, 0x58, 0x00;\t\t\tindex_87 = 1, 0x59, 0x00;";
+		};
+	};
+
+	__fixups__ {
+		mtk_sound_machine = "/fragment@0:target:0";
+		cus_i2c0_amp0 = "/fragment@0/__overlay__:audio-codec:0\0/fragment@2/__overlay__:audio-codec:0\0/fragment@3:target:0";
+		mtk_tv_machine = "/fragment@1:target:0";
+		mtk_sound_soc = "/fragment@2:target:0";
+		pm_gpio0 = "/fragment@3/__overlay__:amppowerdown-gpios:0";
+	};
+};

@@ -1,0 +1,175 @@
+/vendor/lib/modules/mtktv-cpufreq.ko: /vendor/lib/modules/mtktv-cpufreq-ca.ko
+/vendor/lib/modules/mzc.ko: /vendor/lib/modules/mzc-mtk.ko
+/vendor/lib/modules/snd-amp-ntp8928.ko:
+/vendor/lib/modules/mtk-vcodec-dec.ko: /vendor/lib/modules/mtk-vcodec-common.ko /vendor/lib/modules/mtk-vcu.ko
+/vendor/lib/modules/mtk_mic_mute_drv.ko: /vendor/lib/modules/tcl_speech.ko
+/vendor/lib/modules/snd-amp-tas5805.ko:
+/vendor/lib/modules/dish_rt5047.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/mtk-pq.ko: /vendor/lib/modules/mtk-dramc.ko /vendor/lib/modules/mtktv-thermal.ko /vendor/lib/modules/mtk-tvpqu.ko /vendor/lib/modules/mtk-boottime.ko /vendor/lib/modules/mtk-tvcpuif.ko /vendor/lib/modules/mtk_realtime_producer.ko
+/vendor/lib/modules/cxd2857.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/mt58xx-thermal.ko:
+/vendor/lib/modules/mediatek-drm-tv.ko: /vendor/lib/modules/tcl_qhb_reset.ko /vendor/lib/modules/mtk-tvpqu.ko /vendor/lib/modules/mtk-boottime.ko /vendor/lib/modules/mtk-tvcpuif.ko /vendor/lib/modules/mtk_realtime_producer.ko
+/vendor/lib/modules/mtu3.ko:
+/vendor/lib/modules/mtk_lmkd.ko:
+/vendor/lib/modules/mtk-miup_debug.ko:
+/vendor/lib/modules/mtk-pmu-cec.ko:
+/vendor/lib/modules/mtk-stctrl.ko:
+/vendor/lib/modules/wifi_ctl.ko:
+/vendor/lib/modules/dish_rt5047_bf.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/mtktv-regulator-mt5876-core-power.ko:
+/vendor/lib/modules/mtktv-gpu-thermal.ko:
+/vendor/lib/modules/pj593.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/audio-ipauth.ko: /vendor/lib/modules/audio-public-if.ko
+/vendor/lib/modules/spi-mtkdtv-ci.ko:
+/vendor/lib/modules/mtk-caps.ko: /vendor/lib/modules/mtktv-disp-rm.ko
+/vendor/lib/modules/mtk_light.ko:
+/vendor/lib/modules/mtk-tvsnd-machine.ko: /vendor/lib/modules/mtk-tvsnd-platform.ko /vendor/lib/modules/mtk-tvsnd-soc-JP.ko /vendor/lib/modules/audio-public-if.ko
+/vendor/lib/modules/mtk-aloop.ko:
+/vendor/lib/modules/phy-mtk-tphy-tv.ko:
+/vendor/lib/modules/tuner_cxd686.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/audio-public-if.ko:
+/vendor/lib/modules/dish_arg81300.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/mtk-austin-demod.ko:
+/vendor/lib/modules/mtk-mic-capture.ko: /vendor/lib/modules/mtk-mic-communication.ko
+/vendor/lib/modules/mtk-tvsnd-dsp-loader.ko: /vendor/lib/modules/mtk-tvsnd-soc-JP.ko /vendor/lib/modules/audio-public-if.ko
+/vendor/lib/modules/rtl8150.ko:
+/vendor/lib/modules/snd-amp-rt9119.ko:
+/vendor/lib/modules/mtk_zsmalloc.ko: /vendor/lib/modules/mzc-mtk.ko /vendor/lib/modules/mtk_zram_genpool.ko
+/vendor/lib/modules/mtk-cfm.ko: /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/extcon-mtk-headset.ko:
+/vendor/lib/modules/snd-machine.ko:
+/vendor/lib/modules/mtk_zdec_drv.ko:
+/vendor/lib/modules/mtk-vcu.ko:
+/vendor/lib/modules/mtk-merak20-demod.ko: /vendor/lib/modules/mtk-austin-demod.ko /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/r8152.ko: /vendor/lib/modules/mii.ko
+/vendor/lib/modules/mtk-bw.ko: /vendor/lib/modules/mtk-dramc.ko /vendor/lib/modules/mtktv-thermal.ko
+/vendor/lib/modules/dish_tps65235.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/mtk-earc.ko:
+/vendor/lib/modules/mtk-tvsnd-platform.ko: /vendor/lib/modules/mtk-tvsnd-soc-JP.ko /vendor/lib/modules/audio-public-if.ko
+/vendor/lib/modules/mtk_zram_genpool.ko:
+/vendor/lib/modules/leds-mtk-irtx.ko:
+/vendor/lib/modules/bluetooth.ko: /vendor/lib/modules/rfkill.ko
+/vendor/lib/modules/mtk_xcalg3pty_TCH.ko:
+/vendor/lib/modules/mtk-vcu-venc.ko: /vendor/lib/modules/mtk-vcu.ko
+/vendor/lib/modules/mzc_hybrid.ko: /vendor/lib/modules/mzc-mtk.ko
+/vendor/lib/modules/dish_a8304.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/mtk-audio-mcu-communication.ko:
+/vendor/lib/modules/snd-amp-rt9120.ko:
+/vendor/lib/modules/mali_kbase_mt5879.ko: /vendor/lib/modules/resourcemonitor.ko
+/vendor/lib/modules/tuner_mxl661.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/mtk-vcodec-enc.ko: /vendor/lib/modules/mtk-vcodec-common.ko /vendor/lib/modules/mtk-vcu.ko
+/vendor/lib/modules/rfkill.ko:
+/vendor/lib/modules/mtk_xcalg3pty_hdrvivid.ko:
+/vendor/lib/modules/tcl_dybridge.ko:
+/vendor/lib/modules/gpio-mtk-pmu.ko:
+/vendor/lib/modules/pwm-ext-mt5896.ko:
+/vendor/lib/modules/mtk_xcalg3pty.ko:
+/vendor/lib/modules/ws_tsf.ko:
+/vendor/lib/modules/input_panic.ko: /vendor/lib/modules/tcl_action_monitor.ko /vendor/lib/modules/tcl_state.ko /vendor/lib/modules/tcl_kfault.ko
+/vendor/lib/modules/mtk-tvcpuif.ko: /vendor/lib/modules/mtk_realtime_producer.ko
+/vendor/lib/modules/pwmseg-mtktv.ko:
+/vendor/lib/modules/snd-coprocessor.ko: /vendor/lib/modules/mtk-soc.ko
+/vendor/lib/modules/mtk-es-buf-mgr.ko:
+/vendor/lib/modules/spi-nor-tcl.ko: /vendor/lib/modules/mtd.ko
+/vendor/lib/modules/apu_power.ko: /vendor/lib/modules/apu_comm.ko
+/vendor/lib/modules/mtk_tty_uart.ko:
+/vendor/lib/modules/mtk_tty_vuart.ko:
+/vendor/lib/modules/mtk-v4l2-g2d.ko:
+/vendor/lib/modules/vim2m.ko:
+/vendor/lib/modules/mtk_dmx.ko: /vendor/lib/modules/mtk-merak20-demod.ko /vendor/lib/modules/mtk-austin-demod.ko /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/tuner_rt710.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/tcl_action_monitor.ko: /vendor/lib/modules/tcl_state.ko /vendor/lib/modules/tcl_kfault.ko
+/vendor/lib/modules/cpu_perf_monitor.ko:
+/vendor/lib/modules/cdc_eem.ko: /vendor/lib/modules/usbnet.ko /vendor/lib/modules/mii.ko
+/vendor/lib/modules/dish_h30.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/mtk_zram.ko: /vendor/lib/modules/mzc.ko /vendor/lib/modules/mzc_hybrid.ko /vendor/lib/modules/mtk_zsmalloc.ko /vendor/lib/modules/mzc-mtk.ko /vendor/lib/modules/mtk_zram_genpool.ko
+/vendor/lib/modules/snd-aloop.ko:
+/vendor/lib/modules/rpmsg_ut.ko:
+/vendor/lib/modules/mtktv-cpufreq-ca.ko:
+/vendor/lib/modules/cdc_ether.ko: /vendor/lib/modules/usbnet.ko /vendor/lib/modules/mii.ko
+/vendor/lib/modules/usbnet.ko: /vendor/lib/modules/mii.ko
+/vendor/lib/modules/mt5896-mailbox.ko:
+/vendor/lib/modules/mtk-soc.ko:
+/vendor/lib/modules/mtk_msb9121.ko: /vendor/lib/modules/spi-mtkdtv-ci.ko
+/vendor/lib/modules/mtktv-disp-rm.ko:
+/vendor/lib/modules/mtk_test_cdev.ko:
+/vendor/lib/modules/wdt-mt5896.ko:
+/vendor/lib/modules/ofpart.ko: /vendor/lib/modules/mtd.ko
+/vendor/lib/modules/tcl_vdf.ko:
+/vendor/lib/modules/i2c-mt5896.ko:
+/vendor/lib/modules/mtktv-regulator-mt5876.ko:
+/vendor/lib/modules/mdla.ko: /vendor/lib/modules/apu_power.ko /vendor/lib/modules/apusys.ko /vendor/lib/modules/apu_comm.ko
+/vendor/lib/modules/dish_tps65233.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/clk_dbg.ko:
+/vendor/lib/modules/mtk_and.ko:
+/vendor/lib/modules/pwmadc-mt5896.ko:
+/vendor/lib/modules/aqc111.ko: /vendor/lib/modules/usbnet.ko /vendor/lib/modules/mii.ko
+/vendor/lib/modules/dish_sgm41286.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/tdlc.ko:
+/vendor/lib/modules/xhci-mtk-hcd-tv.ko: /vendor/lib/modules/mtu3.ko
+/vendor/lib/modules/tcl_stability_test.ko:
+/vendor/lib/modules/mtk-mediator.ko: /vendor/lib/modules/mtk-dramc.ko /vendor/lib/modules/mtktv-thermal.ko
+/vendor/lib/modules/mtk-vcu-vdec.ko: /vendor/lib/modules/mtk_realtime_producer.ko /vendor/lib/modules/mtk-vcu.ko
+/vendor/lib/modules/dvb-core.ko:
+/vendor/lib/modules/mtd.ko:
+/vendor/lib/modules/mtk-tvpqu.ko: /vendor/lib/modules/mtk-boottime.ko /vendor/lib/modules/mtk_realtime_producer.ko
+/vendor/lib/modules/leds-gpio.ko:
+/vendor/lib/modules/tcl_speech.ko:
+/vendor/lib/modules/tuner_rda5815.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/mtktv-thermal.ko:
+/vendor/lib/modules/spidev.ko:
+/vendor/lib/modules/mtk-srccap.ko: /vendor/lib/modules/mtk-tvpqu.ko /vendor/lib/modules/mtk-boottime.ko /vendor/lib/modules/mtk_realtime_producer.ko
+/vendor/lib/modules/mtk-ab-boot.ko:
+/vendor/lib/modules/tuner_av2017.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/cfg80211.ko: /vendor/lib/modules/rfkill.ko
+/vendor/lib/modules/mtk-tvsnd-soc.ko: /vendor/lib/modules/audio-public-if.ko
+/vendor/lib/modules/tcl_state.ko:
+/vendor/lib/modules/mtk-v4l2-jpd.ko:
+/vendor/lib/modules/snd-amp-ad82089.ko:
+/vendor/lib/modules/edma.ko: /vendor/lib/modules/apu_power.ko /vendor/lib/modules/apusys.ko /vendor/lib/modules/apu_comm.ko
+/vendor/lib/modules/tcl_kfault.ko:
+/vendor/lib/modules/tcl_qhb_reset.ko:
+/vendor/lib/modules/mt5896_saradc.ko:
+/vendor/lib/modules/apu_comm.ko:
+/vendor/lib/modules/mtk_realtime_example.ko: /vendor/lib/modules/mtk_realtime_producer.ko
+/vendor/lib/modules/snd-pcm-platform.ko: /vendor/lib/modules/mtk-soc.ko
+/vendor/lib/modules/mtk-vcodec-common.ko:
+/vendor/lib/modules/mtk-dvb-adapter.ko: /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/texfat.ko: /vendor/lib/modules/tcl_action_monitor.ko /vendor/lib/modules/tcl_state.ko /vendor/lib/modules/tcl_kfault.ko
+/vendor/lib/modules/rpmsg_st.ko:
+/vendor/lib/modules/mtk-cec.ko:
+/vendor/lib/modules/cpufreq_ondemand.ko:
+/vendor/lib/modules/cpu-freq-adapter.ko: /vendor/lib/modules/mtk-mediator.ko /vendor/lib/modules/mtktv-cpufreq.ko /vendor/lib/modules/mtktv-cpufreq-ca.ko /vendor/lib/modules/mtk-dramc.ko /vendor/lib/modules/mtktv-thermal.ko
+/vendor/lib/modules/ax88179_178a.ko: /vendor/lib/modules/usbnet.ko /vendor/lib/modules/mii.ko
+/vendor/lib/modules/resourcemonitor.ko:
+/vendor/lib/modules/mtk_als.ko:
+/vendor/lib/modules/rtc-mt5896.ko:
+/vendor/lib/modules/apusys.ko: /vendor/lib/modules/apu_comm.ko
+/vendor/lib/modules/ntfs.ko:
+/vendor/lib/modules/cxd2878.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/tuner_r842.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/i2c-gpio.ko:
+/vendor/lib/modules/mtk-audio-mcu.ko: /vendor/lib/modules/mtk-audio-mcu-communication.ko
+/vendor/lib/modules/btmtk_pmu.ko:
+/vendor/lib/modules/mtk-dramc.ko: /vendor/lib/modules/mtktv-thermal.ko
+/vendor/lib/modules/mtk_sc.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/mtk_frc_mcu_rproc.ko:
+/vendor/lib/modules/mtk-mic-communication.ko:
+/vendor/lib/modules/mtk_pcmcia.ko: /vendor/lib/modules/mtk_msb9121.ko /vendor/lib/modules/spi-mtkdtv-ci.ko /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/mtk-tvsnd-soc-JP.ko: /vendor/lib/modules/audio-public-if.ko
+/vendor/lib/modules/tuner_av2018.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/mtktv-cpufreq-dbg.ko: /vendor/lib/modules/mtktv-cpufreq.ko /vendor/lib/modules/mtktv-cpufreq-ca.ko /vendor/lib/modules/mtktv-thermal.ko
+/vendor/lib/modules/mtktv-regulator-mt5896.ko:
+/vendor/lib/modules/i2c-mt5896-rproc.ko:
+/vendor/lib/modules/mtk-boottime.ko:
+/vendor/lib/modules/rndis_host.ko: /vendor/lib/modules/cdc_ether.ko /vendor/lib/modules/usbnet.ko /vendor/lib/modules/mii.ko
+/vendor/lib/modules/mtktv_apusys.ko: /vendor/lib/modules/apu_comm.ko
+/vendor/lib/modules/mtk-db-tool.ko:
+/vendor/lib/modules/mzc-mtk.ko:
+/vendor/lib/modules/mii.ko:
+/vendor/lib/modules/i2c-dev.ko:
+/vendor/lib/modules/dish_h29.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko
+/vendor/lib/modules/mtk_realtime_producer.ko:
+/vendor/lib/modules/mac80211.ko: /vendor/lib/modules/cfg80211.ko /vendor/lib/modules/rfkill.ko
+/vendor/lib/modules/snd-amp-rt9114.ko:
+/vendor/lib/modules/tuner_si2151.ko: /vendor/lib/modules/mtk-dvb-adapter.ko /vendor/lib/modules/mtk-cfm.ko /vendor/lib/modules/dvb-core.ko

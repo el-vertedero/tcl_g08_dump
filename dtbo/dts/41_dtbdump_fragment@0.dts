@@ -1,0 +1,29 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			vritual_fe_id = <0x00 0x01>;
+			cfm_group = <0xffffffff 0xffffffff>;
+
+			cfm_node0 {
+				tuners = <0x607b 0xffff>;
+				demods = <0x00 0xffff>;
+			};
+
+			cfm_node1 {
+				tuners = <0x6062 0xffff>;
+				demods = <0x39a 0xffff>;
+			};
+		};
+	};
+
+	__fixups__ {
+		mtk_cfm = "/fragment@0:target:0";
+		cfm_node0 = "/fragment@0/__overlay__:cfm_group:0";
+		cfm_node1 = "/fragment@0/__overlay__:cfm_group:4";
+	};
+};

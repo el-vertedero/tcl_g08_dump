@@ -1,0 +1,56 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			audio-codec = <0xffffffff>;
+			codec-dai-name = "AMP_RT9114";
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			codec-dai-name = "AMP_RT9114";
+			amp-model-cnt = "1";
+			amp-1-name = "rt9114";
+		};
+	};
+
+	fragment@2 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			audio-codec = <0xffffffff>;
+		};
+	};
+
+	fragment@3 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+
+			mtk-amp9114 {
+				compatible = "mediatek, rt9114";
+				mtk_ini = "../tvconfig/bsp/chip/amp/audio_amp_device_rt9114b.ini";
+				reg = <0x1b>;
+				status = "okay";
+				ampmute-gpios = <0xffffffff 0x05 0x01>;
+				ampreset-gpios = <0xffffffff 0x14 0x01>;
+			};
+		};
+	};
+
+	__fixups__ {
+		mtk_sound_machine = "/fragment@0:target:0";
+		rt9114 = "/fragment@0/__overlay__:audio-codec:0\0/fragment@2/__overlay__:audio-codec:0";
+		mtk_tv_machine = "/fragment@1:target:0";
+		mtk_sound_soc = "/fragment@2:target:0";
+		i2c0 = "/fragment@3:target:0";
+		pm_gpio0 = "/fragment@3/__overlay__/mtk-amp9114:ampmute-gpios:0\0/fragment@3/__overlay__/mtk-amp9114:ampreset-gpios:0";
+	};
+};

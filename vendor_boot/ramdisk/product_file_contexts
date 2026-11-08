@@ -1,0 +1,8 @@
+/preload(/.*)?               u:object_r:system_file:s0
+/preload/lib(64)?(/.*)?      u:object_r:system_lib_file:s0
+/preload/overlay(/.*)?       u:object_r:vendor_overlay_file:s0
+/product/gtvs_overlay(/.*)?                      u:object_r:system_file:s0
+/product/gtvs_overlay/system(/.*)?               u:object_r:system_file:s0
+/product/gtvs_overlay/system_ext(/.*)?           u:object_r:system_file:s0
+/product/gtvs_overlay/system/lib(64)?(/.*)?      u:object_r:system_lib_file:s0
+/product/gtvs_overlay/system_ext/lib(64)?(/.*)?  u:object_r:system_lib_file:s0

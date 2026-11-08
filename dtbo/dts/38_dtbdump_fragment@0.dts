@@ -1,0 +1,65 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disalbed";
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disalbed";
+		};
+	};
+
+	fragment@2 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@3 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@4 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+
+			scz-gpio-hog {
+				gpio-hog;
+				gpios = <0x87 0x00>;
+				output-low;
+				line-name = "gpio-scz-gpio-out";
+			};
+
+			scl-gpio-hog {
+				gpio-hog;
+				gpios = <0x88 0x00>;
+				output-low;
+				line-name = "gpio-scl-gpio-out";
+			};
+		};
+	};
+
+	__fixups__ {
+		pmu_rproc = "/fragment@0:target:0";
+		pmu_rpmsg = "/fragment@1:target:0";
+		pmu_mcs51_rproc = "/fragment@2:target:0";
+		pmu_ini = "/fragment@3:target:0";
+		gpio0 = "/fragment@4:target:0";
+	};
+};

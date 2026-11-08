@@ -1,0 +1,16 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			reg = <0x00 0x1c4876c0 0x00 0x200 0x00 0x1c206000 0x00 0x4000>;
+		};
+	};
+
+	__fixups__ {
+		pwm = "/fragment@0:target:0";
+	};
+};

@@ -1,0 +1,70 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@2 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@3 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@4 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@5 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@6 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disabled";
+		};
+	};
+
+	__fixups__ {
+		mtk_sound_soc = "/fragment@0:target:0";
+		mtk_sound_machine = "/fragment@1:target:0";
+		mtk_sound_capture_platform = "/fragment@2:target:0";
+		mtk_sound_duplex_platform = "/fragment@3:target:0";
+		mtk_sound_dplayback_platform = "/fragment@4:target:0";
+		mtk_sound_playback_platform = "/fragment@5:target:0";
+		mtk_sound_coprocessor_platform = "/fragment@6:target:0";
+	};
+};

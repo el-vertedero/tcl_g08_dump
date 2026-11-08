@@ -1,0 +1,36 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "okay";
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			mediatek,auto-boot = "0x1";
+			firmware-name = "ausnd_mt5897_2048.elf";
+		};
+	};
+
+	fragment@2 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			mediatek,auto-boot = "0x1";
+			firmware-name = "audec_mt5897_2048.elf";
+		};
+	};
+
+	__fixups__ {
+		audio_mcu_audio = "/fragment@0:target:0";
+		memcu = "/fragment@1:target:0";
+		mtk_pqu = "/fragment@2:target:0";
+	};
+};

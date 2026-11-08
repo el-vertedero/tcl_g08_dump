@@ -1,0 +1,16 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			pre-timeout-isr = <0x01>;
+		};
+	};
+
+	__fixups__ {
+		wdt0 = "/fragment@0:target:0";
+	};
+};

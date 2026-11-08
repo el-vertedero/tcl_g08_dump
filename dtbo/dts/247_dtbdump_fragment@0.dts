@@ -1,0 +1,25 @@
+/dts-v1/;
+
+/ {
+
+	fragment@0 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disalbed";
+		};
+	};
+
+	fragment@1 {
+		target = <0xffffffff>;
+
+		__overlay__ {
+			status = "disalbed";
+		};
+	};
+
+	__fixups__ {
+		ir_in = "/fragment@0:target:0";
+		keypad = "/fragment@1:target:0";
+	};
+};
