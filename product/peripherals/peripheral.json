@@ -1,0 +1,91 @@
+{
+    "version": 1,
+    "peripheral": [
+    {
+        "deviceType": "DCON",
+        "name": "DCON",
+        "model": "DCON-653",
+        "version": -1,
+        "upgradeType": "default",
+        "rebootType": "force",
+        "virtualCode": "V8-ED55CBG-LCG12,V8-ED55CBG-LCG11,V8-E75CBGP-LCG12,V8-E75CBGP-LCG11",
+        "firmwareRul": ".+V+\\d{3}+[.]+.{3}",
+        "fileMd5": "",
+        "filePath": "",
+        "upgradeNote": [
+        {
+            "language": "ZH",
+            "content": "1、解决了一些问题\n2、优化了固件的性能和稳定性"
+        },
+        {
+            "language": "EN",
+            "content": "1. Bug fixes \n2. Firmware performance and stability optimizations"
+        }]
+    },
+    {
+        "deviceType": "LocalDimming",
+        "name": "LocalDimming",
+        "model": "LocalDimming-653",
+        "version": -1,
+        "upgradeType": "default",
+        "rebootType": "force",
+        "virtualCode": "V8-M55P12H-LCF11,V8-M65P12H-LCF11,V8-M75P12H-LCF11,V8-M85CEAL-LCA12,V8-M55C845-LCF11,V8-M55C845-LCF12,V8-M65C845-LCF11,V8-M65C845-LCF12,V8-M75C8D2-LCF11,V8-M75C8D2-LCF12,V8-M85C8D1-LCF11",
+        "firmwareRul": ".+V+\\d{3}+[.]+.{3}",
+        "fileMd5": "",
+        "filePath": "",
+        "upgradeNote": [
+        {
+            "language": "ZH",
+            "content": "1、解决了一些问题\n2、优化了固件的性能和稳定性"
+        },
+        {
+            "language": "EN",
+            "content": "1. Bug fixes \n2. Firmware performance and stability optimizations"
+        }]
+    },
+   {
+      "deviceType": "SBAR",
+      "name": "SBAR",
+      "model": "SBAR-653",
+      "version": -1,
+      "upgradeType": "default",
+      "rebootType":"force",
+      "virtualCode": "V8-AT58T01-LR1",
+      "firmwareRul": ".*V\\d*\\..*",
+      "fileMd5": "",
+      "filePath": "",
+      "upgradeNote": [
+        {
+          "language": "ZH",
+          "content": "1、解决了一些问题\n2、优化了固件的性能和稳定性"
+        },
+        {
+          "language": "EN",
+          "content": "1. Bug fixes \n2. Firmware performance and stability optimizations"
+        }
+      ]
+    },
+    {
+      "deviceType": "Tcon",
+      "name": "Tcon",
+      "model": "Tcon",
+      "version": -1,
+      "upgradeType": "force",
+      "rebootType":"force",
+      "virtualCode": "V8-M85X965-TCX12,V8-M98X965-TCX12,V8-M98X965-TCX13",
+      "firmwareRul": ".+V+\\d{3}+[.]+.{3}",
+      "fileMd5": "",
+      "filePath": "",
+      "upgradeNote": [
+        {
+          "language": "ZH",
+          "content": "1、解决了一些问题\n2、优化了固件的性能和稳定性"
+        },
+        {
+          "language": "EN",
+          "content": "1. Bug fixes \n2. Firmware performance and stability optimizations"
+        }
+      ]
+	}
+	]
+}

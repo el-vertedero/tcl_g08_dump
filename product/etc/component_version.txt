@@ -1,0 +1,5 @@
+component_version=V8-T653T01-PRD-V670
+component_build_date=2610240113
+trom_sdk_version=6.0.0
+android_sdk_version=34
+product_available_vndk_version=001

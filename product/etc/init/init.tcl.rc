@@ -1,0 +1,15 @@
+on boot
+    mkdir /userdata  0770 system system
+    chmod 660 /userdata/satellite.db
+    chmod 660 /userdata/DtvData.db
+    chmod 660 /userdata/AtvData.db
+    chmod 660 /userdata/AtscData.db
+    chown system system /userdata/satellite.db
+    chown system system /userdata/DtvData.db
+    chown system system /userdata/AtvData.db
+    chown system system /userdata/AtscData.db
+
+on post-fs-data
+#xinning.wei@tcl.com, 2023/10/26, add data/tcluniplayer dir
+    mkdir /data/tcluniplayer 0770 media audio
+    restorecon /data/tcluniplayer
